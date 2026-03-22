@@ -27,7 +27,7 @@ func save_snack(object : Snack, prefix : String) {
     defaults.set(object.pos_y, forKey: prefix + "pos_y")
     
     defaults.set(object.bubbles.bubcounter, forKey: prefix + "bubbles.bubcounter")
-    defaults.set(object.bubbles.is_muted, forKey: prefix + "bubbles.is_muted")
+    defaults.set(object.bubbles.isMuted, forKey: prefix + "bubbles.is_muted")
     defaults.set(object.points_snack, forKey: prefix + "points_snack")
 }
 
@@ -73,7 +73,7 @@ func get_snack(object : inout Snack, prefix : String) {
     object.setPosition(position: CGPoint(x: object.pos_x, y: object.pos_y))
     
     object.bubbles.bubcounter = defaults.integer(forKey: prefix + "bubbles.bubcounter")
-    object.bubbles.is_muted = defaults.bool(forKey: prefix + "bubbles.is_muted")
+    object.bubbles.isMuted = defaults.bool(forKey: prefix + "bubbles.is_muted")
     object.points_snack = defaults.integer(forKey: prefix + "points_snack")
 }
 
@@ -97,7 +97,7 @@ func save_misty(object : Misty, prefix : String) {
     defaults.set(object.pos_y, forKey: prefix + "pos_y")
     
     defaults.set(object.bubbles.bubcounter, forKey: prefix + "bubbles.bubcounter")
-    defaults.set(object.bubbles.is_muted, forKey: prefix + "bubbles.is_muted")
+    defaults.set(object.bubbles.isMuted, forKey: prefix + "bubbles.is_muted")
     
     defaults.set(object.top, forKey: prefix + "top")
     defaults.set(object.counter1, forKey: prefix + "counter1")
@@ -123,7 +123,7 @@ func get_misty_object(object : inout Misty, prefix : String) {
     object.pos_y = CGFloat(defaults.float(forKey: prefix + "pos_y"))
     
     object.bubbles.bubcounter = defaults.integer(forKey: prefix + "bubbles.bubcounter")
-    object.bubbles.is_muted = defaults.bool(forKey: prefix + "bubbles.is_muted")
+    object.bubbles.isMuted = defaults.bool(forKey: prefix + "bubbles.is_muted")
     
     object.top = defaults.bool(forKey: prefix + "top")
     object.counter1 = defaults.integer(forKey: prefix + "counter1")
@@ -151,7 +151,7 @@ func save_object(object : GameObject, prefix : String) {
     defaults.set(object.pos_y, forKey: prefix + "pos_y")
     
     defaults.set(object.bubbles.bubcounter, forKey: prefix + "bubbles.bubcounter")
-    defaults.set(object.bubbles.is_muted, forKey: prefix + "bubbles.is_muted")
+    defaults.set(object.bubbles.isMuted, forKey: prefix + "bubbles.is_muted")
 }
 
 func getFish(object : inout Fish, prefix : String) {
@@ -175,7 +175,7 @@ func getFish(object : inout Fish, prefix : String) {
     object.setPosition(position: CGPoint(x: object.pos_x, y: object.pos_y))
     
     object.bubbles.bubcounter = defaults.integer(forKey: prefix + "bubbles.bubcounter")
-    object.bubbles.is_muted = defaults.bool(forKey: prefix + "bubbles.is_muted")
+    object.bubbles.isMuted = defaults.bool(forKey: prefix + "bubbles.is_muted")
 }
 
 func get_blowfish(object : inout BlowFish, prefix : String) {
@@ -199,7 +199,7 @@ func get_blowfish(object : inout BlowFish, prefix : String) {
     object.setPosition(position: CGPoint(x: object.pos_x, y: object.pos_y))
     
     object.bubbles.bubcounter = defaults.integer(forKey: prefix + "bubbles.bubcounter")
-    object.bubbles.is_muted = defaults.bool(forKey: prefix + "bubbles.is_muted")
+    object.bubbles.isMuted = defaults.bool(forKey: prefix + "bubbles.is_muted")
 }
 
 func get_brownie_object(object : inout Brownie, prefix : String) {
@@ -223,7 +223,7 @@ func get_brownie_object(object : inout Brownie, prefix : String) {
     object.setPosition(position: CGPoint(x: object.pos_x, y: object.pos_y))
     
     object.bubbles.bubcounter = defaults.integer(forKey: prefix + "bubbles.bubcounter")
-    object.bubbles.is_muted = defaults.bool(forKey: prefix + "bubbles.is_muted")
+    object.bubbles.isMuted = defaults.bool(forKey: prefix + "bubbles.is_muted")
 }
 
 func get_frito_object(object : inout Frito, prefix : String) {
@@ -247,7 +247,7 @@ func get_frito_object(object : inout Frito, prefix : String) {
     object.setPosition(position: CGPoint(x: object.pos_x, y: object.pos_y))
     
     object.bubbles.bubcounter = defaults.integer(forKey: prefix + "bubbles.bubcounter")
-    object.bubbles.is_muted = defaults.bool(forKey: prefix + "bubbles.is_muted")
+    object.bubbles.isMuted = defaults.bool(forKey: prefix + "bubbles.is_muted")
 }
 
 func get_player_object(object : inout Player, prefix : String) {
@@ -271,7 +271,7 @@ func get_player_object(object : inout Player, prefix : String) {
     object.setPosition(position: CGPoint(x: object.pos_x, y: object.pos_y))
     
     object.bubbles.bubcounter = defaults.integer(forKey: prefix + "bubbles.bubcounter")
-    object.bubbles.is_muted = defaults.bool(forKey: prefix + "bubbles.is_muted")
+    object.bubbles.isMuted = defaults.bool(forKey: prefix + "bubbles.is_muted")
 }
 
 func start_scene(scene : SKScene, start : inout Bool, GameLevel : SKScene) {

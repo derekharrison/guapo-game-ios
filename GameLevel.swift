@@ -534,13 +534,13 @@ class GameLevel {
     }
     
     func mute_bubbles(bubbles : Bubbles, mute : Bool) {
-        bubbles.is_muted = mute
+        bubbles.isMuted = mute
     }
     
     func update_player_ocean() {
         player.update_pos_api()
         
-        player.bubbles.pop_bubbles_api(pos : player.getPosition(), scene : scene, sound : [bubbles_sounds])
+        player.bubbles.popBubbles(pos : player.getPosition(), scene : scene, sound : [bubbles_sounds])
     }
     
     func init_background(scene : SKScene, num_backgrounds : Int, string1 : String) {
@@ -613,9 +613,9 @@ class GameLevel {
     }
     
     func add_bubbles(bubbles_char : Bubbles, bubble_image : String) {
-        bubbles_char.add_bubble(image_id: bubble_image)
-        bubbles_char.add_bubble(image_id: bubble_image)
-        bubbles_char.add_bubble(image_id: bubble_image)
+        bubbles_char.addBubble(imageId: bubble_image)
+        bubbles_char.addBubble(imageId: bubble_image)
+        bubbles_char.addBubble(imageId: bubble_image)
     }
     
     func add_birds(images : [String]) {
@@ -711,9 +711,9 @@ class GameLevel {
         player.setPosition(position: CGPoint(x : scene.size.width / 5, y : scene.size.height / 2))
         player.setHeight(height : scene.size.height)
         player.setWidth(width : scene.size.width)
-        player.bubbles.add_bubble(image_id: BUBBLE_IMAGE_STR)
-        player.bubbles.add_bubble(image_id: BUBBLE_IMAGE_STR)
-        player.bubbles.add_bubble(image_id: BUBBLE_IMAGE_STR)
+        player.bubbles.addBubble(imageId: BUBBLE_IMAGE_STR)
+        player.bubbles.addBubble(imageId: BUBBLE_IMAGE_STR)
+        player.bubbles.addBubble(imageId: BUBBLE_IMAGE_STR)
         
         for x in player.bubbles.bubbles {
             x.removeFromParent()
@@ -839,10 +839,10 @@ class GameLevel {
                 frito.play_sound = false
             }
             
-            frito.bubbles.pop_bubbles_api(pos: frito.getPosition(), scene : scene, sound : [bubbles_sounds])
+            frito.bubbles.popBubbles(pos: frito.getPosition(), scene : scene, sound : [bubbles_sounds])
         }
         else {
-            frito.bubbles.set_pos_bubbles(pos: CGPoint(x: -1000, y: 0))
+            frito.bubbles.setPosition(pos: CGPoint(x: -1000, y: 0))
         }
 
         frito.updatePosition(scene: scene)
@@ -865,11 +865,11 @@ class GameLevel {
                 brownie.play_sound = false
             }
             
-            brownie.bubbles.pop_bubbles_api(pos: brownie.getPosition(), scene : scene, sound : [bubbles_sounds])
+            brownie.bubbles.popBubbles(pos: brownie.getPosition(), scene : scene, sound : [bubbles_sounds])
 
         }
         else {
-            brownie.bubbles.set_pos_bubbles(pos: CGPoint(x: -1000, y: 0))
+            brownie.bubbles.setPosition(pos: CGPoint(x: -1000, y: 0))
         }
 
         brownie.update(scene: scene)
@@ -913,11 +913,11 @@ class GameLevel {
             
             if muted == false {
                 play_sound_api(scene: scene, sound: [misty_sound_appearing])
-                misty.bubbles.pop_bubbles_api(pos: misty.getPosition(), scene : scene, sound : [bubbles_sounds])
+                misty.bubbles.popBubbles(pos: misty.getPosition(), scene : scene, sound : [bubbles_sounds])
             }
         }
         else {
-            misty.bubbles.set_pos_bubbles(pos: CGPoint(x: -1000, y: 0))
+            misty.bubbles.setPosition(pos: CGPoint(x: -1000, y: 0))
         }
     }
     

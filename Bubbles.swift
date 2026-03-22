@@ -12,39 +12,39 @@ class Bubbles {
     
     var bubbles : [SKSpriteNode]
     var bubcounter : Int
-    var is_muted : Bool
+    var isMuted : Bool
     
     init() {
         self.bubbles = [SKSpriteNode]()
         self.bubcounter = 1
-        self.is_muted = false
+        self.isMuted = false
     }
     
-    func add_bubble(image_id : String) {
+    func addBubble(imageId : String) {
         
-        self.bubbles.append(SKSpriteNode(imageNamed: image_id))
+        self.bubbles.append(SKSpriteNode(imageNamed: imageId))
     }
     
-    func play_bubbles() {
+    func playBubbles() {
         bubcounter = 1
         for x in bubbles {
             x.zPosition = -1
         }
     }
     
-    func set_pos_bubbles(pos : CGPoint) {
+    func setPosition(pos : CGPoint) {
         for x in bubbles {
             x.position = pos
         }
     }
 
-    func pop_bubbles_api(pos : CGPoint, scene : SKScene, sound : [SKAction]) {
+    func popBubbles(pos : CGPoint, scene : SKScene, sound : [SKAction]) {
         
         if self.bubcounter == 1 {
             self.bubbles[0].position = pos
             self.bubbles[0].zPosition = 1000
             self.bubcounter += 1
-            if self.is_muted == false {
+            if self.isMuted == false {
                 play_sound_api(scene : scene, sound : sound)
             }
             
@@ -75,7 +75,7 @@ class Bubbles {
             self.bubcounter += 1
         }
         if self.bubcounter == 240 {
-            play_bubbles()
+            playBubbles()
         }
     }
 }

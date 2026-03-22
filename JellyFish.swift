@@ -6,24 +6,63 @@
 //
 
 import Foundation
+import SpriteKit
 
 class JellyFish : GameObject {
-    
     var counter : Int = 1
     
     init(jelly_fish : [String], size : CGSize, z_pos : CGFloat) {
         super.init()
         
         for x in jelly_fish {
-            self.add_image(image: x)
+            self.addImage(image: x)
         }
         
-        self.set_pos(pos: CGPoint(x: -5000, y: 0))
-        self.set_z_pos(z_pos: z_pos)
+        self.setPosition(position: CGPoint(x: -5000, y: 0))
+        self.setZPosition(zPos: z_pos)
         self.set_size(size: size)
     }
+    
+    func update(scene : SKScene, backgroundSpeed : CGFloat) {
+        super.update()
+        updatePosition(scene: scene, backgroundSpeed: backgroundSpeed, numFrames: num_frames_jelly)
+        updateImage(numFrames: num_frames_jelly)
+        updatePosition()
+    }
+    
+    func updatePosition(scene : SKScene, backgroundSpeed : CGFloat, numFrames : Int) {
+        
+        self.images[0].position.x += self.vel_x
+        self.images[0].position.y += self.vel_y
+        
+        if self.images[0].position.x < -self.images[0].size.width {
+            
+            let speed = get_rand_num() * 2 * backgroundSpeed + 1.2 * backgroundSpeed
+            setVelocity(vel_x: speed, vel_y: 0)
+            
+            self.play_sound = true
+            self.play_hit_sound = true
+            
+            let factor = 1.0 - (self.images[0].size.height) / (scene.size.height / 2)
+            self.images[0].position.x = get_rand_num() * scene.size.width + scene.size.width
+            self.images[0].position.y = get_rand_num() * scene.size.height / 2 * factor + scene.size.height / 4 + 1/2 * (1 - factor) * scene.size.height / 2
+            
+            self.hit = false
+        }
+        
+        for x in self.images {
+            x.position = self.images[0].position
+        }
+        
+        for x in self.imagesHit {
+            x.position = self.images[0].position
+        }
+        
+        self.pos_x = images[0].position.x
+        self.pos_y = images[0].position.y
+    }
 
-    func update_pos_api() {
+    func updatePosition() {
         
         if counter < 20 {
             for x in images {

@@ -18,7 +18,25 @@ class Misty : GameObject {
         super.init()
         self.height = 100000
         self.width = -100000
-        self.set_pos(pos: CGPoint(x: -5000, y: 0))
+        self.setPosition(position: CGPoint(x: -5000, y: 0))
+    }
+    
+    override func update() {
+        super.update()
+        updatePositionMisty()
+    }
+    
+    func updatePositionMisty() {
+        for image in images {
+            image.position.x += self.vel_x
+            image.position.y += self.vel_y
+        }
+        for image in imagesHit {
+            image.position = images[0].position
+        }
+        
+        self.pos_x = images[0].position.x
+        self.pos_y = images[0].position.y
     }
     
     func play_misty(bool : Bool) {
@@ -29,7 +47,7 @@ class Misty : GameObject {
     }
     
     func set_vel_misty(vx : CGFloat, vy : CGFloat) {
-        self.set_vel(vel_x: vx, vel_y: vy)
+        self.setVelocity(vel_x: vx, vel_y: vy)
     }
     
     func set_pos_api(pos : CGPoint) {
@@ -62,7 +80,7 @@ class Misty : GameObject {
         }
         
         if counter1 < num_frames_misty {
-            self.update_pos()
+            self.updatePositionMisty()
             counter1 += 1
         }
         
@@ -72,7 +90,7 @@ class Misty : GameObject {
         }
         
         else if counter1 < num_frames_misty + 60 {
-            self.update_pos()
+            self.updatePositionMisty()
             counter1 += 1
         }
     }

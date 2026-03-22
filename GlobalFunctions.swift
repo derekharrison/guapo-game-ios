@@ -70,7 +70,7 @@ func get_snack(object : inout Snack, prefix : String) {
     object.pos_x = CGFloat(defaults.float(forKey: prefix + "pos_x"))
     object.pos_y = CGFloat(defaults.float(forKey: prefix + "pos_y"))
     
-    object.set_pos(pos: CGPoint(x: object.pos_x, y: object.pos_y))
+    object.setPosition(position: CGPoint(x: object.pos_x, y: object.pos_y))
     
     object.bubbles.bubcounter = defaults.integer(forKey: prefix + "bubbles.bubcounter")
     object.bubbles.is_muted = defaults.bool(forKey: prefix + "bubbles.is_muted")
@@ -154,7 +154,7 @@ func save_object(object : GameObject, prefix : String) {
     defaults.set(object.bubbles.is_muted, forKey: prefix + "bubbles.is_muted")
 }
 
-func get_object(object : inout GameObject, prefix : String) {
+func getFish(object : inout Fish, prefix : String) {
     let defaults = UserDefaults()
     
     object.z_pos = CGFloat(defaults.float(forKey: prefix + "z_pos"))
@@ -172,7 +172,7 @@ func get_object(object : inout GameObject, prefix : String) {
     object.pos_x = CGFloat(defaults.float(forKey: prefix + "pos_x"))
     object.pos_y = CGFloat(defaults.float(forKey: prefix + "pos_y"))
     
-    object.set_pos(pos: CGPoint(x: object.pos_x, y: object.pos_y))
+    object.setPosition(position: CGPoint(x: object.pos_x, y: object.pos_y))
     
     object.bubbles.bubcounter = defaults.integer(forKey: prefix + "bubbles.bubcounter")
     object.bubbles.is_muted = defaults.bool(forKey: prefix + "bubbles.is_muted")
@@ -196,7 +196,7 @@ func get_blowfish(object : inout BlowFish, prefix : String) {
     object.pos_x = CGFloat(defaults.float(forKey: prefix + "pos_x"))
     object.pos_y = CGFloat(defaults.float(forKey: prefix + "pos_y"))
     
-    object.set_pos(pos: CGPoint(x: object.pos_x, y: object.pos_y))
+    object.setPosition(position: CGPoint(x: object.pos_x, y: object.pos_y))
     
     object.bubbles.bubcounter = defaults.integer(forKey: prefix + "bubbles.bubcounter")
     object.bubbles.is_muted = defaults.bool(forKey: prefix + "bubbles.is_muted")
@@ -220,7 +220,7 @@ func get_brownie_object(object : inout Brownie, prefix : String) {
     object.pos_x = CGFloat(defaults.float(forKey: prefix + "pos_x"))
     object.pos_y = CGFloat(defaults.float(forKey: prefix + "pos_y"))
     
-    object.set_pos(pos: CGPoint(x: object.pos_x, y: object.pos_y))
+    object.setPosition(position: CGPoint(x: object.pos_x, y: object.pos_y))
     
     object.bubbles.bubcounter = defaults.integer(forKey: prefix + "bubbles.bubcounter")
     object.bubbles.is_muted = defaults.bool(forKey: prefix + "bubbles.is_muted")
@@ -244,7 +244,7 @@ func get_frito_object(object : inout Frito, prefix : String) {
     object.pos_x = CGFloat(defaults.float(forKey: prefix + "pos_x"))
     object.pos_y = CGFloat(defaults.float(forKey: prefix + "pos_y"))
     
-    object.set_pos(pos: CGPoint(x: object.pos_x, y: object.pos_y))
+    object.setPosition(position: CGPoint(x: object.pos_x, y: object.pos_y))
     
     object.bubbles.bubcounter = defaults.integer(forKey: prefix + "bubbles.bubcounter")
     object.bubbles.is_muted = defaults.bool(forKey: prefix + "bubbles.is_muted")
@@ -268,7 +268,7 @@ func get_player_object(object : inout Player, prefix : String) {
     object.pos_x = CGFloat(defaults.float(forKey: prefix + "pos_x"))
     object.pos_y = CGFloat(defaults.float(forKey: prefix + "pos_y"))
     
-    object.set_pos(pos: CGPoint(x: object.pos_x, y: object.pos_y))
+    object.setPosition(position: CGPoint(x: object.pos_x, y: object.pos_y))
     
     object.bubbles.bubcounter = defaults.integer(forKey: prefix + "bubbles.bubcounter")
     object.bubbles.is_muted = defaults.bool(forKey: prefix + "bubbles.is_muted")

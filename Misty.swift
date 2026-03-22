@@ -47,7 +47,7 @@ class Misty : GameObject {
     }
     
     func set_vel_misty(vx : CGFloat, vy : CGFloat) {
-        self.setVelocity(vel_x: vx, vel_y: vy)
+        self.setVelocity(velX: vx, velY: vy)
     }
     
     func set_pos_api(pos : CGPoint) {

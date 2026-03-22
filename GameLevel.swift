@@ -364,7 +364,7 @@ class GameLevel {
         blow_fish.setSizeHit(size: CGSize(width : width * 3 / 7.5, height : height * 2 / 7.5))
         blow_fish.setPosition(position: CGPoint(x: -1000, y: 0))
         blow_fish.setZPosition(zPos: min_z_pos_fishes + 6)
-        blow_fish.setVelocity(vel_x: -1.5 * background_speed, vel_y: 0)
+        blow_fish.setVelocity(velX: -1.5 * background_speed, velY: 0)
         blow_fish.addImagesToScene(scene: scene)
     }
     
@@ -375,7 +375,7 @@ class GameLevel {
         frito.setHeight(height : height)
         frito.setWidth(width : width)
         frito.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
-        frito.setVelocity(vel_x: 2 * background_speed, vel_y: -2 * background_speed)
+        frito.setVelocity(velX: 2 * background_speed, velY: -2 * background_speed)
         frito.setZPosition(zPos: z_pos_chars)
         frito.setPosition(position: CGPoint(x : 10 * width, y : height * 0.75 + frito.images[0].size.height / 2))
         frito.addImagesToScene(scene: scene)
@@ -388,7 +388,7 @@ class GameLevel {
         brownie.setHeight(height : height)
         brownie.setWidth(width : width)
         brownie.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
-        brownie.setVelocity(vel_x: -2 * background_speed, vel_y: -2 * background_speed)
+        brownie.setVelocity(velX: -2 * background_speed, velY: -2 * background_speed)
         brownie.setZPosition(zPos: z_pos_chars + 1)
         brownie.setPosition(position: CGPoint(x : -width, y : height * 0.75 + brownie.images[0].size.height / 2))
         
@@ -591,7 +591,7 @@ class GameLevel {
             let pos_y = getRandomNumber() * scene.size.height / 2 * factor + scene.size.height / 4 + 1/2 * (1 - factor) * scene.size.height / 2
             
             cheesy_bite.setPosition(position: CGPoint(x: pos_x, y: pos_y))
-            cheesy_bite.setVelocity(vel_x: -background_speed, vel_y: 0)
+            cheesy_bite.setVelocity(velX: -background_speed, velY: 0)
             cheesy_bite.points_snack = points
             cheesy_bites.append(cheesy_bite)
         }
@@ -680,7 +680,7 @@ class GameLevel {
         }
 
         player.addImagesToScene(scene : scene)
-        player.setVelocity(vel_x: 0, vel_y: 0)
+        player.setVelocity(velX: 0, velY: 0)
         player.setPosition(position: CGPoint(x : scene.size.width / 5, y : scene.size.height / 2))
         player.setHeight(height : scene.size.height)
         player.setWidth(width : scene.size.width)
@@ -707,7 +707,7 @@ class GameLevel {
         }
         
 
-        player.setVelocity(vel_x: 0, vel_y: 0)
+        player.setVelocity(velX: 0, velY: 0)
         player.setPosition(position: CGPoint(x : scene.size.width / 5, y : scene.size.height / 2))
         player.setHeight(height : scene.size.height)
         player.setWidth(width : scene.size.width)
@@ -742,7 +742,7 @@ class GameLevel {
     func update_snack(cucumbers : [Snack], background_speed : CGFloat) {
         for cucumber in cucumbers {
             cucumber.update(scene: scene)
-            cucumber.setVelocity(vel_x: -background_speed, vel_y: 0)
+            cucumber.setVelocity(velX: -background_speed, velY: 0)
             
             if check_collision(bird : cucumber, player : player, den : 2.5) {
                 cucumber.setPosition(position: CGPoint(x: -scene.size.width * 10, y: 0))
@@ -1228,7 +1228,7 @@ class GameLevel {
         
         if currentGameState == gameState.preGame {
             startGame()
-            player.setVelocity(vel_x: 0, vel_y: 0)
+            player.setVelocity(velX: 0, velY: 0)
         }
         else if currentGameState == gameState.inGame {
             
@@ -1245,7 +1245,7 @@ class GameLevel {
                 }
                 else if touch_in_game_area {
                     player.set_pos_api(pos: pointOfTouch)
-                    player.setVelocity(vel_x: 0, vel_y: 0)
+                    player.setVelocity(velX: 0, velY: 0)
                 }
             }
         }
@@ -1327,7 +1327,7 @@ class GameLevel {
         
         if currentGameState == gameState.preGame {
             startGame()
-            player.setVelocity(vel_x: 0, vel_y: 0)
+            player.setVelocity(velX: 0, velY: 0)
         }
         else if currentGameState == gameState.inGame && move_counter > 10 {
             
@@ -1357,7 +1357,7 @@ class GameLevel {
                         vel_y = 0
                     }
                     
-                    player.setVelocity(vel_x: vel_x, vel_y: vel_y)
+                    player.setVelocity(velX: vel_x, velY: vel_y)
                 }
             }
         }

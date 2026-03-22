@@ -38,7 +38,7 @@ class JellyFish : GameObject {
         if self.images[0].position.x < -self.images[0].size.width {
             
             let speed = getRandomNumber() * 2 * backgroundSpeed + 1.2 * backgroundSpeed
-            setVelocity(vel_x: speed, vel_y: 0)
+            setVelocity(velX: speed, velY: 0)
             
             self.playSound = true
             self.playHitSound = true

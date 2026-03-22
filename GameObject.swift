@@ -93,15 +93,18 @@ class GameObject {
         for image in imagesHit {
             image.position = position
         }
+        
+        posX = position.x
+        posY = position.y
     }
     
     func getPosition() -> CGPoint {
         return self.images[0].position
     }
     
-    func setVelocity(vel_x : CGFloat, vel_y : CGFloat) {
-        self.velX = vel_x
-        self.velY = vel_y
+    func setVelocity(velX : CGFloat, velY : CGFloat) {
+        self.velX = velX
+        self.velY = velY
     }
     
     func setPlaySound(play_s : Bool) {

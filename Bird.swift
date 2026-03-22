@@ -9,9 +9,6 @@ import Foundation
 import SpriteKit
 
 class Bird : GameObject {
-    
-    override init() { super.init() }
-    
     init(birds : [String], size : CGSize, zPos : CGFloat) {
         super.init()
         
@@ -28,37 +25,45 @@ class Bird : GameObject {
         super.update()
         updateImage(numFrames: NUM_FRAMES_BIRD)
         updatePosition(scene: scene, backgroundSpeed: backgroundSpeed)
+        updateImagePositions()
     }
     
     func updatePosition(scene : SKScene, backgroundSpeed : CGFloat) {
-        
-        self.images[0].position.x += self.velX
-        self.images[0].position.y += self.velY
-        
-        if self.images[0].position.x < -self.images[0].size.width {
-            
-            let speed = getRandomNumber() * 2 * backgroundSpeed + 1.2 * backgroundSpeed
-            setVelocity(vel_x: speed, vel_y: 0)
-            
-            self.playSound = true
-            self.playHitSound = true
-            
-            let factor = 1.0 - (self.images[0].size.height) / (scene.size.height / 2)
-            self.images[0].position.x = getRandomNumber() * scene.size.width + scene.size.width
-            self.images[0].position.y = getRandomNumber() * scene.size.height / 2 * factor + scene.size.height / 4 + 1/2 * (1 - factor) * scene.size.height / 2
-            
+        posX += self.velX
+        posY += self.velY
+        if posX < -self.images[0].size.width {
+            updateSpeed(backgroundSpeed: backgroundSpeed)
+            playSoundAllowed()
+            updatePosition(scene: scene)
             self.hit = false
         }
+    }
+    
+    func updateSpeed(backgroundSpeed : CGFloat) {
+        let speed = getRandomNumber() * 2 * backgroundSpeed + 1.2 * backgroundSpeed
+        setVelocity(velX: speed, velY: 0)
         
-        for x in self.images {
-            x.position = self.images[0].position
+    }
+    
+    func playSoundAllowed() {
+        self.playSound = true
+        self.playHitSound = true
+    }
+    
+    func updatePosition(scene : SKScene) {
+        let factor = 1.0 - (self.images[0].size.height) / (scene.size.height / 2)
+        posX = getRandomNumber() * scene.size.width + scene.size.width
+        posY = getRandomNumber() * scene.size.height / 2 * factor + scene.size.height / 4 + 1/2 * (1 - factor) * scene.size.height / 2
+        
+    }
+    
+    func updateImagePositions() {
+        for image in self.images {
+            image.position.x = posX
         }
         
-        for x in self.imagesHit {
-            x.position = self.images[0].position
+        for image in self.images {
+            image.position.y = posY
         }
-        
-        self.posX = images[0].position.x
-        self.posY = images[0].position.y
     }
 }

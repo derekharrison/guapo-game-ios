@@ -17,10 +17,10 @@ class GameObject {
     var images : [SKSpriteNode]
     var images_hit : [SKSpriteNode]
     var image_names : [String]
-    var bird_counter = 1
-    var bird_counter_hit = 1
-    var bird_id = 0
-    var bird_id_hit = 0
+    var frameCounter = 1
+    var frameCounterHit = 1
+    var imageId = 0
+    var imageIdHit = 0
     var width : CGFloat
     var height : CGFloat
     var hit : Bool
@@ -81,6 +81,10 @@ class GameObject {
         self.images_hit[0].zPosition = z_pos
     }
     
+    func update() {
+        
+    }
+    
     func update_pos() {
         for image in images {
             image.position.x += self.vel_x
@@ -125,7 +129,7 @@ class GameObject {
         self.images_hit.append(SKSpriteNode(imageNamed: image))
     }
     
-    func add_childs(scene : SKScene) {
+    func addImagesToScene(scene : SKScene) {
         self.cape1.setScale(1)
         self.cape1.size = CGSize(width: scene.size.width / 12, height: scene.size.height / 10)
         self.cape2.setScale(1)
@@ -146,7 +150,16 @@ class GameObject {
         }
     }
     
-    func birdi_on_top(image_id : Int) {
+    func displayImage(imageId : Int) {
+        if(hit) {
+            displayImageHit(image_id: imageId)
+        }
+        else {
+            displayImageNotHit(image_id: imageId)
+        }
+    }
+    
+    func displayImageNotHit(image_id : Int) {
         for image in 0..<self.images.count {
             if(image == image_id) {
                 self.images[image].zPosition = self.z_pos
@@ -160,7 +173,7 @@ class GameObject {
         }
     }
     
-    func birdi_on_top_hit(image_id : Int) {
+    func displayImageHit(image_id : Int) {
         for image in 0..<self.images_hit.count {
             if(image == image_id) {
                 self.images_hit[image].zPosition = self.z_pos
@@ -206,7 +219,7 @@ class GameObject {
         self.pos_y = images[0].position.y
     }
     
-    func update_pos(scene : SKScene, bk_speed : CGFloat) {
+    func updatePositionBirdsOrFish(scene : SKScene, bk_speed : CGFloat) {
         
         self.images[0].position.x += self.vel_x
         self.images[0].position.y += self.vel_y
@@ -237,10 +250,11 @@ class GameObject {
         self.pos_x = images[0].position.x
         self.pos_y = images[0].position.y
         
-        advance_bird_counter()
+        updateImage(numFrames: num_frames_bird)
+        advanceFrameCounter()
     }
     
-    func update_pos_jelly(scene : SKScene, bk_speed : CGFloat, num_frames : Int) {
+    func updatePositionJellyFish(scene : SKScene, bk_speed : CGFloat, num_frames : Int) {
         
         self.images[0].position.x += self.vel_x
         self.images[0].position.y += self.vel_y
@@ -271,10 +285,11 @@ class GameObject {
         self.pos_x = images[0].position.x
         self.pos_y = images[0].position.y
         
-        advance_bird_counter(num_frames : num_frames)
+        updateImage(numFrames: num_frames)
+        advanceFrameCounter()
     }
     
-    func update_pos_rev(scene : SKScene, bk_speed : CGFloat) {
+    func updatePositionFishGoingInOppositeDirection(scene : SKScene, bk_speed : CGFloat) {
         
         self.images[0].position.x += self.vel_x
         self.images[0].position.y += self.vel_y
@@ -305,41 +320,8 @@ class GameObject {
         self.pos_x = images[0].position.x
         self.pos_y = images[0].position.y
         
-        advance_bird_counter()
-    }
-    
-    func update_pos_hit(scene : SKScene, bk_speed : CGFloat) {
-        
-        self.images[0].position.x += self.vel_x
-        self.images[0].position.y += self.vel_y
-        
-        if self.images[0].position.x < -self.images[0].size.width {
-            
-            let speed = get_rand_num() * 2 * bk_speed + 1.2 * bk_speed
-            set_vel(vel_x: speed, vel_y: 0)
-            
-            self.play_sound = true
-            self.play_hit_sound = true
-            
-            let factor = 1.0 - (self.images[0].size.height) / (scene.size.height / 2)
-            self.images[0].position.x = get_rand_num() * scene.size.width + scene.size.width
-            self.images[0].position.y = get_rand_num() * scene.size.height / 2 * factor + scene.size.height / 4 + 1/2 * (1 - factor) * scene.size.height / 2
-            
-            self.hit = false
-        }
-        
-        for x in self.images_hit {
-            x.position = self.images[0].position
-        }
-        
-        for x in self.images {
-            x.position = self.images[0].position
-        }
-        
-        self.pos_x = images[0].position.x
-        self.pos_y = images[0].position.y
-        
-        advance_bird_counter_hit()
+        updateImage(numFrames: num_frames_bird)
+        advanceFrameCounter()
     }
     
     func reflect_player_velocity() {
@@ -364,7 +346,7 @@ class GameObject {
         self.pos_y = images[0].position.y
     }
     
-    func update_pos3() {
+    func updatePositionPlayer() {
         
         self.images[0].position.x += self.vel_x
         self.images[0].position.y += self.vel_y
@@ -382,10 +364,11 @@ class GameObject {
         self.pos_x = images[0].position.x
         self.pos_y = images[0].position.y
         
-        advance_bird_counter(num_frames: 5)
+        updateImage(numFrames: num_frames_bird)
+        advanceFrameCounter()
     }
     
-    func update_pos(scene : SKScene) {
+    func updatePositionSnacks(scene : SKScene) {
         
         self.images[0].position.x += self.vel_x
         self.images[0].position.y += self.vel_y
@@ -408,7 +391,7 @@ class GameObject {
         self.pos_y = images[0].position.y
     }
     
-    func update_pos(scene : SKScene, at_screen : Int) {
+    func updatePositionBlowFishOrBrownie(scene : SKScene, at_screen : Int) {
         
         self.images[0].position.x += self.vel_x
         self.images[0].position.y += self.vel_y
@@ -434,10 +417,11 @@ class GameObject {
         self.pos_x = images[0].position.x
         self.pos_y = images[0].position.y
         
-        advance_bird_counter()
+        updateImage(numFrames: num_frames_bird)
+        advanceFrameCounter()
     }
     
-    func update_pos_hit(scene : SKScene, at_screen : Int) {
+    func updatePositionBlowFishHit(scene : SKScene, at_screen : Int) {
         
         self.images[0].position.x += self.vel_x
         self.images[0].position.y += self.vel_y
@@ -463,10 +447,10 @@ class GameObject {
         self.pos_x = images[0].position.x
         self.pos_y = images[0].position.y
         
-        advance_bird_counter_hit()
+        advanceFrameCounterHit()
     }
     
-    func update_pos_rev(scene : SKScene, at_screen : Int) {
+    func updatePositionFrito(scene : SKScene, at_screen : Int) {
         
         self.images[0].position.x += self.vel_x
         self.images[0].position.y += self.vel_y
@@ -488,51 +472,38 @@ class GameObject {
         self.pos_x = images[0].position.x
         self.pos_y = images[0].position.y
         
-        advance_bird_counter()
+        updateImage(numFrames: num_frames_bird)
+        advanceFrameCounter()
     }
     
-    func advance_bird_counter() {
-        bird_counter += 1
-        
-        if(bird_counter < num_frames_bird) {
-            birdi_on_top(image_id: bird_id)
+    func updateImage(numFrames : Int) {
+        if(frameCounter < numFrames) {
+            displayImage(imageId: imageId)
         }
         else {
-            bird_counter = 0
-            bird_id += 1
-            if(bird_id == self.images.count) { bird_id = 0 }
-            birdi_on_top(image_id: bird_id)
+            frameCounter = 0
+            imageId += 1
+            if(imageId == self.images.count) { imageId = 0 }
+            displayImage(imageId: imageId)
 
         }
     }
     
-    func advance_bird_counter(num_frames : Int) {
-        bird_counter += 1
-    
-        
-        if(bird_counter < num_frames) {
-            birdi_on_top(image_id: bird_id)
-        }
-        else {
-            bird_counter = 0
-            bird_id += 1
-            if(bird_id == self.images.count) { bird_id = 0 }
-            birdi_on_top(image_id: bird_id)
-
-        }
+    func advanceFrameCounter() {
+        frameCounter += 1
     }
     
-    func advance_bird_counter_hit() {
-        bird_counter_hit += 1
+    func advanceFrameCounterHit() {
+        frameCounterHit += 1
         
-        if(bird_counter_hit < num_frames_bird) {
-            birdi_on_top_hit(image_id: bird_id_hit)
+        if(frameCounterHit < num_frames_bird) {
+            displayImageHit(image_id: imageIdHit)
         }
         else {
-            bird_counter_hit = 0
-            bird_id_hit += 1
-            if(bird_id_hit == self.images_hit.count) { bird_id_hit = 0 }
-            birdi_on_top_hit(image_id: bird_id_hit)
+            frameCounterHit = 0
+            imageIdHit += 1
+            if(imageIdHit == self.images_hit.count) { imageIdHit = 0 }
+            displayImageHit(image_id: imageIdHit)
 
         }
     }

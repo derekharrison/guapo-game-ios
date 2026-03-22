@@ -307,7 +307,7 @@ class GameLevel {
         fish1.set_size(size: CGSize(width : width / 7.5, height : height / 15))
         fish1.set_pos(pos: CGPoint(x: -1000, y: 0))
         fish1.set_z_pos(z_pos: min_z_pos_fishes)
-        fish1.add_childs(scene: scene)
+        fish1.addImagesToScene(scene: scene)
         
         fish2.add_image(image: FISH_IMAGE_2A)
         fish2.add_image(image: FISH_IMAGE_2B)
@@ -316,7 +316,7 @@ class GameLevel {
         fish2.set_size(size: CGSize(width : width / 7.5, height : height / 7.5))
         fish2.set_pos(pos: CGPoint(x: -1000, y: 0))
         fish2.set_z_pos(z_pos: min_z_pos_fishes + 1)
-        fish2.add_childs(scene: scene)
+        fish2.addImagesToScene(scene: scene)
         
         fish3.add_image(image: FISH_IMAGE_3A)
         fish3.add_image(image: FISH_IMAGE_3B)
@@ -325,7 +325,7 @@ class GameLevel {
         fish3.set_size(size: CGSize(width : width / 7.5, height : height / 15))
         fish3.set_pos(pos: CGPoint(x: -1000, y: 0))
         fish3.set_z_pos(z_pos: min_z_pos_fishes + 2)
-        fish3.add_childs(scene: scene)
+        fish3.addImagesToScene(scene: scene)
         
         fish4.add_image(image: FISH_IMAGE_4A)
         fish4.add_image(image: FISH_IMAGE_4B)
@@ -334,7 +334,7 @@ class GameLevel {
         fish4.set_size(size: CGSize(width : width / 7.5, height : height / 7.5))
         fish4.set_pos(pos: CGPoint(x: -1000, y: 0))
         fish4.set_z_pos(z_pos: min_z_pos_fishes + 3)
-        fish4.add_childs(scene: scene)
+        fish4.addImagesToScene(scene: scene)
         
         fish5.add_image(image: FISH_IMAGE_5A)
         fish5.add_image(image: FISH_IMAGE_5B)
@@ -343,7 +343,7 @@ class GameLevel {
         fish5.set_size(size: CGSize(width : width / 7.5, height : height / 7.5))
         fish5.set_pos(pos: CGPoint(x: 10 * width, y: 0))
         fish5.set_z_pos(z_pos: min_z_pos_fishes + 4)
-        fish5.add_childs(scene: scene)
+        fish5.addImagesToScene(scene: scene)
         
         fish6.add_image(image: FISH_IMAGE_6A)
         fish6.add_image(image: FISH_IMAGE_6B)
@@ -352,7 +352,7 @@ class GameLevel {
         fish6.set_size(size: CGSize(width : width / 7.5, height : height / 15))
         fish6.set_pos(pos: CGPoint(x: 10 * width, y: 0))
         fish6.set_z_pos(z_pos: min_z_pos_fishes + 5)
-        fish6.add_childs(scene: scene)
+        fish6.addImagesToScene(scene: scene)
         
         blow_fish.add_image(image: BLOW_FISH_IMAGE_1)
         blow_fish.add_image(image: BLOW_FISH_IMAGE_2)
@@ -365,7 +365,7 @@ class GameLevel {
         blow_fish.set_pos(pos: CGPoint(x: -1000, y: 0))
         blow_fish.set_z_pos(z_pos: min_z_pos_fishes + 6)
         blow_fish.set_vel(vel_x: -1.5 * background_speed, vel_y: 0)
-        blow_fish.add_childs(scene: scene)
+        blow_fish.addImagesToScene(scene: scene)
     }
     
     func init_images_frito(images : [String], height : CGFloat, width : CGFloat) {
@@ -378,7 +378,7 @@ class GameLevel {
         frito.set_vel(vel_x: 2 * background_speed, vel_y: -2 * background_speed)
         frito.set_z_pos(z_pos: z_pos_chars)
         frito.set_pos(pos: CGPoint(x : 10 * width, y : height * 0.75 + frito.images[0].size.height / 2))
-        frito.add_childs(scene: scene)
+        frito.addImagesToScene(scene: scene)
     }
     
     func init_images_brownie(images : [String], height : CGFloat, width : CGFloat) {
@@ -392,7 +392,7 @@ class GameLevel {
         brownie.set_z_pos(z_pos: z_pos_chars + 1)
         brownie.set_pos(pos: CGPoint(x : -width, y : height * 0.75 + brownie.images[0].size.height / 2))
         
-        brownie.add_childs(scene: scene)
+        brownie.addImagesToScene(scene: scene)
     }
     
     func init_images_misty(images : [String], height : CGFloat, width : CGFloat) {
@@ -406,7 +406,7 @@ class GameLevel {
         misty.set_z_pos(z_pos: z_pos_chars + 2)
         misty.set_pos(pos: CGPoint(x : width / 2, y : height * 0.75 + misty.images[0].size.height / 2))
         
-        misty.add_childs(scene: scene)
+        misty.addImagesToScene(scene: scene)
     }
     
     func init_common(scene : SKScene, id : Int) {
@@ -428,28 +428,28 @@ class GameLevel {
         continue_button.set_pos(pos: CGPoint(x: scene.size.width / 2 - continue_button.get_size().width / 2, y: scene.size.height / 2))
         continue_button.set_z_pos(z_pos: -1)
         continue_button.set_size(size: CGSize(width: scene.size.width / 5, height: scene.size.height / 10))
-        continue_button.add_childs(scene: scene)
+        continue_button.addImagesToScene(scene: scene)
         
         restart_button.add_image(image: RESTART_BUTTON_NOT_PRESSED)
         restart_button.add_image_hit(image: RESTART_BUTTON_PRESSED)
         restart_button.set_pos(pos: CGPoint(x: scene.size.width / 2 + restart_button.get_size().width / 2, y: scene.size.height / 2))
         restart_button.set_z_pos(z_pos: -1)
         restart_button.set_size(size: CGSize(width: scene.size.width / 5, height: scene.size.height / 10))
-        restart_button.add_childs(scene: scene)
+        restart_button.addImagesToScene(scene: scene)
         
         if level_id != LEVEL_ID_5 {
             flag.add_image(image: FLAG_ARUBA_STR)
             flag.set_z_pos(z_pos: -1)
             flag.set_size(size: CGSize(width: scene.size.width / 5, height: scene.size.height / 5))
             flag.set_pos(pos: CGPoint(x: scene.size.width - flag.get_size().width, y: scene.size.height * 0.75 - flag.get_size().height))
-            flag.add_childs(scene: scene)
+            flag.addImagesToScene(scene: scene)
         }
         else {
             flag.add_image(image: FLAG_NETHERLANDS_STR)
             flag.set_z_pos(z_pos: -1)
             flag.set_size(size: CGSize(width: scene.size.width / 5, height: scene.size.height / 5))
             flag.set_pos(pos: CGPoint(x: scene.size.width - flag.get_size().width, y: scene.size.height * 0.75 - flag.get_size().height))
-            flag.add_childs(scene: scene)
+            flag.addImagesToScene(scene: scene)
         }
         
         pause_button.setScale(1)
@@ -584,7 +584,7 @@ class GameLevel {
             
             let cheesy_bite = Snack(bite: bite_image, points: points_cheesy_bite, size: size, z_pos: z_pos_snacks)
             
-            cheesy_bite.add_childs(scene: scene)
+            cheesy_bite.addImagesToScene(scene: scene)
 
             let factor = 1.0 - (cheesy_bite.get_size().height) / (scene.size.height / 2)
             let pos_x = get_rand_num() * scene.size.width * 2
@@ -632,7 +632,7 @@ class GameLevel {
             
             let bird = Bird(birds: bird_images, size: size, z_pos: z_pos)
             
-            bird.add_childs(scene : scene)
+            bird.addImagesToScene(scene : scene)
 
             birds.append(bird)
             
@@ -652,7 +652,7 @@ class GameLevel {
             let size = CGSize(width: scene.size.width / 10, height: scene.size.height / 10)
             
             let jelly = JellyFish(jelly_fish: jelly_images, size: size, z_pos: z_pos)
-            jelly.add_childs(scene : scene)
+            jelly.addImagesToScene(scene : scene)
 
             jellyfishes.append(jelly)
         }
@@ -679,7 +679,7 @@ class GameLevel {
             player.add_image_hit(image: PLAYER_TUTTI_IMAGE_HIT, size: size, z_pos: -1)
         }
 
-        player.add_childs(scene : scene)
+        player.addImagesToScene(scene : scene)
         player.set_vel(vel_x: 0, vel_y: 0)
         player.set_pos(pos: CGPoint(x : scene.size.width / 5, y : scene.size.height / 2))
         player.set_height(height : scene.size.height)
@@ -719,7 +719,7 @@ class GameLevel {
             x.removeFromParent()
             scene.addChild(x)
         }
-        player.add_childs(scene : scene)
+        player.addImagesToScene(scene : scene)
     }
     
     func add_snacks(scene : SKScene) {
@@ -741,7 +741,7 @@ class GameLevel {
     
     func update_snack(cucumbers : [Snack], background_speed : CGFloat) {
         for cucumber in cucumbers {
-            cucumber.update_pos(scene: scene)
+            cucumber.updatePositionSnacks(scene: scene)
             cucumber.set_vel(vel_x: -background_speed, vel_y: 0)
             
             if check_collision(bird : cucumber, player : player, den : 2.5) {
@@ -925,7 +925,7 @@ class GameLevel {
         let defaults = UserDefaults()
         
         for jelly in jellyfishes {
-            jelly.update_pos_jelly(scene : scene, bk_speed: -background_speed, num_frames: num_frames_jelly)
+            jelly.updatePositionJellyFish(scene : scene, bk_speed: -background_speed, num_frames: num_frames_jelly)
             jelly.update_pos_api()
             
             if check_collision(bird : jelly, player : player, den : 3.5) {
@@ -956,12 +956,12 @@ class GameLevel {
     }
     
     func update_fish() {
-        fish1.update_pos(scene : scene, bk_speed : -background_speed)
-        fish2.update_pos(scene : scene, bk_speed : -background_speed)
-        fish3.update_pos(scene : scene, bk_speed : -background_speed)
-        fish4.update_pos(scene : scene, bk_speed : -background_speed)
-        fish5.update_pos_rev(scene : scene, bk_speed : background_speed)
-        fish6.update_pos_rev(scene : scene, bk_speed : background_speed)
+        fish1.updatePositionBirdsOrFish(scene : scene, bk_speed : -background_speed)
+        fish2.updatePositionBirdsOrFish(scene : scene, bk_speed : -background_speed)
+        fish3.updatePositionBirdsOrFish(scene : scene, bk_speed : -background_speed)
+        fish4.updatePositionBirdsOrFish(scene : scene, bk_speed : -background_speed)
+        fish5.updatePositionFishGoingInOppositeDirection(scene : scene, bk_speed : background_speed)
+        fish6.updatePositionFishGoingInOppositeDirection(scene : scene, bk_speed : background_speed)
     }
     
     func update_blow_fish() {
@@ -1008,7 +1008,7 @@ class GameLevel {
         let defaults = UserDefaults()
         
         for bird in birds {
-            bird.update_pos(scene : scene, bk_speed: -background_speed)
+            bird.updatePositionBirdsOrFish(scene : scene, bk_speed: -background_speed)
 
             if check_collision(bird : bird, player : player, den : 3.5) {
 
@@ -1134,7 +1134,7 @@ class GameLevel {
             let size = self.birds[0].images[0].size
             
             let bird = Bird(birds: image_names, size: size, z_pos: CGFloat(birds.count) + min_z_pos_birds)
-            bird.add_childs(scene : scene)
+            bird.addImagesToScene(scene : scene)
             
             birds.append(bird)
             
@@ -1149,7 +1149,7 @@ class GameLevel {
             let size = self.jellyfishes[0].images[0].size
             
             let jelly = JellyFish(jelly_fish: image_names, size: size, z_pos: CGFloat(jellyfishes.count) + min_z_pos_birds)
-            jelly.add_childs(scene : scene)
+            jelly.addImagesToScene(scene : scene)
             
             jellyfishes.append(jelly)
             

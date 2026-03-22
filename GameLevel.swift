@@ -959,8 +959,8 @@ class GameLevel {
         fish2.updatePosition(scene : scene, backgroundSpeed : -background_speed)
         fish3.updatePosition(scene : scene, backgroundSpeed : -background_speed)
         fish4.updatePosition(scene : scene, backgroundSpeed : -background_speed)
-        fish5.updatePositionGoingInOppositeDirection(scene : scene, bk_speed : background_speed)
-        fish6.updatePositionGoingInOppositeDirection(scene : scene, bk_speed : background_speed)
+        fish5.updatePositionGoingInOppositeDirection(scene : scene, backgroundSpeed : background_speed)
+        fish6.updatePositionGoingInOppositeDirection(scene : scene, backgroundSpeed : background_speed)
     }
     
     func update_blow_fish() {

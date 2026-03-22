@@ -18,11 +18,11 @@ class Brownie : GameObject {
         self.updatePosition(scene : scene, at_screen : 10)
         updateImage(numFrames: NUM_FRAMES_BIRD)
         if hit {
-            self.displayImageNotHit(image_id: 1)
+            self.displayImageNotHit(imageId: 1)
         }
         
         if !hit {
-            self.displayImageNotHit(image_id: 0)
+            self.displayImageNotHit(imageId: 0)
         }
         
         self.appeared = self.images[0].position.x > 0 && self.images[0].position.x < scene.size.width

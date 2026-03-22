@@ -64,19 +64,19 @@ class Misty : GameObject {
     func pop_misty(height : CGFloat, speed : CGFloat) {
         
         if !self.hit && top {
-            self.displayImageNotHit(image_id: 2)
+            self.displayImageNotHit(imageId: 2)
         }
         
         if self.hit && top {
-            self.displayImageNotHit(image_id: 3)
+            self.displayImageNotHit(imageId: 3)
         }
         
         if !self.hit && !top {
-            self.displayImageNotHit(image_id: 0)
+            self.displayImageNotHit(imageId: 0)
         }
         
         if self.hit && !top {
-            self.displayImageNotHit(image_id: 1)
+            self.displayImageNotHit(imageId: 1)
         }
         
         if counter1 < num_frames_misty {

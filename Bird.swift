@@ -33,8 +33,8 @@ class Bird : GameObject {
         posY += self.velY
         if posX < -self.images[0].size.width {
             updateSpeed(backgroundSpeed: backgroundSpeed)
-            playSoundAllowed()
             updatePosition(scene: scene)
+            playSoundAllowed()
             self.hit = false
         }
     }
@@ -45,25 +45,9 @@ class Bird : GameObject {
         
     }
     
-    func playSoundAllowed() {
-        self.playSound = true
-        self.playHitSound = true
-    }
-    
     func updatePosition(scene : SKScene) {
         let factor = 1.0 - (self.images[0].size.height) / (scene.size.height / 2)
         posX = getRandomNumber() * scene.size.width + scene.size.width
         posY = getRandomNumber() * scene.size.height / 2 * factor + scene.size.height / 4 + 1/2 * (1 - factor) * scene.size.height / 2
-        
-    }
-    
-    func updateImagePositions() {
-        for image in self.images {
-            image.position.x = posX
-        }
-        
-        for image in self.images {
-            image.position.y = posY
-        }
     }
 }

@@ -107,6 +107,29 @@ class GameObject {
         self.velY = velY
     }
     
+    func updateImagePositions() {
+        for image in self.images {
+            image.position.x = posX
+        }
+        
+        for image in self.images {
+            image.position.y = posY
+        }
+        
+        for image in self.imagesHit {
+            image.position.x = posX
+        }
+        
+        for image in self.imagesHit {
+            image.position.y = posY
+        }
+    }
+    
+    func playSoundAllowed() {
+        self.playSound = true
+        self.playHitSound = true
+    }
+    
     func setPlaySound(play_s : Bool) {
         self.playSound = play_s
     }
@@ -143,16 +166,16 @@ class GameObject {
     
     func displayImage(imageId : Int) {
         if(hit) {
-            displayImageHit(image_id: imageId)
+            displayImageHit(imageId: imageId)
         }
         else {
-            displayImageNotHit(image_id: imageId)
+            displayImageNotHit(imageId: imageId)
         }
     }
     
-    func displayImageNotHit(image_id : Int) {
+    func displayImageNotHit(imageId : Int) {
         for image in 0..<self.images.count {
-            if(image == image_id) {
+            if(image == imageId) {
                 self.images[image].zPosition = self.zPos
             }
             else {
@@ -164,9 +187,9 @@ class GameObject {
         }
     }
     
-    func displayImageHit(image_id : Int) {
+    func displayImageHit(imageId : Int) {
         for image in 0..<self.imagesHit.count {
-            if(image == image_id) {
+            if(image == imageId) {
                 self.imagesHit[image].zPosition = self.zPos
             }
             else {
@@ -218,13 +241,13 @@ class GameObject {
         frameCounterHit += 1
         
         if(frameCounterHit < NUM_FRAMES_BIRD) {
-            displayImageHit(image_id: imageIdHit)
+            displayImageHit(imageId: imageIdHit)
         }
         else {
             frameCounterHit = 0
             imageIdHit += 1
             if(imageIdHit == self.imagesHit.count) { imageIdHit = 0 }
-            displayImageHit(image_id: imageIdHit)
+            displayImageHit(imageId: imageIdHit)
         }
     }
 }

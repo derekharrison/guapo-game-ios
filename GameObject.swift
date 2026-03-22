@@ -9,14 +9,14 @@ import Foundation
 import SpriteKit
 
 class GameObject {
-    var z_pos: CGFloat
-    var vel_x: CGFloat
-    var vel_y: CGFloat
-    var play_sound: Bool
-    var play_hit_sound : Bool
+    var zPos: CGFloat
+    var velX: CGFloat
+    var velY: CGFloat
+    var playSound: Bool
+    var playHitSound : Bool
     var images : [SKSpriteNode]
     var imagesHit : [SKSpriteNode]
-    var image_names : [String]
+    var imageNames : [String]
     var frameCounter = 1
     var frameCounterHit = 1
     var imageId = 0
@@ -26,32 +26,36 @@ class GameObject {
     var hit : Bool
     var appeared : Bool
     var bubbles : Bubbles
-    var pos_x : CGFloat
-    var pos_y : CGFloat
+    var posX : CGFloat
+    var posY : CGFloat
     var cape1 : SKSpriteNode
     var cape2 : SKSpriteNode
-    var cape_counter = 1
+    var capeCounter = 1
     
     init() {
-        self.z_pos = -1
-        self.vel_x = 0
-        self.vel_y = 0
-        self.play_sound = true
-        self.play_hit_sound = true
+        self.zPos = -1
+        self.velX = 0
+        self.velY = 0
+        self.playSound = true
+        self.playHitSound = true
         self.images = [SKSpriteNode]()
         self.imagesHit = [SKSpriteNode]()
-        self.image_names = [String]()
+        self.imageNames = [String]()
         self.width = 0
         self.height = 0
         self.hit = false
         self.appeared = false
         self.bubbles = Bubbles()
-        self.pos_x = -10000
-        self.pos_y = 0
+        self.posX = -10000
+        self.posY = 0
         self.cape1 = SKSpriteNode(imageNamed: CAPE_IMAGE1)
         self.cape2 = SKSpriteNode(imageNamed: CAPE_IMAGE2)
     }
     
+    func update() {
+        advanceFrameCounter()
+    }
+
     func setHeight(height : CGFloat) {
         self.height = height
     }
@@ -61,7 +65,7 @@ class GameObject {
     }
     
     func setZPosition(zPos : CGFloat) {
-        self.z_pos = zPos
+        self.zPos = zPos
         for image in images {
             image.zPosition = zPos
         }
@@ -71,7 +75,7 @@ class GameObject {
     }
     
     func setZPositionHit(zPos : CGFloat) {
-        self.z_pos = zPos
+        self.zPos = zPos
         for image in images {
             image.zPosition = -1
         }
@@ -81,10 +85,6 @@ class GameObject {
         self.imagesHit[0].zPosition = zPos
     }
     
-    func update() {
-        advanceFrameCounter()
-    }
-
     
     func setPosition(position : CGPoint) {
         for image in images {
@@ -100,17 +100,17 @@ class GameObject {
     }
     
     func setVelocity(vel_x : CGFloat, vel_y : CGFloat) {
-        self.vel_x = vel_x
-        self.vel_y = vel_y
+        self.velX = vel_x
+        self.velY = vel_y
     }
     
     func setPlaySound(play_s : Bool) {
-        self.play_sound = play_s
+        self.playSound = play_s
     }
     
     func addImage(image : String) {
         self.images.append(SKSpriteNode(imageNamed: image))
-        self.image_names.append(image)
+        self.imageNames.append(image)
     }
     
     func addImageHit(image : String) {
@@ -150,7 +150,7 @@ class GameObject {
     func displayImageNotHit(image_id : Int) {
         for image in 0..<self.images.count {
             if(image == image_id) {
-                self.images[image].zPosition = self.z_pos
+                self.images[image].zPosition = self.zPos
             }
             else {
                 self.images[image].zPosition = -1
@@ -164,7 +164,7 @@ class GameObject {
     func displayImageHit(image_id : Int) {
         for image in 0..<self.imagesHit.count {
             if(image == image_id) {
-                self.imagesHit[image].zPosition = self.z_pos
+                self.imagesHit[image].zPosition = self.zPos
             }
             else {
                 self.imagesHit[image].zPosition = -1
@@ -175,7 +175,7 @@ class GameObject {
         }
     }
  
-    func set_size(size : CGSize) {
+    func setSize(size : CGSize) {
         for x in self.images {
             x.size = size
         }
@@ -184,13 +184,13 @@ class GameObject {
         }
     }
     
-    func set_size_hit(size : CGSize) {
+    func setSizeHit(size : CGSize) {
         for x in self.imagesHit {
             x.size = size
         }
     }
     
-    func get_size() -> CGSize {
+    func getSize() -> CGSize {
         return self.images[0].size
     }
     
@@ -214,7 +214,7 @@ class GameObject {
     func advanceFrameCounterHit() {
         frameCounterHit += 1
         
-        if(frameCounterHit < num_frames_bird) {
+        if(frameCounterHit < NUM_FRAMES_BIRD) {
             displayImageHit(image_id: imageIdHit)
         }
         else {

@@ -21,18 +21,18 @@ class Player : GameObject {
         
         self.setPosition(position: CGPoint(x: -5000, y: 0))
         self.setZPosition(zPos: z_pos)
-        self.set_size(size: size)
+        self.setSize(size: size)
     }
     
     override func update() {
         super.update()
         updatePositionPlayer()
-        updateImage(numFrames: num_frames_bird)
+        updateImage(numFrames: NUM_FRAMES_BIRD)
     }
     
     func updatePositionPlayer() {
-        self.images[0].position.x += self.vel_x
-        self.images[0].position.y += self.vel_y
+        self.images[0].position.x += self.velX
+        self.images[0].position.y += self.velY
         
         reflect_player_velocity()
         
@@ -44,31 +44,31 @@ class Player : GameObject {
             x.position = self.images[0].position
         }
         
-        self.pos_x = images[0].position.x
-        self.pos_y = images[0].position.y
+        self.posX = images[0].position.x
+        self.posY = images[0].position.y
     }
     
     
     func reflect_player_velocity() {
         if self.images[0].position.x < 0 {
             self.images[0].position.x = 0
-            self.vel_x = -self.vel_x
+            self.velX = -self.velX
         }
         if self.images[0].position.x > self.width {
             self.images[0].position.x = self.width
-            self.vel_x = -self.vel_x
+            self.velX = -self.velX
         }
         if self.images[0].position.y > (self.height / 2 + self.height / 4) {
             self.images[0].position.y = self.height / 2 + self.height / 4
-            self.vel_y = -self.vel_y
+            self.velY = -self.velY
         }
         if self.images[0].position.y < (self.height / 2 - self.height / 4) {
             self.images[0].position.y = self.height / 2 - self.height / 4
-            self.vel_y = -self.vel_y
+            self.velY = -self.velY
         }
         
-        self.pos_x = images[0].position.x
-        self.pos_y = images[0].position.y
+        self.posX = images[0].position.x
+        self.posY = images[0].position.y
     }
     
     func add_image_hit(image : String, size : CGSize, z_pos : CGFloat) {

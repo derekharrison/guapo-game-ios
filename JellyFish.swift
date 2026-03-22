@@ -20,7 +20,7 @@ class JellyFish : GameObject {
         
         self.setPosition(position: CGPoint(x: -5000, y: 0))
         self.setZPosition(zPos: z_pos)
-        self.set_size(size: size)
+        self.setSize(size: size)
     }
     
     func update(scene : SKScene, backgroundSpeed : CGFloat) {
@@ -32,20 +32,20 @@ class JellyFish : GameObject {
     
     func updatePosition(scene : SKScene, backgroundSpeed : CGFloat, numFrames : Int) {
         
-        self.images[0].position.x += self.vel_x
-        self.images[0].position.y += self.vel_y
+        self.images[0].position.x += self.velX
+        self.images[0].position.y += self.velY
         
         if self.images[0].position.x < -self.images[0].size.width {
             
-            let speed = get_rand_num() * 2 * backgroundSpeed + 1.2 * backgroundSpeed
+            let speed = getRandomNumber() * 2 * backgroundSpeed + 1.2 * backgroundSpeed
             setVelocity(vel_x: speed, vel_y: 0)
             
-            self.play_sound = true
-            self.play_hit_sound = true
+            self.playSound = true
+            self.playHitSound = true
             
             let factor = 1.0 - (self.images[0].size.height) / (scene.size.height / 2)
-            self.images[0].position.x = get_rand_num() * scene.size.width + scene.size.width
-            self.images[0].position.y = get_rand_num() * scene.size.height / 2 * factor + scene.size.height / 4 + 1/2 * (1 - factor) * scene.size.height / 2
+            self.images[0].position.x = getRandomNumber() * scene.size.width + scene.size.width
+            self.images[0].position.y = getRandomNumber() * scene.size.height / 2 * factor + scene.size.height / 4 + 1/2 * (1 - factor) * scene.size.height / 2
             
             self.hit = false
         }
@@ -58,8 +58,8 @@ class JellyFish : GameObject {
             x.position = self.images[0].position
         }
         
-        self.pos_x = images[0].position.x
-        self.pos_y = images[0].position.y
+        self.posX = images[0].position.x
+        self.posY = images[0].position.y
     }
 
     func updatePosition() {

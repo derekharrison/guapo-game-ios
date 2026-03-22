@@ -29,7 +29,7 @@ class GameLevel4: SKScene {
         images.append(FRITO_OCEAN_2)
         base.add_bubbles(bubbles_char: base.frito.bubbles, bubble_image: BUBBLE_IMAGE_STR)
         
-        for x in base.frito.bubbles.bubbles {
+        for x in base.frito.bubbles.bubblez {
             x.removeFromParent()
             self.addChild(x)
         }
@@ -41,7 +41,7 @@ class GameLevel4: SKScene {
         images_brownie.append(BROWNIE_OCEAN_2)
         base.add_bubbles(bubbles_char: base.brownie.bubbles, bubble_image: BUBBLE_IMAGE_STR)
         
-        for x in base.brownie.bubbles.bubbles {
+        for x in base.brownie.bubbles.bubblez {
             x.removeFromParent()
             self.addChild(x)
         }
@@ -55,7 +55,7 @@ class GameLevel4: SKScene {
         images_misty.append(MISTY_OCEAN_4)
         base.add_bubbles(bubbles_char: base.misty.bubbles, bubble_image: BUBBLE_IMAGE_STR)
         
-        for x in base.misty.bubbles.bubbles {
+        for x in base.misty.bubbles.bubblez {
             x.removeFromParent()
             self.addChild(x)
         }

@@ -28,15 +28,15 @@ class Misty : GameObject {
     
     func updatePositionMisty() {
         for image in images {
-            image.position.x += self.vel_x
-            image.position.y += self.vel_y
+            image.position.x += self.velX
+            image.position.y += self.velY
         }
         for image in imagesHit {
             image.position = images[0].position
         }
         
-        self.pos_x = images[0].position.x
-        self.pos_y = images[0].position.y
+        self.posX = images[0].position.x
+        self.posY = images[0].position.y
     }
     
     func play_misty(bool : Bool) {
@@ -85,7 +85,7 @@ class Misty : GameObject {
         }
         
         else if counter1 == num_frames_misty {
-            self.vel_y = -self.vel_y
+            self.velY = -self.velY
             counter1 += 1
         }
         

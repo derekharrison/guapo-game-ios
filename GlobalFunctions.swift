@@ -11,10 +11,10 @@ import SpriteKit
 func save_snack(object : Snack, prefix : String) {
     let defaults = UserDefaults()
     
-    defaults.set(object.z_pos, forKey: prefix + "z_pos")
-    defaults.set(object.vel_x, forKey: prefix + "vel_x")
-    defaults.set(object.vel_y, forKey: prefix + "vel_y")
-    defaults.set(object.play_sound, forKey: prefix + "play_sound")
+    defaults.set(object.zPos, forKey: prefix + "z_pos")
+    defaults.set(object.velX, forKey: prefix + "vel_x")
+    defaults.set(object.velY, forKey: prefix + "vel_y")
+    defaults.set(object.playSound, forKey: prefix + "play_sound")
     defaults.set(object.frameCounter, forKey: prefix + "bird_counter")
     defaults.set(object.frameCounterHit, forKey: prefix + "bird_counter_hit")
     defaults.set(object.imageId, forKey: prefix + "bird_id")
@@ -23,8 +23,8 @@ func save_snack(object : Snack, prefix : String) {
     defaults.set(object.height, forKey: prefix + "height")
     defaults.set(object.hit, forKey: prefix + "hit")
     defaults.set(object.appeared, forKey: prefix + "appeared")
-    defaults.set(object.pos_x, forKey: prefix + "pos_x")
-    defaults.set(object.pos_y, forKey: prefix + "pos_y")
+    defaults.set(object.posX, forKey: prefix + "pos_x")
+    defaults.set(object.posY, forKey: prefix + "pos_y")
     
     defaults.set(object.bubbles.bubcounter, forKey: prefix + "bubbles.bubcounter")
     defaults.set(object.bubbles.isMuted, forKey: prefix + "bubbles.is_muted")
@@ -55,10 +55,10 @@ func get_snacks(snacks : inout [Snack], prefix : String) {
 func get_snack(object : inout Snack, prefix : String) {
     let defaults = UserDefaults()
     
-    object.z_pos = CGFloat(defaults.float(forKey: prefix + "z_pos"))
-    object.vel_x = CGFloat(defaults.float(forKey: prefix + "vel_x"))
-    object.vel_y = CGFloat(defaults.float(forKey: prefix + "vel_y"))
-    object.play_sound = defaults.bool(forKey: prefix + "play_sound")
+    object.zPos = CGFloat(defaults.float(forKey: prefix + "z_pos"))
+    object.velX = CGFloat(defaults.float(forKey: prefix + "vel_x"))
+    object.velY = CGFloat(defaults.float(forKey: prefix + "vel_y"))
+    object.playSound = defaults.bool(forKey: prefix + "play_sound")
     object.frameCounter = defaults.integer(forKey: prefix + "bird_counter")
     object.frameCounterHit = defaults.integer(forKey: prefix + "bird_counter_hit")
     object.imageId = defaults.integer(forKey: prefix + "bird_id")
@@ -67,10 +67,10 @@ func get_snack(object : inout Snack, prefix : String) {
     object.height = CGFloat(defaults.float(forKey: prefix + "height"))
     object.hit = defaults.bool(forKey: prefix + "hit")
     object.appeared = defaults.bool(forKey: prefix + "appeared")
-    object.pos_x = CGFloat(defaults.float(forKey: prefix + "pos_x"))
-    object.pos_y = CGFloat(defaults.float(forKey: prefix + "pos_y"))
+    object.posX = CGFloat(defaults.float(forKey: prefix + "pos_x"))
+    object.posY = CGFloat(defaults.float(forKey: prefix + "pos_y"))
     
-    object.setPosition(position: CGPoint(x: object.pos_x, y: object.pos_y))
+    object.setPosition(position: CGPoint(x: object.posX, y: object.posY))
     
     object.bubbles.bubcounter = defaults.integer(forKey: prefix + "bubbles.bubcounter")
     object.bubbles.isMuted = defaults.bool(forKey: prefix + "bubbles.is_muted")
@@ -81,10 +81,10 @@ func save_misty(object : Misty, prefix : String) {
 
     let defaults = UserDefaults()
     
-    defaults.set(object.z_pos, forKey: prefix + "z_pos")
-    defaults.set(object.vel_x, forKey: prefix + "vel_x")
-    defaults.set(object.vel_y, forKey: prefix + "vel_y")
-    defaults.set(object.play_sound, forKey: prefix + "play_sound")
+    defaults.set(object.zPos, forKey: prefix + "z_pos")
+    defaults.set(object.velX, forKey: prefix + "vel_x")
+    defaults.set(object.velY, forKey: prefix + "vel_y")
+    defaults.set(object.playSound, forKey: prefix + "play_sound")
     defaults.set(object.frameCounter, forKey: prefix + "bird_counter")
     defaults.set(object.frameCounterHit, forKey: prefix + "bird_counter_hit")
     defaults.set(object.imageId, forKey: prefix + "bird_id")
@@ -93,8 +93,8 @@ func save_misty(object : Misty, prefix : String) {
     defaults.set(object.height, forKey: prefix + "height")
     defaults.set(object.hit, forKey: prefix + "hit")
     defaults.set(object.appeared, forKey: prefix + "appeared")
-    defaults.set(object.pos_x, forKey: prefix + "pos_x")
-    defaults.set(object.pos_y, forKey: prefix + "pos_y")
+    defaults.set(object.posX, forKey: prefix + "pos_x")
+    defaults.set(object.posY, forKey: prefix + "pos_y")
     
     defaults.set(object.bubbles.bubcounter, forKey: prefix + "bubbles.bubcounter")
     defaults.set(object.bubbles.isMuted, forKey: prefix + "bubbles.is_muted")
@@ -107,10 +107,10 @@ func save_misty(object : Misty, prefix : String) {
 func get_misty_object(object : inout Misty, prefix : String) {
     let defaults = UserDefaults()
     
-    object.z_pos = CGFloat(defaults.float(forKey: prefix + "z_pos"))
-    object.vel_x = CGFloat(defaults.float(forKey: prefix + "vel_x"))
-    object.vel_y = CGFloat(defaults.float(forKey: prefix + "vel_y"))
-    object.play_sound = defaults.bool(forKey: prefix + "play_sound")
+    object.zPos = CGFloat(defaults.float(forKey: prefix + "z_pos"))
+    object.velX = CGFloat(defaults.float(forKey: prefix + "vel_x"))
+    object.velY = CGFloat(defaults.float(forKey: prefix + "vel_y"))
+    object.playSound = defaults.bool(forKey: prefix + "play_sound")
     object.frameCounter = defaults.integer(forKey: prefix + "bird_counter")
     object.frameCounterHit = defaults.integer(forKey: prefix + "bird_counter_hit")
     object.imageId = defaults.integer(forKey: prefix + "bird_id")
@@ -119,8 +119,8 @@ func get_misty_object(object : inout Misty, prefix : String) {
     object.height = CGFloat(defaults.float(forKey: prefix + "height"))
     object.hit = defaults.bool(forKey: prefix + "hit")
     object.appeared = defaults.bool(forKey: prefix + "appeared")
-    object.pos_x = CGFloat(defaults.float(forKey: prefix + "pos_x"))
-    object.pos_y = CGFloat(defaults.float(forKey: prefix + "pos_y"))
+    object.posX = CGFloat(defaults.float(forKey: prefix + "pos_x"))
+    object.posY = CGFloat(defaults.float(forKey: prefix + "pos_y"))
     
     object.bubbles.bubcounter = defaults.integer(forKey: prefix + "bubbles.bubcounter")
     object.bubbles.isMuted = defaults.bool(forKey: prefix + "bubbles.is_muted")
@@ -129,16 +129,16 @@ func get_misty_object(object : inout Misty, prefix : String) {
     object.counter1 = defaults.integer(forKey: prefix + "counter1")
     object.counter2 = defaults.integer(forKey: prefix + "counter2")
     
-    object.set_pos_api(pos: CGPoint(x: object.pos_x, y: object.pos_y))
+    object.set_pos_api(pos: CGPoint(x: object.posX, y: object.posY))
 }
 
 func save_object(object : GameObject, prefix : String) {
     let defaults = UserDefaults()
     
-    defaults.set(object.z_pos, forKey: prefix + "z_pos")
-    defaults.set(object.vel_x, forKey: prefix + "vel_x")
-    defaults.set(object.vel_y, forKey: prefix + "vel_y")
-    defaults.set(object.play_sound, forKey: prefix + "play_sound")
+    defaults.set(object.zPos, forKey: prefix + "z_pos")
+    defaults.set(object.velX, forKey: prefix + "vel_x")
+    defaults.set(object.velY, forKey: prefix + "vel_y")
+    defaults.set(object.playSound, forKey: prefix + "play_sound")
     defaults.set(object.frameCounter, forKey: prefix + "bird_counter")
     defaults.set(object.frameCounterHit, forKey: prefix + "bird_counter_hit")
     defaults.set(object.imageId, forKey: prefix + "bird_id")
@@ -147,8 +147,8 @@ func save_object(object : GameObject, prefix : String) {
     defaults.set(object.height, forKey: prefix + "height")
     defaults.set(object.hit, forKey: prefix + "hit")
     defaults.set(object.appeared, forKey: prefix + "appeared")
-    defaults.set(object.pos_x, forKey: prefix + "pos_x")
-    defaults.set(object.pos_y, forKey: prefix + "pos_y")
+    defaults.set(object.posX, forKey: prefix + "pos_x")
+    defaults.set(object.posY, forKey: prefix + "pos_y")
     
     defaults.set(object.bubbles.bubcounter, forKey: prefix + "bubbles.bubcounter")
     defaults.set(object.bubbles.isMuted, forKey: prefix + "bubbles.is_muted")
@@ -157,10 +157,10 @@ func save_object(object : GameObject, prefix : String) {
 func getFish(object : inout Fish, prefix : String) {
     let defaults = UserDefaults()
     
-    object.z_pos = CGFloat(defaults.float(forKey: prefix + "z_pos"))
-    object.vel_x = CGFloat(defaults.float(forKey: prefix + "vel_x"))
-    object.vel_y = CGFloat(defaults.float(forKey: prefix + "vel_y"))
-    object.play_sound = defaults.bool(forKey: prefix + "play_sound")
+    object.zPos = CGFloat(defaults.float(forKey: prefix + "z_pos"))
+    object.velX = CGFloat(defaults.float(forKey: prefix + "vel_x"))
+    object.velY = CGFloat(defaults.float(forKey: prefix + "vel_y"))
+    object.playSound = defaults.bool(forKey: prefix + "play_sound")
     object.frameCounter = defaults.integer(forKey: prefix + "bird_counter")
     object.frameCounterHit = defaults.integer(forKey: prefix + "bird_counter_hit")
     object.imageId = defaults.integer(forKey: prefix + "bird_id")
@@ -169,10 +169,10 @@ func getFish(object : inout Fish, prefix : String) {
     object.height = CGFloat(defaults.float(forKey: prefix + "height"))
     object.hit = defaults.bool(forKey: prefix + "hit")
     object.appeared = defaults.bool(forKey: prefix + "appeared")
-    object.pos_x = CGFloat(defaults.float(forKey: prefix + "pos_x"))
-    object.pos_y = CGFloat(defaults.float(forKey: prefix + "pos_y"))
+    object.posX = CGFloat(defaults.float(forKey: prefix + "pos_x"))
+    object.posY = CGFloat(defaults.float(forKey: prefix + "pos_y"))
     
-    object.setPosition(position: CGPoint(x: object.pos_x, y: object.pos_y))
+    object.setPosition(position: CGPoint(x: object.posX, y: object.posY))
     
     object.bubbles.bubcounter = defaults.integer(forKey: prefix + "bubbles.bubcounter")
     object.bubbles.isMuted = defaults.bool(forKey: prefix + "bubbles.is_muted")
@@ -181,10 +181,10 @@ func getFish(object : inout Fish, prefix : String) {
 func get_blowfish(object : inout BlowFish, prefix : String) {
     let defaults = UserDefaults()
     
-    object.z_pos = CGFloat(defaults.float(forKey: prefix + "z_pos"))
-    object.vel_x = CGFloat(defaults.float(forKey: prefix + "vel_x"))
-    object.vel_y = CGFloat(defaults.float(forKey: prefix + "vel_y"))
-    object.play_sound = defaults.bool(forKey: prefix + "play_sound")
+    object.zPos = CGFloat(defaults.float(forKey: prefix + "z_pos"))
+    object.velX = CGFloat(defaults.float(forKey: prefix + "vel_x"))
+    object.velY = CGFloat(defaults.float(forKey: prefix + "vel_y"))
+    object.playSound = defaults.bool(forKey: prefix + "play_sound")
     object.frameCounter = defaults.integer(forKey: prefix + "bird_counter")
     object.frameCounterHit = defaults.integer(forKey: prefix + "bird_counter_hit")
     object.imageId = defaults.integer(forKey: prefix + "bird_id")
@@ -193,10 +193,10 @@ func get_blowfish(object : inout BlowFish, prefix : String) {
     object.height = CGFloat(defaults.float(forKey: prefix + "height"))
     object.hit = defaults.bool(forKey: prefix + "hit")
     object.appeared = defaults.bool(forKey: prefix + "appeared")
-    object.pos_x = CGFloat(defaults.float(forKey: prefix + "pos_x"))
-    object.pos_y = CGFloat(defaults.float(forKey: prefix + "pos_y"))
+    object.posX = CGFloat(defaults.float(forKey: prefix + "pos_x"))
+    object.posY = CGFloat(defaults.float(forKey: prefix + "pos_y"))
     
-    object.setPosition(position: CGPoint(x: object.pos_x, y: object.pos_y))
+    object.setPosition(position: CGPoint(x: object.posX, y: object.posY))
     
     object.bubbles.bubcounter = defaults.integer(forKey: prefix + "bubbles.bubcounter")
     object.bubbles.isMuted = defaults.bool(forKey: prefix + "bubbles.is_muted")
@@ -205,10 +205,10 @@ func get_blowfish(object : inout BlowFish, prefix : String) {
 func get_brownie_object(object : inout Brownie, prefix : String) {
     let defaults = UserDefaults()
     
-    object.z_pos = CGFloat(defaults.float(forKey: prefix + "z_pos"))
-    object.vel_x = CGFloat(defaults.float(forKey: prefix + "vel_x"))
-    object.vel_y = CGFloat(defaults.float(forKey: prefix + "vel_y"))
-    object.play_sound = defaults.bool(forKey: prefix + "play_sound")
+    object.zPos = CGFloat(defaults.float(forKey: prefix + "z_pos"))
+    object.velX = CGFloat(defaults.float(forKey: prefix + "vel_x"))
+    object.velY = CGFloat(defaults.float(forKey: prefix + "vel_y"))
+    object.playSound = defaults.bool(forKey: prefix + "play_sound")
     object.frameCounter = defaults.integer(forKey: prefix + "bird_counter")
     object.frameCounterHit = defaults.integer(forKey: prefix + "bird_counter_hit")
     object.imageId = defaults.integer(forKey: prefix + "bird_id")
@@ -217,10 +217,10 @@ func get_brownie_object(object : inout Brownie, prefix : String) {
     object.height = CGFloat(defaults.float(forKey: prefix + "height"))
     object.hit = defaults.bool(forKey: prefix + "hit")
     object.appeared = defaults.bool(forKey: prefix + "appeared")
-    object.pos_x = CGFloat(defaults.float(forKey: prefix + "pos_x"))
-    object.pos_y = CGFloat(defaults.float(forKey: prefix + "pos_y"))
+    object.posX = CGFloat(defaults.float(forKey: prefix + "pos_x"))
+    object.posY = CGFloat(defaults.float(forKey: prefix + "pos_y"))
     
-    object.setPosition(position: CGPoint(x: object.pos_x, y: object.pos_y))
+    object.setPosition(position: CGPoint(x: object.posX, y: object.posY))
     
     object.bubbles.bubcounter = defaults.integer(forKey: prefix + "bubbles.bubcounter")
     object.bubbles.isMuted = defaults.bool(forKey: prefix + "bubbles.is_muted")
@@ -229,10 +229,10 @@ func get_brownie_object(object : inout Brownie, prefix : String) {
 func get_frito_object(object : inout Frito, prefix : String) {
     let defaults = UserDefaults()
     
-    object.z_pos = CGFloat(defaults.float(forKey: prefix + "z_pos"))
-    object.vel_x = CGFloat(defaults.float(forKey: prefix + "vel_x"))
-    object.vel_y = CGFloat(defaults.float(forKey: prefix + "vel_y"))
-    object.play_sound = defaults.bool(forKey: prefix + "play_sound")
+    object.zPos = CGFloat(defaults.float(forKey: prefix + "z_pos"))
+    object.velX = CGFloat(defaults.float(forKey: prefix + "vel_x"))
+    object.velY = CGFloat(defaults.float(forKey: prefix + "vel_y"))
+    object.playSound = defaults.bool(forKey: prefix + "play_sound")
     object.frameCounter = defaults.integer(forKey: prefix + "bird_counter")
     object.frameCounterHit = defaults.integer(forKey: prefix + "bird_counter_hit")
     object.imageId = defaults.integer(forKey: prefix + "bird_id")
@@ -241,10 +241,10 @@ func get_frito_object(object : inout Frito, prefix : String) {
     object.height = CGFloat(defaults.float(forKey: prefix + "height"))
     object.hit = defaults.bool(forKey: prefix + "hit")
     object.appeared = defaults.bool(forKey: prefix + "appeared")
-    object.pos_x = CGFloat(defaults.float(forKey: prefix + "pos_x"))
-    object.pos_y = CGFloat(defaults.float(forKey: prefix + "pos_y"))
+    object.posX = CGFloat(defaults.float(forKey: prefix + "pos_x"))
+    object.posY = CGFloat(defaults.float(forKey: prefix + "pos_y"))
     
-    object.setPosition(position: CGPoint(x: object.pos_x, y: object.pos_y))
+    object.setPosition(position: CGPoint(x: object.posX, y: object.posY))
     
     object.bubbles.bubcounter = defaults.integer(forKey: prefix + "bubbles.bubcounter")
     object.bubbles.isMuted = defaults.bool(forKey: prefix + "bubbles.is_muted")
@@ -253,10 +253,10 @@ func get_frito_object(object : inout Frito, prefix : String) {
 func get_player_object(object : inout Player, prefix : String) {
     let defaults = UserDefaults()
     
-    object.z_pos = CGFloat(defaults.float(forKey: prefix + "z_pos"))
-    object.vel_x = CGFloat(defaults.float(forKey: prefix + "vel_x"))
-    object.vel_y = CGFloat(defaults.float(forKey: prefix + "vel_y"))
-    object.play_sound = defaults.bool(forKey: prefix + "play_sound")
+    object.zPos = CGFloat(defaults.float(forKey: prefix + "z_pos"))
+    object.velX = CGFloat(defaults.float(forKey: prefix + "vel_x"))
+    object.velY = CGFloat(defaults.float(forKey: prefix + "vel_y"))
+    object.playSound = defaults.bool(forKey: prefix + "play_sound")
     object.frameCounter = defaults.integer(forKey: prefix + "bird_counter")
     object.frameCounterHit = defaults.integer(forKey: prefix + "bird_counter_hit")
     object.imageId = defaults.integer(forKey: prefix + "bird_id")
@@ -265,10 +265,10 @@ func get_player_object(object : inout Player, prefix : String) {
     object.height = CGFloat(defaults.float(forKey: prefix + "height"))
     object.hit = defaults.bool(forKey: prefix + "hit")
     object.appeared = defaults.bool(forKey: prefix + "appeared")
-    object.pos_x = CGFloat(defaults.float(forKey: prefix + "pos_x"))
-    object.pos_y = CGFloat(defaults.float(forKey: prefix + "pos_y"))
+    object.posX = CGFloat(defaults.float(forKey: prefix + "pos_x"))
+    object.posY = CGFloat(defaults.float(forKey: prefix + "pos_y"))
     
-    object.setPosition(position: CGPoint(x: object.pos_x, y: object.pos_y))
+    object.setPosition(position: CGPoint(x: object.posX, y: object.posY))
     
     object.bubbles.bubcounter = defaults.integer(forKey: prefix + "bubbles.bubcounter")
     object.bubbles.isMuted = defaults.bool(forKey: prefix + "bubbles.is_muted")
@@ -294,7 +294,7 @@ func play_sound_api(scene : SKScene, sound : [SKAction]) {
     bubble_sound.run(bubble_sound_biteSequence)
 }
 
-func get_rand_num() -> CGFloat {
+func getRandomNumber() -> CGFloat {
     CGFloat(Float(arc4random()) / Float(UINT32_MAX))
 }
 
@@ -323,10 +323,10 @@ func check_collision(bird : GameObject, player : Player, den : CGFloat) -> Bool 
     
     var l1 = bird.images[0].position
     var r1 = l1
-    l1.x -= bird.get_size().width / den
-    l1.y += bird.get_size().height / den
-    r1.x += bird.get_size().width / den
-    r1.y -= bird.get_size().height / den
+    l1.x -= bird.getSize().width / den
+    l1.y += bird.getSize().height / den
+    r1.x += bird.getSize().width / den
+    r1.y -= bird.getSize().height / den
     var l2 = player.images[0].position
     var r2 = player.images[0].position
     l2.x -= player.images[0].size.width / den

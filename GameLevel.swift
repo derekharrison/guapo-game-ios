@@ -304,7 +304,7 @@ class GameLevel {
         fish1.addImage(image: FISH_IMAGE_2)
         fish1.setHeight(height : height)
         fish1.setWidth(width : width)
-        fish1.set_size(size: CGSize(width : width / 7.5, height : height / 15))
+        fish1.setSize(size: CGSize(width : width / 7.5, height : height / 15))
         fish1.setPosition(position: CGPoint(x: -1000, y: 0))
         fish1.setZPosition(zPos: min_z_pos_fishes)
         fish1.addImagesToScene(scene: scene)
@@ -313,7 +313,7 @@ class GameLevel {
         fish2.addImage(image: FISH_IMAGE_2B)
         fish2.setHeight(height : height)
         fish2.setWidth(width : width)
-        fish2.set_size(size: CGSize(width : width / 7.5, height : height / 7.5))
+        fish2.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
         fish2.setPosition(position: CGPoint(x: -1000, y: 0))
         fish2.setZPosition(zPos: min_z_pos_fishes + 1)
         fish2.addImagesToScene(scene: scene)
@@ -322,7 +322,7 @@ class GameLevel {
         fish3.addImage(image: FISH_IMAGE_3B)
         fish3.setHeight(height : height)
         fish3.setWidth(width : width)
-        fish3.set_size(size: CGSize(width : width / 7.5, height : height / 15))
+        fish3.setSize(size: CGSize(width : width / 7.5, height : height / 15))
         fish3.setPosition(position: CGPoint(x: -1000, y: 0))
         fish3.setZPosition(zPos: min_z_pos_fishes + 2)
         fish3.addImagesToScene(scene: scene)
@@ -331,7 +331,7 @@ class GameLevel {
         fish4.addImage(image: FISH_IMAGE_4B)
         fish4.setHeight(height : height)
         fish4.setWidth(width : width)
-        fish4.set_size(size: CGSize(width : width / 7.5, height : height / 7.5))
+        fish4.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
         fish4.setPosition(position: CGPoint(x: -1000, y: 0))
         fish4.setZPosition(zPos: min_z_pos_fishes + 3)
         fish4.addImagesToScene(scene: scene)
@@ -340,7 +340,7 @@ class GameLevel {
         fish5.addImage(image: FISH_IMAGE_5B)
         fish5.setHeight(height : height)
         fish5.setWidth(width : width)
-        fish5.set_size(size: CGSize(width : width / 7.5, height : height / 7.5))
+        fish5.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
         fish5.setPosition(position: CGPoint(x: 10 * width, y: 0))
         fish5.setZPosition(zPos: min_z_pos_fishes + 4)
         fish5.addImagesToScene(scene: scene)
@@ -349,7 +349,7 @@ class GameLevel {
         fish6.addImage(image: FISH_IMAGE_6B)
         fish6.setHeight(height : height)
         fish6.setWidth(width : width)
-        fish6.set_size(size: CGSize(width : width / 7.5, height : height / 15))
+        fish6.setSize(size: CGSize(width : width / 7.5, height : height / 15))
         fish6.setPosition(position: CGPoint(x: 10 * width, y: 0))
         fish6.setZPosition(zPos: min_z_pos_fishes + 5)
         fish6.addImagesToScene(scene: scene)
@@ -360,8 +360,8 @@ class GameLevel {
         blow_fish.addImageHit(image: BLOW_FISH_IMAGE_4)
         blow_fish.setHeight(height : height)
         blow_fish.setWidth(width : width)
-        blow_fish.set_size(size: CGSize(width : width * 3 / 15, height : height / 7.5))
-        blow_fish.set_size_hit(size: CGSize(width : width * 3 / 7.5, height : height * 2 / 7.5))
+        blow_fish.setSize(size: CGSize(width : width * 3 / 15, height : height / 7.5))
+        blow_fish.setSizeHit(size: CGSize(width : width * 3 / 7.5, height : height * 2 / 7.5))
         blow_fish.setPosition(position: CGPoint(x: -1000, y: 0))
         blow_fish.setZPosition(zPos: min_z_pos_fishes + 6)
         blow_fish.setVelocity(vel_x: -1.5 * background_speed, vel_y: 0)
@@ -374,7 +374,7 @@ class GameLevel {
         }
         frito.setHeight(height : height)
         frito.setWidth(width : width)
-        frito.set_size(size: CGSize(width : width / 7.5, height : height / 7.5))
+        frito.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
         frito.setVelocity(vel_x: 2 * background_speed, vel_y: -2 * background_speed)
         frito.setZPosition(zPos: z_pos_chars)
         frito.setPosition(position: CGPoint(x : 10 * width, y : height * 0.75 + frito.images[0].size.height / 2))
@@ -387,7 +387,7 @@ class GameLevel {
         }
         brownie.setHeight(height : height)
         brownie.setWidth(width : width)
-        brownie.set_size(size: CGSize(width : width / 7.5, height : height / 7.5))
+        brownie.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
         brownie.setVelocity(vel_x: -2 * background_speed, vel_y: -2 * background_speed)
         brownie.setZPosition(zPos: z_pos_chars + 1)
         brownie.setPosition(position: CGPoint(x : -width, y : height * 0.75 + brownie.images[0].size.height / 2))
@@ -401,7 +401,7 @@ class GameLevel {
         }
         misty.setHeight(height : height)
         misty.setWidth(width : width)
-        misty.set_size(size: CGSize(width : width / 7.5, height : height / 7.5))
+        misty.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
         misty.set_vel_misty(vx: 0, vy: -background_speed)
         misty.setZPosition(zPos: z_pos_chars + 2)
         misty.setPosition(position: CGPoint(x : width / 2, y : height * 0.75 + misty.images[0].size.height / 2))
@@ -425,30 +425,30 @@ class GameLevel {
         
         continue_button.addImage(image: CONTINUE_BUTTON_NOT_PRESSED)
         continue_button.addImageHit(image: CONTINUE_BUTTON_PRESSED)
-        continue_button.setPosition(position: CGPoint(x: scene.size.width / 2 - continue_button.get_size().width / 2, y: scene.size.height / 2))
+        continue_button.setPosition(position: CGPoint(x: scene.size.width / 2 - continue_button.getSize().width / 2, y: scene.size.height / 2))
         continue_button.setZPosition(zPos: -1)
-        continue_button.set_size(size: CGSize(width: scene.size.width / 5, height: scene.size.height / 10))
+        continue_button.setSize(size: CGSize(width: scene.size.width / 5, height: scene.size.height / 10))
         continue_button.addImagesToScene(scene: scene)
         
         restart_button.addImage(image: RESTART_BUTTON_NOT_PRESSED)
         restart_button.addImageHit(image: RESTART_BUTTON_PRESSED)
-        restart_button.setPosition(position: CGPoint(x: scene.size.width / 2 + restart_button.get_size().width / 2, y: scene.size.height / 2))
+        restart_button.setPosition(position: CGPoint(x: scene.size.width / 2 + restart_button.getSize().width / 2, y: scene.size.height / 2))
         restart_button.setZPosition(zPos: -1)
-        restart_button.set_size(size: CGSize(width: scene.size.width / 5, height: scene.size.height / 10))
+        restart_button.setSize(size: CGSize(width: scene.size.width / 5, height: scene.size.height / 10))
         restart_button.addImagesToScene(scene: scene)
         
         if level_id != LEVEL_ID_5 {
             flag.addImage(image: FLAG_ARUBA_STR)
             flag.setZPosition(zPos: -1)
-            flag.set_size(size: CGSize(width: scene.size.width / 5, height: scene.size.height / 5))
-            flag.setPosition(position: CGPoint(x: scene.size.width - flag.get_size().width, y: scene.size.height * 0.75 - flag.get_size().height))
+            flag.setSize(size: CGSize(width: scene.size.width / 5, height: scene.size.height / 5))
+            flag.setPosition(position: CGPoint(x: scene.size.width - flag.getSize().width, y: scene.size.height * 0.75 - flag.getSize().height))
             flag.addImagesToScene(scene: scene)
         }
         else {
             flag.addImage(image: FLAG_NETHERLANDS_STR)
             flag.setZPosition(zPos: -1)
-            flag.set_size(size: CGSize(width: scene.size.width / 5, height: scene.size.height / 5))
-            flag.setPosition(position: CGPoint(x: scene.size.width - flag.get_size().width, y: scene.size.height * 0.75 - flag.get_size().height))
+            flag.setSize(size: CGSize(width: scene.size.width / 5, height: scene.size.height / 5))
+            flag.setPosition(position: CGPoint(x: scene.size.width - flag.getSize().width, y: scene.size.height * 0.75 - flag.getSize().height))
             flag.addImagesToScene(scene: scene)
         }
         
@@ -586,9 +586,9 @@ class GameLevel {
             
             cheesy_bite.addImagesToScene(scene: scene)
 
-            let factor = 1.0 - (cheesy_bite.get_size().height) / (scene.size.height / 2)
-            let pos_x = get_rand_num() * scene.size.width * 2
-            let pos_y = get_rand_num() * scene.size.height / 2 * factor + scene.size.height / 4 + 1/2 * (1 - factor) * scene.size.height / 2
+            let factor = 1.0 - (cheesy_bite.getSize().height) / (scene.size.height / 2)
+            let pos_x = getRandomNumber() * scene.size.width * 2
+            let pos_y = getRandomNumber() * scene.size.height / 2 * factor + scene.size.height / 4 + 1/2 * (1 - factor) * scene.size.height / 2
             
             cheesy_bite.setPosition(position: CGPoint(x: pos_x, y: pos_y))
             cheesy_bite.setVelocity(vel_x: -background_speed, vel_y: 0)
@@ -630,7 +630,7 @@ class GameLevel {
             let z_pos = CGFloat(j) + min_z_pos_birds
             let size = CGSize(width: scene.size.width / 10, height: scene.size.height / 10)
             
-            let bird = Bird(birds: bird_images, size: size, z_pos: z_pos)
+            let bird = Bird(birds: bird_images, size: size, zPos: z_pos)
             
             bird.addImagesToScene(scene : scene)
 
@@ -715,7 +715,7 @@ class GameLevel {
         player.bubbles.addBubble(imageId: BUBBLE_IMAGE_STR)
         player.bubbles.addBubble(imageId: BUBBLE_IMAGE_STR)
         
-        for x in player.bubbles.bubbles {
+        for x in player.bubbles.bubblez {
             x.removeFromParent()
             scene.addChild(x)
         }
@@ -759,9 +759,9 @@ class GameLevel {
     func pop_frito() {
         if frito.appeared  {
 
-            if muted == false && frito.play_sound {
+            if muted == false && frito.playSound {
                 play_sound_api(scene: scene, sound: [frito_sound_appearing])
-                frito.play_sound = false
+                frito.playSound = false
             }
         }
 
@@ -770,9 +770,9 @@ class GameLevel {
         if check_collision(bird : frito, player : player, den : 2.5) {
             frito.hit = true
 
-            if muted == false && frito.play_hit_sound {
+            if muted == false && frito.playHitSound {
                 play_sound_api(scene: scene, sound: [frito_sound])
-                frito.play_hit_sound = false
+                frito.playHitSound = false
             }
         }
     }
@@ -780,9 +780,9 @@ class GameLevel {
     func pop_brownie() {
         if brownie.appeared  {
 
-            if muted == false && brownie.play_sound {
+            if muted == false && brownie.playSound {
                 play_sound_api(scene: scene, sound: [brownie_sound_appearing])
-                brownie.play_sound = false
+                brownie.playSound = false
             }
         }
 
@@ -791,9 +791,9 @@ class GameLevel {
         if check_collision(bird : brownie, player : player, den : 2.5) {
             brownie.hit = true
 
-            if muted == false && brownie.play_hit_sound {
+            if muted == false && brownie.playHitSound {
                 play_sound_api(scene: scene, sound: [brownie_sound])
-                brownie.play_hit_sound = false
+                brownie.playHitSound = false
             }
         }
     }
@@ -804,8 +804,8 @@ class GameLevel {
         if check_collision(bird : misty, player : player, den : 2.5) {
             misty.hit = true
             
-            if muted == false && misty.play_sound {
-                misty.play_sound = false
+            if muted == false && misty.playSound {
+                misty.playSound = false
                 play_sound_api(scene: scene, sound: [misty_sound])
             }
         }
@@ -815,14 +815,14 @@ class GameLevel {
             misty.play_misty(bool: Bool.random())
             if misty.top {
                 misty.setPosition(position: CGPoint(x : misty.width / 2, y : misty.height * 0.75 + misty.images[0].size.height / 2))
-                misty.set_vel_misty(vx: misty.vel_x, vy: -background_speed)
+                misty.set_vel_misty(vx: misty.velX, vy: -background_speed)
             }
             else {
                 misty.setPosition(position: CGPoint(x : misty.width / 2, y : misty.height * 0.25 - misty.images[0].size.height / 2))
-                misty.set_vel_misty(vx: misty.vel_x, vy: background_speed)
+                misty.set_vel_misty(vx: misty.velX, vy: background_speed)
             }
             
-            misty.play_sound = true
+            misty.playSound = true
             misty.hit = false
             
             if muted == false {
@@ -834,9 +834,9 @@ class GameLevel {
     func pop_frito_ocean() {
         if frito.appeared  {
 
-            if muted == false && frito.play_sound {
+            if muted == false && frito.playSound {
                 play_sound_api(scene: scene, sound: [frito_sound_appearing])
-                frito.play_sound = false
+                frito.playSound = false
             }
             
             frito.bubbles.popBubbles(pos: frito.getPosition(), scene : scene, sound : [bubbles_sounds])
@@ -850,9 +850,9 @@ class GameLevel {
         if check_collision(bird : frito, player : player, den : 2.5) {
             frito.hit = true
 
-            if muted == false && frito.play_hit_sound {
+            if muted == false && frito.playHitSound {
                 play_sound_api(scene: scene, sound: [frito_sound])
-                frito.play_hit_sound = false
+                frito.playHitSound = false
             }
         }
     }
@@ -860,9 +860,9 @@ class GameLevel {
     func pop_brownie_ocean() {
         if brownie.appeared  {
 
-            if muted == false && brownie.play_sound {
+            if muted == false && brownie.playSound {
                 play_sound_api(scene: scene, sound: [brownie_sound_appearing])
-                brownie.play_sound = false
+                brownie.playSound = false
             }
             
             brownie.bubbles.popBubbles(pos: brownie.getPosition(), scene : scene, sound : [bubbles_sounds])
@@ -877,9 +877,9 @@ class GameLevel {
         if check_collision(bird : brownie, player : player, den : 2.5) {
             brownie.hit = true
 
-            if muted == false && brownie.play_hit_sound {
+            if muted == false && brownie.playHitSound {
                 play_sound_api(scene: scene, sound: [brownie_sound])
-                brownie.play_hit_sound = false
+                brownie.playHitSound = false
             }
         }
     }
@@ -890,9 +890,9 @@ class GameLevel {
         if check_collision(bird : misty, player : player, den : 2.5) {
             misty.hit = true
             
-            if muted == false && misty.play_sound {
+            if muted == false && misty.playSound {
                 play_sound_api(scene: scene, sound: [misty_sound])
-                misty.play_sound = false
+                misty.playSound = false
             }
         }
         
@@ -901,14 +901,14 @@ class GameLevel {
             misty.play_misty(bool: Bool.random())
             if misty.top {
                 misty.setPosition(position: CGPoint(x : misty.width / 2, y : misty.height * 0.75 + misty.images[0].size.height / 2))
-                misty.set_vel_misty(vx: misty.vel_x, vy: -background_speed)
+                misty.set_vel_misty(vx: misty.velX, vy: -background_speed)
             }
             else {
                 misty.setPosition(position: CGPoint(x : misty.width / 2, y : misty.height * 0.25 - misty.images[0].size.height / 2))
-                misty.set_vel_misty(vx: misty.vel_x, vy: background_speed)
+                misty.set_vel_misty(vx: misty.velX, vy: background_speed)
             }
             
-            misty.play_sound = true
+            misty.playSound = true
             misty.hit = false
             
             if muted == false {
@@ -968,11 +968,11 @@ class GameLevel {
         
         if check_collision(bird : blow_fish, player : player, den : 3.5) {
 
-            if muted == false && blow_fish.play_hit_sound {
+            if muted == false && blow_fish.playHitSound {
                 play_sound_api(scene: scene, sound: [blowfish_sound])
             }
-            blow_fish.play_sound = false
-            blow_fish.play_hit_sound = false
+            blow_fish.playSound = false
+            blow_fish.playHitSound = false
             blow_fish.hit = true
         }
     }
@@ -980,10 +980,10 @@ class GameLevel {
     func update_player() {
         player.update_pos_api()
         
-        player.cape1.position.x = player.pos_x - player.cape1.size.width / 2
-        player.cape1.position.y = player.pos_y
-        player.cape2.position.x = player.pos_x - player.cape2.size.width / 2
-        player.cape2.position.y = player.pos_y
+        player.cape1.position.x = player.posX - player.cape1.size.width / 2
+        player.cape1.position.y = player.posY
+        player.cape2.position.x = player.posX - player.cape2.size.width / 2
+        player.cape2.position.y = player.posY
         
         if my_counter < 5 {
             if my_switch {
@@ -1128,10 +1128,10 @@ class GameLevel {
     func update_num_birds() {
         if gameScore >= bound_tracker * num_points_when_birds_appear && birds.count < tot_num_birds {
             
-            let image_names = self.birds[0].image_names
+            let image_names = self.birds[0].imageNames
             let size = self.birds[0].images[0].size
             
-            let bird = Bird(birds: image_names, size: size, z_pos: CGFloat(birds.count) + min_z_pos_birds)
+            let bird = Bird(birds: image_names, size: size, zPos: CGFloat(birds.count) + min_z_pos_birds)
             bird.addImagesToScene(scene : scene)
             
             birds.append(bird)
@@ -1143,7 +1143,7 @@ class GameLevel {
     func update_num_jelly() {
         if gameScore >= bound_tracker * num_points_when_birds_appear && jellyfishes.count < tot_num_birds {
             
-            let image_names = self.jellyfishes[0].image_names
+            let image_names = self.jellyfishes[0].imageNames
             let size = self.jellyfishes[0].images[0].size
             
             let jelly = JellyFish(jelly_fish: image_names, size: size, z_pos: CGFloat(jellyfishes.count) + min_z_pos_birds)

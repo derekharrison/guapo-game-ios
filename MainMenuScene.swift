@@ -81,7 +81,7 @@ class MainMenuScene: SKScene {
     var highScoreNumberLevel4 = 0
     var highScoreNumberLevel5 = 0
     
-    override func didMove(to view: SKView) {
+    override func didMove(to _: SKView) {
         
         startNewScene = false
         startNewScenePressed = false
@@ -160,8 +160,8 @@ class MainMenuScene: SKScene {
         placeLevelButton(scorePreviousLevel : highScoreNumberLevel3, fac : 0.13, levelNotPressed : level5ButtonNotPressed, levelPressed : level5ButtonPressed, levelGray : level5ButtonGrey, highScore : highScoreNumberLevel5, scoreLabel : level5Score)
         
         
-        place_button(fac: 0.9, buttonNotPressed: startMenuButtonNotPressed, buttonPressed: startMenuButtonPressed)
-        place_button(fac: 0.76, buttonNotPressed: playerMenuButtonNotPressed, buttonPressed: playerMenuButtonPressed)
+        placeButton(fac: 0.9, buttonNotPressed: startMenuButtonNotPressed, buttonPressed: startMenuButtonPressed)
+        placeButton(fac: 0.76, buttonNotPressed: playerMenuButtonNotPressed, buttonPressed: playerMenuButtonPressed)
     }
     
     //Force the mute button to change by running update()
@@ -338,7 +338,7 @@ class MainMenuScene: SKScene {
         self.addChild(scoreLabel)
     }
     
-    func place_button(fac : CGFloat, buttonNotPressed : SKSpriteNode, buttonPressed : SKSpriteNode) {
+    func placeButton(fac : CGFloat, buttonNotPressed : SKSpriteNode, buttonPressed : SKSpriteNode) {
         let widthButton = self.size.width / 4
         let heightButton = self.size.height / 16
         

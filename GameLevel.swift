@@ -257,23 +257,13 @@ class GameLevel {
     }
     
     func getOther() {
-        
         let defaults = UserDefaults()
         gameScore = defaults.integer(forKey: String(levelId) + SCORE_ID)
         playMisty = defaults.integer(forKey: String(levelId) + MISTY_GUARD)
         flagNum = defaults.integer(forKey: String(levelId) + FLAG_NUM)
         numLives = defaults.integer(forKey: String(levelId) + NUM_LIVES_STR)
         if numLives > 0 {
-            for j in 0..<numLives {
-                let lifeImage = SKSpriteNode(imageNamed: HEART_IMAGE_STR)
-                lifeImage.setScale(1)
-                lifeImage.size = CGSize(width: scene.size.width / 28, height: scene.size.height / 28)
-                let sizeLoc = CGSize(width: scene.size.width / 28, height: scene.size.height / 28)
-                lifeImage.position = CGPoint(x: scene.size.width / 2 + CGFloat(j) * sizeLoc.width + 5, y: CGFloat(scene.size.height * 0.75) - sizeLoc.height)
-                lifeImage.zPosition = Z_POS_LIVES
-                lifeImage.removeFromParent()
-                scene.addChild(lifeImage)
-            }
+           initLives()
         }
         else {
             numLives = 0
@@ -517,19 +507,22 @@ class GameLevel {
         startGame()
     }
     
+    func initLives() {
+        for j in 0..<numLives {
+            let lifeImage = SKSpriteNode(imageNamed: HEART_IMAGE_STR)
+            lifeImage.setScale(1)
+            lifeImage.size = CGSize(width: scene.size.width / 28, height: scene.size.height / 28)
+            let sizeLoc = CGSize(width: scene.size.width / 28, height: scene.size.height / 28)
+            lifeImage.position = CGPoint(x: scene.size.width / 2 + CGFloat(j) * sizeLoc.width + 5, y: CGFloat(scene.size.height * 0.75) - sizeLoc.height)
+            lifeImage.zPosition = Z_POS_LIVES
+            lifeImage.removeFromParent()
+            scene.addChild(lifeImage)
+        }
+    }
+    
     func addLives() {
-        
         if numLives > 0 {
-            for j in 0..<numLives {
-                let lifeImage = SKSpriteNode(imageNamed: HEART_IMAGE_STR)
-                lifeImage.setScale(1)
-                lifeImage.size = CGSize(width: scene.size.width / 28, height: scene.size.height / 28)
-                let sizeLoc = CGSize(width: scene.size.width / 28, height: scene.size.height / 28)
-                lifeImage.position = CGPoint(x: scene.size.width / 2 + CGFloat(j) * sizeLoc.width + 5, y: CGFloat(scene.size.height * 0.75) - sizeLoc.height)
-                lifeImage.zPosition = Z_POS_LIVES
-                lifeImage.removeFromParent()
-                scene.addChild(lifeImage)
-            }
+            initLives()
         }
     }
     

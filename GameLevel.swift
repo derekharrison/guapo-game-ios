@@ -415,7 +415,7 @@ class GameLevel {
         playSunPopup = true
         sunPopupFrameCounter = 0
         gameScore = 0
-        bound_tracker = 1
+        boundTracker = 1
         backgroundSpeed = scene.size.width / 400
         
         let width = scene.size.width
@@ -559,8 +559,8 @@ class GameLevel {
         
         for i in 0..<numBackgrounds {
             let string2 = String(i + 1)
-            let image_name = string1 + string2
-            let background = SKSpriteNode(imageNamed: image_name)
+            let imageName = string1 + string2
+            let background = SKSpriteNode(imageNamed: imageName)
             
             background.size = CGSize(width: scene.size.width, height: scene.size.height / 2)
                         
@@ -580,20 +580,20 @@ class GameLevel {
         for _ in 0..<numCheesyBites {
             
             let size = CGSize(width: scene.size.width / 14, height: scene.size.height / 14)
-            let bite_image = bite
+            let biteImage = bite
             
-            let cheesy_bite = Snack(bite: bite_image, points: POINTS_CHEESY_BITES, size: size, z_pos: Z_POS_SNACKS)
+            let cheesyBite = Snack(bite: biteImage, points: POINTS_CHEESY_BITES, size: size, z_pos: Z_POS_SNACKS)
             
-            cheesy_bite.addImagesToScene(scene: scene)
+            cheesyBite.addImagesToScene(scene: scene)
 
-            let factor = 1.0 - (cheesy_bite.getSize().height) / (scene.size.height / 2)
+            let factor = 1.0 - (cheesyBite.getSize().height) / (scene.size.height / 2)
             let pos_x = getRandomNumber() * scene.size.width * 2
             let pos_y = getRandomNumber() * scene.size.height / 2 * factor + scene.size.height / 4 + 1/2 * (1 - factor) * scene.size.height / 2
             
-            cheesy_bite.setPosition(position: CGPoint(x: pos_x, y: pos_y))
-            cheesy_bite.setVelocity(velX: -backgroundSpeed, velY: 0)
-            cheesy_bite.points_snack = points
-            snacks.append(cheesy_bite)
+            cheesyBite.setPosition(position: CGPoint(x: pos_x, y: pos_y))
+            cheesyBite.setVelocity(velX: -backgroundSpeed, velY: 0)
+            cheesyBite.points_snack = points
+            snacks.append(cheesyBite)
         }
     }
     
@@ -612,25 +612,25 @@ class GameLevel {
         }
     }
     
-    func addBubbles(bubbles_char : Bubbles, bubble_image : String) {
-        bubbles_char.addBubble(imageId: bubble_image)
-        bubbles_char.addBubble(imageId: bubble_image)
-        bubbles_char.addBubble(imageId: bubble_image)
+    func addBubbles(bubbles : Bubbles, bubbleImage : String) {
+        bubbles.addBubble(imageId: bubbleImage)
+        bubbles.addBubble(imageId: bubbleImage)
+        bubbles.addBubble(imageId: bubbleImage)
     }
     
     func addBirds(images : [String]) {
         for j in 0..<numBirds {
             
-            var bird_images = [String]()
+            var birdImages = [String]()
             
             for x in images {
-                bird_images.append(x)
+                birdImages.append(x)
             }
             
-            let z_pos = CGFloat(j) + MIN_Z_POS_BIRDS
+            let zPosition = CGFloat(j) + MIN_Z_POS_BIRDS
             let size = CGSize(width: scene.size.width / 10, height: scene.size.height / 10)
             
-            let bird = Bird(birds: bird_images, size: size, zPos: z_pos)
+            let bird = Bird(birds: birdImages, size: size, zPos: zPosition)
             
             bird.addImagesToScene(scene : scene)
 
@@ -642,16 +642,16 @@ class GameLevel {
     func addJellyfish(images : [String]) {
         for j in 0..<numJellyFish {
             
-            var jelly_images = [String]()
+            var jellyImages = [String]()
             
             for x in images {
-                jelly_images.append(x)
+                jellyImages.append(x)
             }
             
-            let z_pos = CGFloat(j) + MIN_Z_POS_JELLY_FISH
+            let zPosition = CGFloat(j) + MIN_Z_POS_JELLY_FISH
             let size = CGSize(width: scene.size.width / 10, height: scene.size.height / 10)
             
-            let jelly = JellyFish(jelly_fish: jelly_images, size: size, z_pos: z_pos)
+            let jelly = JellyFish(jellyFish: jellyImages, size: size, zPos: zPosition)
             jelly.addImagesToScene(scene : scene)
 
             jellyfishes.append(jelly)
@@ -661,21 +661,21 @@ class GameLevel {
     func addPlayer() {
         let size = CGSize(width: scene.size.width / 5, height: scene.size.height / 7.5)
         
-        var player_images : [String] = [String]()
+        var playerImages : [String] = [String]()
         
         let defaults = UserDefaults()
-        let player_id = defaults.integer(forKey: "player_id")
+        let playerId = defaults.integer(forKey: "player_id")
         
-        if(player_id == 0) {
-            player_images.append(PLAYER_IMAGE_1)
-            player_images.append(PLAYER_IMAGE_2)
-            player = Player(images: player_images, size: size, z_pos: Z_POS_PLAYER)
+        if(playerId == 0) {
+            playerImages.append(PLAYER_IMAGE_1)
+            playerImages.append(PLAYER_IMAGE_2)
+            player = Player(images: playerImages, size: size, z_pos: Z_POS_PLAYER)
             player.addImageHit(image: PLAYER_IMAGE_HIT)
         }
-        if(player_id == 1) {
-            player_images.append(PLAYER_TUTTI_IMAGE_1)
-            player_images.append(PLAYER_TUTTI_IMAGE_2)
-            player = Player(images: player_images, size: size, z_pos: Z_POS_PLAYER)
+        if(playerId == 1) {
+            playerImages.append(PLAYER_TUTTI_IMAGE_1)
+            playerImages.append(PLAYER_TUTTI_IMAGE_2)
+            player = Player(images: playerImages, size: size, z_pos: Z_POS_PLAYER)
             player.addImageHit(image: PLAYER_TUTTI_IMAGE_HIT)
         }
 
@@ -692,15 +692,15 @@ class GameLevel {
         var player_images : [String] = [String]()
         
         let defaults = UserDefaults()
-        let player_id = defaults.integer(forKey: "player_id")
+        let playerId = defaults.integer(forKey: "player_id")
         
-        if player_id == 0 {
+        if playerId == 0 {
             player_images.append(PLAYER_SNORKEL)
             player = Player(images: player_images, size: size, z_pos: Z_POS_PLAYER)
             player.addImageHit(image: PLAYER_SNORKEL_HIT)
         }
         
-        if player_id == 1 {
+        if playerId == 1 {
             player_images.append(PLAYER_TUTTI_SNORKEL)
             player = Player(images: player_images, size: size, z_pos: Z_POS_PLAYER)
             player.addImageHit(image: PLAYER_TUTTI_SNORKEL_HIT)
@@ -799,7 +799,7 @@ class GameLevel {
     }
     
     func popMisty() {
-        misty.pop_misty(height : misty.height, speed : backgroundSpeed)
+        misty.popMisty(height : misty.height, speed : backgroundSpeed)
         
         if objectCollidedWithPlayer(bird : misty, player : player, den : 2.5) {
             misty.hit = true
@@ -812,7 +812,7 @@ class GameLevel {
         
         if gameScore >= playMisty {
             playMisty += 200 + Int.random(in: 10..<40)
-            misty.play_misty(bool: Bool.random())
+            misty.play(bool: Bool.random())
             if misty.top {
                 misty.setPosition(position: CGPoint(x : misty.width / 2, y : misty.height * 0.75 + misty.images[0].size.height / 2))
                 misty.set_vel_misty(vx: misty.velX, vy: -backgroundSpeed)
@@ -885,7 +885,7 @@ class GameLevel {
     }
     
     func popMistyOcean() {
-        misty.pop_misty(height : misty.height, speed : backgroundSpeed)
+        misty.popMisty(height : misty.height, speed : backgroundSpeed)
         
         if objectCollidedWithPlayer(bird : misty, player : player, den : 2.5) {
             misty.hit = true
@@ -898,7 +898,7 @@ class GameLevel {
         
         if gameScore >= playMisty {
             playMisty += 20 + Int.random(in: 10..<40)
-            misty.play_misty(bool: Bool.random())
+            misty.play(bool: Bool.random())
             if misty.top {
                 misty.setPosition(position: CGPoint(x : misty.width / 2, y : misty.height * 0.75 + misty.images[0].size.height / 2))
                 misty.set_vel_misty(vx: misty.velX, vy: -backgroundSpeed)
@@ -1126,7 +1126,7 @@ class GameLevel {
     }
     
     func updateNumberOfBirds() {
-        if gameScore >= bound_tracker * NUM_POINTS_WHEN_BIRDS_APPEAR && birds.count < TOT_NUM_BIRDS {
+        if gameScore >= boundTracker * NUM_POINTS_WHEN_BIRDS_APPEAR && birds.count < TOT_NUM_BIRDS {
             
             let image_names = self.birds[0].imageNames
             let size = self.birds[0].images[0].size
@@ -1136,22 +1136,22 @@ class GameLevel {
             
             birds.append(bird)
             
-            bound_tracker += 1
+            boundTracker += 1
         }
     }
     
     func updateNumJelly() {
-        if gameScore >= bound_tracker * NUM_POINTS_WHEN_BIRDS_APPEAR && jellyfishes.count < TOT_NUM_BIRDS {
+        if gameScore >= boundTracker * NUM_POINTS_WHEN_BIRDS_APPEAR && jellyfishes.count < TOT_NUM_BIRDS {
             
             let image_names = self.jellyfishes[0].imageNames
             let size = self.jellyfishes[0].images[0].size
             
-            let jelly = JellyFish(jelly_fish: image_names, size: size, z_pos: CGFloat(jellyfishes.count) + MIN_Z_POS_BIRDS)
+            let jelly = JellyFish(jellyFish: image_names, size: size, zPos: CGFloat(jellyfishes.count) + MIN_Z_POS_BIRDS)
             jelly.addImagesToScene(scene : scene)
             
             jellyfishes.append(jelly)
             
-            bound_tracker += 1
+            boundTracker += 1
         }
     }
     

@@ -39,7 +39,7 @@ class Misty : GameObject {
         self.posY = images[0].position.y
     }
     
-    func play_misty(bool : Bool) {
+    func play(bool : Bool) {
         self.counter1 = 1;
         self.counter2 = 1;
         
@@ -61,7 +61,7 @@ class Misty : GameObject {
         }
     }
     
-    func pop_misty(height : CGFloat, speed : CGFloat) {
+    func popMisty(height : CGFloat, speed : CGFloat) {
         
         if !self.hit && top {
             self.displayImageNotHit(imageId: 2)

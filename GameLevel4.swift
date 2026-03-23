@@ -22,12 +22,12 @@ class GameLevel4: SKScene {
     override func didMove(to view: SKView) {
         base.didMoveOcean(scene: self, id : LEVEL_ID_4)
 
-        base.addBubbles(bubbles_char: base.player.bubbles, bubble_image: BUBBLE_IMAGE_STR)
+        base.addBubbles(bubbles: base.player.bubbles, bubbleImage: BUBBLE_IMAGE_STR)
 
         var images = [String]()
         images.append(FRITO_OCEAN_1)
         images.append(FRITO_OCEAN_2)
-        base.addBubbles(bubbles_char: base.frito.bubbles, bubble_image: BUBBLE_IMAGE_STR)
+        base.addBubbles(bubbles: base.frito.bubbles, bubbleImage: BUBBLE_IMAGE_STR)
         
         for x in base.frito.bubbles.bubblez {
             x.removeFromParent()
@@ -39,7 +39,7 @@ class GameLevel4: SKScene {
         var images_brownie = [String]()
         images_brownie.append(BROWNIE_OCEAN_1)
         images_brownie.append(BROWNIE_OCEAN_2)
-        base.addBubbles(bubbles_char: base.brownie.bubbles, bubble_image: BUBBLE_IMAGE_STR)
+        base.addBubbles(bubbles: base.brownie.bubbles, bubbleImage: BUBBLE_IMAGE_STR)
         
         for x in base.brownie.bubbles.bubblez {
             x.removeFromParent()
@@ -53,7 +53,7 @@ class GameLevel4: SKScene {
         images_misty.append(MISTY_OCEAN_2)
         images_misty.append(MISTY_OCEAN_3)
         images_misty.append(MISTY_OCEAN_4)
-        base.addBubbles(bubbles_char: base.misty.bubbles, bubble_image: BUBBLE_IMAGE_STR)
+        base.addBubbles(bubbles: base.misty.bubbles, bubbleImage: BUBBLE_IMAGE_STR)
         
         for x in base.misty.bubbles.bubblez {
             x.removeFromParent()

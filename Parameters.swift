@@ -12,7 +12,7 @@ var numBirds = 1
 var numJellyFish = 1
 var gameScore = 0
 var muted = false
-var bound_tracker = 1
+var boundTracker = 1
 
 let TOT_NUM_BIRDS = 12
 let NUM_CHEESY_BITES = 5

@@ -11,15 +11,15 @@ import SpriteKit
 class JellyFish : GameObject {
     var counter : Int = 1
     
-    init(jelly_fish : [String], size : CGSize, z_pos : CGFloat) {
+    init(jellyFish : [String], size : CGSize, zPos : CGFloat) {
         super.init()
         
-        for x in jelly_fish {
+        for x in jellyFish {
             self.addImage(image: x)
         }
         
         self.setPosition(position: CGPoint(x: -5000, y: 0))
-        self.setZPosition(zPos: z_pos)
+        self.setZPosition(zPos: zPos)
         self.setSize(size: size)
     }
     

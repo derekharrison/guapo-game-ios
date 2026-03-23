@@ -580,10 +580,10 @@ class GameLevel {
             cheesyBite.addImagesToScene(scene: scene)
 
             let factor = 1.0 - (cheesyBite.getSize().height) / (scene.size.height / 2)
-            let pos_x = getRandomNumber() * scene.size.width * 2
-            let pos_y = getRandomNumber() * scene.size.height / 2 * factor + scene.size.height / 4 + 1/2 * (1 - factor) * scene.size.height / 2
+            let posX = getRandomNumber() * scene.size.width * 2
+            let posY = getRandomNumber() * scene.size.height / 2 * factor + scene.size.height / 4 + 1/2 * (1 - factor) * scene.size.height / 2
             
-            cheesyBite.setPosition(position: CGPoint(x: pos_x, y: pos_y))
+            cheesyBite.setPosition(position: CGPoint(x: posX, y: posY))
             cheesyBite.setVelocity(velX: -backgroundSpeed, velY: 0)
             cheesyBite.points_snack = points
             snacks.append(cheesyBite)

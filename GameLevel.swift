@@ -268,8 +268,8 @@ class GameLevel {
                 let lifeImage = SKSpriteNode(imageNamed: HEART_IMAGE_STR)
                 lifeImage.setScale(1)
                 lifeImage.size = CGSize(width: scene.size.width / 28, height: scene.size.height / 28)
-                let size_loc = CGSize(width: scene.size.width / 28, height: scene.size.height / 28)
-                lifeImage.position = CGPoint(x: scene.size.width / 2 + CGFloat(j) * size_loc.width + 5, y: CGFloat(scene.size.height * 0.75) - size_loc.height)
+                let sizeLoc = CGSize(width: scene.size.width / 28, height: scene.size.height / 28)
+                lifeImage.position = CGPoint(x: scene.size.width / 2 + CGFloat(j) * sizeLoc.width + 5, y: CGFloat(scene.size.height * 0.75) - sizeLoc.height)
                 lifeImage.zPosition = Z_POS_LIVES
                 lifeImage.removeFromParent()
                 scene.addChild(lifeImage)
@@ -524,8 +524,8 @@ class GameLevel {
                 let lifeImage = SKSpriteNode(imageNamed: HEART_IMAGE_STR)
                 lifeImage.setScale(1)
                 lifeImage.size = CGSize(width: scene.size.width / 28, height: scene.size.height / 28)
-                let size_loc = CGSize(width: scene.size.width / 28, height: scene.size.height / 28)
-                lifeImage.position = CGPoint(x: scene.size.width / 2 + CGFloat(j) * size_loc.width + 5, y: CGFloat(scene.size.height * 0.75) - size_loc.height)
+                let sizeLoc = CGSize(width: scene.size.width / 28, height: scene.size.height / 28)
+                lifeImage.position = CGPoint(x: scene.size.width / 2 + CGFloat(j) * sizeLoc.width + 5, y: CGFloat(scene.size.height * 0.75) - sizeLoc.height)
                 lifeImage.zPosition = Z_POS_LIVES
                 lifeImage.removeFromParent()
                 scene.addChild(lifeImage)

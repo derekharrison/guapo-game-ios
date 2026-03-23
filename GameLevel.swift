@@ -802,22 +802,26 @@ class GameLevel {
         
         if gameScore >= playMisty {
             playMisty += 200 + Int.random(in: 10..<40)
-            misty.play(bool: Bool.random())
-            if misty.top {
-                misty.setPosition(position: CGPoint(x : misty.width / 2, y : misty.height * 0.75 + misty.images[0].size.height / 2))
-                misty.set_vel_misty(vx: misty.velX, vy: -backgroundSpeed)
-            }
-            else {
-                misty.setPosition(position: CGPoint(x : misty.width / 2, y : misty.height * 0.25 - misty.images[0].size.height / 2))
-                misty.set_vel_misty(vx: misty.velX, vy: backgroundSpeed)
-            }
-            
-            misty.playSound = true
-            misty.hit = false
-            
-            if muted == false {
-                playSound(scene: scene, sound: [MISTY_SOUND_APPEARING])
-            }
+            playMistyFcn()
+        }
+    }
+    
+    func playMistyFcn() {
+        misty.play(bool: Bool.random())
+        if misty.top {
+            misty.setPosition(position: CGPoint(x : misty.width / 2, y : misty.height * 0.75 + misty.images[0].size.height / 2))
+            misty.set_vel_misty(vx: misty.velX, vy: -backgroundSpeed)
+        }
+        else {
+            misty.setPosition(position: CGPoint(x : misty.width / 2, y : misty.height * 0.25 - misty.images[0].size.height / 2))
+            misty.set_vel_misty(vx: misty.velX, vy: backgroundSpeed)
+        }
+        
+        misty.playSound = true
+        misty.hit = false
+        
+        if muted == false {
+            playSound(scene: scene, sound: [MISTY_SOUND_APPEARING])
         }
     }
     
@@ -889,22 +893,7 @@ class GameLevel {
         if gameScore >= playMisty {
             playMisty += 20 + Int.random(in: 10..<40)
             misty.play(bool: Bool.random())
-            if misty.top {
-                misty.setPosition(position: CGPoint(x : misty.width / 2, y : misty.height * 0.75 + misty.images[0].size.height / 2))
-                misty.set_vel_misty(vx: misty.velX, vy: -backgroundSpeed)
-            }
-            else {
-                misty.setPosition(position: CGPoint(x : misty.width / 2, y : misty.height * 0.25 - misty.images[0].size.height / 2))
-                misty.set_vel_misty(vx: misty.velX, vy: backgroundSpeed)
-            }
-            
-            misty.playSound = true
-            misty.hit = false
-            
-            if muted == false {
-                playSound(scene: scene, sound: [MISTY_SOUND_APPEARING])
-                misty.bubbles.popBubbles(pos: misty.getPosition(), scene : scene, sound : [BUBBLES_SOUNDS])
-            }
+            playMistyFcn()
         }
         else {
             misty.bubbles.setPosition(pos: CGPoint(x: -1000, y: 0))

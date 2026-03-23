@@ -265,14 +265,14 @@ class GameLevel {
         numLives = defaults.integer(forKey: String(levelId) + NUM_LIVES_STR)
         if numLives > 0 {
             for j in 0..<numLives {
-                let life_image = SKSpriteNode(imageNamed: HEART_IMAGE_STR)
-                life_image.setScale(1)
-                life_image.size = CGSize(width: scene.size.width / 28, height: scene.size.height / 28)
+                let lifeImage = SKSpriteNode(imageNamed: HEART_IMAGE_STR)
+                lifeImage.setScale(1)
+                lifeImage.size = CGSize(width: scene.size.width / 28, height: scene.size.height / 28)
                 let size_loc = CGSize(width: scene.size.width / 28, height: scene.size.height / 28)
-                life_image.position = CGPoint(x: scene.size.width / 2 + CGFloat(j) * size_loc.width + 5, y: CGFloat(scene.size.height * 0.75) - size_loc.height)
-                life_image.zPosition = Z_POS_LIVES
-                life_image.removeFromParent()
-                scene.addChild(life_image)
+                lifeImage.position = CGPoint(x: scene.size.width / 2 + CGFloat(j) * size_loc.width + 5, y: CGFloat(scene.size.height * 0.75) - size_loc.height)
+                lifeImage.zPosition = Z_POS_LIVES
+                lifeImage.removeFromParent()
+                scene.addChild(lifeImage)
             }
         }
         else {

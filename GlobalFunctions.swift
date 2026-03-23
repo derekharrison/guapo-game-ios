@@ -9,26 +9,7 @@ import Foundation
 import SpriteKit
 
 func saveSnack(object : Snack, prefix : String) {
-    let defaults = UserDefaults()
-    
-    defaults.set(object.zPos, forKey: prefix + "z_pos")
-    defaults.set(object.velX, forKey: prefix + "vel_x")
-    defaults.set(object.velY, forKey: prefix + "vel_y")
-    defaults.set(object.playSound, forKey: prefix + "play_sound")
-    defaults.set(object.frameCounter, forKey: prefix + "bird_counter")
-    defaults.set(object.frameCounterHit, forKey: prefix + "bird_counter_hit")
-    defaults.set(object.imageId, forKey: prefix + "bird_id")
-    defaults.set(object.imageIdHit, forKey: prefix + "bird_id_hit")
-    defaults.set(object.width, forKey: prefix + "width")
-    defaults.set(object.height, forKey: prefix + "height")
-    defaults.set(object.hit, forKey: prefix + "hit")
-    defaults.set(object.appeared, forKey: prefix + "appeared")
-    defaults.set(object.posX, forKey: prefix + "pos_x")
-    defaults.set(object.posY, forKey: prefix + "pos_y")
-    
-    defaults.set(object.bubbles.bubcounter, forKey: prefix + "bubbles.bubcounter")
-    defaults.set(object.bubbles.isMuted, forKey: prefix + "bubbles.is_muted")
-    defaults.set(object.points_snack, forKey: prefix + "points_snack")
+    saveObject(object: object, prefix: prefix)
 }
 
 func saveSnacks(snacks : [Snack], prefix : String) {
@@ -298,7 +279,7 @@ func getRandomNumber() -> CGFloat {
     CGFloat(Float(arc4random()) / Float(UINT32_MAX))
 }
 
-func doOverlap(l1: CGPoint ,r1: CGPoint, l2: CGPoint, r2: CGPoint) -> Bool {
+func objectsOverlap(l1: CGPoint ,r1: CGPoint, l2: CGPoint, r2: CGPoint) -> Bool {
  
     // At least one of the rectangles is a line
     if (l1.x == r1.x || l1.y == r1.y || l2.x == r2.x
@@ -334,5 +315,5 @@ func objectCollidedWithPlayer(bird : GameObject, player : Player, den : CGFloat)
     r2.x += player.images[0].size.width / den
     r2.y -= player.images[0].size.height / den
                     
-    return doOverlap(l1: l1 ,r1: r1, l2: l2, r2: r2)
+    return objectsOverlap(l1: l1 ,r1: r1, l2: l2, r2: r2)
 }

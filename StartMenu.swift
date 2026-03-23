@@ -24,7 +24,7 @@ class StartMenu: SKScene {
     var levelMenu = false
     var levelMenuScene = false
     
-    override func didMove(to view: SKView) {
+    override func didMove(to _: SKView) {
         let background = SKSpriteNode(imageNamed: BACKGROUND_START_SCREEN)
         
         let widthb = background.size.width

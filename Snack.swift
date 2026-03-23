@@ -11,7 +11,7 @@ import SpriteKit
 class Snack : GameObject {
     var points_snack : Int
     
-    init(bite : String, points : Int, size : CGSize, z_pos : CGFloat) {
+    init(bite : String, points : Int, size : CGSize, zPos : CGFloat) {
         self.points_snack = points
         super.init()
         self.addImage(image: bite)
@@ -21,7 +21,7 @@ class Snack : GameObject {
         let pos_y = getRandomNumber() * self.height / 2 * factor + self.height / 4 + 1/2 * (1 - factor) * self.height / 2
         
         self.setPosition(position: CGPoint(x: pos_x, y: pos_y))
-        self.setZPosition(zPos: z_pos)
+        self.setZPosition(zPos: zPos)
         self.setSize(size: size)
     }
     

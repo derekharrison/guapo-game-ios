@@ -127,7 +127,7 @@ class GameLevel {
             
             popMisty()
             
-            updateBackgrounds(scene : scene, backgrounds : backgrounds, vel_x : -backgroundSpeed)
+            updateBackgrounds(backgrounds : backgrounds, velX : -backgroundSpeed)
         }
     }
     
@@ -162,7 +162,7 @@ class GameLevel {
             
             popMistyOcean()
             
-            updateBackgrounds(scene : scene, backgrounds : backgrounds, vel_x : -backgroundSpeed)
+            updateBackgrounds(backgrounds : backgrounds, velX : -backgroundSpeed)
         }
     }
     
@@ -575,7 +575,7 @@ class GameLevel {
             let size = CGSize(width: scene.size.width / 14, height: scene.size.height / 14)
             let biteImage = bite
             
-            let cheesyBite = Snack(bite: biteImage, points: POINTS_CHEESY_BITES, size: size, z_pos: Z_POS_SNACKS)
+            let cheesyBite = Snack(bite: biteImage, points: POINTS_CHEESY_BITES, size: size, zPos: Z_POS_SNACKS)
             
             cheesyBite.addImagesToScene(scene: scene)
 
@@ -590,12 +590,12 @@ class GameLevel {
         }
     }
     
-    func updateBackgrounds(scene : SKScene, backgrounds : [SKSpriteNode], vel_x : CGFloat) {
+    func updateBackgrounds(backgrounds : [SKSpriteNode], velX : CGFloat) {
 
         let n = backgrounds.count
         
         for j in 0..<n {
-            backgrounds[j].position.x += vel_x
+            backgrounds[j].position.x += velX
             if(j > 0 && backgrounds[j - 1].position.x < 0) {
                 backgrounds[j].position.x = backgrounds[j - 1].position.x + backgrounds[j - 1].size.width - 10
             }
@@ -662,13 +662,13 @@ class GameLevel {
         if(playerId == 0) {
             playerImages.append(PLAYER_IMAGE_1)
             playerImages.append(PLAYER_IMAGE_2)
-            player = Player(images: playerImages, size: size, z_pos: Z_POS_PLAYER)
+            player = Player(images: playerImages, size: size, zPos: Z_POS_PLAYER)
             player.addImageHit(image: PLAYER_IMAGE_HIT)
         }
         if(playerId == 1) {
             playerImages.append(PLAYER_TUTTI_IMAGE_1)
             playerImages.append(PLAYER_TUTTI_IMAGE_2)
-            player = Player(images: playerImages, size: size, z_pos: Z_POS_PLAYER)
+            player = Player(images: playerImages, size: size, zPos: Z_POS_PLAYER)
             player.addImageHit(image: PLAYER_TUTTI_IMAGE_HIT)
         }
 
@@ -682,20 +682,20 @@ class GameLevel {
     func addPlayerOcean() {
         let size = CGSize(width: scene.size.width / 5, height: scene.size.height / 7.5)
         
-        var player_images : [String] = [String]()
+        var playerImages : [String] = [String]()
         
         let defaults = UserDefaults()
         let playerId = defaults.integer(forKey: "player_id")
         
         if playerId == 0 {
-            player_images.append(PLAYER_SNORKEL)
-            player = Player(images: player_images, size: size, z_pos: Z_POS_PLAYER)
+            playerImages.append(PLAYER_SNORKEL)
+            player = Player(images: playerImages, size: size, zPos: Z_POS_PLAYER)
             player.addImageHit(image: PLAYER_SNORKEL_HIT)
         }
         
         if playerId == 1 {
-            player_images.append(PLAYER_TUTTI_SNORKEL)
-            player = Player(images: player_images, size: size, z_pos: Z_POS_PLAYER)
+            playerImages.append(PLAYER_TUTTI_SNORKEL)
+            player = Player(images: playerImages, size: size, zPos: Z_POS_PLAYER)
             player.addImageHit(image: PLAYER_TUTTI_SNORKEL_HIT)
         }
         

@@ -12,7 +12,7 @@ class Player : GameObject {
     
     override init() { super.init() }
     
-    init(images : [String], size : CGSize, z_pos : CGFloat) {
+    init(images : [String], size : CGSize, zPos : CGFloat) {
         super.init()
         
         for x in images {
@@ -20,7 +20,7 @@ class Player : GameObject {
         }
         
         self.setPosition(position: CGPoint(x: -5000, y: 0))
-        self.setZPosition(zPos: z_pos)
+        self.setZPosition(zPos: zPos)
         self.setSize(size: size)
     }
     

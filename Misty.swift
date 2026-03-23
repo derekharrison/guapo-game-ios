@@ -79,17 +79,17 @@ class Misty : GameObject {
             self.displayImageNotHit(imageId: 1)
         }
         
-        if counter1 < num_frames_misty {
+        if counter1 < NUM_FRAMES_MISTY {
             self.updatePositionMisty()
             counter1 += 1
         }
         
-        else if counter1 == num_frames_misty {
+        else if counter1 == NUM_FRAMES_MISTY {
             self.velY = -self.velY
             counter1 += 1
         }
         
-        else if counter1 < num_frames_misty + 60 {
+        else if counter1 < NUM_FRAMES_MISTY + 60 {
             self.updatePositionMisty()
             counter1 += 1
         }

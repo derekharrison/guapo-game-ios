@@ -50,7 +50,7 @@ class Bubbles {
             
         }
         else if self.bubcounter < 40 {
-            self.bubblez[0].position.y += bubble_vel_y
+            self.bubblez[0].position.y += BUBBLE_VEL_Y
             self.bubcounter += 1
         }
         else if bubcounter == 40 {
@@ -59,8 +59,8 @@ class Bubbles {
             self.bubcounter += 1
         }
         else if bubcounter < 80 {
-            self.bubblez[0].position.y += bubble_vel_y
-            self.bubblez[1].position.y += bubble_vel_y
+            self.bubblez[0].position.y += BUBBLE_VEL_Y
+            self.bubblez[1].position.y += BUBBLE_VEL_Y
             self.bubcounter += 1
         }
         else if self.bubcounter == 80 {
@@ -69,9 +69,9 @@ class Bubbles {
             self.bubcounter += 1
         }
         else if self.bubcounter < 240 {
-            self.bubblez[0].position.y += bubble_vel_y
-            self.bubblez[1].position.y += bubble_vel_y
-            self.bubblez[2].position.y += bubble_vel_y
+            self.bubblez[0].position.y += BUBBLE_VEL_Y
+            self.bubblez[1].position.y += BUBBLE_VEL_Y
+            self.bubblez[2].position.y += BUBBLE_VEL_Y
             self.bubcounter += 1
         }
         if self.bubcounter == 240 {

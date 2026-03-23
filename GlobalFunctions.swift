@@ -135,8 +135,10 @@ func saveObject(object : GameObject, prefix : String) {
     defaults.set(object.bubbles.isMuted, forKey: prefix + "bubbles.is_muted")
 }
 
-func getFish(object : inout Fish, prefix : String) {
+func getObject(prefix : String) -> GameObject {
     let defaults = UserDefaults()
+    
+    var object = GameObject()
     
     object.zPos = CGFloat(defaults.float(forKey: prefix + "z_pos"))
     object.velX = CGFloat(defaults.float(forKey: prefix + "vel_x"))
@@ -157,6 +159,32 @@ func getFish(object : inout Fish, prefix : String) {
     
     object.bubbles.bubcounter = defaults.integer(forKey: prefix + "bubbles.bubcounter")
     object.bubbles.isMuted = defaults.bool(forKey: prefix + "bubbles.is_muted")
+    
+    return object
+}
+
+func getFish(object : inout Fish, levelId : String, prefix : String) {
+    let defaults = UserDefaults()
+    
+    object.zPos = CGFloat(defaults.float(forKey: levelId + prefix + "z_pos"))
+    object.velX = CGFloat(defaults.float(forKey: levelId + prefix + "vel_x"))
+    object.velY = CGFloat(defaults.float(forKey: levelId + prefix + "vel_y"))
+    object.playSound = defaults.bool(forKey: levelId + prefix + "play_sound")
+    object.frameCounter = defaults.integer(forKey: levelId + prefix + "bird_counter")
+    object.frameCounterHit = defaults.integer(forKey: levelId + prefix + "bird_counter_hit")
+    object.imageId = defaults.integer(forKey: levelId + prefix + "bird_id")
+    object.imageIdHit = defaults.integer(forKey: levelId + prefix + "bird_id_hit")
+    object.width = CGFloat(defaults.float(forKey: levelId + prefix + "width"))
+    object.height = CGFloat(defaults.float(forKey: levelId + prefix + "height"))
+    object.hit = defaults.bool(forKey: levelId + prefix + "hit")
+    object.appeared = defaults.bool(forKey: levelId + prefix + "appeared")
+    object.posX = CGFloat(defaults.float(forKey: levelId + prefix + "pos_x"))
+    object.posY = CGFloat(defaults.float(forKey: levelId + prefix + "pos_y"))
+    
+    object.setPosition(position: CGPoint(x: object.posX, y: object.posY))
+    
+    object.bubbles.bubcounter = defaults.integer(forKey: levelId + prefix + "bubbles.bubcounter")
+    object.bubbles.isMuted = defaults.bool(forKey: levelId + prefix + "bubbles.is_muted")
 }
 
 func getBlowfish(object : inout BlowFish, levelId : String) {

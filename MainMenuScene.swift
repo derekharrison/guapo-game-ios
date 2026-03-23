@@ -269,6 +269,18 @@ class MainMenuScene: SKScene {
         let widthButton = self.size.width / 5
         let heightButton = self.size.height / 16
         
+        placeButtonCommon(fac: fac, widthButton: widthButton, heightButton: heightButton, levelNotPressed: levelNotPressed, levelPressed: levelPressed)
+        
+        scoreLabel.text = String(highScore)
+        scoreLabel.fontSize = 70
+        scoreLabel.fontColor = SKColor.gray
+        scoreLabel.position = CGPoint(x: self.size.width / 2 + self.size.width / 4, y: self.size.height / 2 * (fac - 0.03) + self.size.height / 4)
+        scoreLabel.zPosition = 1
+        scoreLabel.removeFromParent()
+        self.addChild(scoreLabel)
+    }
+    
+    func placeButtonCommon(fac : CGFloat, widthButton: CGFloat, heightButton: CGFloat, levelNotPressed : SKSpriteNode, levelPressed : SKSpriteNode,) {
         levelNotPressed.size = CGSize(width: widthButton, height: heightButton)
         levelNotPressed.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2 * fac + self.size.height / 4)
         levelNotPressed.zPosition = 2
@@ -280,16 +292,7 @@ class MainMenuScene: SKScene {
         levelPressed.zPosition = -1
         levelPressed.removeFromParent()
         self.addChild(levelPressed)
-        
-        scoreLabel.text = String(highScore)
-        scoreLabel.fontSize = 70
-        scoreLabel.fontColor = SKColor.gray
-        scoreLabel.position = CGPoint(x: self.size.width / 2 + self.size.width / 4, y: self.size.height / 2 * (fac - 0.03) + self.size.height / 4)
-        scoreLabel.zPosition = 1
-        scoreLabel.removeFromParent()
-        self.addChild(scoreLabel)
     }
-    
     
     func placeLevelButton(scorePreviousLevel : Int, fac : CGFloat, levelNotPressed : SKSpriteNode, levelPressed : SKSpriteNode, levelGray : SKSpriteNode, highScore : Int, scoreLabel : SKLabelNode) {
         
@@ -297,17 +300,7 @@ class MainMenuScene: SKScene {
         let heightButton = self.size.height / 16
         
         if scorePreviousLevel >= LEVEL_UNLOCK_GUARD {
-            levelNotPressed.size = CGSize(width: widthButton, height: heightButton)
-            levelNotPressed.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2 * fac + self.size.height / 4)
-            levelNotPressed.zPosition = 2
-            levelNotPressed.removeFromParent()
-            self.addChild(levelNotPressed)
-            
-            levelPressed.size = CGSize(width: widthButton, height: heightButton)
-            levelPressed.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2 * fac + self.size.height / 4)
-            levelPressed.zPosition = -1
-            levelPressed.removeFromParent()
-            self.addChild(levelPressed)
+            placeButtonCommon(fac: fac, widthButton: widthButton, heightButton: heightButton, levelNotPressed: levelNotPressed, levelPressed: levelPressed)
         }
         else {
             levelNotPressed.size = CGSize(width: widthButton, height: heightButton)

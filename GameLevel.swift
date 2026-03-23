@@ -491,7 +491,7 @@ class GameLevel {
             highScore = defaults.integer(forKey: HIGH_SCORE_ID_5)
         }
 
-        isAlreadyUnlocked = highScore >= unlock_level_points
+        isAlreadyUnlocked = highScore >= LEVEL_UNLOCK_GUARD
         muted = defaults.bool(forKey: String(levelId) + GAME_MUTED)
         playing = defaults.bool(forKey: String(levelId) + PLAYING)
         

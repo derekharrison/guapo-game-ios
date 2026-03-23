@@ -8,8 +8,6 @@
 import Foundation
 import SpriteKit
 
-let unlock_level_points = LEVEL_UNLOCK_GUARD
-
 class MainMenuScene: SKScene {
 
     let levelsText = SKLabelNode(fontNamed: GAME_FONT)
@@ -151,15 +149,15 @@ class MainMenuScene: SKScene {
         highScoreNumberLevel4 = defaults.integer(forKey: HIGH_SCORE_ID_4)
         highScoreNumberLevel5 = defaults.integer(forKey: HIGH_SCORE_ID_5)
 
-        placeFirstLevelButton(fac : 0.73, levelNotPressed : level1ButtonNotPressed, levelPressed : level1ButtonPressed, levelGray : level1ButtonPressed, highScore : highScoreNumberLevel1, scoreLabel : level1Score)
+        placeFirstLevelButton(fac : 0.73, levelNotPressed : level1ButtonNotPressed, levelPressed : level1ButtonPressed, level1ButtonPressed, highScore : highScoreNumberLevel1, scoreLabel : level1Score)
         
-        placeLevelButton(score_prev_level : highScoreNumberLevel1, fac : 0.58, levelNotPressed : level2ButtonNotPressed, levelPressed : level2ButtonPressed, levelGray : level2ButtonGrey, highScore : highScoreNumberLevel2, scoreLabel : level2Score)
+        placeLevelButton(scorePreviousLevel : highScoreNumberLevel1, fac : 0.58, levelNotPressed : level2ButtonNotPressed, levelPressed : level2ButtonPressed, levelGray : level2ButtonGrey, highScore : highScoreNumberLevel2, scoreLabel : level2Score)
         
-        placeLevelButton(score_prev_level : highScoreNumberLevel2, fac : 0.43, levelNotPressed : level3ButtonNotPressed, levelPressed : level3ButtonPressed, levelGray : level3ButtonGrey, highScore : highScoreNumberLevel3, scoreLabel : level3Score)
+        placeLevelButton(scorePreviousLevel : highScoreNumberLevel2, fac : 0.43, levelNotPressed : level3ButtonNotPressed, levelPressed : level3ButtonPressed, levelGray : level3ButtonGrey, highScore : highScoreNumberLevel3, scoreLabel : level3Score)
         
-        placeLevelButton(score_prev_level : highScoreNumberLevel3, fac : 0.28, levelNotPressed : level4ButtonNotPressed, levelPressed : level4ButtonPressed, levelGray : level4ButtonGrey, highScore : highScoreNumberLevel4, scoreLabel : level4Score)
+        placeLevelButton(scorePreviousLevel : highScoreNumberLevel3, fac : 0.28, levelNotPressed : level4ButtonNotPressed, levelPressed : level4ButtonPressed, levelGray : level4ButtonGrey, highScore : highScoreNumberLevel4, scoreLabel : level4Score)
         
-        placeLevelButton(score_prev_level : highScoreNumberLevel3, fac : 0.13, levelNotPressed : level5ButtonNotPressed, levelPressed : level5ButtonPressed, levelGray : level5ButtonGrey, highScore : highScoreNumberLevel5, scoreLabel : level5Score)
+        placeLevelButton(scorePreviousLevel : highScoreNumberLevel3, fac : 0.13, levelNotPressed : level5ButtonNotPressed, levelPressed : level5ButtonPressed, levelGray : level5ButtonGrey, highScore : highScoreNumberLevel5, scoreLabel : level5Score)
         
         
         place_button(fac: 0.9, buttonNotPressed: startMenuButtonNotPressed, buttonPressed: startMenuButtonPressed)
@@ -186,7 +184,7 @@ class MainMenuScene: SKScene {
         startScene(scene: self, start : &playerMenu, GameLevel : PlayerScene(size: self.size))
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with _: UIEvent?) {
         for touch: AnyObject in touches {
             let pointOfTouch = touch.location(in: self)
             let position = CGPoint(x: 2 * self.size.width / 12, y: self.size.height / 2 - self.size.height * 1.5 / 10)
@@ -266,7 +264,7 @@ class MainMenuScene: SKScene {
         }
     }
     
-    func placeFirstLevelButton(fac : CGFloat, levelNotPressed : SKSpriteNode, levelPressed : SKSpriteNode, levelGray : SKSpriteNode, highScore : Int, scoreLabel : SKLabelNode) {
+    func placeFirstLevelButton(fac : CGFloat, levelNotPressed : SKSpriteNode, levelPressed : SKSpriteNode, _ : SKSpriteNode, highScore : Int, scoreLabel : SKLabelNode) {
         
         let widthButton = self.size.width / 5
         let heightButton = self.size.height / 16
@@ -293,12 +291,12 @@ class MainMenuScene: SKScene {
     }
     
     
-    func placeLevelButton(score_prev_level : Int, fac : CGFloat, levelNotPressed : SKSpriteNode, levelPressed : SKSpriteNode, levelGray : SKSpriteNode, highScore : Int, scoreLabel : SKLabelNode) {
+    func placeLevelButton(scorePreviousLevel : Int, fac : CGFloat, levelNotPressed : SKSpriteNode, levelPressed : SKSpriteNode, levelGray : SKSpriteNode, highScore : Int, scoreLabel : SKLabelNode) {
         
         let widthButton = self.size.width / 5
         let heightButton = self.size.height / 16
         
-        if score_prev_level >= unlock_level_points {
+        if scorePreviousLevel >= LEVEL_UNLOCK_GUARD {
             levelNotPressed.size = CGSize(width: widthButton, height: heightButton)
             levelNotPressed.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2 * fac + self.size.height / 4)
             levelNotPressed.zPosition = 2

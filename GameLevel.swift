@@ -229,8 +229,8 @@ class GameLevel {
     
     func get_state() {
         get_player_object(object: &player, prefix: String(level_id) + PLAYER_STR)
-        get_brownie_object(object: &brownie, prefix: String(level_id) + BROWNIE_STR)
-        get_frito_object(object : &frito, prefix : String(level_id) + FRITO_STR)
+        getBrownie(object: &brownie, levelId: String(level_id))
+        getFrito(object : &frito, levelId : String(level_id))
         get_misty_object(object: &misty, prefix: String(level_id) + MISTY_STR)
         get_snacks(snacks: &cheesy_bites, prefix: String(level_id) + CHEESY_STR)
         get_snacks(snacks: &paprikas, prefix: String(level_id) + PAPRIKA_STR)
@@ -243,7 +243,7 @@ class GameLevel {
         getFish(object: &fish4, prefix: String(level_id) + FISH_STR_4)
         getFish(object: &fish5, prefix: String(level_id) + FISH_STR_5)
         getFish(object: &fish6, prefix: String(level_id) + FISH_STR_6)
-        get_blowfish(object: &blow_fish, prefix: String(level_id) + BLOWFISH_STR)
+        getBlowfish(object: &blow_fish, levelId: String(level_id))
         get_backgrounds()
         get_other()
     }
@@ -538,7 +538,7 @@ class GameLevel {
     }
     
     func update_player_ocean() {
-        player.update_pos_api()
+        player.update()
         
         player.bubbles.popBubbles(pos : player.getPosition(), scene : scene, sound : [bubbles_sounds])
     }
@@ -670,13 +670,13 @@ class GameLevel {
             player_images.append(PLAYER_IMAGE_1)
             player_images.append(PLAYER_IMAGE_2)
             player = Player(images: player_images, size: size, z_pos: z_pos_player)
-            player.add_image_hit(image: PLAYER_IMAGE_HIT, size: size, z_pos: -1)
+            player.addImageHit(image: PLAYER_IMAGE_HIT)
         }
         if(player_id == 1) {
             player_images.append(PLAYER_TUTTI_IMAGE_1)
             player_images.append(PLAYER_TUTTI_IMAGE_2)
             player = Player(images: player_images, size: size, z_pos: z_pos_player)
-            player.add_image_hit(image: PLAYER_TUTTI_IMAGE_HIT, size: size, z_pos: -1)
+            player.addImageHit(image: PLAYER_TUTTI_IMAGE_HIT)
         }
 
         player.addImagesToScene(scene : scene)
@@ -697,13 +697,13 @@ class GameLevel {
         if player_id == 0 {
             player_images.append(PLAYER_SNORKEL)
             player = Player(images: player_images, size: size, z_pos: z_pos_player)
-            player.add_image_hit(image: PLAYER_SNORKEL_HIT, size: size, z_pos: -1)
+            player.addImageHit(image: PLAYER_SNORKEL_HIT)
         }
         
         if player_id == 1 {
             player_images.append(PLAYER_TUTTI_SNORKEL)
             player = Player(images: player_images, size: size, z_pos: z_pos_player)
-            player.add_image_hit(image: PLAYER_TUTTI_SNORKEL_HIT, size: size, z_pos: -1)
+            player.addImageHit(image: PLAYER_TUTTI_SNORKEL_HIT)
         }
         
 
@@ -978,7 +978,7 @@ class GameLevel {
     }
     
     func update_player() {
-        player.update_pos_api()
+        player.update()
         
         player.cape1.position.x = player.posX - player.cape1.size.width / 2
         player.cape1.position.y = player.posY
@@ -1244,7 +1244,7 @@ class GameLevel {
                     pause_game()
                 }
                 else if touch_in_game_area {
-                    player.set_pos_api(pos: pointOfTouch)
+                    player.setPosition(position: pointOfTouch)
                     player.setVelocity(velX: 0, velY: 0)
                 }
             }
@@ -1344,7 +1344,7 @@ class GameLevel {
                     // Do nothing
                 }
                 else if touch_in_game_area {
-                    player.set_pos_api(pos: pointOfTouch)
+                    player.setPosition(position: pointOfTouch)
                     
                     var vel_x = (self.player.images[0].position.x - self.r_o.x) / 2
                     var vel_y = (self.player.images[0].position.y - self.r_o.y) / 2

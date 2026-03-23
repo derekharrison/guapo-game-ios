@@ -30,7 +30,7 @@ class Player : GameObject {
         updateImage(numFrames: NUM_FRAMES_BIRD)
     }
     
-    func updatePositionPlayer() {
+    private func updatePositionPlayer() {
         self.images[0].position.x += self.velX
         self.images[0].position.y += self.velY
         
@@ -49,7 +49,7 @@ class Player : GameObject {
     }
     
     
-    func reflect_player_velocity() {
+    private func reflect_player_velocity() {
         if self.images[0].position.x < 0 {
             self.images[0].position.x = 0
             self.velX = -self.velX
@@ -71,18 +71,7 @@ class Player : GameObject {
         self.posY = images[0].position.y
     }
     
-    func add_image_hit(image : String, size : CGSize, z_pos : CGFloat) {
-        let image_hit = SKSpriteNode(imageNamed: image)
-        image_hit.size = size
-        image_hit.zPosition = z_pos
-        self.imagesHit.append(image_hit)
-    }
-    
-    func update_pos_api() {
-        self.updatePositionPlayer()
-    }
-    
-    func set_pos_api(pos : CGPoint) {
+    private func set_pos_api(pos : CGPoint) {
         self.setPosition(position: pos)
         
         for x in imagesHit {

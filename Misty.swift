@@ -50,7 +50,7 @@ class Misty : GameObject {
         self.setVelocity(velX: vx, velY: vy)
     }
     
-    func set_pos_api(pos : CGPoint) {
+    func setPosition(pos : CGPoint) {
         if !top {
             self.images[0].position = pos
             self.images[1].position = pos

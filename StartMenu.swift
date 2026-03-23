@@ -37,18 +37,18 @@ class StartMenu: SKScene {
         background.removeFromParent()
         self.addChild(background)
         
-        placeButton(fac: 0.6, button_np: playerMenuNotPressed, button_p: playerMenuPressed)
-        placeButton(fac: 0.46, button_np: levelMenuNotPressed, button_p: levelMenuPressed)
+        placeButton(fac: 0.6, buttonNotPressed: playerMenuNotPressed, buttonPressed: playerMenuPressed)
+        placeButton(fac: 0.46, buttonNotPressed: levelMenuNotPressed, buttonPressed: levelMenuPressed)
     }
     
     //Force the mute button to change by running update()
-    override func update(_ currentTime: TimeInterval) {
+    override func update(_ _: TimeInterval) {
    
         startScene(scene: self, start : &playerMenu, GameLevel : PlayerScene(size: self.size))
         startScene(scene: self, start : &levelMenu, GameLevel : MainMenuScene(size: self.size))
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with _: UIEvent?) {
         for touch: AnyObject in touches {
             let pointOfTouch = touch.location(in: self)
             pressedButton(pointOfTouch: pointOfTouch, levelNotPressed : playerMenuNotPressed, levelPressed : playerMenuPressed, pressed : &playerMenu)
@@ -56,7 +56,7 @@ class StartMenu: SKScene {
         }
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesEnded(_ _: Set<UITouch>, with _: UIEvent?) {
         if playerMenuChosen {
             playerMenu = true
             playerMenuScene = true
@@ -67,22 +67,22 @@ class StartMenu: SKScene {
         }
     }
     
-    private func placeButton(fac : CGFloat, button_np : SKSpriteNode, button_p : SKSpriteNode) {
+    private func placeButton(fac : CGFloat, buttonNotPressed : SKSpriteNode, buttonPressed : SKSpriteNode) {
         
-        let width_button = self.size.width / 4
-        let height_button = self.size.height / 16
+        let widthButton = self.size.width / 4
+        let heightButton = self.size.height / 16
         
-        button_np.size = CGSize(width: width_button, height: height_button)
-        button_np.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2 * fac + self.size.height / 4)
-        button_np.zPosition = 2
-        button_np.removeFromParent()
-        self.addChild(button_np)
+        buttonNotPressed.size = CGSize(width: widthButton, height: heightButton)
+        buttonNotPressed.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2 * fac + self.size.height / 4)
+        buttonNotPressed.zPosition = 2
+        buttonNotPressed.removeFromParent()
+        self.addChild(buttonNotPressed)
         
-        button_p.size = CGSize(width: width_button, height: height_button)
-        button_p.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2 * fac + self.size.height / 4)
-        button_p.zPosition = -1
-        button_p.removeFromParent()
-        self.addChild(button_p)
+        buttonPressed.size = CGSize(width: widthButton, height: heightButton)
+        buttonPressed.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2 * fac + self.size.height / 4)
+        buttonPressed.zPosition = -1
+        buttonPressed.removeFromParent()
+        self.addChild(buttonPressed)
     }
     
     private func pressedButton(pointOfTouch : CGPoint, levelNotPressed : SKSpriteNode, levelPressed : SKSpriteNode, pressed : inout Bool) {

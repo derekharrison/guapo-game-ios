@@ -45,7 +45,7 @@ class Bubbles {
             self.bubblez[0].zPosition = 1000
             self.bubcounter += 1
             if self.isMuted == false {
-                play_sound_api(scene : scene, sound : sound)
+                playSound(scene : scene, sound : sound)
             }
             
         }

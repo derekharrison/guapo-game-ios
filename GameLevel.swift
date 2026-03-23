@@ -207,36 +207,36 @@ class GameLevel {
     }
     
     func save_state() {
-        save_object(object: player, prefix: String(level_id) + PLAYER_STR)
-        save_object(object : brownie, prefix : String(level_id) + BROWNIE_STR)
-        save_object(object : frito, prefix : String(level_id) + FRITO_STR)
-        save_misty(object : misty, prefix : String(level_id) + MISTY_STR)
-        save_snacks(snacks: cheesy_bites, prefix: String(level_id) + CHEESY_STR)
-        save_snacks(snacks: paprikas, prefix: String(level_id) + PAPRIKA_STR)
-        save_snacks(snacks: cucumbers, prefix: String(level_id) + CUCUMBER_STR)
-        save_snacks(snacks: beggin_strips, prefix: String(level_id) + BEGGIN_STR)
-        save_snacks(snacks: broccolis, prefix: String(level_id) + BROCCOLI_STR)
-        save_object(object: fish1, prefix: String(level_id) + FISH_STR_1)
-        save_object(object: fish2, prefix: String(level_id) + FISH_STR_2)
-        save_object(object: fish3, prefix: String(level_id) + FISH_STR_3)
-        save_object(object: fish4, prefix: String(level_id) + FISH_STR_4)
-        save_object(object: fish5, prefix: String(level_id) + FISH_STR_5)
-        save_object(object: fish6, prefix: String(level_id) + FISH_STR_6)
-        save_object(object: blow_fish, prefix: String(level_id) + BLOWFISH_STR)
+        saveObject(object: player, prefix: String(level_id) + PLAYER_STR)
+        saveObject(object : brownie, prefix : String(level_id) + BROWNIE_STR)
+        saveObject(object : frito, prefix : String(level_id) + FRITO_STR)
+        saveMisty(object : misty, levelId : String(level_id))
+        saveSnacks(snacks: cheesy_bites, prefix: String(level_id) + CHEESY_STR)
+        saveSnacks(snacks: paprikas, prefix: String(level_id) + PAPRIKA_STR)
+        saveSnacks(snacks: cucumbers, prefix: String(level_id) + CUCUMBER_STR)
+        saveSnacks(snacks: beggin_strips, prefix: String(level_id) + BEGGIN_STR)
+        saveSnacks(snacks: broccolis, prefix: String(level_id) + BROCCOLI_STR)
+        saveObject(object: fish1, prefix: String(level_id) + FISH_STR_1)
+        saveObject(object: fish2, prefix: String(level_id) + FISH_STR_2)
+        saveObject(object: fish3, prefix: String(level_id) + FISH_STR_3)
+        saveObject(object: fish4, prefix: String(level_id) + FISH_STR_4)
+        saveObject(object: fish5, prefix: String(level_id) + FISH_STR_5)
+        saveObject(object: fish6, prefix: String(level_id) + FISH_STR_6)
+        saveObject(object: blow_fish, prefix: String(level_id) + BLOWFISH_STR)
         save_backgrounds()
         save_other()
     }
     
     func get_state() {
-        get_player_object(object: &player, prefix: String(level_id) + PLAYER_STR)
+        getPlayer(object: &player, levelId: String(level_id))
         getBrownie(object: &brownie, levelId: String(level_id))
         getFrito(object : &frito, levelId : String(level_id))
-        get_misty_object(object: &misty, prefix: String(level_id) + MISTY_STR)
-        get_snacks(snacks: &cheesy_bites, prefix: String(level_id) + CHEESY_STR)
-        get_snacks(snacks: &paprikas, prefix: String(level_id) + PAPRIKA_STR)
-        get_snacks(snacks: &cucumbers, prefix: String(level_id) + CUCUMBER_STR)
-        get_snacks(snacks: &beggin_strips, prefix: String(level_id) + BEGGIN_STR)
-        get_snacks(snacks: &broccolis, prefix: String(level_id) + BROCCOLI_STR)
+        getMisty(object: &misty, levelId: String(level_id))
+        getSnacks(snacks: &cheesy_bites, prefix: String(level_id) + CHEESY_STR)
+        getSnacks(snacks: &paprikas, prefix: String(level_id) + PAPRIKA_STR)
+        getSnacks(snacks: &cucumbers, prefix: String(level_id) + CUCUMBER_STR)
+        getSnacks(snacks: &beggin_strips, prefix: String(level_id) + BEGGIN_STR)
+        getSnacks(snacks: &broccolis, prefix: String(level_id) + BROCCOLI_STR)
         getFish(object: &fish1, prefix: String(level_id) + FISH_STR_1)
         getFish(object: &fish2, prefix: String(level_id) + FISH_STR_2)
         getFish(object: &fish3, prefix: String(level_id) + FISH_STR_3)
@@ -744,11 +744,11 @@ class GameLevel {
             cucumber.update(scene: scene)
             cucumber.setVelocity(velX: -background_speed, velY: 0)
             
-            if check_collision(bird : cucumber, player : player, den : 2.5) {
+            if objectCollidedWithPlayer(bird : cucumber, player : player, den : 2.5) {
                 cucumber.setPosition(position: CGPoint(x: -scene.size.width * 10, y: 0))
                 
                 if muted == false {
-                    play_sound_api(scene: scene, sound: [eat_sound1])
+                    playSound(scene: scene, sound: [eat_sound1])
                 }
                 
                 gameScore += cucumber.points_snack
@@ -760,18 +760,18 @@ class GameLevel {
         if frito.appeared  {
 
             if muted == false && frito.playSound {
-                play_sound_api(scene: scene, sound: [frito_sound_appearing])
+                playSound(scene: scene, sound: [frito_sound_appearing])
                 frito.playSound = false
             }
         }
 
         frito.updatePosition(scene: scene)
         
-        if check_collision(bird : frito, player : player, den : 2.5) {
+        if objectCollidedWithPlayer(bird : frito, player : player, den : 2.5) {
             frito.hit = true
 
             if muted == false && frito.playHitSound {
-                play_sound_api(scene: scene, sound: [frito_sound])
+                playSound(scene: scene, sound: [frito_sound])
                 frito.playHitSound = false
             }
         }
@@ -781,18 +781,18 @@ class GameLevel {
         if brownie.appeared  {
 
             if muted == false && brownie.playSound {
-                play_sound_api(scene: scene, sound: [brownie_sound_appearing])
+                playSound(scene: scene, sound: [brownie_sound_appearing])
                 brownie.playSound = false
             }
         }
 
         brownie.update(scene: scene)
         
-        if check_collision(bird : brownie, player : player, den : 2.5) {
+        if objectCollidedWithPlayer(bird : brownie, player : player, den : 2.5) {
             brownie.hit = true
 
             if muted == false && brownie.playHitSound {
-                play_sound_api(scene: scene, sound: [brownie_sound])
+                playSound(scene: scene, sound: [brownie_sound])
                 brownie.playHitSound = false
             }
         }
@@ -801,12 +801,12 @@ class GameLevel {
     func pop_misty() {
         misty.pop_misty(height : misty.height, speed : background_speed)
         
-        if check_collision(bird : misty, player : player, den : 2.5) {
+        if objectCollidedWithPlayer(bird : misty, player : player, den : 2.5) {
             misty.hit = true
             
             if muted == false && misty.playSound {
                 misty.playSound = false
-                play_sound_api(scene: scene, sound: [misty_sound])
+                playSound(scene: scene, sound: [misty_sound])
             }
         }
         
@@ -826,7 +826,7 @@ class GameLevel {
             misty.hit = false
             
             if muted == false {
-                play_sound_api(scene: scene, sound: [misty_sound_appearing])
+                playSound(scene: scene, sound: [misty_sound_appearing])
             }
         }
     }
@@ -835,7 +835,7 @@ class GameLevel {
         if frito.appeared  {
 
             if muted == false && frito.playSound {
-                play_sound_api(scene: scene, sound: [frito_sound_appearing])
+                playSound(scene: scene, sound: [frito_sound_appearing])
                 frito.playSound = false
             }
             
@@ -847,11 +847,11 @@ class GameLevel {
 
         frito.updatePosition(scene: scene)
         
-        if check_collision(bird : frito, player : player, den : 2.5) {
+        if objectCollidedWithPlayer(bird : frito, player : player, den : 2.5) {
             frito.hit = true
 
             if muted == false && frito.playHitSound {
-                play_sound_api(scene: scene, sound: [frito_sound])
+                playSound(scene: scene, sound: [frito_sound])
                 frito.playHitSound = false
             }
         }
@@ -861,7 +861,7 @@ class GameLevel {
         if brownie.appeared  {
 
             if muted == false && brownie.playSound {
-                play_sound_api(scene: scene, sound: [brownie_sound_appearing])
+                playSound(scene: scene, sound: [brownie_sound_appearing])
                 brownie.playSound = false
             }
             
@@ -874,11 +874,11 @@ class GameLevel {
 
         brownie.update(scene: scene)
         
-        if check_collision(bird : brownie, player : player, den : 2.5) {
+        if objectCollidedWithPlayer(bird : brownie, player : player, den : 2.5) {
             brownie.hit = true
 
             if muted == false && brownie.playHitSound {
-                play_sound_api(scene: scene, sound: [brownie_sound])
+                playSound(scene: scene, sound: [brownie_sound])
                 brownie.playHitSound = false
             }
         }
@@ -887,11 +887,11 @@ class GameLevel {
     func pop_misty_ocean() {
         misty.pop_misty(height : misty.height, speed : background_speed)
         
-        if check_collision(bird : misty, player : player, den : 2.5) {
+        if objectCollidedWithPlayer(bird : misty, player : player, den : 2.5) {
             misty.hit = true
             
             if muted == false && misty.playSound {
-                play_sound_api(scene: scene, sound: [misty_sound])
+                playSound(scene: scene, sound: [misty_sound])
                 misty.playSound = false
             }
         }
@@ -912,7 +912,7 @@ class GameLevel {
             misty.hit = false
             
             if muted == false {
-                play_sound_api(scene: scene, sound: [misty_sound_appearing])
+                playSound(scene: scene, sound: [misty_sound_appearing])
                 misty.bubbles.popBubbles(pos: misty.getPosition(), scene : scene, sound : [bubbles_sounds])
             }
         }
@@ -927,10 +927,10 @@ class GameLevel {
         for jelly in jellyfishes {
             jelly.update(scene : scene, backgroundSpeed: -background_speed)
             
-            if check_collision(bird : jelly, player : player, den : 3.5) {
+            if objectCollidedWithPlayer(bird : jelly, player : player, den : 3.5) {
 
                 if muted == false {
-                    play_sound_api(scene: scene, sound: [endSound])
+                    playSound(scene: scene, sound: [endSound])
                 }
                 
                 self.currentGameState = gameState.afterGame
@@ -966,10 +966,10 @@ class GameLevel {
     func update_blow_fish() {
         blow_fish.update(scene: scene, at: 5)
         
-        if check_collision(bird : blow_fish, player : player, den : 3.5) {
+        if objectCollidedWithPlayer(bird : blow_fish, player : player, den : 3.5) {
 
             if muted == false && blow_fish.playHitSound {
-                play_sound_api(scene: scene, sound: [blowfish_sound])
+                playSound(scene: scene, sound: [blowfish_sound])
             }
             blow_fish.playSound = false
             blow_fish.playHitSound = false
@@ -1008,10 +1008,10 @@ class GameLevel {
         for bird in birds {
             bird.update(scene : scene, backgroundSpeed: -background_speed)
 
-            if check_collision(bird : bird, player : player, den : 3.5) {
+            if objectCollidedWithPlayer(bird : bird, player : player, den : 3.5) {
 
                 if muted == false {
-                    play_sound_api(scene: scene, sound: [endSound])
+                    playSound(scene: scene, sound: [endSound])
                 }
                 
                 self.currentGameState = gameState.afterGame
@@ -1050,7 +1050,7 @@ class GameLevel {
         if gameScore >=  LEVEL_UNLOCK_GUARD && !is_already_unlocked && sun_popup_frame_counter <= num_frames_sun_popup {
             sun_popup_frame_counter += 1
             if muted == false && play_sun_pop_up {
-                play_sound_api(scene: scene, sound: [sun_popup_sound])
+                playSound(scene: scene, sound: [sun_popup_sound])
                 play_sun_pop_up = false
             }
             
@@ -1089,7 +1089,7 @@ class GameLevel {
             flag_popup_frame_counter += 1
             
             if muted == false && play_flag_pop_up {
-                play_sound_api(scene: scene, sound: [sun_popup_sound])
+                playSound(scene: scene, sound: [sun_popup_sound])
                 play_flag_pop_up = false
             }
             
@@ -1164,7 +1164,7 @@ class GameLevel {
         player.setZPosition(zPos: -1)
         player.setZPositionHit(zPos: z_pos_player)
         var start = true
-        start_scene(scene : scene, start : &start, GameLevel : GameLevel)
+        startScene(scene : scene, start : &start, GameLevel : GameLevel)
     }
     
     func run_restart(high_score_id: String) {

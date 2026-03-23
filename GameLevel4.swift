@@ -16,53 +16,53 @@ class GameLevel4: SKScene {
     var num_backgrounds : Int = NUM_BACKGROUNDS_LEVEL_4
     
     override func update(_ currentTime: TimeInterval) {
-        base.update_ocean(scene: self)
+        base.updateOcean(scene: self)
     }
     
     override func didMove(to view: SKView) {
-        base.didMove_ocean(scene: self, id : LEVEL_ID_4)
+        base.didMoveOcean(scene: self, id : LEVEL_ID_4)
 
-        base.add_bubbles(bubbles_char: base.player.bubbles, bubble_image: BUBBLE_IMAGE_STR)
+        base.addBubbles(bubbles_char: base.player.bubbles, bubble_image: BUBBLE_IMAGE_STR)
 
         var images = [String]()
         images.append(FRITO_OCEAN_1)
         images.append(FRITO_OCEAN_2)
-        base.add_bubbles(bubbles_char: base.frito.bubbles, bubble_image: BUBBLE_IMAGE_STR)
+        base.addBubbles(bubbles_char: base.frito.bubbles, bubble_image: BUBBLE_IMAGE_STR)
         
         for x in base.frito.bubbles.bubblez {
             x.removeFromParent()
             self.addChild(x)
         }
         
-        base.init_images_frito(images: images, height: self.size.height, width: self.size.width)
+        base.initImagesFrito(images: images, height: self.size.height, width: self.size.width)
         
         var images_brownie = [String]()
         images_brownie.append(BROWNIE_OCEAN_1)
         images_brownie.append(BROWNIE_OCEAN_2)
-        base.add_bubbles(bubbles_char: base.brownie.bubbles, bubble_image: BUBBLE_IMAGE_STR)
+        base.addBubbles(bubbles_char: base.brownie.bubbles, bubble_image: BUBBLE_IMAGE_STR)
         
         for x in base.brownie.bubbles.bubblez {
             x.removeFromParent()
             self.addChild(x)
         }
         
-        base.init_images_brownie(images: images_brownie, height: self.size.height, width: self.size.width)
+        base.initImagesBrownie(images: images_brownie, height: self.size.height, width: self.size.width)
         
         var images_misty = [String]()
         images_misty.append(MISTY_OCEAN_1)
         images_misty.append(MISTY_OCEAN_2)
         images_misty.append(MISTY_OCEAN_3)
         images_misty.append(MISTY_OCEAN_4)
-        base.add_bubbles(bubbles_char: base.misty.bubbles, bubble_image: BUBBLE_IMAGE_STR)
+        base.addBubbles(bubbles_char: base.misty.bubbles, bubble_image: BUBBLE_IMAGE_STR)
         
         for x in base.misty.bubbles.bubblez {
             x.removeFromParent()
             self.addChild(x)
         }
         
-        base.init_images_misty(images: images_misty, height: self.size.height, width: self.size.width)
+        base.initImagesMisty(images: images_misty, height: self.size.height, width: self.size.width)
         
-        base.init_background(scene: self, num_backgrounds: num_backgrounds, string1: BACKGROUND_STR_LEVEL_4)
+        base.initBackground(scene: self, numBackgrounds: num_backgrounds, string1: BACKGROUND_STR_LEVEL_4)
         
         var jelly_images = [String]()
         
@@ -70,10 +70,10 @@ class GameLevel4: SKScene {
         jelly_images.append(JELLY_IMAGE_2)
         jelly_images.append(JELLY_IMAGE_3)
         
-        base.add_jellyfish(images : jelly_images)
+        base.addJellyfish(images : jelly_images)
         
         if base.playing {
-            base.get_state()
+            base.getState()
         }
     }
     
@@ -85,3 +85,4 @@ class GameLevel4: SKScene {
         base.touchesMoved(touches, with: event)
     }
 }
+

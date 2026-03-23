@@ -24,21 +24,21 @@ class GameLevel1 : SKScene {
         images.append(FRITO_IMAGE_1)
         images.append(FRITO_IMAGE_2)
         
-        base.init_images_frito(images: images, height: self.size.height, width: self.size.width)
-        base.init_background(scene: self, num_backgrounds: num_backgrounds, string1: BACKGROUND_STR_LEVEL_1)
+        base.initImagesFrito(images: images, height: self.size.height, width: self.size.width)
+        base.initBackground(scene: self, numBackgrounds: num_backgrounds, string1: BACKGROUND_STR_LEVEL_1)
         
         var images_brownie = [String]()
         images_brownie.append(BROWNIE_IMAGE_1)
         images_brownie.append(BROWNIE_IMAGE_2)
         
-        base.init_images_brownie(images: images_brownie, height: self.size.height, width: self.size.width)
+        base.initImagesBrownie(images: images_brownie, height: self.size.height, width: self.size.width)
         
         var images_misty = [String]()
         images_misty.append(MISTY_IMAGE_1)
         images_misty.append(MISTY_IMAGE_2)
         images_misty.append(MISTY_IMAGE_3)
         images_misty.append(MISTY_IMAGE_4)
-        base.init_images_misty(images: images_misty, height: self.size.height, width: self.size.width)
+        base.initImagesMisty(images: images_misty, height: self.size.height, width: self.size.width)
         
         var bird_images = [String]()
         
@@ -46,10 +46,10 @@ class GameLevel1 : SKScene {
         bird_images.append(BIRD_IMAGE_WARA_2)
         bird_images.append(BIRD_IMAGE_WARA_3)
         
-        base.add_birds(images: bird_images)
+        base.addBirds(images: bird_images)
         
         if base.playing {
-            base.get_state()
+            base.getState()
         }
     }
     

@@ -7,14 +7,14 @@
 
 import Foundation
 
-enum gameState {
+enum GameState {
     case preGame
     case inGame
     case afterGame
     case gamePaused
 }
 
-enum playingState {
+enum PlayingState {
     case playing
     case restarted
 }

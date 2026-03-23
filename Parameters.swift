@@ -9,8 +9,8 @@ import Foundation
 import SpriteKit
 
 let tot_num_birds = 12
-var num_birds = 1
-var num_jellyfish = 1
+var numBirds = 1
+var numJellyFish = 1
 let num_cheesy_bites = 5
 let num_cucumbers = 1
 let num_paprikas = 1

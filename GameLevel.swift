@@ -96,7 +96,7 @@ class GameLevel {
         initFish(width: scene.size.width, height: scene.size.height)
     }
     
-    func update(scene : SKScene) {
+    func update() {
 
         //Update score text
         SCORE_LABEL.text = String(gameScore)
@@ -131,7 +131,7 @@ class GameLevel {
         }
     }
     
-    func updateOcean(scene : SKScene) {
+    func updateOcean() {
 
         //Update score text
         SCORE_LABEL.text = String(gameScore)
@@ -750,12 +750,9 @@ class GameLevel {
     }
     
     func popFrito() {
-        if frito.appeared  {
-
-            if muted == false && frito.playSound {
-                playSound(scene: scene, sound: [FRITO_SOUND_APPEARING])
-                frito.playSound = false
-            }
+        if frito.appeared && muted == false && frito.playSound {
+            playSound(scene: scene, sound: [FRITO_SOUND_APPEARING])
+            frito.playSound = false
         }
 
         frito.updatePosition(scene: scene)

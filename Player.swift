@@ -34,7 +34,7 @@ class Player : GameObject {
         self.images[0].position.x += self.velX
         self.images[0].position.y += self.velY
         
-        reflect_player_velocity()
+        reflectPlayerVelocity()
         
         for x in self.images {
             x.position = self.images[0].position
@@ -49,7 +49,7 @@ class Player : GameObject {
     }
     
     
-    private func reflect_player_velocity() {
+    private func reflectPlayerVelocity() {
         if self.images[0].position.x < 0 {
             self.images[0].position.x = 0
             self.velX = -self.velX
@@ -69,13 +69,5 @@ class Player : GameObject {
         
         self.posX = images[0].position.x
         self.posY = images[0].position.y
-    }
-    
-    private func set_pos_api(pos : CGPoint) {
-        self.setPosition(position: pos)
-        
-        for x in imagesHit {
-            x.position = pos
-        }
     }
 }

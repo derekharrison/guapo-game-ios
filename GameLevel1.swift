@@ -13,7 +13,7 @@ class GameLevel1 : SKScene {
     var base = GameLevel()
     var numBackgrounds: Int = NUM_BACKGROUNDS_LEVEL_1
     
-    override func update(_ currentTime: TimeInterval) {
+    override func update(_ _: TimeInterval) {
         base.update()
     }
     

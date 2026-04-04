@@ -1129,7 +1129,7 @@ class GameLevel {
         }
     }
     
-    func runContinue(highScoreId: String, GameLevel : SKScene) {
+    func runContinue(highScoreId: String, gameLevel : SKScene) {
         let defaults = UserDefaults()
         if gameScore > highScore {
             defaults.set(gameScore, forKey: highScoreId)
@@ -1138,7 +1138,7 @@ class GameLevel {
         player.setZPosition(zPos: -1)
         player.setZPositionHit(zPos: Z_POS_PLAYER)
         var start = true
-        startScene(scene : scene, start : &start, GameLevel : GameLevel)
+        startScene(scene : scene, start : &start, gameLevel : gameLevel)
     }
     
     func runRestart(highScoreId: String) {
@@ -1253,19 +1253,19 @@ class GameLevel {
                     defaults.set(playing, forKey: String(levelId) + PLAYING)
                     
                     if levelId == LEVEL_ID_1 {
-                        runContinue(highScoreId: HIGH_SCORE_ID_1, GameLevel: GameLevel1(size: scene.size))
+                        runContinue(highScoreId: HIGH_SCORE_ID_1, gameLevel: GameLevel1(size: scene.size))
                     }
                     if levelId == LEVEL_ID_2 {
-                        runContinue(highScoreId: HIGH_SCORE_ID_2, GameLevel: GameLevel2(size: scene.size))
+                        runContinue(highScoreId: HIGH_SCORE_ID_2, gameLevel: GameLevel2(size: scene.size))
                     }
                     if levelId == LEVEL_ID_3 {
-                        runContinue(highScoreId: HIGH_SCORE_ID_3, GameLevel: GameLevel3(size: scene.size))
+                        runContinue(highScoreId: HIGH_SCORE_ID_3, gameLevel: GameLevel3(size: scene.size))
                     }
                     if levelId == LEVEL_ID_4 {
-                        runContinue(highScoreId: HIGH_SCORE_ID_4, GameLevel: GameLevel4(size: scene.size))
+                        runContinue(highScoreId: HIGH_SCORE_ID_4, gameLevel: GameLevel4(size: scene.size))
                     }
                     if levelId == LEVEL_ID_5 {
-                        runContinue(highScoreId: HIGH_SCORE_ID_5, GameLevel: GameLevel5(size: scene.size))
+                        runContinue(highScoreId: HIGH_SCORE_ID_5, gameLevel: GameLevel5(size: scene.size))
                     }
                 }
                 

@@ -175,13 +175,13 @@ class MainMenuScene: SKScene {
             volumeOn.zPosition = 2
         }
         
-        startScene(scene: self, start : &startLevel1Scene, GameLevel : GameLevel1(size: self.size))
-        startScene(scene: self, start : &startLevel2Scene, GameLevel : GameLevel2(size: self.size))
-        startScene(scene: self, start : &startLevel3Scene, GameLevel : GameLevel3(size: self.size))
-        startScene(scene: self, start : &startLevel4Scene, GameLevel : GameLevel4(size: self.size))
-        startScene(scene: self, start : &startLevel5Scene, GameLevel : GameLevel5(size: self.size))
-        startScene(scene: self, start : &startMenu, GameLevel : StartMenu(size: self.size))
-        startScene(scene: self, start : &playerMenu, GameLevel : PlayerScene(size: self.size))
+        startScene(scene: self, start : &startLevel1Scene, gameLevel : GameLevel1(size: self.size))
+        startScene(scene: self, start : &startLevel2Scene, gameLevel : GameLevel2(size: self.size))
+        startScene(scene: self, start : &startLevel3Scene, gameLevel : GameLevel3(size: self.size))
+        startScene(scene: self, start : &startLevel4Scene, gameLevel : GameLevel4(size: self.size))
+        startScene(scene: self, start : &startLevel5Scene, gameLevel : GameLevel5(size: self.size))
+        startScene(scene: self, start : &startMenu, gameLevel : StartMenu(size: self.size))
+        startScene(scene: self, start : &playerMenu, gameLevel : PlayerScene(size: self.size))
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with _: UIEvent?) {

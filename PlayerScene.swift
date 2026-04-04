@@ -55,8 +55,8 @@ class PlayerScene: SKScene {
     
     //Force the mute button to change by running update()
     override func update(_ currentTime: TimeInterval) {
-        startScene(scene: self, start : &startMenu, GameLevel : StartMenu(size: self.size))
-        startScene(scene: self, start : &levelMenu, GameLevel : MainMenuScene(size: self.size))
+        startScene(scene: self, start : &startMenu, gameLevel : StartMenu(size: self.size))
+        startScene(scene: self, start : &levelMenu, gameLevel : MainMenuScene(size: self.size))
         
     }
     

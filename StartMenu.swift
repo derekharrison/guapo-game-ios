@@ -44,8 +44,8 @@ class StartMenu: SKScene {
     //Force the mute button to change by running update()
     override func update(_ _: TimeInterval) {
    
-        startScene(scene: self, start : &playerMenu, GameLevel : PlayerScene(size: self.size))
-        startScene(scene: self, start : &levelMenu, GameLevel : MainMenuScene(size: self.size))
+        startScene(scene: self, start : &playerMenu, gameLevel : PlayerScene(size: self.size))
+        startScene(scene: self, start : &levelMenu, gameLevel : MainMenuScene(size: self.size))
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with _: UIEvent?) {

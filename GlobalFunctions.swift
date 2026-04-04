@@ -255,9 +255,9 @@ func getPlayer(object : inout Player, levelId : String) {
     object.bubbles.isMuted = defaults.bool(forKey: levelId + PLAYER_STR + "bubbles.is_muted")
 }
 
-func startScene(scene : SKScene, start : inout Bool, GameLevel : SKScene) {
+func startScene(scene : SKScene, start : inout Bool, gameLevel : SKScene) {
     if start {
-        let sceneToMoveTo = GameLevel
+        let sceneToMoveTo = gameLevel
         sceneToMoveTo.scaleMode = scene.scaleMode
         let myTransition = SKTransition.fade(withDuration: 3.0)
         scene.view!.presentScene(sceneToMoveTo, transition: myTransition)

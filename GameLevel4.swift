@@ -15,7 +15,7 @@ class GameLevel4: SKScene {
     var base = GameLevel()
     var numBackgrounds: Int = NUM_BACKGROUNDS_LEVEL_4
     
-    override func update(_ currentTime: TimeInterval) {
+    override func update(_ _: TimeInterval) {
         base.updateOcean()
     }
     

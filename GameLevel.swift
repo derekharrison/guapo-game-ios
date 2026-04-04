@@ -1198,7 +1198,7 @@ class GameLevel {
         currentGameState = GameState.afterGame
     }
     
-    func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    func touchesBegan(_ touches: Set<UITouch>, with _: UIEvent?) {
         
         if currentGameState == GameState.preGame {
             startGame()
@@ -1295,7 +1295,7 @@ class GameLevel {
         }
     }
     
-    func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    func touchesMoved(_ touches: Set<UITouch>, with _: UIEvent?) {
         
         self.ro = player.images[0].position
         
@@ -1320,18 +1320,18 @@ class GameLevel {
                 else if touchInGameArea {
                     player.setPosition(position: pointOfTouch)
                     
-                    var vel_x = (self.player.images[0].position.x - self.ro.x) / 2
-                    var vel_y = (self.player.images[0].position.y - self.ro.y) / 2
+                    var velX = (self.player.images[0].position.x - self.ro.x) / 2
+                    var velY = (self.player.images[0].position.y - self.ro.y) / 2
                     
-                    let min_speed2 = 3.1
-                    let speed2 = vel_x * vel_x + vel_y * vel_y
+                    let minSpeed2 = 3.1
+                    let speed2 = velX * velX + velY * velY
 
-                    if speed2 < CGFloat(min_speed2) {
-                        vel_x = 0
-                        vel_y = 0
+                    if speed2 < CGFloat(minSpeed2) {
+                        velX = 0
+                        velY = 0
                     }
                     
-                    player.setVelocity(velX: vel_x, velY: vel_y)
+                    player.setVelocity(velX: velX, velY: velY)
                 }
             }
         }

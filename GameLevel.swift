@@ -786,7 +786,7 @@ class GameLevel {
     }
     
     func popMisty() {
-        misty.popMisty(height : misty.height, speed : backgroundSpeed)
+        misty.popMisty(misty.height, speed : backgroundSpeed)
         
         if objectCollidedWithPlayer(bird : misty, player : player, den : 2.5) {
             misty.hit = true
@@ -876,7 +876,7 @@ class GameLevel {
     }
     
     func popMistyOcean() {
-        misty.popMisty(height : misty.height, speed : backgroundSpeed)
+        misty.popMisty(misty.height, speed : backgroundSpeed)
         
         if objectCollidedWithPlayer(bird : misty, player : player, den : 2.5) {
             misty.hit = true

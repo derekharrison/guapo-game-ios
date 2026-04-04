@@ -46,10 +46,6 @@ class Misty : GameObject {
         self.top = bool
     }
     
-    func set_vel_misty(vx : CGFloat, vy : CGFloat) {
-        self.setVelocity(velX: vx, velY: vy)
-    }
-    
     func setPosition(pos : CGPoint) {
         if !top {
             self.images[0].position = pos

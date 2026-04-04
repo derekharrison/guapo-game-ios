@@ -168,19 +168,19 @@ class GameLevel {
     
     func gameOver() {
         if levelId == LEVEL_ID_1 {
-            runGameOver(high_score_id: HIGH_SCORE_ID_1)
+            runGameOver(highScoreId: HIGH_SCORE_ID_1)
         }
         if levelId == LEVEL_ID_2 {
-            runGameOver(high_score_id: HIGH_SCORE_ID_2)
+            runGameOver(highScoreId: HIGH_SCORE_ID_2)
         }
         if levelId == LEVEL_ID_3 {
-            runGameOver(high_score_id: HIGH_SCORE_ID_3)
+            runGameOver(highScoreId: HIGH_SCORE_ID_3)
         }
         if levelId == LEVEL_ID_4 {
-            runGameOver(high_score_id: HIGH_SCORE_ID_4)
+            runGameOver(highScoreId: HIGH_SCORE_ID_4)
         }
         if levelId == LEVEL_ID_5 {
-            runGameOver(high_score_id: HIGH_SCORE_ID_5)
+            runGameOver(highScoreId: HIGH_SCORE_ID_5)
         }
     }
     
@@ -392,7 +392,7 @@ class GameLevel {
         misty.setHeight(height : height)
         misty.setWidth(width : width)
         misty.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
-        misty.set_vel_misty(vx: 0, vy: -backgroundSpeed)
+        misty.setVelocity(velX: 0, velY: -backgroundSpeed)
         misty.setZPosition(zPos: Z_POS_CHARS + 2)
         misty.setPosition(position: CGPoint(x : width / 2, y : height * 0.75 + misty.images[0].size.height / 2))
         
@@ -768,12 +768,9 @@ class GameLevel {
     }
     
     func popBrownie() {
-        if brownie.appeared  {
-
-            if muted == false && brownie.playSound {
-                playSound(scene: scene, sound: [BROWNIE_SOUND_APPEARING])
-                brownie.playSound = false
-            }
+        if brownie.appeared && muted == false && brownie.playSound {
+            playSound(scene: scene, sound: [BROWNIE_SOUND_APPEARING])
+            brownie.playSound = false
         }
 
         brownie.update(scene: scene)
@@ -810,11 +807,11 @@ class GameLevel {
         misty.play(bool: Bool.random())
         if misty.top {
             misty.setPosition(position: CGPoint(x : misty.width / 2, y : misty.height * 0.75 + misty.images[0].size.height / 2))
-            misty.set_vel_misty(vx: misty.velX, vy: -backgroundSpeed)
+            misty.setVelocity(velX: misty.velX, velY: -backgroundSpeed)
         }
         else {
             misty.setPosition(position: CGPoint(x : misty.width / 2, y : misty.height * 0.25 - misty.images[0].size.height / 2))
-            misty.set_vel_misty(vx: misty.velX, vy: backgroundSpeed)
+            misty.setVelocity(velX: misty.velX, velY: backgroundSpeed)
         }
         
         misty.playSound = true
@@ -1043,24 +1040,22 @@ class GameLevel {
     
     func flagPopup() {
         
-        if gameScore == 0 {
-            if startSave {
-                startSave = false
-                
-                // Spawn thread to save state
-                class MyThread: Thread {
-                    var base : GameLevel
-                    init(base : GameLevel) {
-                        self.base = base
-                    }
-                    override func main() {
-                        base.saveState()
-                    }
+        if gameScore == 0 && startSave {
+            startSave = false
+            
+            // Spawn thread to save state
+            class MyThread: Thread {
+                var base : GameLevel
+                init(base : GameLevel) {
+                    self.base = base
                 }
-
-                let thread = MyThread(base : self)
-                thread.start()
+                override func main() {
+                    base.saveState()
+                }
             }
+
+            let thread = MyThread(base : self)
+            thread.start()
         }
         
         if gameScore >= flagNum * flagFrequency && flagPopupFrameCounter <= NUM_FRAMES_FLAG_POPUP && numLives > 0 {
@@ -1107,10 +1102,10 @@ class GameLevel {
     func updateNumberOfBirds() {
         if gameScore >= boundTracker * NUM_POINTS_WHEN_BIRDS_APPEAR && birds.count < TOT_NUM_BIRDS {
             
-            let image_names = self.birds[0].imageNames
+            let imageNames = self.birds[0].imageNames
             let size = self.birds[0].images[0].size
             
-            let bird = Bird(birds: image_names, size: size, zPos: CGFloat(birds.count) + MIN_Z_POS_BIRDS)
+            let bird = Bird(birds: imageNames, size: size, zPos: CGFloat(birds.count) + MIN_Z_POS_BIRDS)
             bird.addImagesToScene(scene : scene)
             
             birds.append(bird)
@@ -1122,10 +1117,10 @@ class GameLevel {
     func updateNumJelly() {
         if gameScore >= boundTracker * NUM_POINTS_WHEN_BIRDS_APPEAR && jellyfishes.count < TOT_NUM_BIRDS {
             
-            let image_names = self.jellyfishes[0].imageNames
+            let imageNames = self.jellyfishes[0].imageNames
             let size = self.jellyfishes[0].images[0].size
             
-            let jelly = JellyFish(jellyFish: image_names, size: size, zPos: CGFloat(jellyfishes.count) + MIN_Z_POS_BIRDS)
+            let jelly = JellyFish(jellyFish: imageNames, size: size, zPos: CGFloat(jellyfishes.count) + MIN_Z_POS_BIRDS)
             jelly.addImagesToScene(scene : scene)
             
             jellyfishes.append(jelly)
@@ -1134,10 +1129,10 @@ class GameLevel {
         }
     }
     
-    func runContinue(high_score_id: String, GameLevel : SKScene) {
+    func runContinue(highScoreId: String, GameLevel : SKScene) {
         let defaults = UserDefaults()
         if gameScore > highScore {
-            defaults.set(gameScore, forKey: high_score_id)
+            defaults.set(gameScore, forKey: highScoreId)
         }
         
         player.setZPosition(zPos: -1)
@@ -1146,15 +1141,15 @@ class GameLevel {
         startScene(scene : scene, start : &start, GameLevel : GameLevel)
     }
     
-    func runRestart(high_score_id: String) {
-        runGameOver(high_score_id: high_score_id)
+    func runRestart(highScoreId: String) {
+        runGameOver(highScoreId: highScoreId)
     }
     
-    func runGameOver(high_score_id : String) {
+    func runGameOver(highScoreId : String) {
         let defaults = UserDefaults()
         
         if gameScore > highScore {
-            defaults.set(gameScore, forKey: high_score_id)
+            defaults.set(gameScore, forKey: highScoreId)
         }
         
         player.setZPosition(zPos: -1)
@@ -1217,12 +1212,12 @@ class GameLevel {
                 // Position defines the boundaries of the pause / play button
                 let position = CGPoint(x: scene.size.width - 2 * scene.size.width / 12, y: scene.size.height / 2 + scene.size.height * 1.5 / 10)
                 
-                let touch_in_game_area = pointOfTouch.x > 0 && pointOfTouch.x < scene.size.width && pointOfTouch.y > scene.size.height / 4 && pointOfTouch.y < 0.75 * scene.size.height
+                let touchInGameArea = pointOfTouch.x > 0 && pointOfTouch.x < scene.size.width && pointOfTouch.y > scene.size.height / 4 && pointOfTouch.y < 0.75 * scene.size.height
                 
                 if pointOfTouch.x > position.x && pointOfTouch.y > position.y {
                     pauseGame()
                 }
-                else if touch_in_game_area {
+                else if touchInGameArea {
                     player.setPosition(position: pointOfTouch)
                     player.setVelocity(velX: 0, velY: 0)
                 }
@@ -1258,19 +1253,19 @@ class GameLevel {
                     defaults.set(playing, forKey: String(levelId) + PLAYING)
                     
                     if levelId == LEVEL_ID_1 {
-                        runContinue(high_score_id: HIGH_SCORE_ID_1, GameLevel: GameLevel1(size: scene.size))
+                        runContinue(highScoreId: HIGH_SCORE_ID_1, GameLevel: GameLevel1(size: scene.size))
                     }
                     if levelId == LEVEL_ID_2 {
-                        runContinue(high_score_id: HIGH_SCORE_ID_2, GameLevel: GameLevel2(size: scene.size))
+                        runContinue(highScoreId: HIGH_SCORE_ID_2, GameLevel: GameLevel2(size: scene.size))
                     }
                     if levelId == LEVEL_ID_3 {
-                        runContinue(high_score_id: HIGH_SCORE_ID_3, GameLevel: GameLevel3(size: scene.size))
+                        runContinue(highScoreId: HIGH_SCORE_ID_3, GameLevel: GameLevel3(size: scene.size))
                     }
                     if levelId == LEVEL_ID_4 {
-                        runContinue(high_score_id: HIGH_SCORE_ID_4, GameLevel: GameLevel4(size: scene.size))
+                        runContinue(highScoreId: HIGH_SCORE_ID_4, GameLevel: GameLevel4(size: scene.size))
                     }
                     if levelId == LEVEL_ID_5 {
-                        runContinue(high_score_id: HIGH_SCORE_ID_5, GameLevel: GameLevel5(size: scene.size))
+                        runContinue(highScoreId: HIGH_SCORE_ID_5, GameLevel: GameLevel5(size: scene.size))
                     }
                 }
                 
@@ -1281,19 +1276,19 @@ class GameLevel {
                     playing = false
                     defaults.set(playing, forKey: String(levelId) + PLAYING)
                     if levelId == LEVEL_ID_1 {
-                        runRestart(high_score_id: HIGH_SCORE_ID_1)
+                        runRestart(highScoreId: HIGH_SCORE_ID_1)
                     }
                     if levelId == LEVEL_ID_2 {
-                        runRestart(high_score_id: HIGH_SCORE_ID_2)
+                        runRestart(highScoreId: HIGH_SCORE_ID_2)
                     }
                     if levelId == LEVEL_ID_3 {
-                        runRestart(high_score_id: HIGH_SCORE_ID_3)
+                        runRestart(highScoreId: HIGH_SCORE_ID_3)
                     }
                     if levelId == LEVEL_ID_4 {
-                        runRestart(high_score_id: HIGH_SCORE_ID_4)
+                        runRestart(highScoreId: HIGH_SCORE_ID_4)
                     }
                     if levelId == LEVEL_ID_5 {
-                        runRestart(high_score_id: HIGH_SCORE_ID_5)
+                        runRestart(highScoreId: HIGH_SCORE_ID_5)
                     }
                 }
             }
@@ -1317,12 +1312,12 @@ class GameLevel {
                 
                 let position = CGPoint(x: scene.size.width - 3 * scene.size.width / 12, y: scene.size.height / 2 + scene.size.height * 1.5 / 10)
                 
-                let touch_in_game_area = pointOfTouch.x > 0 && pointOfTouch.x < scene.size.width && pointOfTouch.y > scene.size.height / 4 && pointOfTouch.y < 0.75 * scene.size.height
+                let touchInGameArea = pointOfTouch.x > 0 && pointOfTouch.x < scene.size.width && pointOfTouch.y > scene.size.height / 4 && pointOfTouch.y < 0.75 * scene.size.height
                 
                 if pointOfTouch.x > position.x  && pointOfTouch.y > position.y {
                     // Do nothing
                 }
-                else if touch_in_game_area {
+                else if touchInGameArea {
                     player.setPosition(position: pointOfTouch)
                     
                     var vel_x = (self.player.images[0].position.x - self.ro.x) / 2

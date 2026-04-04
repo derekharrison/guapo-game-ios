@@ -17,7 +17,7 @@ class Frito : GameObject {
         updateImage(numFrames: NUM_FRAMES_BIRD)
     }
     
-    func updatePosition(scene : SKScene, at_screen : Int) {
+    func updatePosition(scene : SKScene, atScreen : Int) {
         
         self.images[0].position.x += self.velX
         self.images[0].position.y += self.velY
@@ -29,7 +29,7 @@ class Frito : GameObject {
             self.hit = false
             
             let factor = 1.0 - (self.images[0].size.height) / (scene.size.height / 2)
-            self.images[0].position.x = getRandomNumber() * scene.size.width + CGFloat(at_screen) * scene.size.width
+            self.images[0].position.x = getRandomNumber() * scene.size.width + CGFloat(atScreen) * scene.size.width
             self.images[0].position.y = getRandomNumber() * scene.size.height / 2 * factor  + scene.size.height / 4 + 1/2 * (1 - factor) * scene.size.height / 2
         }
         for x in self.images {
@@ -43,7 +43,7 @@ class Frito : GameObject {
     func updatePosition(scene : SKScene) {
         
         self.reflect(scene : scene)
-        self.updatePosition(scene : scene, at_screen : -15)
+        self.updatePosition(scene : scene, atScreen : -15)
         
         if hit {
             self.displayImageNotHit(imageId: 1)

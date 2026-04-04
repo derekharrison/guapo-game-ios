@@ -39,8 +39,4 @@ class GameViewController: UIViewController {
             return .all
         }
     }
-
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
 }

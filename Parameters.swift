@@ -37,30 +37,29 @@ let numberOfFramesChange = 5
 let numberOfFramesFlagPopup = 180
 let numFramesMisty = 60
 
-let NUM_POINTS_WHEN_BIRDS_APPEAR = 35
+let numberOfPointsWhenVillainsAppear = 35
+let numberOfScreenLengthsForDisplay = 10
+let numberOfPointsWhenBegginStripAppears = 50
 
-let NUM_SCREEN_LENGTHS_FOR_DISP = 10
-let POINTS_AT_WHICH_BEGGIN_STRIPS_APPEAR = 50
+let verticalBubbleVelocity = 5.0
 
-let BUBBLE_VEL_Y = 5.0
+let pauseButtonNode = SKSpriteNode(imageNamed: "pause_button_bitmap_cropped")
+let playButtonNode = SKSpriteNode(imageNamed: "play_button_bitmap_cropped")
+let sunPopupNode = SKSpriteNode(imageNamed: "sun_popup_bitmap_cropped")
+let scoreLabelNode = SKLabelNode(fontNamed: "Courier-Bold")
 
-let PAUSE_BUTTON = SKSpriteNode(imageNamed: "pause_button_bitmap_cropped")
-let PLAY_BUTTON = SKSpriteNode(imageNamed: "play_button_bitmap_cropped")
-let SUN_POPUP_SPR = SKSpriteNode(imageNamed: "sun_popup_bitmap_cropped")
+let numberOfPixelsOfOverlapBetweenBackgroundImages = 10
 
-let SCORE_LABEL = SKLabelNode(fontNamed: "Courier-Bold")
-let BACKGROUND_OVERLAP = 10
-
-let Z_POS_PLAYER : CGFloat = CGFloat(Parameters.totalNumberOfVillains) * 5
-let Z_POS_SNACKS : CGFloat = CGFloat(Parameters.totalNumberOfVillains) * 2
-let Z_POS_CHARS : CGFloat = CGFloat(Parameters.totalNumberOfVillains) * 1
-let Z_POS_PAUSE : CGFloat = CGFloat(Parameters.totalNumberOfVillains) * 5 + 1
-let Z_POS_CONTINUE : CGFloat = CGFloat(Parameters.totalNumberOfVillains) * 5 + 2
-let Z_POS_RESTART : CGFloat = CGFloat(Parameters.totalNumberOfVillains) * 5 + 2
-let Z_POS_LIVES : CGFloat = CGFloat(Parameters.totalNumberOfVillains) * 5 + 2
-let Z_POS_FLAG : CGFloat = CGFloat(Parameters.totalNumberOfVillains) * 5 - 1
-let Z_POS_SUN : CGFloat = CGFloat(Parameters.totalNumberOfVillains) * 5 - 1
-let Z_POS_BLACK : CGFloat = CGFloat(Parameters.totalNumberOfVillains) * 10
+let zPosPlayer : CGFloat = CGFloat(Parameters.totalNumberOfVillains) * 5
+let zPosSnacks : CGFloat = CGFloat(Parameters.totalNumberOfVillains) * 2
+let zPosCharacters : CGFloat = CGFloat(Parameters.totalNumberOfVillains) * 1
+let zPosPauseButton : CGFloat = CGFloat(Parameters.totalNumberOfVillains) * 5 + 1
+let zPosContinueButton : CGFloat = CGFloat(Parameters.totalNumberOfVillains) * 5 + 2
+let zPosStartButton : CGFloat = CGFloat(Parameters.totalNumberOfVillains) * 5 + 2
+let zPosLives : CGFloat = CGFloat(Parameters.totalNumberOfVillains) * 5 + 2
+let zPosFlagPopup : CGFloat = CGFloat(Parameters.totalNumberOfVillains) * 5 - 1
+let zPosSunPopup : CGFloat = CGFloat(Parameters.totalNumberOfVillains) * 5 - 1
+let zPosBlackCoverImages : CGFloat = CGFloat(Parameters.totalNumberOfVillains) * 10
 
 let MIN_Z_POS_JELLY_FISH = CGFloat(Parameters.totalNumberOfVillains) * 3
 let MIN_Z_POS_FISHES = CGFloat(Parameters.totalNumberOfVillains) * 1

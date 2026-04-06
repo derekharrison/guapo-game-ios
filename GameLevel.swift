@@ -99,7 +99,7 @@ class GameLevel {
     func update() {
 
         //Update score text
-        SCORE_LABEL.text = String(gameScore)
+        scoreLabelNode.text = String(gameScore)
         
         if levelId != LEVEL_ID_5 {
             sunPopup()
@@ -134,7 +134,7 @@ class GameLevel {
     func updateOcean() {
 
         //Update score text
-        SCORE_LABEL.text = String(gameScore)
+        scoreLabelNode.text = String(gameScore)
         
         if self.currentGameState == GameState.inGame {
             moveCounter += 1
@@ -284,7 +284,7 @@ class GameLevel {
         updateSnack(snacks : broccolis, backgroundSpeed : backgroundSpeed)
         
         //Update positions of beggin strips and detect eating beggin strip
-        if gameScore >= POINTS_AT_WHICH_BEGGIN_STRIPS_APPEAR {
+        if gameScore >= numberOfPointsWhenBegginStripAppears {
             updateSnack(snacks : begginStrips, backgroundSpeed : backgroundSpeed)
         }
     }
@@ -366,7 +366,7 @@ class GameLevel {
         frito.setWidth(width : width)
         frito.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
         frito.setVelocity(velX: 2 * backgroundSpeed, velY: -2 * backgroundSpeed)
-        frito.setZPosition(zPos: Z_POS_CHARS)
+        frito.setZPosition(zPos: zPosCharacters)
         frito.setPosition(position: CGPoint(x : 10 * width, y : height * 0.75 + frito.images[0].size.height / 2))
         frito.addImagesToScene(scene: scene)
     }
@@ -379,7 +379,7 @@ class GameLevel {
         brownie.setWidth(width : width)
         brownie.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
         brownie.setVelocity(velX: -2 * backgroundSpeed, velY: -2 * backgroundSpeed)
-        brownie.setZPosition(zPos: Z_POS_CHARS + 1)
+        brownie.setZPosition(zPos: zPosCharacters + 1)
         brownie.setPosition(position: CGPoint(x : -width, y : height * 0.75 + brownie.images[0].size.height / 2))
         
         brownie.addImagesToScene(scene: scene)
@@ -393,7 +393,7 @@ class GameLevel {
         misty.setWidth(width : width)
         misty.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
         misty.setVelMisty(vx: 0, vy: -backgroundSpeed)
-        misty.setZPosition(zPos: Z_POS_CHARS + 2)
+        misty.setZPosition(zPos: zPosCharacters + 2)
         misty.setPosition(position: CGPoint(x : width / 2, y : height * 0.75 + misty.images[0].size.height / 2))
         
         misty.addImagesToScene(scene: scene)
@@ -442,36 +442,36 @@ class GameLevel {
             flag.addImagesToScene(scene: scene)
         }
         
-        PAUSE_BUTTON.setScale(1)
-        PAUSE_BUTTON.size = CGSize(width: width / 28, height: height / 28)
-        PAUSE_BUTTON.position = CGPoint(x: width - width / 12, y: height / 2 + height * 1.9 / 10)
-        PAUSE_BUTTON.zPosition = Z_POS_PAUSE
-        PAUSE_BUTTON.removeFromParent()
-        scene.addChild(PAUSE_BUTTON)
+        pauseButtonNode.setScale(1)
+        pauseButtonNode.size = CGSize(width: width / 28, height: height / 28)
+        pauseButtonNode.position = CGPoint(x: width - width / 12, y: height / 2 + height * 1.9 / 10)
+        pauseButtonNode.zPosition = zPosPauseButton
+        pauseButtonNode.removeFromParent()
+        scene.addChild(pauseButtonNode)
         
-        PLAY_BUTTON.setScale(1)
-        PLAY_BUTTON.size = CGSize(width: width / 28, height: height / 28)
-        PLAY_BUTTON.position = PAUSE_BUTTON.position
-        PLAY_BUTTON.zPosition = -1
-        PLAY_BUTTON.removeFromParent()
-        scene.addChild(PLAY_BUTTON)
+        playButtonNode.setScale(1)
+        playButtonNode.size = CGSize(width: width / 28, height: height / 28)
+        playButtonNode.position = pauseButtonNode.position
+        playButtonNode.zPosition = -1
+        playButtonNode.removeFromParent()
+        scene.addChild(playButtonNode)
         
-        SUN_POPUP_SPR.setScale(1)
-        SUN_POPUP_SPR.size = CGSize(width: width / 7, height: height / 7)
-        SUN_POPUP_SPR.position = CGPoint(x: width / 2 + SUN_POPUP_SPR.size.width / 5, y: height / 2 + height / 4 - SUN_POPUP_SPR.size.height / 2 - width / 11)
-        SUN_POPUP_SPR.zPosition = -1
-        SUN_POPUP_SPR.removeFromParent()
-        scene.addChild(SUN_POPUP_SPR)
+        sunPopupNode.setScale(1)
+        sunPopupNode.size = CGSize(width: width / 7, height: height / 7)
+        sunPopupNode.position = CGPoint(x: width / 2 + sunPopupNode.size.width / 5, y: height / 2 + height / 4 - sunPopupNode.size.height / 2 - width / 11)
+        sunPopupNode.zPosition = -1
+        sunPopupNode.removeFromParent()
+        scene.addChild(sunPopupNode)
         
-        SCORE_LABEL.text = "0"
-        SCORE_LABEL.fontSize = 100
-        SCORE_LABEL.fontColor = SKColor.gray
-        SCORE_LABEL.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
-        SCORE_LABEL.position = CGPoint(x: scene.size.width / 12, y: scene.size.height / 2 + scene.size.height * 1.8 / 10)
+        scoreLabelNode.text = "0"
+        scoreLabelNode.fontSize = 100
+        scoreLabelNode.fontColor = SKColor.gray
+        scoreLabelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
+        scoreLabelNode.position = CGPoint(x: scene.size.width / 12, y: scene.size.height / 2 + scene.size.height * 1.8 / 10)
         
-        SCORE_LABEL.zPosition = Z_POS_PAUSE
-        SCORE_LABEL.removeFromParent()
-        scene.addChild(SCORE_LABEL)
+        scoreLabelNode.zPosition = zPosPauseButton
+        scoreLabelNode.removeFromParent()
+        scene.addChild(scoreLabelNode)
         
         
         let defaults = UserDefaults()
@@ -514,7 +514,7 @@ class GameLevel {
             lifeImage.size = CGSize(width: scene.size.width / 28, height: scene.size.height / 28)
             let sizeLoc = CGSize(width: scene.size.width / 28, height: scene.size.height / 28)
             lifeImage.position = CGPoint(x: scene.size.width / 2 + CGFloat(j) * sizeLoc.width + 5, y: CGFloat(scene.size.height * 0.75) - sizeLoc.height)
-            lifeImage.zPosition = Z_POS_LIVES
+            lifeImage.zPosition = zPosLives
             lifeImage.removeFromParent()
             scene.addChild(lifeImage)
         }
@@ -539,10 +539,10 @@ class GameLevel {
     func initBackground(scene : SKScene, numBackgrounds : Int, string1 : String) {
         blackBackgroundTop.size = CGSize(width: scene.size.width, height: scene.size.height / 4)
         blackBackgroundTop.position = CGPoint(x: scene.size.width / 2, y: scene.size.height * 0.75 + scene.size.height / 8)
-        blackBackgroundTop.zPosition = Z_POS_BLACK
+        blackBackgroundTop.zPosition = zPosBlackCoverImages
         blackBackgroundBottom.size = CGSize(width: scene.size.width, height: scene.size.height / 4)
         blackBackgroundBottom.position = CGPoint(x: scene.size.width / 2, y: scene.size.height * 0.25 - scene.size.height / 8)
-        blackBackgroundBottom.zPosition = Z_POS_BLACK
+        blackBackgroundBottom.zPosition = zPosBlackCoverImages
         blackBackgroundTop.removeFromParent()
         blackBackgroundBottom.removeFromParent()
         scene.addChild(blackBackgroundTop)
@@ -560,7 +560,7 @@ class GameLevel {
             widthBackground = background.size.width
             
             background.anchorPoint = CGPoint(x: 0, y: 0.5)
-            background.position = CGPoint(x: widthBackground * CGFloat(i) - CGFloat(BACKGROUND_OVERLAP * i), y: scene.size.height / 2)
+            background.position = CGPoint(x: widthBackground * CGFloat(i) - CGFloat(numberOfPixelsOfOverlapBetweenBackgroundImages * i), y: scene.size.height / 2)
             
             background.zPosition = 0
             backgrounds.append(background)
@@ -575,7 +575,7 @@ class GameLevel {
             let size = CGSize(width: scene.size.width / 14, height: scene.size.height / 14)
             let biteImage = bite
             
-            let cheesyBite = Snack(bite: biteImage, points: pointsForCheesyBite, size: size, zPos: Z_POS_SNACKS)
+            let cheesyBite = Snack(bite: biteImage, points: pointsForCheesyBite, size: size, zPos: zPosSnacks)
             
             cheesyBite.addImagesToScene(scene: scene)
 
@@ -662,13 +662,13 @@ class GameLevel {
         if(playerId == 0) {
             playerImages.append(PLAYER_IMAGE_1)
             playerImages.append(PLAYER_IMAGE_2)
-            player = Player(images: playerImages, size: size, zPos: Z_POS_PLAYER)
+            player = Player(images: playerImages, size: size, zPos: zPosPlayer)
             player.addImageHit(image: PLAYER_IMAGE_HIT)
         }
         if(playerId == 1) {
             playerImages.append(PLAYER_TUTTI_IMAGE_1)
             playerImages.append(PLAYER_TUTTI_IMAGE_2)
-            player = Player(images: playerImages, size: size, zPos: Z_POS_PLAYER)
+            player = Player(images: playerImages, size: size, zPos: zPosPlayer)
             player.addImageHit(image: PLAYER_TUTTI_IMAGE_HIT)
         }
 
@@ -689,13 +689,13 @@ class GameLevel {
         
         if playerId == 0 {
             playerImages.append(PLAYER_SNORKEL)
-            player = Player(images: playerImages, size: size, zPos: Z_POS_PLAYER)
+            player = Player(images: playerImages, size: size, zPos: zPosPlayer)
             player.addImageHit(image: PLAYER_SNORKEL_HIT)
         }
         
         if playerId == 1 {
             playerImages.append(PLAYER_TUTTI_SNORKEL)
-            player = Player(images: playerImages, size: size, zPos: Z_POS_PLAYER)
+            player = Player(images: playerImages, size: size, zPos: zPosPlayer)
             player.addImageHit(image: PLAYER_TUTTI_SNORKEL_HIT)
         }
         
@@ -1030,11 +1030,11 @@ class GameLevel {
                 playSunPopup = false
             }
             
-            SUN_POPUP_SPR.zPosition = Z_POS_SUN
+            sunPopupNode.zPosition = zPosSunPopup
         }
         else {
             //Reset sun popup zposition
-            SUN_POPUP_SPR.zPosition = -1
+            sunPopupNode.zPosition = -1
         }
     }
     
@@ -1068,7 +1068,7 @@ class GameLevel {
                 playFlagPopup = false
             }
             
-            flag.setZPosition(zPos: Z_POS_FLAG)
+            flag.setZPosition(zPos: zPosFlagPopup)
             
             if startThread {
                 startThread = false
@@ -1101,7 +1101,7 @@ class GameLevel {
     }
     
     func updateNumberOfBirds() {
-        if gameScore >= boundTracker * NUM_POINTS_WHEN_BIRDS_APPEAR && birds.count < Parameters.totalNumberOfVillains {
+        if gameScore >= boundTracker * numberOfPointsWhenVillainsAppear && birds.count < Parameters.totalNumberOfVillains {
             
             let imageNames = self.birds[0].imageNames
             let size = self.birds[0].images[0].size
@@ -1116,7 +1116,7 @@ class GameLevel {
     }
     
     func updateNumJelly() {
-        if gameScore >= boundTracker * NUM_POINTS_WHEN_BIRDS_APPEAR && jellyfishes.count < Parameters.totalNumberOfVillains {
+        if gameScore >= boundTracker * numberOfPointsWhenVillainsAppear && jellyfishes.count < Parameters.totalNumberOfVillains {
             
             let imageNames = self.jellyfishes[0].imageNames
             let size = self.jellyfishes[0].images[0].size
@@ -1137,7 +1137,7 @@ class GameLevel {
         }
         
         player.setZPosition(zPos: -1)
-        player.setZPositionHit(zPos: Z_POS_PLAYER)
+        player.setZPositionHit(zPos: zPosPlayer)
         var start = true
         startScene(scene: scene, start: &start, gameLevel: gameLevel)
     }
@@ -1154,7 +1154,7 @@ class GameLevel {
         }
         
         player.setZPosition(zPos: -1)
-        player.setZPositionHit(zPos: Z_POS_PLAYER)
+        player.setZPositionHit(zPos: zPosPlayer)
         
         playing = false
         defaults.set(playing, forKey: String(levelId) + PLAYING)
@@ -1168,9 +1168,9 @@ class GameLevel {
     func showRestartContinue() {
         
         player.setZPosition(zPos: -1)
-        player.setZPositionHit(zPos: Z_POS_PLAYER)
-        continueButton.images[0].zPosition = Z_POS_CONTINUE
-        restartButton.images[0].zPosition = Z_POS_RESTART
+        player.setZPositionHit(zPos: zPosPlayer)
+        continueButton.images[0].zPosition = zPosContinueButton
+        restartButton.images[0].zPosition = zPosStartButton
         
         endGame()
     }
@@ -1185,14 +1185,14 @@ class GameLevel {
     
     func startGame() {
         currentGameState = GameState.inGame
-        PAUSE_BUTTON.zPosition = Z_POS_PAUSE
-        PLAY_BUTTON.zPosition = -1
+        pauseButtonNode.zPosition = zPosPauseButton
+        playButtonNode.zPosition = -1
     }
     
     func pauseGame() {
         currentGameState = GameState.gamePaused
-        PAUSE_BUTTON.zPosition = -1
-        PLAY_BUTTON.zPosition = Z_POS_PAUSE
+        pauseButtonNode.zPosition = -1
+        playButtonNode.zPosition = zPosPauseButton
     }
     
     func endGame() {
@@ -1247,7 +1247,7 @@ class GameLevel {
                 let w2 = restartButton.images[0].size.width / 2
                 let h2 = restartButton.images[0].size.height / 2
                 if point.x > p1.x - w1 && point.x < p1.x + w1 && point.y > p1.y - h1 && point.y < p1.y + h1 {
-                    continueButton.imagesHit[0].zPosition = Z_POS_CONTINUE
+                    continueButton.imagesHit[0].zPosition = zPosContinueButton
                     continueButton.images[0].zPosition = -1
                     let defaults = UserDefaults()
                     playing = true
@@ -1271,7 +1271,7 @@ class GameLevel {
                 }
                 
                 if point.x > p2.x - w2 && point.x < p2.x + w2 && point.y > p2.y - h2 && point.y < p2.y + h2 {
-                    restartButton.imagesHit[0].zPosition = Z_POS_RESTART
+                    restartButton.imagesHit[0].zPosition = zPosStartButton
                     restartButton.images[0].zPosition = -1
                     let defaults = UserDefaults()
                     playing = false

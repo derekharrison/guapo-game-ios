@@ -28,23 +28,11 @@ class GameViewController: UIViewController {
         }
     }
 
-    override var shouldAutorotate: Bool {
-        return isTrue()
-    }
-
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         if UIDevice.current.userInterfaceIdiom == .phone {
             return .allButUpsideDown
         } else {
             return .all
         }
-    }
-
-    override var prefersStatusBarHidden: Bool {
-        return isTrue()
-    }
-    
-    private func isTrue() -> Bool {
-        return true;
     }
 }

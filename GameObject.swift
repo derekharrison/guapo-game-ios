@@ -130,8 +130,8 @@ class GameObject {
         self.playHitSound = true
     }
     
-    func setPlaySound(play_s : Bool) {
-        self.playSound = play_s
+    func setPlaySound(playSound : Bool) {
+        self.playSound = playSound
     }
     
     func addImage(image : String) {

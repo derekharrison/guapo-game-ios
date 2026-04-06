@@ -18,7 +18,7 @@ class GameLevel4: SKScene {
         base.updateOcean()
     }
     
-    override func didMove(to view: SKView) {
+    override func didMove(to _: SKView) {
         base.didMoveOcean(scene: self, id : LEVEL_ID_4)
 
         base.addBubbles(bubbles: base.player.bubbles, bubbleImage: BUBBLE_IMAGE_STR)

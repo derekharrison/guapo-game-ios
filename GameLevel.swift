@@ -716,7 +716,7 @@ class GameLevel {
     }
     
     func addSnacks(scene : SKScene) {
-        initSnack(bite : CHEESY_BITE_IMAGE, points: POINTS_CHEESY_BITES, numCheesyBites : NUM_CHEESY_BITES, snacks : &cheesyBites, scene : scene)
+        initSnack(bite : CHEESY_BITE_IMAGE, points: POINTS_CHEESY_BITES, numCheesyBites : Parameters.NUM_CHEESY_BITES, snacks : &cheesyBites, scene : scene)
         
         initSnack(bite : PAPRIKA_IMAGE, points: POINTS_PAPRIKA, numCheesyBites : NUM_PAPRIKAS, snacks : &paprikas, scene : scene)
         
@@ -1101,7 +1101,7 @@ class GameLevel {
     }
     
     func updateNumberOfBirds() {
-        if gameScore >= boundTracker * NUM_POINTS_WHEN_BIRDS_APPEAR && birds.count < TOT_NUM_BIRDS {
+        if gameScore >= boundTracker * NUM_POINTS_WHEN_BIRDS_APPEAR && birds.count < Parameters.TOT_NUM_BIRDS {
             
             let imageNames = self.birds[0].imageNames
             let size = self.birds[0].images[0].size
@@ -1116,7 +1116,7 @@ class GameLevel {
     }
     
     func updateNumJelly() {
-        if gameScore >= boundTracker * NUM_POINTS_WHEN_BIRDS_APPEAR && jellyfishes.count < TOT_NUM_BIRDS {
+        if gameScore >= boundTracker * NUM_POINTS_WHEN_BIRDS_APPEAR && jellyfishes.count < Parameters.TOT_NUM_BIRDS {
             
             let imageNames = self.jellyfishes[0].imageNames
             let size = self.jellyfishes[0].images[0].size

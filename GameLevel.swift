@@ -27,8 +27,8 @@ class GameLevel {
     var restartButton = GameObject()
     var flag = Flag()
     var widthBackground : CGFloat = 0
-    var blackBackgroundBottom = SKSpriteNode(imageNamed: BACKGROUND_OPAQUE_STR)
-    var blackBackgroundTop = SKSpriteNode(imageNamed: BACKGROUND_OPAQUE_STR)
+    var blackBackgroundBottom = SKSpriteNode(imageNamed: coverBackgroundPrefix)
+    var blackBackgroundTop = SKSpriteNode(imageNamed: coverBackgroundPrefix)
     var backgrounds = [SKSpriteNode]()
     
     var frito = Frito()
@@ -344,10 +344,10 @@ class GameLevel {
         fish6.setZPosition(zPos: minZPosFishes + 5)
         fish6.addImagesToScene(scene: scene)
         
-        blowFish.addImage(image: BLOW_FISH_IMAGE_1)
-        blowFish.addImage(image: BLOW_FISH_IMAGE_2)
-        blowFish.addImageHit(image: BLOW_FISH_IMAGE_3)
-        blowFish.addImageHit(image: BLOW_FISH_IMAGE_4)
+        blowFish.addImage(image: blowFishImage1)
+        blowFish.addImage(image: blowFishImage2)
+        blowFish.addImageHit(image: blowFishImage3)
+        blowFish.addImageHit(image: blowFishImage4)
         blowFish.setHeight(height : height)
         blowFish.setWidth(width : width)
         blowFish.setSize(size: CGSize(width : width * 3 / 15, height : height / 7.5))
@@ -704,9 +704,9 @@ class GameLevel {
         player.setPosition(position: CGPoint(x : scene.size.width / 5, y : scene.size.height / 2))
         player.setHeight(height : scene.size.height)
         player.setWidth(width : scene.size.width)
-        player.bubbles.addBubble(imageId: BUBBLE_IMAGE_STR)
-        player.bubbles.addBubble(imageId: BUBBLE_IMAGE_STR)
-        player.bubbles.addBubble(imageId: BUBBLE_IMAGE_STR)
+        player.bubbles.addBubble(imageId: bubbleImage)
+        player.bubbles.addBubble(imageId: bubbleImage)
+        player.bubbles.addBubble(imageId: bubbleImage)
         
         for x in player.bubbles.bubblez {
             x.removeFromParent()
@@ -716,15 +716,15 @@ class GameLevel {
     }
     
     func addSnacks(scene : SKScene) {
-        initSnack(bite : CHEESY_BITE_IMAGE, points: pointsForCheesyBite, numCheesyBites : Parameters.numberOfCheesyBites, snacks : &cheesyBites, scene : scene)
+        initSnack(bite : cheesyBiteImage, points: pointsForCheesyBite, numCheesyBites : Parameters.numberOfCheesyBites, snacks : &cheesyBites, scene : scene)
         
-        initSnack(bite : PAPRIKA_IMAGE, points: pointsForPaprika, numCheesyBites : totalNumberOfPaprika, snacks : &paprikas, scene : scene)
+        initSnack(bite : paprikaImage, points: pointsForPaprika, numCheesyBites : totalNumberOfPaprika, snacks : &paprikas, scene : scene)
         
-        initSnack(bite : BROCCOLI_IMAGE, points: pointsForBroccoli, numCheesyBites : totalNumberOfBroccoli, snacks : &broccolis, scene : scene)
+        initSnack(bite : broccoliImage, points: pointsForBroccoli, numCheesyBites : totalNumberOfBroccoli, snacks : &broccolis, scene : scene)
         
-        initSnack(bite : CUCUMBER_IMAGE, points: pointsForCucumber, numCheesyBites : totalNumberOfCucumbers, snacks : &cucumbers, scene : scene)
+        initSnack(bite : cucumberImage, points: pointsForCucumber, numCheesyBites : totalNumberOfCucumbers, snacks : &cucumbers, scene : scene)
         
-        initSnack(bite : BEGGIN_IMAGE, points: pointsBegginStrip, numCheesyBites : totalNumberOfBegginStrips, snacks : &begginStrips, scene : scene)
+        initSnack(bite : begginStripImage, points: pointsBegginStrip, numCheesyBites : totalNumberOfBegginStrips, snacks : &begginStrips, scene : scene)
         
         // Move beggin strips out of bounds
         for strip in begginStrips {

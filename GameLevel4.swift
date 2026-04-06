@@ -21,12 +21,12 @@ class GameLevel4: SKScene {
     override func didMove(to _: SKView) {
         base.didMoveOcean(scene: self, id : LEVEL_ID_4)
 
-        base.addBubbles(bubbles: base.player.bubbles, bubbleImage: BUBBLE_IMAGE_STR)
+        base.addBubbles(bubbles: base.player.bubbles, bubbleImage: bubbleImage)
 
         var images = [String]()
         images.append(fritoSnorkelImage)
         images.append(fritoSNorkelHitImage)
-        base.addBubbles(bubbles: base.frito.bubbles, bubbleImage: BUBBLE_IMAGE_STR)
+        base.addBubbles(bubbles: base.frito.bubbles, bubbleImage: bubbleImage)
         
         for x in base.frito.bubbles.bubblez {
             x.removeFromParent()
@@ -38,7 +38,7 @@ class GameLevel4: SKScene {
         var imagesBrownie = [String]()
         imagesBrownie.append(brownieSnorkelImage)
         imagesBrownie.append(brownieSnorkerHitImage)
-        base.addBubbles(bubbles: base.brownie.bubbles, bubbleImage: BUBBLE_IMAGE_STR)
+        base.addBubbles(bubbles: base.brownie.bubbles, bubbleImage: bubbleImage)
         
         for x in base.brownie.bubbles.bubblez {
             x.removeFromParent()
@@ -52,7 +52,7 @@ class GameLevel4: SKScene {
         imagesMisty.append(mistySnorkelHitImage)
         imagesMisty.append(mistySnorkelRotatedImage)
         imagesMisty.append(mistySnorkelRotatedHitImage)
-        base.addBubbles(bubbles: base.misty.bubbles, bubbleImage: BUBBLE_IMAGE_STR)
+        base.addBubbles(bubbles: base.misty.bubbles, bubbleImage: bubbleImage)
         
         for x in base.misty.bubbles.bubblez {
             x.removeFromParent()
@@ -61,7 +61,7 @@ class GameLevel4: SKScene {
         
         base.initImagesMisty(images: imagesMisty, height: self.size.height, width: self.size.width)
         
-        base.initBackground(scene: self, numBackgrounds: NUM_BACKGROUNDS_LEVEL_4, string1: BACKGROUND_STR_LEVEL_4)
+        base.initBackground(scene: self, numBackgrounds: numberOfBackgroundImagesOceanLevel, string1: backgroundOceanLevelPrefix)
         
         var jellyImages = [String]()
         

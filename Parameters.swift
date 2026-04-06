@@ -144,31 +144,31 @@ let fishImage5b = "fish12b_bitmap_cropped"
 let fishImage6a = "yellowfish_facingright_raw"
 let fishImage6b = "yellowfish_facingright_raw2"
 
-let BLOW_FISH_IMAGE_1 = "fish10_bitmap_cropped"
-let BLOW_FISH_IMAGE_2 = "fish10b_bitmap_cropped"
-let BLOW_FISH_IMAGE_3 = "fish11_bitmap_cropped"
-let BLOW_FISH_IMAGE_4 = "fish11b_bitmap_cropped"
+let blowFishImage1 = "fish10_bitmap_cropped"
+let blowFishImage2 = "fish10b_bitmap_cropped"
+let blowFishImage3 = "fish11_bitmap_cropped"
+let blowFishImage4 = "fish11b_bitmap_cropped"
 
-let CHEESY_BITE_IMAGE = "cheesy_bite_resized"
-let PAPRIKA_IMAGE = "paprika_bitmap_cropped"
-let BROCCOLI_IMAGE = "broccoli_bitmap_cropped"
-let CUCUMBER_IMAGE = "cucumber_bitmap_cropped"
-let BEGGIN_IMAGE = "beggin_strip_cropped"
+let cheesyBiteImage = "cheesy_bite_resized"
+let paprikaImage = "paprika_bitmap_cropped"
+let broccoliImage = "broccoli_bitmap_cropped"
+let cucumberImage = "cucumber_bitmap_cropped"
+let begginStripImage = "beggin_strip_cropped"
 
-let BACKGROUND_STR_LEVEL_1 = "background_guapo_game_nr"
-let BACKGROUND_STR_LEVEL_2 = "beach_background_slide"
-let BACKGROUND_STR_LEVEL_3 = "background_guapo_game_level3_"
-let BACKGROUND_STR_LEVEL_4 = "background_guapogame_underwaterlevel_"
-let BACKGROUND_STR_LEVEL_5 = "background_tuttigame_nr"
-let BACKGROUND_OPAQUE_STR = "black_background"
+let backgroundArubaLevelPrefix = "background_guapo_game_nr"
+let backgroundBeachLevelPrefix = "beach_background_slide"
+let backgroundTripLevelPrefix = "background_guapo_game_level3_"
+let backgroundOceanLevelPrefix = "background_guapogame_underwaterlevel_"
+let backgroundUtrechtLevelPrefix = "background_tuttigame_nr"
+let coverBackgroundPrefix = "black_background"
 
-let NUM_BACKGROUNDS_LEVEL_1 = 10
-let NUM_BACKGROUNDS_LEVEL_2 = 14
-let NUM_BACKGROUNDS_LEVEL_3 = 11
-let NUM_BACKGROUNDS_LEVEL_4 = 5
-let NUM_BACKGROUNDS_LEVEL_5 = 18
+let numberOfBackgroundImagesArubaLevel = 10
+let numberOfBackgroundImagesBeachLevel = 14
+let numberOfBackgroundImagesTripLevel = 11
+let numberOfBackgroundImagesOceanLevel = 5
+let numberOfBackgroundImagesUtrechtLevel = 18
 
-let BUBBLE_IMAGE_STR = "bubble_bitmap_cropped"
+let bubbleImage = "bubble_bitmap_cropped"
 
 let HIGH_SCORE_ID_1 = "HighScoreLevel1Saved"
 let HIGH_SCORE_ID_2 = "HighScoreLevel2Saved"

@@ -11,7 +11,7 @@ import SpriteKit
 class GameLevel1 : SKScene {
     
     var base = GameLevel()
-    var numBackgrounds: Int = NUM_BACKGROUNDS_LEVEL_1
+    var numBackgrounds: Int = numberOfBackgroundImagesArubaLevel
     
     override func update(_ _: TimeInterval) {
         base.update()
@@ -25,7 +25,7 @@ class GameLevel1 : SKScene {
         images.append(fritoHitImage)
         
         base.initImagesFrito(images: images, height: self.size.height, width: self.size.width)
-        base.initBackground(scene: self, numBackgrounds: numBackgrounds, string1: BACKGROUND_STR_LEVEL_1)
+        base.initBackground(scene: self, numBackgrounds: numBackgrounds, string1: backgroundArubaLevelPrefix)
         
         var imagesBrownie = [String]()
         imagesBrownie.append(brownieImage)

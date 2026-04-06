@@ -25,7 +25,7 @@ class GameLevel3: SKScene {
         images.append(fritoHitImage)
         
         base.initImagesFrito(images: images, height: self.size.height, width: self.size.width)
-        base.initBackground(scene: self, numBackgrounds: NUM_BACKGROUNDS_LEVEL_3, string1: BACKGROUND_STR_LEVEL_3)
+        base.initBackground(scene: self, numBackgrounds: numberOfBackgroundImagesTripLevel, string1: backgroundTripLevelPrefix)
         
         var imagesBrownie = [String]()
         imagesBrownie.append(brownieImage)

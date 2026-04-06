@@ -15,8 +15,8 @@ var muted = false
 var boundTracker = 1
 
 class Parameters {
-    static let TOT_NUM_BIRDS = 12
-    static let NUM_CHEESY_BITES = 5
+    static let totalNumberOfVillains = 12
+    static let numberOfCheesyBites = 5
 }
 
 let NUM_CUCUMBERS = 1
@@ -46,19 +46,19 @@ let SUN_POPUP_SPR = SKSpriteNode(imageNamed: "sun_popup_bitmap_cropped")
 let SCORE_LABEL = SKLabelNode(fontNamed: "Courier-Bold")
 let BACKGROUND_OVERLAP = 10
 
-let Z_POS_PLAYER : CGFloat = CGFloat(Parameters.TOT_NUM_BIRDS) * 5
-let Z_POS_SNACKS : CGFloat = CGFloat(Parameters.TOT_NUM_BIRDS) * 2
-let Z_POS_CHARS : CGFloat = CGFloat(Parameters.TOT_NUM_BIRDS) * 1
-let Z_POS_PAUSE : CGFloat = CGFloat(Parameters.TOT_NUM_BIRDS) * 5 + 1
-let Z_POS_CONTINUE : CGFloat = CGFloat(Parameters.TOT_NUM_BIRDS) * 5 + 2
-let Z_POS_RESTART : CGFloat = CGFloat(Parameters.TOT_NUM_BIRDS) * 5 + 2
-let Z_POS_LIVES : CGFloat = CGFloat(Parameters.TOT_NUM_BIRDS) * 5 + 2
-let Z_POS_FLAG : CGFloat = CGFloat(Parameters.TOT_NUM_BIRDS) * 5 - 1
-let Z_POS_SUN : CGFloat = CGFloat(Parameters.TOT_NUM_BIRDS) * 5 - 1
-let Z_POS_BLACK : CGFloat = CGFloat(Parameters.TOT_NUM_BIRDS) * 10
+let Z_POS_PLAYER : CGFloat = CGFloat(Parameters.totalNumberOfVillains) * 5
+let Z_POS_SNACKS : CGFloat = CGFloat(Parameters.totalNumberOfVillains) * 2
+let Z_POS_CHARS : CGFloat = CGFloat(Parameters.totalNumberOfVillains) * 1
+let Z_POS_PAUSE : CGFloat = CGFloat(Parameters.totalNumberOfVillains) * 5 + 1
+let Z_POS_CONTINUE : CGFloat = CGFloat(Parameters.totalNumberOfVillains) * 5 + 2
+let Z_POS_RESTART : CGFloat = CGFloat(Parameters.totalNumberOfVillains) * 5 + 2
+let Z_POS_LIVES : CGFloat = CGFloat(Parameters.totalNumberOfVillains) * 5 + 2
+let Z_POS_FLAG : CGFloat = CGFloat(Parameters.totalNumberOfVillains) * 5 - 1
+let Z_POS_SUN : CGFloat = CGFloat(Parameters.totalNumberOfVillains) * 5 - 1
+let Z_POS_BLACK : CGFloat = CGFloat(Parameters.totalNumberOfVillains) * 10
 
-let MIN_Z_POS_JELLY_FISH = CGFloat(Parameters.TOT_NUM_BIRDS) * 3
-let MIN_Z_POS_FISHES = CGFloat(Parameters.TOT_NUM_BIRDS) * 1
+let MIN_Z_POS_JELLY_FISH = CGFloat(Parameters.totalNumberOfVillains) * 3
+let MIN_Z_POS_FISHES = CGFloat(Parameters.totalNumberOfVillains) * 1
 let MIN_Z_POS_BIRDS = MIN_Z_POS_JELLY_FISH
 
 let BULLET_SOUND = SKAction.playSoundFileNamed("sound_effect.wav", waitForCompletion: true)

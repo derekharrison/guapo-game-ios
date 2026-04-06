@@ -575,7 +575,7 @@ class GameLevel {
             let size = CGSize(width: scene.size.width / 14, height: scene.size.height / 14)
             let biteImage = bite
             
-            let cheesyBite = Snack(bite: biteImage, points: POINTS_CHEESY_BITES, size: size, zPos: Z_POS_SNACKS)
+            let cheesyBite = Snack(bite: biteImage, points: pointsForCheesyBite, size: size, zPos: Z_POS_SNACKS)
             
             cheesyBite.addImagesToScene(scene: scene)
 
@@ -716,15 +716,15 @@ class GameLevel {
     }
     
     func addSnacks(scene : SKScene) {
-        initSnack(bite : CHEESY_BITE_IMAGE, points: POINTS_CHEESY_BITES, numCheesyBites : Parameters.numberOfCheesyBites, snacks : &cheesyBites, scene : scene)
+        initSnack(bite : CHEESY_BITE_IMAGE, points: pointsForCheesyBite, numCheesyBites : Parameters.numberOfCheesyBites, snacks : &cheesyBites, scene : scene)
         
-        initSnack(bite : PAPRIKA_IMAGE, points: POINTS_PAPRIKA, numCheesyBites : NUM_PAPRIKAS, snacks : &paprikas, scene : scene)
+        initSnack(bite : PAPRIKA_IMAGE, points: pointsForPaprika, numCheesyBites : totalNumberOfPaprika, snacks : &paprikas, scene : scene)
         
-        initSnack(bite : BROCCOLI_IMAGE, points: POINTS_BROCCOLI, numCheesyBites : NUM_BROCCOLI, snacks : &broccolis, scene : scene)
+        initSnack(bite : BROCCOLI_IMAGE, points: pointsForBroccoli, numCheesyBites : totalNumberOfBroccoli, snacks : &broccolis, scene : scene)
         
-        initSnack(bite : CUCUMBER_IMAGE, points: POINTS_CUCUMBER, numCheesyBites : NUM_CUCUMBERS, snacks : &cucumbers, scene : scene)
+        initSnack(bite : CUCUMBER_IMAGE, points: pointsForCucumber, numCheesyBites : totalNumberOfCucumbers, snacks : &cucumbers, scene : scene)
         
-        initSnack(bite : BEGGIN_IMAGE, points: POINTS_BEGGIN_STRIP, numCheesyBites : NUM_BEGGIN_STRIPS, snacks : &begginStrips, scene : scene)
+        initSnack(bite : BEGGIN_IMAGE, points: pointsBegginStrip, numCheesyBites : totalNumberOfBegginStrips, snacks : &begginStrips, scene : scene)
         
         // Move beggin strips out of bounds
         for strip in begginStrips {

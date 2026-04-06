@@ -19,15 +19,17 @@ class Parameters {
     static let numberOfCheesyBites = 5
 }
 
-let NUM_CUCUMBERS = 1
-let NUM_PAPRIKAS = 1
-let NUM_BROCCOLI = 1
-let NUM_BEGGIN_STRIPS = 1
-let POINTS_CHEESY_BITES = 1
-let POINTS_CUCUMBER = 1
-let POINTS_PAPRIKA = 1
-let POINTS_BROCCOLI = 3
-let POINTS_BEGGIN_STRIP = 5
+let totalNumberOfCucumbers = 1
+let totalNumberOfPaprika = 1
+let totalNumberOfBroccoli = 1
+let totalNumberOfBegginStrips = 1
+
+let pointsForCheesyBite = 1
+let pointsForCucumber = 1
+let pointsForPaprika = 1
+let pointsForBroccoli = 3
+let pointsBegginStrip = 5
+
 let NUM_FRAMES_BIRD = 8
 let NUM_FRAMES_JELLY = 15
 let NUM_POINTS_WHEN_BIRDS_APPEAR = 35

@@ -21,14 +21,14 @@ func saveSnacks(snacks : [Snack], prefix : String) {
         saveSnack(object: snack, prefix: prefix + String(counter))
         counter += 1
     }
-    defaults.set(snacks.count, forKey: prefix + "num_snacks")
+    defaults.set(snacks.count, forKey: prefix + "numSnacks")
     
 }
 
 func getSnacks(snacks : inout [Snack], prefix : String) {
     let defaults = UserDefaults()
-    let num_snacks = defaults.integer(forKey: prefix + "num_snacks")
-    for counter in 0..<num_snacks {
+    let numSnacks = defaults.integer(forKey: prefix + "numSnacks")
+    for counter in 0..<numSnacks {
         getSnack(object: &snacks[counter], prefix: prefix + String(counter))
     }
 }
@@ -267,12 +267,12 @@ func startScene(scene : SKScene, start : inout Bool, gameLevel : SKScene) {
 }
 
 func playSound(scene : SKScene, sound : [SKAction]) {
-    let bubble_sound = SKSpriteNode()
-    bubble_sound.removeFromParent()
-    scene.addChild(bubble_sound)
+    let bubbleSound = SKSpriteNode()
+    bubbleSound.removeFromParent()
+    scene.addChild(bubbleSound)
 
-    let bubble_sound_biteSequence = SKAction.sequence(sound)
-    bubble_sound.run(bubble_sound_biteSequence)
+    let bubbleSoundBiteSequence = SKAction.sequence(sound)
+    bubbleSound.run(bubbleSoundBiteSequence)
 }
 
 func getRandomNumber() -> CGFloat {

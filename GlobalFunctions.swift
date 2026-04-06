@@ -55,7 +55,7 @@ func getSnack(object : inout Snack, prefix : String) {
     
     object.bubbles.bubcounter = defaults.integer(forKey: prefix + "bubbles.bubcounter")
     object.bubbles.isMuted = defaults.bool(forKey: prefix + "bubbles.is_muted")
-    object.points_snack = defaults.integer(forKey: prefix + "points_snack")
+    object.pointsForSnack = defaults.integer(forKey: prefix + "points_snack")
 }
 
 func saveMisty(object : Misty, levelId : String) {

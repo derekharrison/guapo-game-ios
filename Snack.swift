@@ -9,18 +9,18 @@ import Foundation
 import SpriteKit
 
 class Snack : GameObject {
-    var points_snack : Int
+    var pointsForSnack : Int
     
     init(bite : String, points : Int, size : CGSize, zPos : CGFloat) {
-        self.points_snack = points
+        self.pointsForSnack = points
         super.init()
         self.addImage(image: bite)
         
         let factor = 1.0 - (self.images[0].size.height) / (self.height / 2)
-        let pos_x = getRandomNumber() * self.width * 2
-        let pos_y = getRandomNumber() * self.height / 2 * factor + self.height / 4 + 1/2 * (1 - factor) * self.height / 2
+        let posX = getRandomNumber() * self.width * 2
+        let posY = getRandomNumber() * self.height / 2 * factor + self.height / 4 + 1/2 * (1 - factor) * self.height / 2
         
-        self.setPosition(position: CGPoint(x: pos_x, y: pos_y))
+        self.setPosition(position: CGPoint(x: posX, y: posY))
         self.setZPosition(zPos: zPos)
         self.setSize(size: size)
     }

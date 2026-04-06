@@ -585,7 +585,7 @@ class GameLevel {
             
             cheesyBite.setPosition(position: CGPoint(x: posX, y: posY))
             cheesyBite.setVelocity(velX: -backgroundSpeed, velY: 0)
-            cheesyBite.points_snack = points
+            cheesyBite.pointsForSnack = points
             snacks.append(cheesyBite)
         }
     }
@@ -744,7 +744,7 @@ class GameLevel {
                     playSound(scene: scene, sound: [tuttiEatingKnaagstokSound])
                 }
                 
-                gameScore += snack.points_snack
+                gameScore += snack.pointsForSnack
             }
         }
     }

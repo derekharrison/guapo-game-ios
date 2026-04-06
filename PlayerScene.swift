@@ -162,9 +162,9 @@ class PlayerScene: SKScene {
         
         let touchedButtonX = pointOfTouch.x > buttonNotPressed.position.x - buttonNotPressed.size.width / 2 && pointOfTouch.x < buttonNotPressed.position.x + buttonNotPressed.size.width / 2
         
-        let touched_button_y = pointOfTouch.y > buttonNotPressed.position.y - buttonNotPressed.size.height / 2 && pointOfTouch.y < buttonNotPressed.position.y + buttonNotPressed.size.height / 2
+        let touchedButtonY = pointOfTouch.y > buttonNotPressed.position.y - buttonNotPressed.size.height / 2 && pointOfTouch.y < buttonNotPressed.position.y + buttonNotPressed.size.height / 2
         
-        if touchedButtonX && touched_button_y {
+        if touchedButtonX && touchedButtonY {
             self.guapoButtonNotPressed.zPosition = 2
             self.guapoButtonPressed.zPosition = -1
             self.tuttiButtonNotPressed.zPosition = 2

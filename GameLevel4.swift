@@ -65,9 +65,9 @@ class GameLevel4: SKScene {
         
         var jellyImages = [String]()
         
-        jellyImages.append(JELLY_IMAGE_1)
-        jellyImages.append(JELLY_IMAGE_2)
-        jellyImages.append(JELLY_IMAGE_3)
+        jellyImages.append(jellyFishImage1)
+        jellyImages.append(jellyFishImage2)
+        jellyImages.append(jellyFishImage3)
         
         base.addJellyfish(images : jellyImages)
         

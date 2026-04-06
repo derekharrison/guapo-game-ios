@@ -290,8 +290,8 @@ class GameLevel {
     }
     
     func initFish(width : CGFloat, height : CGFloat) {
-        fish1.addImage(image: FISH_IMAGE_1)
-        fish1.addImage(image: FISH_IMAGE_2)
+        fish1.addImage(image: fishImage1a)
+        fish1.addImage(image: fishImage1b)
         fish1.setHeight(height : height)
         fish1.setWidth(width : width)
         fish1.setSize(size: CGSize(width : width / 7.5, height : height / 15))
@@ -299,8 +299,8 @@ class GameLevel {
         fish1.setZPosition(zPos: minZPosFishes)
         fish1.addImagesToScene(scene: scene)
         
-        fish2.addImage(image: FISH_IMAGE_2A)
-        fish2.addImage(image: FISH_IMAGE_2B)
+        fish2.addImage(image: fishImage2a)
+        fish2.addImage(image: fishImage2b)
         fish2.setHeight(height : height)
         fish2.setWidth(width : width)
         fish2.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
@@ -308,8 +308,8 @@ class GameLevel {
         fish2.setZPosition(zPos: minZPosFishes + 1)
         fish2.addImagesToScene(scene: scene)
         
-        fish3.addImage(image: FISH_IMAGE_3A)
-        fish3.addImage(image: FISH_IMAGE_3B)
+        fish3.addImage(image: fishImage3a)
+        fish3.addImage(image: fishImage3b)
         fish3.setHeight(height : height)
         fish3.setWidth(width : width)
         fish3.setSize(size: CGSize(width : width / 7.5, height : height / 15))
@@ -317,8 +317,8 @@ class GameLevel {
         fish3.setZPosition(zPos: minZPosFishes + 2)
         fish3.addImagesToScene(scene: scene)
         
-        fish4.addImage(image: FISH_IMAGE_4A)
-        fish4.addImage(image: FISH_IMAGE_4B)
+        fish4.addImage(image: fishImage4a)
+        fish4.addImage(image: fishImage4b)
         fish4.setHeight(height : height)
         fish4.setWidth(width : width)
         fish4.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
@@ -326,8 +326,8 @@ class GameLevel {
         fish4.setZPosition(zPos: minZPosFishes + 3)
         fish4.addImagesToScene(scene: scene)
         
-        fish5.addImage(image: FISH_IMAGE_5A)
-        fish5.addImage(image: FISH_IMAGE_5B)
+        fish5.addImage(image: fishImage5a)
+        fish5.addImage(image: fishImage5b)
         fish5.setHeight(height : height)
         fish5.setWidth(width : width)
         fish5.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
@@ -335,8 +335,8 @@ class GameLevel {
         fish5.setZPosition(zPos: minZPosFishes + 4)
         fish5.addImagesToScene(scene: scene)
         
-        fish6.addImage(image: FISH_IMAGE_6A)
-        fish6.addImage(image: FISH_IMAGE_6B)
+        fish6.addImage(image: fishImage6a)
+        fish6.addImage(image: fishImage6b)
         fish6.setHeight(height : height)
         fish6.setWidth(width : width)
         fish6.setSize(size: CGSize(width : width / 7.5, height : height / 15))

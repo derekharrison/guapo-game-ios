@@ -41,9 +41,9 @@ class GameLevel5 : SKScene {
         
         var birdImages = [String]()
         
-        birdImages.append(BIRD_IMAGE_WARA_1)
-        birdImages.append(BIRD_IMAGE_WARA_2)
-        birdImages.append(BIRD_IMAGE_WARA_3)
+        birdImages.append(waraWaraImage1)
+        birdImages.append(waraWaraImage2)
+        birdImages.append(waraWaraImage3)
         
         base.addBirds(images: birdImages)
         

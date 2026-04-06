@@ -15,8 +15,8 @@ class PlayerScene: SKScene {
     let startMenuNotPressed = SKSpriteNode(imageNamed: Parameters.startMenuButtonNotPressed)
     let startMenuPressed = SKSpriteNode(imageNamed: Parameters.startMenuButtonPressed)
     
-    let guapoImage = SKSpriteNode(imageNamed: GUAPO_IMAGE_PLAYER)
-    let tuttiImage = SKSpriteNode(imageNamed: TUTTI_IMAGE_PLAYER)
+    let guapoImage = SKSpriteNode(imageNamed: guapoPlayerImage)
+    let tuttiImage = SKSpriteNode(imageNamed: tuttiPlayerImage)
 
     let guapoButtonNotPressed = SKSpriteNode(imageNamed: Parameters.guapoButtonNotPressed)
     let guapoButtonPressed = SKSpriteNode(imageNamed: Parameters.guapoButtonPressed)

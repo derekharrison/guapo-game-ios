@@ -63,9 +63,9 @@ class GameLevel {
     var ro = CGPoint(x: 0, y: 0)
     
     var playMisty = Int.random(in: 10..<40) + 20
-    var flagFrequency = FLAG_FREQUENCY
+    var flagFrequency = numberOfPointsBetweenCheckpoints
     var flagNum = 1
-    var numLives = NUM_LIVES
+    var numLives = numberOfLives
     var counter = 1
     var toSwitch = false
     
@@ -190,7 +190,7 @@ class GameLevel {
         let defaults = UserDefaults()
         
         for x in backgrounds {
-            defaults.set(x.position.x, forKey: String(levelId) + BACKGROUNDS_STR + String(counter))
+            defaults.set(x.position.x, forKey: String(levelId) + backgroundsKey + String(counter))
             counter += 1
         }
     }
@@ -201,28 +201,28 @@ class GameLevel {
         let defaults = UserDefaults()
         
         for x in backgrounds {
-            x.position.x = CGFloat(defaults.float(forKey: String(levelId) + BACKGROUNDS_STR + String(counter)))
+            x.position.x = CGFloat(defaults.float(forKey: String(levelId) + backgroundsKey + String(counter)))
             counter += 1
         }
     }
     
     func saveState() {
-        saveObject(object: player, prefix: String(levelId) + PLAYER_STR)
-        saveObject(object : brownie, prefix : String(levelId) + BROWNIE_STR)
-        saveObject(object : frito, prefix : String(levelId) + FRITO_STR)
+        saveObject(object: player, prefix: String(levelId) + playerKey)
+        saveObject(object : brownie, prefix : String(levelId) + brownieKey)
+        saveObject(object : frito, prefix : String(levelId) + fritoKey)
         saveMisty(object : misty, levelId : String(levelId))
-        saveSnacks(snacks: cheesyBites, prefix: String(levelId) + CHEESY_STR)
-        saveSnacks(snacks: paprikas, prefix: String(levelId) + PAPRIKA_STR)
-        saveSnacks(snacks: cucumbers, prefix: String(levelId) + CUCUMBER_STR)
-        saveSnacks(snacks: begginStrips, prefix: String(levelId) + BEGGIN_STR)
-        saveSnacks(snacks: broccolis, prefix: String(levelId) + BROCCOLI_STR)
-        saveObject(object: fish1, prefix: String(levelId) + FISH_STR_1)
-        saveObject(object: fish2, prefix: String(levelId) + FISH_STR_2)
-        saveObject(object: fish3, prefix: String(levelId) + FISH_STR_3)
-        saveObject(object: fish4, prefix: String(levelId) + FISH_STR_4)
-        saveObject(object: fish5, prefix: String(levelId) + FISH_STR_5)
-        saveObject(object: fish6, prefix: String(levelId) + FISH_STR_6)
-        saveObject(object: blowFish, prefix: String(levelId) + BLOWFISH_STR)
+        saveSnacks(snacks: cheesyBites, prefix: String(levelId) + cheesyBiteKey)
+        saveSnacks(snacks: paprikas, prefix: String(levelId) + paprikaKey)
+        saveSnacks(snacks: cucumbers, prefix: String(levelId) + cucumberKey)
+        saveSnacks(snacks: begginStrips, prefix: String(levelId) + begginStripKey)
+        saveSnacks(snacks: broccolis, prefix: String(levelId) + broccoliKey)
+        saveObject(object: fish1, prefix: String(levelId) + fishKey1)
+        saveObject(object: fish2, prefix: String(levelId) + fishKey2)
+        saveObject(object: fish3, prefix: String(levelId) + fishKey3)
+        saveObject(object: fish4, prefix: String(levelId) + fishKey4)
+        saveObject(object: fish5, prefix: String(levelId) + fishKey5)
+        saveObject(object: fish6, prefix: String(levelId) + fishKey6)
+        saveObject(object: blowFish, prefix: String(levelId) + blowFishKey)
         saveBackgrounds()
         saveOther()
     }
@@ -232,17 +232,17 @@ class GameLevel {
         getBrownie(object: &brownie, levelId: String(levelId))
         getFrito(object : &frito, levelId : String(levelId))
         getMisty(object: &misty, levelId: String(levelId))
-        getSnacks(snacks: &cheesyBites, prefix: String(levelId) + CHEESY_STR)
-        getSnacks(snacks: &paprikas, prefix: String(levelId) + PAPRIKA_STR)
-        getSnacks(snacks: &cucumbers, prefix: String(levelId) + CUCUMBER_STR)
-        getSnacks(snacks: &begginStrips, prefix: String(levelId) + BEGGIN_STR)
-        getSnacks(snacks: &broccolis, prefix: String(levelId) + BROCCOLI_STR)
-        getFish(object: &fish1, levelId: String(levelId), prefix : FISH_STR_1)
-        getFish(object: &fish2, levelId: String(levelId), prefix : FISH_STR_2)
-        getFish(object: &fish3, levelId: String(levelId), prefix : FISH_STR_3)
-        getFish(object: &fish4, levelId: String(levelId), prefix : FISH_STR_4)
-        getFish(object: &fish5, levelId: String(levelId), prefix : FISH_STR_5)
-        getFish(object: &fish6, levelId: String(levelId), prefix : FISH_STR_6)
+        getSnacks(snacks: &cheesyBites, prefix: String(levelId) + cheesyBiteKey)
+        getSnacks(snacks: &paprikas, prefix: String(levelId) + paprikaKey)
+        getSnacks(snacks: &cucumbers, prefix: String(levelId) + cucumberKey)
+        getSnacks(snacks: &begginStrips, prefix: String(levelId) + begginStripKey)
+        getSnacks(snacks: &broccolis, prefix: String(levelId) + broccoliKey)
+        getFish(object: &fish1, levelId: String(levelId), prefix : fishKey1)
+        getFish(object: &fish2, levelId: String(levelId), prefix : fishKey2)
+        getFish(object: &fish3, levelId: String(levelId), prefix : fishKey3)
+        getFish(object: &fish4, levelId: String(levelId), prefix : fishKey4)
+        getFish(object: &fish5, levelId: String(levelId), prefix : fishKey5)
+        getFish(object: &fish6, levelId: String(levelId), prefix : fishKey6)
         getBlowfish(object: &blowFish, levelId: String(levelId))
         getBackgrounds()
         getOther()
@@ -250,18 +250,18 @@ class GameLevel {
     
     func saveOther() {
         let defaults = UserDefaults()
-        defaults.set(gameScore, forKey: String(levelId) + SCORE_ID)
-        defaults.set(playMisty, forKey: String(levelId) + MISTY_GUARD)
-        defaults.set(flagNum, forKey: String(levelId) + FLAG_NUM)
-        defaults.set(numLives, forKey: String(levelId) + NUM_LIVES_STR)
+        defaults.set(gameScore, forKey: String(levelId) + scoreKey)
+        defaults.set(playMisty, forKey: String(levelId) + mistyGuardKey)
+        defaults.set(flagNum, forKey: String(levelId) + flagNumKey)
+        defaults.set(numLives, forKey: String(levelId) + numberOfLivesKey)
     }
     
     func getOther() {
         let defaults = UserDefaults()
-        gameScore = defaults.integer(forKey: String(levelId) + SCORE_ID)
-        playMisty = defaults.integer(forKey: String(levelId) + MISTY_GUARD)
-        flagNum = defaults.integer(forKey: String(levelId) + FLAG_NUM)
-        numLives = defaults.integer(forKey: String(levelId) + NUM_LIVES_STR)
+        gameScore = defaults.integer(forKey: String(levelId) + scoreKey)
+        playMisty = defaults.integer(forKey: String(levelId) + mistyGuardKey)
+        flagNum = defaults.integer(forKey: String(levelId) + flagNumKey)
+        numLives = defaults.integer(forKey: String(levelId) + numberOfLivesKey)
         if numLives > 0 {
            initLives()
         }
@@ -413,29 +413,29 @@ class GameLevel {
         
         addSnacks(scene : scene)
         
-        continueButton.addImage(image: CONTINUE_BUTTON_NOT_PRESSED)
-        continueButton.addImageHit(image: CONTINUE_BUTTON_PRESSED)
+        continueButton.addImage(image: continueButtonNotPressed)
+        continueButton.addImageHit(image: continueButtonPressed)
         continueButton.setPosition(position: CGPoint(x: scene.size.width / 2 - continueButton.getSize().width / 2, y: scene.size.height / 2))
         continueButton.setZPosition(zPos: -1)
         continueButton.setSize(size: CGSize(width: scene.size.width / 5, height: scene.size.height / 10))
         continueButton.addImagesToScene(scene: scene)
         
-        restartButton.addImage(image: RESTART_BUTTON_NOT_PRESSED)
-        restartButton.addImageHit(image: RESTART_BUTTON_PRESSED)
+        restartButton.addImage(image: restartButtonNotPressed)
+        restartButton.addImageHit(image: restartButtonPressed)
         restartButton.setPosition(position: CGPoint(x: scene.size.width / 2 + restartButton.getSize().width / 2, y: scene.size.height / 2))
         restartButton.setZPosition(zPos: -1)
         restartButton.setSize(size: CGSize(width: scene.size.width / 5, height: scene.size.height / 10))
         restartButton.addImagesToScene(scene: scene)
         
         if levelId != levelId5 {
-            flag.addImage(image: FLAG_ARUBA_STR)
+            flag.addImage(image: arubanFlag)
             flag.setZPosition(zPos: -1)
             flag.setSize(size: CGSize(width: scene.size.width / 5, height: scene.size.height / 5))
             flag.setPosition(position: CGPoint(x: scene.size.width - flag.getSize().width, y: scene.size.height * 0.75 - flag.getSize().height))
             flag.addImagesToScene(scene: scene)
         }
         else {
-            flag.addImage(image: FLAG_NETHERLANDS_STR)
+            flag.addImage(image: dutchFlag)
             flag.setZPosition(zPos: -1)
             flag.setSize(size: CGSize(width: scene.size.width / 5, height: scene.size.height / 5))
             flag.setPosition(position: CGPoint(x: scene.size.width - flag.getSize().width, y: scene.size.height * 0.75 - flag.getSize().height))
@@ -491,7 +491,7 @@ class GameLevel {
             highScore = defaults.integer(forKey: highScoreId5)
         }
 
-        isAlreadyUnlocked = highScore >= LEVEL_UNLOCK_GUARD
+        isAlreadyUnlocked = highScore >= numberOfPointsRequiredToUnlockLevel
         muted = defaults.bool(forKey: String(levelId) + gameIsMuted)
         playing = defaults.bool(forKey: String(levelId) + gameIsPlaying)
         
@@ -509,7 +509,7 @@ class GameLevel {
     
     func initLives() {
         for j in 0..<numLives {
-            let lifeImage = SKSpriteNode(imageNamed: HEART_IMAGE_STR)
+            let lifeImage = SKSpriteNode(imageNamed: heartKey)
             lifeImage.setScale(1)
             lifeImage.size = CGSize(width: scene.size.width / 28, height: scene.size.height / 28)
             let sizeLoc = CGSize(width: scene.size.width / 28, height: scene.size.height / 28)
@@ -916,11 +916,11 @@ class GameLevel {
                     numLives = numLives - 1
                 }
                 
-                defaults.set(numLives, forKey: String(levelId) + NUM_LIVES_STR)
+                defaults.set(numLives, forKey: String(levelId) + numberOfLivesKey)
                 
                 if(numLives < 0) {
                     numLives = 0
-                    defaults.set(numLives, forKey: String(levelId) + NUM_LIVES_STR)
+                    defaults.set(numLives, forKey: String(levelId) + numberOfLivesKey)
                     gameOver()
                 }
                 else if(numLives >= 0) {
@@ -997,11 +997,11 @@ class GameLevel {
                     numLives = numLives - 1
                 }
                 
-                defaults.set(numLives, forKey: String(levelId) + NUM_LIVES_STR)
+                defaults.set(numLives, forKey: String(levelId) + numberOfLivesKey)
                 
                 if(numLives < 0) {
                     numLives = 0
-                    defaults.set(numLives, forKey: String(levelId) + NUM_LIVES_STR)
+                    defaults.set(numLives, forKey: String(levelId) + numberOfLivesKey)
                     gameOver()
                 }
                 else if(numLives >= 0) {
@@ -1023,7 +1023,7 @@ class GameLevel {
     }
     
     func sunPopup() {
-        if gameScore >=  LEVEL_UNLOCK_GUARD && !isAlreadyUnlocked && sunPopupFrameCounter <= numberOfFramesSunPopup {
+        if gameScore >=  numberOfPointsRequiredToUnlockLevel && !isAlreadyUnlocked && sunPopupFrameCounter <= numberOfFramesSunPopup {
             sunPopupFrameCounter += 1
             if muted == false && playSunPopup {
                 playSound(scene: scene, sound: [sunPopupSound])

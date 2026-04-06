@@ -30,10 +30,10 @@ class MainMenuScene: SKScene {
     let playerMenuButtonNotPressed = SKSpriteNode(imageNamed: Parameters.playerMenuButtonNotPressed)
     let playerMenuButtonPressed = SKSpriteNode(imageNamed: Parameters.playerMenuButtonPressed)
     
-    let level2ButtonGrey = SKSpriteNode(imageNamed: MAIN_MENU_BUTTON_GRAY_2)
-    let level3ButtonGrey = SKSpriteNode(imageNamed: MAIN_MENU_BUTTON_GRAY_3)
-    let level4ButtonGrey = SKSpriteNode(imageNamed: MAIN_MENU_BUTTON_GRAY_4)
-    let level5ButtonGrey = SKSpriteNode(imageNamed: MAIN_MENU_BUTTON_GRAY_5)
+    let level2ButtonGrey = SKSpriteNode(imageNamed: beachLevelButtonGrayed)
+    let level3ButtonGrey = SKSpriteNode(imageNamed: tripLevelButtonGrayed)
+    let level4ButtonGrey = SKSpriteNode(imageNamed: oceanLevelButtonGrayed)
+    let level5ButtonGrey = SKSpriteNode(imageNamed: utrechtLevelButtonGrayed)
     
     let level1Score = SKLabelNode(fontNamed: usedFont)
     let level2Score = SKLabelNode(fontNamed: usedFont)
@@ -299,7 +299,7 @@ class MainMenuScene: SKScene {
         let widthButton = self.size.width / 5
         let heightButton = self.size.height / 16
         
-        if scorePreviousLevel >= LEVEL_UNLOCK_GUARD {
+        if scorePreviousLevel >= numberOfPointsRequiredToUnlockLevel {
             placeButtonCommon(fac: fac, widthButton: widthButton, heightButton: heightButton, levelNotPressed: levelNotPressed, levelPressed: levelPressed)
         }
         else {

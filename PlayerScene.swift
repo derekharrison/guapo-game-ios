@@ -31,7 +31,7 @@ class PlayerScene: SKScene {
     var levelMenu = false
     var levelMenuScene = false
     
-    override func didMove(to view: SKView) {
+    override func didMove(to _: SKView) {
         let background = SKSpriteNode(imageNamed: backgroundStartScreenImage)
         
         let widthb = background.size.width
@@ -67,10 +67,10 @@ class PlayerScene: SKScene {
             var dummy1 = false
             var dummy2 = false
             
-            pressedMenuButton(pointOfTouch: pointOfTouch, level_np : startMenuNotPressed, level_p : startMenuPressed, touched : &startMenu)
-            pressedMenuButton(pointOfTouch: pointOfTouch, level_np : continueNotPressed, level_p : continuePressed, touched : &levelMenu)
-            pressedCharacterMenu(pointOfTouch: pointOfTouch, level_np : guapoButtonNotPressed, level_p : guapoButtonPressed, touched : &dummy1)
-            pressedCharacterMenu(pointOfTouch: pointOfTouch, level_np : tuttiButtonNotPressed, level_p : tuttiButtonPressed, touched : &dummy2)
+            pressButton(pointOfTouch: pointOfTouch, buttonNotPressed : startMenuNotPressed, buttonPressed : startMenuPressed, touched : &startMenu)
+            pressButton(pointOfTouch: pointOfTouch, buttonNotPressed : continueNotPressed, buttonPressed : continuePressed, touched : &levelMenu)
+            pressCharacterMenu(pointOfTouch: pointOfTouch, level_np : guapoButtonNotPressed, level_p : guapoButtonPressed, touched : &dummy1)
+            pressCharacterMenu(pointOfTouch: pointOfTouch, level_np : tuttiButtonNotPressed, level_p : tuttiButtonPressed, touched : &dummy2)
             
             if dummy1 {
                 let defaults = UserDefaults()
@@ -94,70 +94,70 @@ class PlayerScene: SKScene {
         }
     }
     
-    func placeButton(fac : CGFloat, buttonNotPressed : SKSpriteNode, buttonPressed : SKSpriteNode, width : CGFloat, height : CGFloat) {
+    private func placeButton(fac : CGFloat, buttonNotPressed : SKSpriteNode, buttonPressed : SKSpriteNode, width : CGFloat, height : CGFloat) {
         
-        let width_button = width
-        let height_button = height
+        let buttonWidth = width
+        let heightButton = height
         
-        buttonNotPressed.size = CGSize(width: width_button, height: height_button)
+        buttonNotPressed.size = CGSize(width: buttonWidth, height: heightButton)
         buttonNotPressed.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2 * fac + self.size.height / 4)
         buttonNotPressed.zPosition = 2
         buttonNotPressed.removeFromParent()
         self.addChild(buttonNotPressed)
         
-        buttonPressed.size = CGSize(width: width_button, height: height_button)
+        buttonPressed.size = CGSize(width: buttonWidth, height: heightButton)
         buttonPressed.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2 * fac + self.size.height / 4)
         buttonPressed.zPosition = -1
         buttonPressed.removeFromParent()
         self.addChild(buttonPressed)
     }
     
-    func place_button2(fac : CGFloat, button_np : SKSpriteNode, button_p : SKSpriteNode) {
+    private func placeButton(fac : CGFloat, buttonNotPressed : SKSpriteNode, buttonPressed : SKSpriteNode) {
         
-        let width_button = self.size.width / 4
-        let height_button = self.size.height / 16
+        let buttonWidth = self.size.width / 4
+        let buttonHeight = self.size.height / 16
         
-        button_np.size = CGSize(width: width_button, height: height_button)
-        button_np.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2 * fac + self.size.height / 4)
-        button_np.zPosition = 2
-        button_np.removeFromParent()
-        self.addChild(button_np)
+        buttonNotPressed.size = CGSize(width: buttonWidth, height: buttonHeight)
+        buttonNotPressed.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2 * fac + self.size.height / 4)
+        buttonNotPressed.zPosition = 2
+        buttonNotPressed.removeFromParent()
+        self.addChild(buttonNotPressed)
         
-        button_p.size = CGSize(width: width_button, height: height_button)
-        button_p.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2 * fac + self.size.height / 4)
-        button_p.zPosition = -1
-        button_p.removeFromParent()
-        self.addChild(button_p)
+        buttonPressed.size = CGSize(width: buttonWidth, height: buttonHeight)
+        buttonPressed.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2 * fac + self.size.height / 4)
+        buttonPressed.zPosition = -1
+        buttonPressed.removeFromParent()
+        self.addChild(buttonPressed)
     }
     
     func placeImage(fac : CGFloat, button : SKSpriteNode) {
         
-        let width_button = self.size.width / 16
-        let height_button = self.size.height / 16
+        let buttonWidth = self.size.width / 16
+        let buttonHeight = self.size.height / 16
         
-        button.size = CGSize(width: width_button, height: height_button)
+        button.size = CGSize(width: buttonWidth, height: buttonHeight)
         button.position = CGPoint(x: self.size.width / 2 - self.guapoImage.size.width * 3, y: self.size.height / 2 * fac + self.size.height / 4)
         button.zPosition = 2
         button.removeFromParent()
         self.addChild(button)
     }
     
-    func pressedMenuButton(pointOfTouch : CGPoint, level_np : SKSpriteNode, level_p : SKSpriteNode, touched : inout Bool) {
+    private func pressButton(pointOfTouch : CGPoint, buttonNotPressed : SKSpriteNode, buttonPressed : SKSpriteNode, touched : inout Bool) {
     
         
-        let touched_button_x = pointOfTouch.x > level_np.position.x - level_np.size.width / 2 && pointOfTouch.x < level_np.position.x + level_np.size.width / 2
+        let touched_button_x = pointOfTouch.x > buttonNotPressed.position.x - buttonNotPressed.size.width / 2 && pointOfTouch.x < buttonNotPressed.position.x + buttonNotPressed.size.width / 2
         
-        let touched_button_y = pointOfTouch.y > level_np.position.y - level_np.size.height / 2 && pointOfTouch.y < level_np.position.y + level_np.size.height / 2
+        let touched_button_y = pointOfTouch.y > buttonNotPressed.position.y - buttonNotPressed.size.height / 2 && pointOfTouch.y < buttonNotPressed.position.y + buttonNotPressed.size.height / 2
         
         if touched_button_x && touched_button_y {
             
-            level_np.zPosition = -1
-            level_p.zPosition = 2
+            buttonNotPressed.zPosition = -1
+            buttonPressed.zPosition = 2
             touched = true
         }
     }
     
-    func pressedCharacterMenu(pointOfTouch : CGPoint, level_np : SKSpriteNode, level_p : SKSpriteNode, touched : inout Bool) {
+    private func pressCharacterMenu(pointOfTouch : CGPoint, level_np : SKSpriteNode, level_p : SKSpriteNode, touched : inout Bool) {
     
         
         let touched_button_x = pointOfTouch.x > level_np.position.x - level_np.size.width / 2 && pointOfTouch.x < level_np.position.x + level_np.size.width / 2

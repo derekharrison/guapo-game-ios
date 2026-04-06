@@ -23,7 +23,7 @@ class Bird : GameObject {
     
     func update(scene : SKScene, backgroundSpeed : CGFloat) {
         super.update()
-        updateImage(numFrames: NUM_FRAMES_BIRD)
+        updateImage(numFrames: numberOfFramesBird)
         updatePosition(scene: scene, backgroundSpeed: backgroundSpeed)
         updateImagePositions()
     }

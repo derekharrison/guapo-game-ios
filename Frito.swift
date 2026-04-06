@@ -14,7 +14,7 @@ class Frito : GameObject {
     func update(scene : SKScene) {
         super.update()
         updatePosition(scene: scene)
-        updateImage(numFrames: NUM_FRAMES_BIRD)
+        updateImage(numFrames: numberOfFramesBird)
     }
     
     func updatePosition(scene : SKScene, atScreen : Int) {

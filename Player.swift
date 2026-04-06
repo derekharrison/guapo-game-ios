@@ -27,7 +27,7 @@ class Player : GameObject {
     override func update() {
         super.update()
         updatePositionPlayer()
-        updateImage(numFrames: NUM_FRAMES_BIRD)
+        updateImage(numFrames: numberOfFramesBird)
     }
     
     private func updatePositionPlayer() {

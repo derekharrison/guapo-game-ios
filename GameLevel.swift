@@ -1023,7 +1023,7 @@ class GameLevel {
     }
     
     func sunPopup() {
-        if gameScore >=  LEVEL_UNLOCK_GUARD && !isAlreadyUnlocked && sunPopupFrameCounter <= NUM_FRAMES_SUN_POPUP {
+        if gameScore >=  LEVEL_UNLOCK_GUARD && !isAlreadyUnlocked && sunPopupFrameCounter <= numberOfFramesSunPopup {
             sunPopupFrameCounter += 1
             if muted == false && playSunPopup {
                 playSound(scene: scene, sound: [SUN_POPUP_SOUND])
@@ -1059,7 +1059,7 @@ class GameLevel {
         
         }
         
-        if gameScore >= flagNum * flagFrequency && flagPopupFrameCounter <= NUM_FRAMES_FLAG_POPUP && numLives > 0 {
+        if gameScore >= flagNum * flagFrequency && flagPopupFrameCounter <= numberOfFramesFlagPopup && numLives > 0 {
             
             flagPopupFrameCounter += 1
             
@@ -1088,7 +1088,7 @@ class GameLevel {
                 thread.start()
             }
         }
-        else if flagPopupFrameCounter > NUM_FRAMES_FLAG_POPUP {
+        else if flagPopupFrameCounter > numberOfFramesFlagPopup {
             
             flagNum += 1
             flagPopupFrameCounter = 0

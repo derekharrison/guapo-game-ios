@@ -13,7 +13,7 @@ class Brownie : GameObject {
         super.update()
         reflect(scene : scene)
         updatePosition(scene : scene, at : 10)
-        updateImage(numFrames: NUM_FRAMES_BIRD)
+        updateImage(numFrames: numberOfFramesBird)
         updateImagePositions()
         displayImage(imageId: 0)
         checkIfBrownieAppeared(scene: scene)

@@ -25,8 +25,8 @@ class JellyFish : GameObject {
     
     func update(scene : SKScene, backgroundSpeed : CGFloat) {
         super.update()
-        updatePosition(scene: scene, backgroundSpeed: backgroundSpeed, NUM_FRAMES_JELLY)
-        updateImage(numFrames: NUM_FRAMES_JELLY)
+        updatePosition(scene: scene, backgroundSpeed: backgroundSpeed, numberOfFramesJellyFish)
+        updateImage(numFrames: numberOfFramesJellyFish)
         updatePosition()
     }
     

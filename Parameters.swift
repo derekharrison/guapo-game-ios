@@ -30,15 +30,18 @@ let pointsForPaprika = 1
 let pointsForBroccoli = 3
 let pointsBegginStrip = 5
 
-let NUM_FRAMES_BIRD = 8
-let NUM_FRAMES_JELLY = 15
+let numberOfFramesBird = 8
+let numberOfFramesJellyFish = 15
+let numberOfFramesSunPopup = 180
+let numberOfFramesChange = 5
+let numberOfFramesFlagPopup = 180
+let numFramesMisty = 60
+
 let NUM_POINTS_WHEN_BIRDS_APPEAR = 35
-let NUM_FRAMES_CHANGE = 5
+
 let NUM_SCREEN_LENGTHS_FOR_DISP = 10
 let POINTS_AT_WHICH_BEGGIN_STRIPS_APPEAR = 50
-let NUM_FRAMES_SUN_POPUP = 180
-let NUM_FRAMES_FLAG_POPUP = 180
-let NUM_FRAMES_MISTY = 60
+
 let BUBBLE_VEL_Y = 5.0
 
 let PAUSE_BUTTON = SKSpriteNode(imageNamed: "pause_button_bitmap_cropped")

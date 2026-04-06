@@ -768,12 +768,9 @@ class GameLevel {
     }
     
     func popBrownie() {
-        if brownie.appeared  {
-
-            if muted == false && brownie.playSound {
-                playSound(scene: scene, sound: [BROWNIE_SOUND_APPEARING])
-                brownie.playSound = false
-            }
+        if brownie.appeared && muted == false && brownie.playSound {
+            playSound(scene: scene, sound: [BROWNIE_SOUND_APPEARING])
+            brownie.playSound = false
         }
 
         brownie.update(scene: scene)
@@ -1043,24 +1040,23 @@ class GameLevel {
     
     func flagPopup() {
         
-        if gameScore == 0 {
-            if startSave {
-                startSave = false
-                
-                // Spawn thread to save state
-                class MyThread: Thread {
-                    var base : GameLevel
-                    init(base : GameLevel) {
-                        self.base = base
-                    }
-                    override func main() {
-                        base.saveState()
-                    }
+        if gameScore == 0 && startSave {
+            startSave = false
+            
+            // Spawn thread to save state
+            class MyThread: Thread {
+                var base : GameLevel
+                init(base : GameLevel) {
+                    self.base = base
                 }
-
-                let thread = MyThread(base : self)
-                thread.start()
+                override func main() {
+                    base.saveState()
+                }
             }
+
+            let thread = MyThread(base : self)
+            thread.start()
+        
         }
         
         if gameScore >= flagNum * flagFrequency && flagPopupFrameCounter <= NUM_FRAMES_FLAG_POPUP && numLives > 0 {
@@ -1107,10 +1103,10 @@ class GameLevel {
     func updateNumberOfBirds() {
         if gameScore >= boundTracker * NUM_POINTS_WHEN_BIRDS_APPEAR && birds.count < TOT_NUM_BIRDS {
             
-            let image_names = self.birds[0].imageNames
+            let imageNames = self.birds[0].imageNames
             let size = self.birds[0].images[0].size
             
-            let bird = Bird(birds: image_names, size: size, zPos: CGFloat(birds.count) + MIN_Z_POS_BIRDS)
+            let bird = Bird(birds: imageNames, size: size, zPos: CGFloat(birds.count) + MIN_Z_POS_BIRDS)
             bird.addImagesToScene(scene : scene)
             
             birds.append(bird)
@@ -1122,10 +1118,10 @@ class GameLevel {
     func updateNumJelly() {
         if gameScore >= boundTracker * NUM_POINTS_WHEN_BIRDS_APPEAR && jellyfishes.count < TOT_NUM_BIRDS {
             
-            let image_names = self.jellyfishes[0].imageNames
+            let imageNames = self.jellyfishes[0].imageNames
             let size = self.jellyfishes[0].images[0].size
             
-            let jelly = JellyFish(jellyFish: image_names, size: size, zPos: CGFloat(jellyfishes.count) + MIN_Z_POS_BIRDS)
+            let jelly = JellyFish(jellyFish: imageNames, size: size, zPos: CGFloat(jellyfishes.count) + MIN_Z_POS_BIRDS)
             jelly.addImagesToScene(scene : scene)
             
             jellyfishes.append(jelly)

@@ -18,7 +18,7 @@ class GameLevel1 : SKScene {
     }
     
     override func didMove(to _: SKView) {
-        base.didMove(scene: self, id: LEVEL_ID_1)
+        base.didMove(scene: self, id: levelId1)
         
         var images = [String]()
         images.append(fritoImage)

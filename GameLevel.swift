@@ -101,7 +101,7 @@ class GameLevel {
         //Update score text
         scoreLabelNode.text = String(gameScore)
         
-        if levelId != LEVEL_ID_5 {
+        if levelId != levelId5 {
             sunPopup()
         }
         
@@ -167,20 +167,20 @@ class GameLevel {
     }
     
     func gameOver() {
-        if levelId == LEVEL_ID_1 {
-            runGameOver(highScoreId: HIGH_SCORE_ID_1)
+        if levelId == levelId1 {
+            runGameOver(highScoreId: highScoreId1)
         }
-        if levelId == LEVEL_ID_2 {
-            runGameOver(highScoreId: HIGH_SCORE_ID_2)
+        if levelId == levelId2 {
+            runGameOver(highScoreId: highScoreId2)
         }
-        if levelId == LEVEL_ID_3 {
-            runGameOver(highScoreId: HIGH_SCORE_ID_3)
+        if levelId == levelId3 {
+            runGameOver(highScoreId: highScoreId3)
         }
-        if levelId == LEVEL_ID_4 {
-            runGameOver(highScoreId: HIGH_SCORE_ID_4)
+        if levelId == levelId4 {
+            runGameOver(highScoreId: highScoreId4)
         }
-        if levelId == LEVEL_ID_5 {
-            runGameOver(highScoreId: HIGH_SCORE_ID_5)
+        if levelId == levelId5 {
+            runGameOver(highScoreId: highScoreId5)
         }
     }
     
@@ -427,7 +427,7 @@ class GameLevel {
         restartButton.setSize(size: CGSize(width: scene.size.width / 5, height: scene.size.height / 10))
         restartButton.addImagesToScene(scene: scene)
         
-        if levelId != LEVEL_ID_5 {
+        if levelId != levelId5 {
             flag.addImage(image: FLAG_ARUBA_STR)
             flag.setZPosition(zPos: -1)
             flag.setSize(size: CGSize(width: scene.size.width / 5, height: scene.size.height / 5))
@@ -475,25 +475,25 @@ class GameLevel {
         
         
         let defaults = UserDefaults()
-        if levelId == LEVEL_ID_1 {
-            highScore = defaults.integer(forKey: HIGH_SCORE_ID_1)
+        if levelId == levelId1 {
+            highScore = defaults.integer(forKey: highScoreId1)
         }
-        if levelId == LEVEL_ID_2 {
-            highScore = defaults.integer(forKey: HIGH_SCORE_ID_2)
+        if levelId == levelId2 {
+            highScore = defaults.integer(forKey: highScoreId2)
         }
-        if levelId == LEVEL_ID_3 {
-            highScore = defaults.integer(forKey: HIGH_SCORE_ID_3)
+        if levelId == levelId3 {
+            highScore = defaults.integer(forKey: highScoreId3)
         }
-        if levelId == LEVEL_ID_4 {
-            highScore = defaults.integer(forKey: HIGH_SCORE_ID_4)
+        if levelId == levelId4 {
+            highScore = defaults.integer(forKey: highScoreId4)
         }
-        if levelId == LEVEL_ID_5 {
-            highScore = defaults.integer(forKey: HIGH_SCORE_ID_5)
+        if levelId == levelId5 {
+            highScore = defaults.integer(forKey: highScoreId5)
         }
 
         isAlreadyUnlocked = highScore >= LEVEL_UNLOCK_GUARD
-        muted = defaults.bool(forKey: String(levelId) + GAME_MUTED)
-        playing = defaults.bool(forKey: String(levelId) + PLAYING)
+        muted = defaults.bool(forKey: String(levelId) + gameIsMuted)
+        playing = defaults.bool(forKey: String(levelId) + gameIsPlaying)
         
         muteBubbles(bubbles : player.bubbles, mute : muted)
         muteBubbles(bubbles : frito.bubbles, mute : muted)
@@ -1005,16 +1005,16 @@ class GameLevel {
                     gameOver()
                 }
                 else if(numLives >= 0) {
-                    if(levelId == LEVEL_ID_1) {
+                    if(levelId == levelId1) {
                         showRestartContinue()
                     }
-                    if(levelId == LEVEL_ID_2) {
+                    if(levelId == levelId2) {
                         showRestartContinue()
                     }
-                    if(levelId == LEVEL_ID_3) {
+                    if(levelId == levelId3) {
                         showRestartContinue()
                     }
-                    if(levelId == LEVEL_ID_5) {
+                    if(levelId == levelId5) {
                         showRestartContinue()
                     }
                 }
@@ -1157,7 +1157,7 @@ class GameLevel {
         player.setZPositionHit(zPos: zPosPlayer)
         
         playing = false
-        defaults.set(playing, forKey: String(levelId) + PLAYING)
+        defaults.set(playing, forKey: String(levelId) + gameIsPlaying)
         
         let changeSceneAction = SKAction.run(changeScene)
         let waitToChangeScene = SKAction.wait(forDuration: 1)
@@ -1251,22 +1251,22 @@ class GameLevel {
                     continueButton.images[0].zPosition = -1
                     let defaults = UserDefaults()
                     playing = true
-                    defaults.set(playing, forKey: String(levelId) + PLAYING)
+                    defaults.set(playing, forKey: String(levelId) + gameIsPlaying)
                     
-                    if levelId == LEVEL_ID_1 {
-                        runContinue(highScoreId: HIGH_SCORE_ID_1, gameLevel: GameLevel1(size: scene.size))
+                    if levelId == levelId1 {
+                        runContinue(highScoreId: highScoreId1, gameLevel: GameLevel1(size: scene.size))
                     }
-                    if levelId == LEVEL_ID_2 {
-                        runContinue(highScoreId: HIGH_SCORE_ID_2, gameLevel: GameLevel2(size: scene.size))
+                    if levelId == levelId2 {
+                        runContinue(highScoreId: highScoreId2, gameLevel: GameLevel2(size: scene.size))
                     }
-                    if levelId == LEVEL_ID_3 {
-                        runContinue(highScoreId: HIGH_SCORE_ID_3, gameLevel: GameLevel3(size: scene.size))
+                    if levelId == levelId3 {
+                        runContinue(highScoreId: highScoreId3, gameLevel: GameLevel3(size: scene.size))
                     }
-                    if levelId == LEVEL_ID_4 {
-                        runContinue(highScoreId: HIGH_SCORE_ID_4, gameLevel: GameLevel4(size: scene.size))
+                    if levelId == levelId4 {
+                        runContinue(highScoreId: highScoreId4, gameLevel: GameLevel4(size: scene.size))
                     }
-                    if levelId == LEVEL_ID_5 {
-                        runContinue(highScoreId: HIGH_SCORE_ID_5, gameLevel: GameLevel5(size: scene.size))
+                    if levelId == levelId5 {
+                        runContinue(highScoreId: highScoreId5, gameLevel: GameLevel5(size: scene.size))
                     }
                 }
                 
@@ -1275,21 +1275,21 @@ class GameLevel {
                     restartButton.images[0].zPosition = -1
                     let defaults = UserDefaults()
                     playing = false
-                    defaults.set(playing, forKey: String(levelId) + PLAYING)
-                    if levelId == LEVEL_ID_1 {
-                        runRestart(highScoreId: HIGH_SCORE_ID_1)
+                    defaults.set(playing, forKey: String(levelId) + gameIsPlaying)
+                    if levelId == levelId1 {
+                        runRestart(highScoreId: highScoreId1)
                     }
-                    if levelId == LEVEL_ID_2 {
-                        runRestart(highScoreId: HIGH_SCORE_ID_2)
+                    if levelId == levelId2 {
+                        runRestart(highScoreId: highScoreId2)
                     }
-                    if levelId == LEVEL_ID_3 {
-                        runRestart(highScoreId: HIGH_SCORE_ID_3)
+                    if levelId == levelId3 {
+                        runRestart(highScoreId: highScoreId3)
                     }
-                    if levelId == LEVEL_ID_4 {
-                        runRestart(highScoreId: HIGH_SCORE_ID_4)
+                    if levelId == levelId4 {
+                        runRestart(highScoreId: highScoreId4)
                     }
-                    if levelId == LEVEL_ID_5 {
-                        runRestart(highScoreId: HIGH_SCORE_ID_5)
+                    if levelId == levelId5 {
+                        runRestart(highScoreId: highScoreId5)
                     }
                 }
             }

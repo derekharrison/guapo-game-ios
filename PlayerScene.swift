@@ -10,18 +10,18 @@ import SpriteKit
 
 class PlayerScene: SKScene {
     
-    let continueNotPressed = SKSpriteNode(imageNamed: CONTINUE_NOTPRESSED)
-    let continuePressed = SKSpriteNode(imageNamed: CONTINUE_PRESSED)
-    let startMenuNotPressed = SKSpriteNode(imageNamed: START_MENU_NOTPRESSED)
-    let startMenuPressed = SKSpriteNode(imageNamed: START_MENU_PRESSED)
+    let continueNotPressed = SKSpriteNode(imageNamed: Parameters.continueButtonNotPressed)
+    let continuePressed = SKSpriteNode(imageNamed: Parameters.continueButtonPressed)
+    let startMenuNotPressed = SKSpriteNode(imageNamed: Parameters.startMenuButtonNotPressed)
+    let startMenuPressed = SKSpriteNode(imageNamed: Parameters.startMenuButtonPressed)
     
     let guapoImage = SKSpriteNode(imageNamed: GUAPO_IMAGE_PLAYER)
     let tuttiImage = SKSpriteNode(imageNamed: TUTTI_IMAGE_PLAYER)
 
-    let guapoButtonNotPressed = SKSpriteNode(imageNamed: GUAPO_BUTTON_NOTPRESSED)
-    let guapoButtonPressed = SKSpriteNode(imageNamed: GUAPO_BUTTON_PRESSED)
-    let tuttiButtonNotPressed = SKSpriteNode(imageNamed: TUTTI_BUTTON_NOTPRESSED)
-    let tuttiButtonPressed = SKSpriteNode(imageNamed: TUTTI_BUTTON_PRESSED)
+    let guapoButtonNotPressed = SKSpriteNode(imageNamed: Parameters.guapoButtonNotPressed)
+    let guapoButtonPressed = SKSpriteNode(imageNamed: Parameters.guapoButtonPressed)
+    let tuttiButtonNotPressed = SKSpriteNode(imageNamed: Parameters.tuttiButtonNotPressed)
+    let tuttiButtonPressed = SKSpriteNode(imageNamed: Parameters.tuttiButtonPressed)
     
     var startMenuChosen = false
     var startMenu = false
@@ -32,7 +32,7 @@ class PlayerScene: SKScene {
     var levelMenuScene = false
     
     override func didMove(to view: SKView) {
-        let background = SKSpriteNode(imageNamed: BACKGROUND_START_SCREEN)
+        let background = SKSpriteNode(imageNamed: backgroundStartScreenImage)
         
         let widthb = background.size.width
         let heightb = self.size.height/2

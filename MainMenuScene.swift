@@ -10,41 +10,41 @@ import SpriteKit
 
 class MainMenuScene: SKScene {
 
-    let levelsText = SKLabelNode(fontNamed: GAME_FONT)
-    let highScoreText = SKLabelNode(fontNamed: GAME_FONT)
+    let levelsText = SKLabelNode(fontNamed: usedFont)
+    let highScoreText = SKLabelNode(fontNamed: usedFont)
     
-    let level1ButtonNotPressed = SKSpriteNode(imageNamed: MAIN_MENU_BUTTON_NOTPRESSED_1)
-    let level1ButtonPressed = SKSpriteNode(imageNamed: MAIN_MENU_BUTTON_PRESSED_1)
-    let level2ButtonNotPressed = SKSpriteNode(imageNamed: MAIN_MENU_BUTTON_NOTPRESSED_2)
-    let level2ButtonPressed = SKSpriteNode(imageNamed: MAIN_MENU_BUTTON_PRESSED_2)
-    let level3ButtonNotPressed = SKSpriteNode(imageNamed: MAIN_MENU_BUTTON_NOTPRESSED_3)
-    let level3ButtonPressed = SKSpriteNode(imageNamed: MAIN_MENU_BUTTON_PRESSED_3)
-    let level4ButtonNotPressed = SKSpriteNode(imageNamed: MAIN_MENU_BUTTON_NOTPRESSED_4)
-    let level4ButtonPressed = SKSpriteNode(imageNamed: MAIN_MENU_BUTTON_PRESSED_4)
-    let level5ButtonNotPressed = SKSpriteNode(imageNamed: MAIN_MENU_BUTTON_NOTPRESSED_5)
-    let level5ButtonPressed = SKSpriteNode(imageNamed: MAIN_MENU_BUTTON_PRESSED_5)
+    let level1ButtonNotPressed = SKSpriteNode(imageNamed: arubaLevelButtonNotPressed)
+    let level1ButtonPressed = SKSpriteNode(imageNamed: arubaLevelButtonPressed)
+    let level2ButtonNotPressed = SKSpriteNode(imageNamed: beachLevelButtonNotPressed)
+    let level2ButtonPressed = SKSpriteNode(imageNamed: beachLevelButtonPressed)
+    let level3ButtonNotPressed = SKSpriteNode(imageNamed: tripLevelButtonNotPressed)
+    let level3ButtonPressed = SKSpriteNode(imageNamed: tripLevelButtonPressed)
+    let level4ButtonNotPressed = SKSpriteNode(imageNamed: oceanLevelButtonNotPressed)
+    let level4ButtonPressed = SKSpriteNode(imageNamed: oceanLevelButtonPressed)
+    let level5ButtonNotPressed = SKSpriteNode(imageNamed: utrechtLevelButtonNotPressed)
+    let level5ButtonPressed = SKSpriteNode(imageNamed: utrechtLevelButtonPressed)
     
-    let startMenuButtonNotPressed = SKSpriteNode(imageNamed: START_MENU_NOTPRESSED)
-    let startMenuButtonPressed = SKSpriteNode(imageNamed: START_MENU_PRESSED)
+    let startMenuButtonNotPressed = SKSpriteNode(imageNamed: Parameters.startMenuButtonNotPressed)
+    let startMenuButtonPressed = SKSpriteNode(imageNamed: Parameters.startMenuButtonPressed)
     
-    let playerMenuButtonNotPressed = SKSpriteNode(imageNamed: PLAYER_MENU_BUTTON_NOTPRESSED)
-    let playerMenuButtonPressed = SKSpriteNode(imageNamed: PLAYER_MENU_BUTTON_PRESSED)
+    let playerMenuButtonNotPressed = SKSpriteNode(imageNamed: Parameters.playerMenuButtonNotPressed)
+    let playerMenuButtonPressed = SKSpriteNode(imageNamed: Parameters.playerMenuButtonPressed)
     
     let level2ButtonGrey = SKSpriteNode(imageNamed: MAIN_MENU_BUTTON_GRAY_2)
     let level3ButtonGrey = SKSpriteNode(imageNamed: MAIN_MENU_BUTTON_GRAY_3)
     let level4ButtonGrey = SKSpriteNode(imageNamed: MAIN_MENU_BUTTON_GRAY_4)
     let level5ButtonGrey = SKSpriteNode(imageNamed: MAIN_MENU_BUTTON_GRAY_5)
     
-    let level1Score = SKLabelNode(fontNamed: GAME_FONT)
-    let level2Score = SKLabelNode(fontNamed: GAME_FONT)
-    let level3Score = SKLabelNode(fontNamed: GAME_FONT)
-    let level4Score = SKLabelNode(fontNamed: GAME_FONT)
-    let level5Score = SKLabelNode(fontNamed: GAME_FONT)
+    let level1Score = SKLabelNode(fontNamed: usedFont)
+    let level2Score = SKLabelNode(fontNamed: usedFont)
+    let level3Score = SKLabelNode(fontNamed: usedFont)
+    let level4Score = SKLabelNode(fontNamed: usedFont)
+    let level5Score = SKLabelNode(fontNamed: usedFont)
     
-    var label = SKLabelNode(fontNamed: LABEL_FONT)
+    var label = SKLabelNode(fontNamed: labelFont)
 
-    let volumeOn = SKSpriteNode(imageNamed: SOUND_ON_IMAGE_STR)
-    let volumeOff = SKSpriteNode(imageNamed: SOUND_OFF_IMAGE_STR)
+    let volumeOn = SKSpriteNode(imageNamed: soundOnStr)
+    let volumeOff = SKSpriteNode(imageNamed: soundOffStr)
     
     var muted = false
 
@@ -115,7 +115,7 @@ class MainMenuScene: SKScene {
         
         self.addChild(volumeOff)
         self.addChild(volumeOn)
-        let background = SKSpriteNode(imageNamed: BACKGROUND_START_SCREEN)
+        let background = SKSpriteNode(imageNamed: backgroundStartScreenImage)
         
         let widthb = background.size.width
         let heightb = self.size.height/2
@@ -127,7 +127,7 @@ class MainMenuScene: SKScene {
         background.removeFromParent()
         self.addChild(background)
         
-        levelsText.text = LEVELS_STR
+        levelsText.text = levelsStr
         levelsText.fontSize = 80
         levelsText.fontColor = SKColor.gray
         levelsText.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2 * 0.85 + self.size.height / 4)
@@ -135,7 +135,7 @@ class MainMenuScene: SKScene {
         levelsText.removeFromParent()
         self.addChild(levelsText)
         
-        highScoreText.text = HIGHSCORE_STR
+        highScoreText.text = highScoreStr
         highScoreText.fontSize = 80
         highScoreText.fontColor = SKColor.gray
         highScoreText.position = CGPoint(x: self.size.width / 2 + self.size.width / 4, y: self.size.height / 2 * 0.85 + self.size.height / 4)
@@ -143,11 +143,11 @@ class MainMenuScene: SKScene {
         highScoreText.removeFromParent()
         self.addChild(highScoreText)
         
-        highScoreNumberLevel1 = defaults.integer(forKey: HIGH_SCORE_ID_1)
-        highScoreNumberLevel2 = defaults.integer(forKey: HIGH_SCORE_ID_2)
-        highScoreNumberLevel3 = defaults.integer(forKey: HIGH_SCORE_ID_3)
-        highScoreNumberLevel4 = defaults.integer(forKey: HIGH_SCORE_ID_4)
-        highScoreNumberLevel5 = defaults.integer(forKey: HIGH_SCORE_ID_5)
+        highScoreNumberLevel1 = defaults.integer(forKey: highScoreId1)
+        highScoreNumberLevel2 = defaults.integer(forKey: highScoreId2)
+        highScoreNumberLevel3 = defaults.integer(forKey: highScoreId3)
+        highScoreNumberLevel4 = defaults.integer(forKey: highScoreId4)
+        highScoreNumberLevel5 = defaults.integer(forKey: highScoreId5)
 
         placeFirstLevelButton(fac : 0.73, levelNotPressed : level1ButtonNotPressed, levelPressed : level1ButtonPressed, level1ButtonPressed, highScore : highScoreNumberLevel1, scoreLabel : level1Score)
         
@@ -194,7 +194,7 @@ class MainMenuScene: SKScene {
                 muted = true
 
                 let defaults = UserDefaults()
-                defaults.set(muted, forKey: GAME_MUTED)
+                defaults.set(muted, forKey: gameIsMuted)
             }
             else if pointOfTouch.x < position.x  && pointOfTouch.y < position.y && muted == true {
                 volumeOn.zPosition = -1
@@ -202,7 +202,7 @@ class MainMenuScene: SKScene {
                 muted = false
                 
                 let defaults = UserDefaults()
-                defaults.set(muted, forKey: GAME_MUTED)
+                defaults.set(muted, forKey: gameIsMuted)
             }
             else {
                 

@@ -17,6 +17,18 @@ var boundTracker = 1
 class Parameters {
     static let totalNumberOfVillains = 12
     static let numberOfCheesyBites = 5
+    static let tuttiButtonNotPressed = "tutti_button_not_pressed_cropped"
+    static let tuttiButtonPressed = "tutti_button_pressed_cropped"
+    static let guapoButtonNotPressed = "guapo_button_not_pressed_cropped"
+    static let guapoButtonPressed = "guapo_button_pressed_cropped"
+    static let playerMenuButtonNotPressed = "player_menu_button_not_pressed_bitmap_cropped"
+    static let playerMenuButtonPressed = "player_menu_button_pressed_bitmap_cropped"
+    static let startMenuButtonNotPressed = "main_menu_button_not_pressed_bitmap_cropped"
+    static let startMenuButtonPressed = "main_menu_button_pressed_bitmap_cropped"
+    static let levelMenuButtonNotPressed = "level_menu_button_not_pressed_bitmap_cropped"
+    static let levelMenuButtonPressed = "level_menu_button_pressed_bitmap_cropped"
+    static let continueButtonNotPressed = "continue_button_not_pressed_bitmap_cropped_1"
+    static let continueButtonPressed = "continue_button_pressed_bitmap_cropped_1"
 }
 
 let totalNumberOfCucumbers = 1
@@ -170,54 +182,40 @@ let numberOfBackgroundImagesUtrechtLevel = 18
 
 let bubbleImage = "bubble_bitmap_cropped"
 
-let HIGH_SCORE_ID_1 = "HighScoreLevel1Saved"
-let HIGH_SCORE_ID_2 = "HighScoreLevel2Saved"
-let HIGH_SCORE_ID_3 = "HighScoreLevel3Saved"
-let HIGH_SCORE_ID_4 = "HighScoreLevel4Saved"
-let HIGH_SCORE_ID_5 = "HighScoreLevel5Saved"
+let highScoreId1 = "HighScoreLevel1Saved"
+let highScoreId2 = "HighScoreLevel2Saved"
+let highScoreId3 = "HighScoreLevel3Saved"
+let highScoreId4 = "HighScoreLevel4Saved"
+let highScoreId5 = "HighScoreLevel5Saved"
 
-let LEVEL_ID_1 = 1
-let LEVEL_ID_2 = 2
-let LEVEL_ID_3 = 3
-let LEVEL_ID_4 = 4
-let LEVEL_ID_5 = 5
+let levelId1 = 1
+let levelId2 = 2
+let levelId3 = 3
+let levelId4 = 4
+let levelId5 = 5
 
-let GAME_MUTED = "gameMuted"
-let PLAYING = "playing"
-let GAME_FONT = "AvenirNext-Bold"
-let LABEL_FONT = "Helvetica"
+let gameIsMuted = "gameMuted"
+let gameIsPlaying = "playing"
+let usedFont = "AvenirNext-Bold"
+let labelFont = "Helvetica"
 
-let BACKGROUND_START_SCREEN = "background_guapo_game_startscreen2"
+let backgroundStartScreenImage = "background_guapo_game_startscreen2"
 
-let LEVELS_STR = "Levels"
-let HIGHSCORE_STR = "High Score"
-let SOUND_ON_IMAGE_STR = "volume_on"
-let SOUND_OFF_IMAGE_STR = "volume_off"
+let levelsStr = "Levels"
+let highScoreStr = "High Score"
+let soundOnStr = "volume_on"
+let soundOffStr = "volume_off"
 
-let MAIN_MENU_BUTTON_NOTPRESSED_1 = "aruba_level_button_not_pressed_bitmap_cropped_1"
-let MAIN_MENU_BUTTON_PRESSED_1 = "aruba_level_button_pressed_bitmap_cropped_1"
-let MAIN_MENU_BUTTON_NOTPRESSED_2 = "beach_level_button_not_pressed_bitmap_cropped_1"
-let MAIN_MENU_BUTTON_PRESSED_2 = "beach_level_button_pressed_bitmap_cropped_1"
-let MAIN_MENU_BUTTON_NOTPRESSED_3 = "trip_level_button_not_pressed_bitmap_cropped_1"
-let MAIN_MENU_BUTTON_PRESSED_3 = "trip_level_button_pressed_bitmap_cropped_1"
-let MAIN_MENU_BUTTON_NOTPRESSED_4 = "ocean_level_button_not_pressed_bitmap_cropped_1"
-let MAIN_MENU_BUTTON_PRESSED_4 = "ocean_level_button_pressed_bitmap_cropped_1"
-let MAIN_MENU_BUTTON_NOTPRESSED_5 = "utreg_level_button_not_pressed_bitmap_cropped_1"
-let MAIN_MENU_BUTTON_PRESSED_5 = "utreg_level_button_pressed_bitmap_cropped_1"
-
-let PLAYER_MENU_BUTTON_NOTPRESSED = "player_menu_button_not_pressed_bitmap_cropped"
-let PLAYER_MENU_BUTTON_PRESSED = "player_menu_button_pressed_bitmap_cropped"
-let START_MENU_NOTPRESSED = "main_menu_button_not_pressed_bitmap_cropped"
-let START_MENU_PRESSED = "main_menu_button_pressed_bitmap_cropped"
-let LEVEL_MENU_NOTPRESSED = "level_menu_button_not_pressed_bitmap_cropped"
-let LEVEL_MENU_PRESSED = "level_menu_button_pressed_bitmap_cropped"
-let CONTINUE_NOTPRESSED = "continue_button_not_pressed_bitmap_cropped_1"
-let CONTINUE_PRESSED = "continue_button_pressed_bitmap_cropped_1"
-
-let TUTTI_BUTTON_NOTPRESSED = "tutti_button_not_pressed_cropped"
-let TUTTI_BUTTON_PRESSED = "tutti_button_pressed_cropped"
-let GUAPO_BUTTON_NOTPRESSED = "guapo_button_not_pressed_cropped"
-let GUAPO_BUTTON_PRESSED = "guapo_button_pressed_cropped"
+let arubaLevelButtonNotPressed = "aruba_level_button_not_pressed_bitmap_cropped_1"
+let arubaLevelButtonPressed = "aruba_level_button_pressed_bitmap_cropped_1"
+let beachLevelButtonNotPressed = "beach_level_button_not_pressed_bitmap_cropped_1"
+let beachLevelButtonPressed = "beach_level_button_pressed_bitmap_cropped_1"
+let tripLevelButtonNotPressed = "trip_level_button_not_pressed_bitmap_cropped_1"
+let tripLevelButtonPressed = "trip_level_button_pressed_bitmap_cropped_1"
+let oceanLevelButtonNotPressed = "ocean_level_button_not_pressed_bitmap_cropped_1"
+let oceanLevelButtonPressed = "ocean_level_button_pressed_bitmap_cropped_1"
+let utrechtLevelButtonNotPressed = "utreg_level_button_not_pressed_bitmap_cropped_1"
+let utrechtLevelButtonPressed = "utreg_level_button_pressed_bitmap_cropped_1"
 
 let GUAPO_IMAGE_PLAYER = "guapo_head_bitmap_cropped 1"
 let TUTTI_IMAGE_PLAYER = "tutti_main_image_cropped_resized"

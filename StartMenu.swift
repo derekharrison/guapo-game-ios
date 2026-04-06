@@ -11,10 +11,10 @@ import SpriteKit
 
 class StartMenu: SKScene {
     
-    let playerMenuNotPressed = SKSpriteNode(imageNamed: PLAYER_MENU_BUTTON_NOTPRESSED)
-    let playerMenuPressed = SKSpriteNode(imageNamed: PLAYER_MENU_BUTTON_PRESSED)
-    let levelMenuNotPressed = SKSpriteNode(imageNamed: LEVEL_MENU_NOTPRESSED)
-    let levelMenuPressed = SKSpriteNode(imageNamed: LEVEL_MENU_PRESSED)
+    let playerMenuNotPressed = SKSpriteNode(imageNamed: Parameters.playerMenuButtonNotPressed)
+    let playerMenuPressed = SKSpriteNode(imageNamed: Parameters.playerMenuButtonPressed)
+    let levelMenuNotPressed = SKSpriteNode(imageNamed: Parameters.levelMenuButtonNotPressed)
+    let levelMenuPressed = SKSpriteNode(imageNamed: Parameters.levelMenuButtonPressed)
     
     var playerMenuChosen = false
     var playerMenu = false
@@ -25,7 +25,7 @@ class StartMenu: SKScene {
     var levelMenuScene = false
     
     override func didMove(to _: SKView) {
-        let background = SKSpriteNode(imageNamed: BACKGROUND_START_SCREEN)
+        let background = SKSpriteNode(imageNamed: backgroundStartScreenImage)
         
         let widthb = background.size.width
         let heightb = self.size.height/2

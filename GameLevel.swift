@@ -1199,7 +1199,7 @@ class GameLevel {
         currentGameState = GameState.afterGame
     }
     
-    func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    func touchesBegan(_ touches: Set<UITouch>, with _ : UIEvent?) {
         
         if currentGameState == GameState.preGame {
             startGame()
@@ -1296,7 +1296,7 @@ class GameLevel {
         }
     }
     
-    func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    func touchesMoved(_ touches: Set<UITouch>, with _: UIEvent?) {
         
         self.ro = player.images[0].position
         

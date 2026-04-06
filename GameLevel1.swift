@@ -11,13 +11,13 @@ import SpriteKit
 class GameLevel1 : SKScene {
     
     var base = GameLevel()
-    var num_backgrounds : Int = NUM_BACKGROUNDS_LEVEL_1
+    var numBackgrounds: Int = NUM_BACKGROUNDS_LEVEL_1
     
-    override func update(_ currentTime: TimeInterval) {
+    override func update(_ _: TimeInterval) {
         base.update()
     }
     
-    override func didMove(to view: SKView) {
+    override func didMove(to _: SKView) {
         base.didMove(scene: self, id: LEVEL_ID_1)
         
         var images = [String]()
@@ -25,28 +25,28 @@ class GameLevel1 : SKScene {
         images.append(FRITO_IMAGE_2)
         
         base.initImagesFrito(images: images, height: self.size.height, width: self.size.width)
-        base.initBackground(scene: self, numBackgrounds: num_backgrounds, string1: BACKGROUND_STR_LEVEL_1)
+        base.initBackground(scene: self, numBackgrounds: numBackgrounds, string1: BACKGROUND_STR_LEVEL_1)
         
-        var images_brownie = [String]()
-        images_brownie.append(BROWNIE_IMAGE_1)
-        images_brownie.append(BROWNIE_IMAGE_2)
+        var imagesBrownie = [String]()
+        imagesBrownie.append(BROWNIE_IMAGE_1)
+        imagesBrownie.append(BROWNIE_IMAGE_2)
         
-        base.initImagesBrownie(images: images_brownie, height: self.size.height, width: self.size.width)
+        base.initImagesBrownie(images: imagesBrownie, height: self.size.height, width: self.size.width)
         
-        var images_misty = [String]()
-        images_misty.append(MISTY_IMAGE_1)
-        images_misty.append(MISTY_IMAGE_2)
-        images_misty.append(MISTY_IMAGE_3)
-        images_misty.append(MISTY_IMAGE_4)
-        base.initImagesMisty(images: images_misty, height: self.size.height, width: self.size.width)
+        var imagesMisty = [String]()
+        imagesMisty.append(MISTY_IMAGE_1)
+        imagesMisty.append(MISTY_IMAGE_2)
+        imagesMisty.append(MISTY_IMAGE_3)
+        imagesMisty.append(MISTY_IMAGE_4)
+        base.initImagesMisty(images: imagesMisty, height: self.size.height, width: self.size.width)
         
-        var bird_images = [String]()
+        var birdImages = [String]()
         
-        bird_images.append(BIRD_IMAGE_WARA_1)
-        bird_images.append(BIRD_IMAGE_WARA_2)
-        bird_images.append(BIRD_IMAGE_WARA_3)
+        birdImages.append(BIRD_IMAGE_WARA_1)
+        birdImages.append(BIRD_IMAGE_WARA_2)
+        birdImages.append(BIRD_IMAGE_WARA_3)
         
-        base.addBirds(images: bird_images)
+        base.addBirds(images: birdImages)
         
         if base.playing {
             base.getState()

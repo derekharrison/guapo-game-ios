@@ -21,23 +21,23 @@ class GameLevel1 : SKScene {
         base.didMove(scene: self, id: LEVEL_ID_1)
         
         var images = [String]()
-        images.append(FRITO_IMAGE_1)
-        images.append(FRITO_IMAGE_2)
+        images.append(fritoImage)
+        images.append(fritoHitImage)
         
         base.initImagesFrito(images: images, height: self.size.height, width: self.size.width)
         base.initBackground(scene: self, numBackgrounds: numBackgrounds, string1: BACKGROUND_STR_LEVEL_1)
         
         var imagesBrownie = [String]()
-        imagesBrownie.append(BROWNIE_IMAGE_1)
-        imagesBrownie.append(BROWNIE_IMAGE_2)
+        imagesBrownie.append(brownieImage)
+        imagesBrownie.append(brownieHitImage)
         
         base.initImagesBrownie(images: imagesBrownie, height: self.size.height, width: self.size.width)
         
         var imagesMisty = [String]()
-        imagesMisty.append(MISTY_IMAGE_1)
-        imagesMisty.append(MISTY_IMAGE_2)
-        imagesMisty.append(MISTY_IMAGE_3)
-        imagesMisty.append(MISTY_IMAGE_4)
+        imagesMisty.append(mistyImage)
+        imagesMisty.append(mistyHitImage)
+        imagesMisty.append(mistyRotatedImage)
+        imagesMisty.append(mistyRotatedHitImage)
         base.initImagesMisty(images: imagesMisty, height: self.size.height, width: self.size.width)
         
         var birdImages = [String]()

@@ -48,8 +48,8 @@ class GameObject {
         self.bubbles = Bubbles()
         self.posX = -10000
         self.posY = 0
-        self.cape1 = SKSpriteNode(imageNamed: CAPE_IMAGE1)
-        self.cape2 = SKSpriteNode(imageNamed: CAPE_IMAGE2)
+        self.cape1 = SKSpriteNode(imageNamed: capeImage1)
+        self.cape2 = SKSpriteNode(imageNamed: capeImage2)
     }
     
     func update() {

@@ -660,16 +660,16 @@ class GameLevel {
         let playerId = defaults.integer(forKey: "player_id")
         
         if(playerId == 0) {
-            playerImages.append(PLAYER_IMAGE_1)
-            playerImages.append(PLAYER_IMAGE_2)
+            playerImages.append(guapoImage1)
+            playerImages.append(guapoImage2)
             player = Player(images: playerImages, size: size, zPos: zPosPlayer)
-            player.addImageHit(image: PLAYER_IMAGE_HIT)
+            player.addImageHit(image: guapoHitImage)
         }
         if(playerId == 1) {
-            playerImages.append(PLAYER_TUTTI_IMAGE_1)
-            playerImages.append(PLAYER_TUTTI_IMAGE_2)
+            playerImages.append(tuttiImage1)
+            playerImages.append(tuttiImage2)
             player = Player(images: playerImages, size: size, zPos: zPosPlayer)
-            player.addImageHit(image: PLAYER_TUTTI_IMAGE_HIT)
+            player.addImageHit(image: tuttiHitImage)
         }
 
         player.addImagesToScene(scene : scene)
@@ -688,15 +688,15 @@ class GameLevel {
         let playerId = defaults.integer(forKey: "player_id")
         
         if playerId == 0 {
-            playerImages.append(PLAYER_SNORKEL)
+            playerImages.append(guapoSnorkelImage)
             player = Player(images: playerImages, size: size, zPos: zPosPlayer)
-            player.addImageHit(image: PLAYER_SNORKEL_HIT)
+            player.addImageHit(image: guapoSnorkelHitImage)
         }
         
         if playerId == 1 {
-            playerImages.append(PLAYER_TUTTI_SNORKEL)
+            playerImages.append(tuttiSnorkelImage)
             player = Player(images: playerImages, size: size, zPos: zPosPlayer)
-            player.addImageHit(image: PLAYER_TUTTI_SNORKEL_HIT)
+            player.addImageHit(image: tuttiSnorkelHitImage)
         }
         
 

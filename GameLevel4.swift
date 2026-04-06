@@ -24,8 +24,8 @@ class GameLevel4: SKScene {
         base.addBubbles(bubbles: base.player.bubbles, bubbleImage: BUBBLE_IMAGE_STR)
 
         var images = [String]()
-        images.append(FRITO_OCEAN_1)
-        images.append(FRITO_OCEAN_2)
+        images.append(fritoSnorkelImage)
+        images.append(fritoSNorkelHitImage)
         base.addBubbles(bubbles: base.frito.bubbles, bubbleImage: BUBBLE_IMAGE_STR)
         
         for x in base.frito.bubbles.bubblez {
@@ -36,8 +36,8 @@ class GameLevel4: SKScene {
         base.initImagesFrito(images: images, height: self.size.height, width: self.size.width)
         
         var imagesBrownie = [String]()
-        imagesBrownie.append(BROWNIE_OCEAN_1)
-        imagesBrownie.append(BROWNIE_OCEAN_2)
+        imagesBrownie.append(brownieSnorkelImage)
+        imagesBrownie.append(brownieSnorkerHitImage)
         base.addBubbles(bubbles: base.brownie.bubbles, bubbleImage: BUBBLE_IMAGE_STR)
         
         for x in base.brownie.bubbles.bubblez {
@@ -48,10 +48,10 @@ class GameLevel4: SKScene {
         base.initImagesBrownie(images: imagesBrownie, height: self.size.height, width: self.size.width)
         
         var imagesMisty = [String]()
-        imagesMisty.append(MISTY_OCEAN_1)
-        imagesMisty.append(MISTY_OCEAN_2)
-        imagesMisty.append(MISTY_OCEAN_3)
-        imagesMisty.append(MISTY_OCEAN_4)
+        imagesMisty.append(mistySnorkelImage)
+        imagesMisty.append(mistySnorkelHitImage)
+        imagesMisty.append(mistySnorkelRotatedImage)
+        imagesMisty.append(mistySnorkelRotatedHitImage)
         base.addBubbles(bubbles: base.misty.bubbles, bubbleImage: BUBBLE_IMAGE_STR)
         
         for x in base.misty.bubbles.bubblez {

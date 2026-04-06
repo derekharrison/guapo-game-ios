@@ -54,7 +54,7 @@ class PlayerScene: SKScene {
     }
     
     //Force the mute button to change by running update()
-    override func update(_ currentTime: TimeInterval) {
+    override func update(_ _: TimeInterval) {
         startScene(scene: self, start : &startMenu, gameLevel : StartMenu(size: self.size))
         startScene(scene: self, start : &levelMenu, gameLevel : MainMenuScene(size: self.size))
         
@@ -69,8 +69,8 @@ class PlayerScene: SKScene {
             
             pressButton(pointOfTouch: pointOfTouch, buttonNotPressed : startMenuNotPressed, buttonPressed : startMenuPressed, touched : &startMenu)
             pressButton(pointOfTouch: pointOfTouch, buttonNotPressed : continueNotPressed, buttonPressed : continuePressed, touched : &levelMenu)
-            pressCharacterMenu(pointOfTouch: pointOfTouch, level_np : guapoButtonNotPressed, level_p : guapoButtonPressed, touched : &dummy1)
-            pressCharacterMenu(pointOfTouch: pointOfTouch, level_np : tuttiButtonNotPressed, level_p : tuttiButtonPressed, touched : &dummy2)
+            pressCharacterMenu(pointOfTouch: pointOfTouch, buttonNotPressed : guapoButtonNotPressed, buttonPressed : guapoButtonPressed, touched : &dummy1)
+            pressCharacterMenu(pointOfTouch: pointOfTouch, buttonNotPressed : tuttiButtonNotPressed, buttonPressed : tuttiButtonPressed, touched : &dummy2)
             
             if dummy1 {
                 let defaults = UserDefaults()
@@ -145,11 +145,11 @@ class PlayerScene: SKScene {
     private func pressButton(pointOfTouch : CGPoint, buttonNotPressed : SKSpriteNode, buttonPressed : SKSpriteNode, touched : inout Bool) {
     
         
-        let touched_button_x = pointOfTouch.x > buttonNotPressed.position.x - buttonNotPressed.size.width / 2 && pointOfTouch.x < buttonNotPressed.position.x + buttonNotPressed.size.width / 2
+        let touchedButtonX = pointOfTouch.x > buttonNotPressed.position.x - buttonNotPressed.size.width / 2 && pointOfTouch.x < buttonNotPressed.position.x + buttonNotPressed.size.width / 2
         
-        let touched_button_y = pointOfTouch.y > buttonNotPressed.position.y - buttonNotPressed.size.height / 2 && pointOfTouch.y < buttonNotPressed.position.y + buttonNotPressed.size.height / 2
+        let touchedButtonY = pointOfTouch.y > buttonNotPressed.position.y - buttonNotPressed.size.height / 2 && pointOfTouch.y < buttonNotPressed.position.y + buttonNotPressed.size.height / 2
         
-        if touched_button_x && touched_button_y {
+        if touchedButtonX && touchedButtonY {
             
             buttonNotPressed.zPosition = -1
             buttonPressed.zPosition = 2
@@ -157,21 +157,21 @@ class PlayerScene: SKScene {
         }
     }
     
-    private func pressCharacterMenu(pointOfTouch : CGPoint, level_np : SKSpriteNode, level_p : SKSpriteNode, touched : inout Bool) {
+    private func pressCharacterMenu(pointOfTouch : CGPoint, buttonNotPressed : SKSpriteNode, buttonPressed : SKSpriteNode, touched : inout Bool) {
     
         
-        let touched_button_x = pointOfTouch.x > level_np.position.x - level_np.size.width / 2 && pointOfTouch.x < level_np.position.x + level_np.size.width / 2
+        let touchedButtonX = pointOfTouch.x > buttonNotPressed.position.x - buttonNotPressed.size.width / 2 && pointOfTouch.x < buttonNotPressed.position.x + buttonNotPressed.size.width / 2
         
-        let touched_button_y = pointOfTouch.y > level_np.position.y - level_np.size.height / 2 && pointOfTouch.y < level_np.position.y + level_np.size.height / 2
+        let touched_button_y = pointOfTouch.y > buttonNotPressed.position.y - buttonNotPressed.size.height / 2 && pointOfTouch.y < buttonNotPressed.position.y + buttonNotPressed.size.height / 2
         
-        if touched_button_x && touched_button_y {
+        if touchedButtonX && touched_button_y {
             self.guapoButtonNotPressed.zPosition = 2
             self.guapoButtonPressed.zPosition = -1
             self.tuttiButtonNotPressed.zPosition = 2
             self.tuttiButtonPressed.zPosition = -1
             
-            level_np.zPosition = -1
-            level_p.zPosition = 2
+            buttonNotPressed.zPosition = -1
+            buttonPressed.zPosition = 2
             touched = true
         }
     }

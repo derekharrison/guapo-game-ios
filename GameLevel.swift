@@ -392,7 +392,7 @@ class GameLevel {
         misty.setHeight(height : height)
         misty.setWidth(width : width)
         misty.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
-        misty.setVelocity(velX: 0, velY: -backgroundSpeed)
+        misty.setVelMisty(vx: 0, vy: -backgroundSpeed)
         misty.setZPosition(zPos: Z_POS_CHARS + 2)
         misty.setPosition(position: CGPoint(x : width / 2, y : height * 0.75 + misty.images[0].size.height / 2))
         
@@ -733,18 +733,18 @@ class GameLevel {
     }
     
     func updateSnack(snacks : [Snack], backgroundSpeed : CGFloat) {
-        for cucumber in snacks {
-            cucumber.update(scene: scene)
-            cucumber.setVelocity(velX: -backgroundSpeed, velY: 0)
+        for snack in snacks {
+            snack.update(scene: scene)
+            snack.setVelocity(velX: -backgroundSpeed, velY: 0)
             
-            if objectCollidedWithPlayer(bird : cucumber, player : player, den : 2.5) {
-                cucumber.setPosition(position: CGPoint(x: -scene.size.width * 10, y: 0))
+            if objectCollidedWithPlayer(bird : snack, player : player, den : 2.5) {
+                snack.setPosition(position: CGPoint(x: -scene.size.width * 10, y: 0))
                 
                 if muted == false {
                     playSound(scene: scene, sound: [EAT_SOUND1])
                 }
                 
-                gameScore += cucumber.points_snack
+                gameScore += snack.points_snack
             }
         }
     }
@@ -768,9 +768,12 @@ class GameLevel {
     }
     
     func popBrownie() {
-        if brownie.appeared && muted == false && brownie.playSound {
-            playSound(scene: scene, sound: [BROWNIE_SOUND_APPEARING])
-            brownie.playSound = false
+        if brownie.appeared  {
+
+            if muted == false && brownie.playSound {
+                playSound(scene: scene, sound: [BROWNIE_SOUND_APPEARING])
+                brownie.playSound = false
+            }
         }
 
         brownie.update(scene: scene)
@@ -786,7 +789,7 @@ class GameLevel {
     }
     
     func popMisty() {
-        misty.popMisty(misty.height, backgroundSpeed)
+        misty.popMisty(height : misty.height, speed : backgroundSpeed)
         
         if objectCollidedWithPlayer(bird : misty, player : player, den : 2.5) {
             misty.hit = true
@@ -807,11 +810,11 @@ class GameLevel {
         misty.play(bool: Bool.random())
         if misty.top {
             misty.setPosition(position: CGPoint(x : misty.width / 2, y : misty.height * 0.75 + misty.images[0].size.height / 2))
-            misty.setVelocity(velX: misty.velX, velY: -backgroundSpeed)
+            misty.setVelMisty(vx: misty.velX, vy: -backgroundSpeed)
         }
         else {
             misty.setPosition(position: CGPoint(x : misty.width / 2, y : misty.height * 0.25 - misty.images[0].size.height / 2))
-            misty.setVelocity(velX: misty.velX, velY: backgroundSpeed)
+            misty.setVelMisty(vx: misty.velX, vy: backgroundSpeed)
         }
         
         misty.playSound = true
@@ -876,7 +879,7 @@ class GameLevel {
     }
     
     func popMistyOcean() {
-        misty.popMisty(misty.height, backgroundSpeed)
+        misty.popMisty(height : misty.height, speed : backgroundSpeed)
         
         if objectCollidedWithPlayer(bird : misty, player : player, den : 2.5) {
             misty.hit = true
@@ -1040,22 +1043,24 @@ class GameLevel {
     
     func flagPopup() {
         
-        if gameScore == 0 && startSave {
-            startSave = false
-            
-            // Spawn thread to save state
-            class MyThread: Thread {
-                var base : GameLevel
-                init(base : GameLevel) {
-                    self.base = base
+        if gameScore == 0 {
+            if startSave {
+                startSave = false
+                
+                // Spawn thread to save state
+                class MyThread: Thread {
+                    var base : GameLevel
+                    init(base : GameLevel) {
+                        self.base = base
+                    }
+                    override func main() {
+                        base.saveState()
+                    }
                 }
-                override func main() {
-                    base.saveState()
-                }
-            }
 
-            let thread = MyThread(base : self)
-            thread.start()
+                let thread = MyThread(base : self)
+                thread.start()
+            }
         }
         
         if gameScore >= flagNum * flagFrequency && flagPopupFrameCounter <= NUM_FRAMES_FLAG_POPUP && numLives > 0 {
@@ -1102,10 +1107,10 @@ class GameLevel {
     func updateNumberOfBirds() {
         if gameScore >= boundTracker * NUM_POINTS_WHEN_BIRDS_APPEAR && birds.count < TOT_NUM_BIRDS {
             
-            let imageNames = self.birds[0].imageNames
+            let image_names = self.birds[0].imageNames
             let size = self.birds[0].images[0].size
             
-            let bird = Bird(birds: imageNames, size: size, zPos: CGFloat(birds.count) + MIN_Z_POS_BIRDS)
+            let bird = Bird(birds: image_names, size: size, zPos: CGFloat(birds.count) + MIN_Z_POS_BIRDS)
             bird.addImagesToScene(scene : scene)
             
             birds.append(bird)
@@ -1117,10 +1122,10 @@ class GameLevel {
     func updateNumJelly() {
         if gameScore >= boundTracker * NUM_POINTS_WHEN_BIRDS_APPEAR && jellyfishes.count < TOT_NUM_BIRDS {
             
-            let imageNames = self.jellyfishes[0].imageNames
+            let image_names = self.jellyfishes[0].imageNames
             let size = self.jellyfishes[0].images[0].size
             
-            let jelly = JellyFish(jellyFish: imageNames, size: size, zPos: CGFloat(jellyfishes.count) + MIN_Z_POS_BIRDS)
+            let jelly = JellyFish(jellyFish: image_names, size: size, zPos: CGFloat(jellyfishes.count) + MIN_Z_POS_BIRDS)
             jelly.addImagesToScene(scene : scene)
             
             jellyfishes.append(jelly)
@@ -1138,7 +1143,7 @@ class GameLevel {
         player.setZPosition(zPos: -1)
         player.setZPositionHit(zPos: Z_POS_PLAYER)
         var start = true
-        startScene(scene : scene, start : &start, gameLevel : gameLevel)
+        startScene(scene: scene, start: &start, gameLevel: gameLevel)
     }
     
     func runRestart(highScoreId: String) {
@@ -1198,7 +1203,7 @@ class GameLevel {
         currentGameState = GameState.afterGame
     }
     
-    func touchesBegan(_ touches: Set<UITouch>, with _: UIEvent?) {
+    func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         if currentGameState == GameState.preGame {
             startGame()
@@ -1295,7 +1300,7 @@ class GameLevel {
         }
     }
     
-    func touchesMoved(_ touches: Set<UITouch>, with _: UIEvent?) {
+    func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         self.ro = player.images[0].position
         

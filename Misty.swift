@@ -46,6 +46,10 @@ class Misty : GameObject {
         self.top = bool
     }
     
+    func setVelMisty(vx : CGFloat, vy : CGFloat) {
+        self.setVelocity(velX: vx, velY: vy)
+    }
+    
     func setPosition(pos : CGPoint) {
         if !top {
             self.images[0].position = pos
@@ -57,7 +61,7 @@ class Misty : GameObject {
         }
     }
     
-    func popMisty(_ : CGFloat, _ : CGFloat) {
+    func popMisty(height : CGFloat, speed : CGFloat) {
         
         if !self.hit && top {
             self.displayImageNotHit(imageId: 2)
@@ -75,12 +79,18 @@ class Misty : GameObject {
             self.displayImageNotHit(imageId: 1)
         }
         
-        if counter1 != NUM_FRAMES_MISTY && counter1 < NUM_FRAMES_MISTY + 60 {
+        if counter1 < NUM_FRAMES_MISTY {
             self.updatePositionMisty()
             counter1 += 1
         }
+        
         else if counter1 == NUM_FRAMES_MISTY {
             self.velY = -self.velY
+            counter1 += 1
+        }
+        
+        else if counter1 < NUM_FRAMES_MISTY + 60 {
+            self.updatePositionMisty()
             counter1 += 1
         }
     }

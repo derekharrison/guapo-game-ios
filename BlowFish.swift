@@ -12,7 +12,7 @@ class BlowFish : GameObject {
     func update(scene : SKScene, at : Int) {
         self.updatePosition(scene: scene, atScreen: at)
         updateImagePositions()
-        updateImage(numFrames: numberOfFramesBird)
+        updateImage(numFrames: numOfFramesForUpdate)
     }
     
     func updatePosition(scene : SKScene, atScreen : Int) {

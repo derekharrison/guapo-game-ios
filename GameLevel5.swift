@@ -18,6 +18,7 @@ class GameLevel5 : SKScene {
     
     override func didMove(to _: SKView) {
         base.didMove(scene: self, id: levelId5)
+        State.levelId = LevelId.UTREG
         
         var images = [String]()
         images.append(fritoImage)
@@ -46,10 +47,6 @@ class GameLevel5 : SKScene {
         birdImages.append(waraWaraImage3)
         
         base.addBirds(images: birdImages)
-        
-        if base.playing {
-            base.getState()
-        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

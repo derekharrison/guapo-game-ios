@@ -20,31 +20,19 @@ class GameLevel4: SKScene {
     
     override func didMove(to _: SKView) {
         base.didMoveOcean(scene: self, id : levelId4)
-
-        base.addBubbles(bubbles: base.player.bubbles, bubbleImage: bubbleImage)
+        State.levelId = LevelId.OCEAN
 
         var images = [String]()
         images.append(fritoSnorkelImage)
         images.append(fritoSNorkelHitImage)
-        base.addBubbles(bubbles: base.frito.bubbles, bubbleImage: bubbleImage)
-        
-        for x in base.frito.bubbles.bubblez {
-            x.removeFromParent()
-            self.addChild(x)
-        }
-        
+
+
         base.initImagesFrito(images: images, height: self.size.height, width: self.size.width)
         
         var imagesBrownie = [String]()
         imagesBrownie.append(brownieSnorkelImage)
         imagesBrownie.append(brownieSnorkerHitImage)
-        base.addBubbles(bubbles: base.brownie.bubbles, bubbleImage: bubbleImage)
-        
-        for x in base.brownie.bubbles.bubblez {
-            x.removeFromParent()
-            self.addChild(x)
-        }
-        
+
         base.initImagesBrownie(images: imagesBrownie, height: self.size.height, width: self.size.width)
         
         var imagesMisty = [String]()
@@ -52,28 +40,10 @@ class GameLevel4: SKScene {
         imagesMisty.append(mistySnorkelHitImage)
         imagesMisty.append(mistySnorkelRotatedImage)
         imagesMisty.append(mistySnorkelRotatedHitImage)
-        base.addBubbles(bubbles: base.misty.bubbles, bubbleImage: bubbleImage)
-        
-        for x in base.misty.bubbles.bubblez {
-            x.removeFromParent()
-            self.addChild(x)
-        }
-        
+
         base.initImagesMisty(images: imagesMisty, height: self.size.height, width: self.size.width)
         
         base.initBackground(scene: self, numBackgrounds: numberOfBackgroundImagesOceanLevel, string1: backgroundOceanLevelPrefix)
-        
-        var jellyImages = [String]()
-        
-        jellyImages.append(jellyFishImage1)
-        jellyImages.append(jellyFishImage2)
-        jellyImages.append(jellyFishImage3)
-        
-        base.addJellyfish(images : jellyImages)
-        
-        if base.playing {
-            base.getState()
-        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

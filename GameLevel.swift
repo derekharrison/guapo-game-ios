@@ -10,39 +10,12 @@ import SpriteKit
 
 class GameLevel {
 
-    var player = Player()
+    var graphics : Graphics = Graphics()
+    var modelUpdate : Update = Update(graphics: Graphics(), scene: SKScene())
     
     var levelId : Int = 0
     var muted = false
     var playing = false
-    var highScore = 0
-    var birds = [Bird]()
-    var jellyfishes = [JellyFish]()
-    var cheesyBites = [Snack]()
-    var cucumbers = [Snack]()
-    var paprikas = [Snack]()
-    var begginStrips = [Snack]()
-    var broccolis = [Snack]()
-    var continueButton = GameObject()
-    var restartButton = GameObject()
-    var flag = Flag()
-    var widthBackground : CGFloat = 0
-    var blackBackgroundBottom = SKSpriteNode(imageNamed: coverBackgroundPrefix)
-    var blackBackgroundTop = SKSpriteNode(imageNamed: coverBackgroundPrefix)
-    var backgrounds = [SKSpriteNode]()
-    
-    var frito = Frito()
-    var brownie = Brownie()
-    var misty = Misty()
-    var fish1 = Fish()
-    var fish2 = Fish()
-    var fish3 = Fish()
-    var fish4 = Fish()
-    var fish5 = Fish()
-    var fish6 = Fish()
-    var blowFish = BlowFish()
-    
-    var backgroundSpeed: CGFloat = 0
     
     var currentGameState = GameState.preGame
     var playingState = PlayingState.restarted
@@ -82,6 +55,8 @@ class GameLevel {
         createPlayer()
         
         initCommon(scene: scene, id: id)
+        
+        self.modelUpdate = Update(graphics : graphics, scene: scene)
     }
     
     func didMoveOcean(scene: SKScene, id : Int) {
@@ -94,76 +69,27 @@ class GameLevel {
         initCommon(scene: scene, id: id)
         
         initFish(width: scene.size.width, height: scene.size.height)
+        
+        self.modelUpdate = Update(graphics : graphics, scene: scene)
     }
     
     func update() {
 
         //Update score text
         scoreLabelNode.text = String(gameScore)
-        
-        if levelId != levelId5 {
-            sunPopup()
-        }
-        
-        flagPopup()
                 
         if self.currentGameState == GameState.inGame {
             moveCounter += 1
         }
         
-        updateNumberOfBirds()
-        
         if self.currentGameState == GameState.inGame {
-            
-            updatePlayer()
-            
-            updateBirds()
-        
-            updateSnacks()
-            
-            popFrito()
-            
-            popBrownie()
-            
-            popMisty()
-            
-            updateBackgrounds(backgrounds : backgrounds, velX : -backgroundSpeed)
+            modelUpdate.update()
         }
     }
     
     func updateOcean() {
-
-        //Update score text
-        scoreLabelNode.text = String(gameScore)
-        
-        if self.currentGameState == GameState.inGame {
-            moveCounter += 1
-        }
-        
-        updateNumJelly()
-        
-        flagPopup()
-        
-        if self.currentGameState == GameState.inGame {
-            
-            updatePlayerOcean()
-            
-            updateJellyfish()
-            
-            updateFish()
-            
-            updateBlowFish()
-            
-            updateSnacks()
-            
-            popFritoOcean()
-            
-            popBrownieOcean()
-            
-            popMistyOcean()
-            
-            updateBackgrounds(backgrounds : backgrounds, velX : -backgroundSpeed)
-        }
+        // TODO :  implement
+        update()
     }
     
     func gameOver() {
@@ -184,219 +110,114 @@ class GameLevel {
         }
     }
     
-    func saveBackgrounds() {
-        
-        var counter = 1
-        let defaults = UserDefaults()
-        
-        for x in backgrounds {
-            defaults.set(x.position.x, forKey: String(levelId) + backgroundsKey + String(counter))
-            counter += 1
-        }
-    }
-    
-    func getBackgrounds() {
-        
-        var counter = 1
-        let defaults = UserDefaults()
-        
-        for x in backgrounds {
-            x.position.x = CGFloat(defaults.float(forKey: String(levelId) + backgroundsKey + String(counter)))
-            counter += 1
-        }
-    }
-    
-    func saveState() {
-        saveObject(object: player, prefix: String(levelId) + playerKey)
-        saveObject(object : brownie, prefix : String(levelId) + brownieKey)
-        saveObject(object : frito, prefix : String(levelId) + fritoKey)
-        saveMisty(object : misty, levelId : String(levelId))
-        saveSnacks(snacks: cheesyBites, prefix: String(levelId) + cheesyBiteKey)
-        saveSnacks(snacks: paprikas, prefix: String(levelId) + paprikaKey)
-        saveSnacks(snacks: cucumbers, prefix: String(levelId) + cucumberKey)
-        saveSnacks(snacks: begginStrips, prefix: String(levelId) + begginStripKey)
-        saveSnacks(snacks: broccolis, prefix: String(levelId) + broccoliKey)
-        saveObject(object: fish1, prefix: String(levelId) + fishKey1)
-        saveObject(object: fish2, prefix: String(levelId) + fishKey2)
-        saveObject(object: fish3, prefix: String(levelId) + fishKey3)
-        saveObject(object: fish4, prefix: String(levelId) + fishKey4)
-        saveObject(object: fish5, prefix: String(levelId) + fishKey5)
-        saveObject(object: fish6, prefix: String(levelId) + fishKey6)
-        saveObject(object: blowFish, prefix: String(levelId) + blowFishKey)
-        saveBackgrounds()
-        saveOther()
-    }
-    
-    func getState() {
-        getPlayer(object: &player, levelId: String(levelId))
-        getBrownie(object: &brownie, levelId: String(levelId))
-        getFrito(object : &frito, levelId : String(levelId))
-        getMisty(object: &misty, levelId: String(levelId))
-        getSnacks(snacks: &cheesyBites, prefix: String(levelId) + cheesyBiteKey)
-        getSnacks(snacks: &paprikas, prefix: String(levelId) + paprikaKey)
-        getSnacks(snacks: &cucumbers, prefix: String(levelId) + cucumberKey)
-        getSnacks(snacks: &begginStrips, prefix: String(levelId) + begginStripKey)
-        getSnacks(snacks: &broccolis, prefix: String(levelId) + broccoliKey)
-        getFish(object: &fish1, levelId: String(levelId), prefix : fishKey1)
-        getFish(object: &fish2, levelId: String(levelId), prefix : fishKey2)
-        getFish(object: &fish3, levelId: String(levelId), prefix : fishKey3)
-        getFish(object: &fish4, levelId: String(levelId), prefix : fishKey4)
-        getFish(object: &fish5, levelId: String(levelId), prefix : fishKey5)
-        getFish(object: &fish6, levelId: String(levelId), prefix : fishKey6)
-        getBlowfish(object: &blowFish, levelId: String(levelId))
-        getBackgrounds()
-        getOther()
-    }
-    
-    func saveOther() {
-        let defaults = UserDefaults()
-        defaults.set(gameScore, forKey: String(levelId) + scoreKey)
-        defaults.set(playMisty, forKey: String(levelId) + mistyGuardKey)
-        defaults.set(flagNum, forKey: String(levelId) + flagNumKey)
-        defaults.set(numLives, forKey: String(levelId) + numberOfLivesKey)
-    }
-    
-    func getOther() {
-        let defaults = UserDefaults()
-        gameScore = defaults.integer(forKey: String(levelId) + scoreKey)
-        playMisty = defaults.integer(forKey: String(levelId) + mistyGuardKey)
-        flagNum = defaults.integer(forKey: String(levelId) + flagNumKey)
-        numLives = defaults.integer(forKey: String(levelId) + numberOfLivesKey)
-        if numLives > 0 {
-           initLives()
-        }
-        else {
-            numLives = 0
-        }
-    }
-    
-    func updateSnacks() {
-        //Update positions of snacks and detect eating snacks
-        updateSnack(snacks : cheesyBites, backgroundSpeed : backgroundSpeed)
-
-        //Update positions of cucumbers and detect eating cucumber
-        updateSnack(snacks : cucumbers, backgroundSpeed : backgroundSpeed)
-        
-        //Update positions of paprikas and detect eating paprika
-        updateSnack(snacks : paprikas, backgroundSpeed : backgroundSpeed)
-        
-        //Update positions of broccolis and detect eating broccoli
-        updateSnack(snacks : broccolis, backgroundSpeed : backgroundSpeed)
-        
-        //Update positions of beggin strips and detect eating beggin strip
-        if gameScore >= numberOfPointsWhenBegginStripAppears {
-            updateSnack(snacks : begginStrips, backgroundSpeed : backgroundSpeed)
-        }
-    }
-    
     func initFish(width : CGFloat, height : CGFloat) {
-        fish1.addImage(image: fishImage1a)
-        fish1.addImage(image: fishImage1b)
-        fish1.setHeight(height : height)
-        fish1.setWidth(width : width)
-        fish1.setSize(size: CGSize(width : width / 7.5, height : height / 15))
-        fish1.setPosition(position: CGPoint(x: -1000, y: 0))
-        fish1.setZPosition(zPos: minZPosFishes)
-        fish1.addImagesToScene(scene: scene)
+        graphics.fish1.addImage(image: fishImage1a)
+        graphics.fish1.addImage(image: fishImage1b)
+        graphics.fish1.setHeight(height : height)
+        graphics.fish1.setWidth(width : width)
+        graphics.fish1.setSize(size: CGSize(width : width / 7.5, height : height / 15))
+        graphics.fish1.setPosition(position: CGPoint(x: -1000, y: 0))
+        graphics.fish1.setZPosition(zPos: minZPosFishes)
+        graphics.fish1.addImagesToScene(scene: scene)
         
-        fish2.addImage(image: fishImage2a)
-        fish2.addImage(image: fishImage2b)
-        fish2.setHeight(height : height)
-        fish2.setWidth(width : width)
-        fish2.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
-        fish2.setPosition(position: CGPoint(x: -1000, y: 0))
-        fish2.setZPosition(zPos: minZPosFishes + 1)
-        fish2.addImagesToScene(scene: scene)
+        graphics.fish2.addImage(image: fishImage2a)
+        graphics.fish2.addImage(image: fishImage2b)
+        graphics.fish2.setHeight(height : height)
+        graphics.fish2.setWidth(width : width)
+        graphics.fish2.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
+        graphics.fish2.setPosition(position: CGPoint(x: -1000, y: 0))
+        graphics.fish2.setZPosition(zPos: minZPosFishes + 1)
+        graphics.fish2.addImagesToScene(scene: scene)
         
-        fish3.addImage(image: fishImage3a)
-        fish3.addImage(image: fishImage3b)
-        fish3.setHeight(height : height)
-        fish3.setWidth(width : width)
-        fish3.setSize(size: CGSize(width : width / 7.5, height : height / 15))
-        fish3.setPosition(position: CGPoint(x: -1000, y: 0))
-        fish3.setZPosition(zPos: minZPosFishes + 2)
-        fish3.addImagesToScene(scene: scene)
+        graphics.fish3.addImage(image: fishImage3a)
+        graphics.fish3.addImage(image: fishImage3b)
+        graphics.fish3.setHeight(height : height)
+        graphics.fish3.setWidth(width : width)
+        graphics.fish3.setSize(size: CGSize(width : width / 7.5, height : height / 15))
+        graphics.fish3.setPosition(position: CGPoint(x: -1000, y: 0))
+        graphics.fish3.setZPosition(zPos: minZPosFishes + 2)
+        graphics.fish3.addImagesToScene(scene: scene)
         
-        fish4.addImage(image: fishImage4a)
-        fish4.addImage(image: fishImage4b)
-        fish4.setHeight(height : height)
-        fish4.setWidth(width : width)
-        fish4.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
-        fish4.setPosition(position: CGPoint(x: -1000, y: 0))
-        fish4.setZPosition(zPos: minZPosFishes + 3)
-        fish4.addImagesToScene(scene: scene)
+        graphics.fish4.addImage(image: fishImage4a)
+        graphics.fish4.addImage(image: fishImage4b)
+        graphics.fish4.setHeight(height : height)
+        graphics.fish4.setWidth(width : width)
+        graphics.fish4.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
+        graphics.fish4.setPosition(position: CGPoint(x: -1000, y: 0))
+        graphics.fish4.setZPosition(zPos: minZPosFishes + 3)
+        graphics.fish4.addImagesToScene(scene: scene)
         
-        fish5.addImage(image: fishImage5a)
-        fish5.addImage(image: fishImage5b)
-        fish5.setHeight(height : height)
-        fish5.setWidth(width : width)
-        fish5.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
-        fish5.setPosition(position: CGPoint(x: 10 * width, y: 0))
-        fish5.setZPosition(zPos: minZPosFishes + 4)
-        fish5.addImagesToScene(scene: scene)
+        graphics.fish5.addImage(image: fishImage5a)
+        graphics.fish5.addImage(image: fishImage5b)
+        graphics.fish5.setHeight(height : height)
+        graphics.fish5.setWidth(width : width)
+        graphics.fish5.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
+        graphics.fish5.setPosition(position: CGPoint(x: 10 * width, y: 0))
+        graphics.fish5.setZPosition(zPos: minZPosFishes + 4)
+        graphics.fish5.addImagesToScene(scene: scene)
         
-        fish6.addImage(image: fishImage6a)
-        fish6.addImage(image: fishImage6b)
-        fish6.setHeight(height : height)
-        fish6.setWidth(width : width)
-        fish6.setSize(size: CGSize(width : width / 7.5, height : height / 15))
-        fish6.setPosition(position: CGPoint(x: 10 * width, y: 0))
-        fish6.setZPosition(zPos: minZPosFishes + 5)
-        fish6.addImagesToScene(scene: scene)
+        graphics.fish6.addImage(image: fishImage6a)
+        graphics.fish6.addImage(image: fishImage6b)
+        graphics.fish6.setHeight(height : height)
+        graphics.fish6.setWidth(width : width)
+        graphics.fish6.setSize(size: CGSize(width : width / 7.5, height : height / 15))
+        graphics.fish6.setPosition(position: CGPoint(x: 10 * width, y: 0))
+        graphics.fish6.setZPosition(zPos: minZPosFishes + 5)
+        graphics.fish6.addImagesToScene(scene: scene)
         
-        blowFish.addImage(image: blowFishImage1)
-        blowFish.addImage(image: blowFishImage2)
-        blowFish.addImageHit(image: blowFishImage3)
-        blowFish.addImageHit(image: blowFishImage4)
-        blowFish.setHeight(height : height)
-        blowFish.setWidth(width : width)
-        blowFish.setSize(size: CGSize(width : width * 3 / 15, height : height / 7.5))
-        blowFish.setSizeHit(size: CGSize(width : width * 3 / 7.5, height : height * 2 / 7.5))
-        blowFish.setPosition(position: CGPoint(x: -1000, y: 0))
-        blowFish.setZPosition(zPos: minZPosFishes + 6)
-        blowFish.setVelocity(velX: -1.5 * backgroundSpeed, velY: 0)
-        blowFish.addImagesToScene(scene: scene)
+        graphics.blowFish.addImage(image: blowFishImage1)
+        graphics.blowFish.addImage(image: blowFishImage2)
+        graphics.blowFish.addImageHit(image: blowFishImage3)
+        graphics.blowFish.addImageHit(image: blowFishImage4)
+        graphics.blowFish.setHeight(height : height)
+        graphics.blowFish.setWidth(width : width)
+        graphics.blowFish.setSize(size: CGSize(width : width * 3 / 15, height : height / 7.5))
+        graphics.blowFish.setSizeHit(size: CGSize(width : width * 3 / 7.5, height : height * 2 / 7.5))
+        graphics.blowFish.setPosition(position: CGPoint(x: -1000, y: 0))
+        graphics.blowFish.setZPosition(zPos: minZPosFishes + 6)
+        graphics.blowFish.setVelocity(velX: -1.5 * graphics.backgroundSpeed, velY: 0)
+        graphics.blowFish.addImagesToScene(scene: scene)
     }
     
     func initImagesFrito(images : [String], height : CGFloat, width : CGFloat) {
         for image in images {
-            frito.addImage(image : image)
+            graphics.frito.addImage(image : image)
         }
-        frito.setHeight(height : height)
-        frito.setWidth(width : width)
-        frito.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
-        frito.setVelocity(velX: 2 * backgroundSpeed, velY: -2 * backgroundSpeed)
-        frito.setZPosition(zPos: zPosCharacters)
-        frito.setPosition(position: CGPoint(x : 10 * width, y : height * 0.75 + frito.images[0].size.height / 2))
-        frito.addImagesToScene(scene: scene)
+        graphics.frito.setHeight(height : height)
+        graphics.frito.setWidth(width : width)
+        graphics.frito.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
+        graphics.frito.setVelocity(velX: 2 * graphics.backgroundSpeed, velY: -2 * graphics.backgroundSpeed)
+        graphics.frito.setZPosition(zPos: zPosCharacters)
+        graphics.frito.setPosition(position: CGPoint(x : 10 * width, y : height * 0.75 + graphics.frito.images[0].size.height / 2))
+        graphics.frito.addImagesToScene(scene: scene)
     }
     
     func initImagesBrownie(images : [String], height : CGFloat, width : CGFloat) {
         for image in images {
-            brownie.addImage(image : image)
+            graphics.brownie.addImage(image : image)
         }
-        brownie.setHeight(height : height)
-        brownie.setWidth(width : width)
-        brownie.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
-        brownie.setVelocity(velX: -2 * backgroundSpeed, velY: -2 * backgroundSpeed)
-        brownie.setZPosition(zPos: zPosCharacters + 1)
-        brownie.setPosition(position: CGPoint(x : -width, y : height * 0.75 + brownie.images[0].size.height / 2))
+        graphics.brownie.setHeight(height : height)
+        graphics.brownie.setWidth(width : width)
+        graphics.brownie.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
+        graphics.brownie.setVelocity(velX: -2 * graphics.backgroundSpeed, velY: -2 * graphics.backgroundSpeed)
+        graphics.brownie.setZPosition(zPos: zPosCharacters + 1)
+        graphics.brownie.setPosition(position: CGPoint(x : -width, y: height * 0.75 + graphics.brownie.images[0].size.height / 2))
         
-        brownie.addImagesToScene(scene: scene)
+        graphics.brownie.addImagesToScene(scene: scene)
     }
     
     func initImagesMisty(images : [String], height : CGFloat, width : CGFloat) {
         for image in images {
-            misty.addImage(image : image)
+            graphics.misty.addImage(image : image)
         }
-        misty.setHeight(height : height)
-        misty.setWidth(width : width)
-        misty.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
-        misty.setVelMisty(vx: 0, vy: -backgroundSpeed)
-        misty.setZPosition(zPos: zPosCharacters + 2)
-        misty.setPosition(position: CGPoint(x : width / 2, y : height * 0.75 + misty.images[0].size.height / 2))
+        graphics.misty.setHeight(height : height)
+        graphics.misty.setWidth(width : width)
+        graphics.misty.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
+        graphics.misty.setVelMisty(vx: 0, vy: -graphics.backgroundSpeed)
+        graphics.misty.setZPosition(zPos: zPosCharacters + 2)
+        graphics.misty.setPosition(position: CGPoint(x : width / 2, y : height * 0.75 + graphics.misty.images[0].size.height / 2))
         
-        misty.addImagesToScene(scene: scene)
+        graphics.misty.addImagesToScene(scene: scene)
     }
     
     func initCommon(scene : SKScene, id : Int) {
@@ -406,40 +227,40 @@ class GameLevel {
         sunPopupFrameCounter = 0
         gameScore = 0
         boundTracker = 1
-        backgroundSpeed = scene.size.width / 400
+        graphics.backgroundSpeed = scene.size.width / 400
         
         let width = scene.size.width
         let height = scene.size.height
         
         addSnacks(scene : scene)
         
-        continueButton.addImage(image: continueButtonNotPressed)
-        continueButton.addImageHit(image: continueButtonPressed)
-        continueButton.setPosition(position: CGPoint(x: scene.size.width / 2 - continueButton.getSize().width / 2, y: scene.size.height / 2))
-        continueButton.setZPosition(zPos: -1)
-        continueButton.setSize(size: CGSize(width: scene.size.width / 5, height: scene.size.height / 10))
-        continueButton.addImagesToScene(scene: scene)
+        graphics.continueButton.addImage(image: continueButtonNotPressed)
+        graphics.continueButton.addImageHit(image: continueButtonPressed)
+        graphics.continueButton.setPosition(position: CGPoint(x: scene.size.width / 2 - graphics.continueButton.getSize().width / 2, y: scene.size.height / 2))
+        graphics.continueButton.setZPosition(zPos: -1)
+        graphics.continueButton.setSize(size: CGSize(width: scene.size.width / 5, height: scene.size.height / 10))
+        graphics.continueButton.addImagesToScene(scene: scene)
         
-        restartButton.addImage(image: restartButtonNotPressed)
-        restartButton.addImageHit(image: restartButtonPressed)
-        restartButton.setPosition(position: CGPoint(x: scene.size.width / 2 + restartButton.getSize().width / 2, y: scene.size.height / 2))
-        restartButton.setZPosition(zPos: -1)
-        restartButton.setSize(size: CGSize(width: scene.size.width / 5, height: scene.size.height / 10))
-        restartButton.addImagesToScene(scene: scene)
+        graphics.restartButton.addImage(image: restartButtonNotPressed)
+        graphics.restartButton.addImageHit(image: restartButtonPressed)
+        graphics.restartButton.setPosition(position: CGPoint(x: scene.size.width / 2 + graphics.restartButton.getSize().width / 2, y: scene.size.height / 2))
+        graphics.restartButton.setZPosition(zPos: -1)
+        graphics.restartButton.setSize(size: CGSize(width: scene.size.width / 5, height: scene.size.height / 10))
+        graphics.restartButton.addImagesToScene(scene: scene)
         
         if levelId != levelId5 {
-            flag.addImage(image: arubanFlag)
-            flag.setZPosition(zPos: -1)
-            flag.setSize(size: CGSize(width: scene.size.width / 5, height: scene.size.height / 5))
-            flag.setPosition(position: CGPoint(x: scene.size.width - flag.getSize().width, y: scene.size.height * 0.75 - flag.getSize().height))
-            flag.addImagesToScene(scene: scene)
+            graphics.flag.addImage(image: arubanFlag)
+            graphics.flag.setZPosition(zPos: -1)
+            graphics.flag.setSize(size: CGSize(width: scene.size.width / 5, height: scene.size.height / 5))
+            graphics.flag.setPosition(position: CGPoint(x: scene.size.width - graphics.flag.getSize().width, y: scene.size.height * 0.75 - graphics.flag.getSize().height))
+            graphics.flag.addImagesToScene(scene: scene)
         }
         else {
-            flag.addImage(image: dutchFlag)
-            flag.setZPosition(zPos: -1)
-            flag.setSize(size: CGSize(width: scene.size.width / 5, height: scene.size.height / 5))
-            flag.setPosition(position: CGPoint(x: scene.size.width - flag.getSize().width, y: scene.size.height * 0.75 - flag.getSize().height))
-            flag.addImagesToScene(scene: scene)
+            graphics.flag.addImage(image: dutchFlag)
+            graphics.flag.setZPosition(zPos: -1)
+            graphics.flag.setSize(size: CGSize(width: scene.size.width / 5, height: scene.size.height / 5))
+            graphics.flag.setPosition(position: CGPoint(x: scene.size.width - graphics.flag.getSize().width, y: scene.size.height * 0.75 - graphics.flag.getSize().height))
+            graphics.flag.addImagesToScene(scene: scene)
         }
         
         pauseButtonNode.setScale(1)
@@ -476,29 +297,29 @@ class GameLevel {
         
         let defaults = UserDefaults()
         if levelId == levelId1 {
-            highScore = defaults.integer(forKey: highScoreId1)
+            graphics.highScore = defaults.integer(forKey: highScoreId1)
         }
         if levelId == levelId2 {
-            highScore = defaults.integer(forKey: highScoreId2)
+            graphics.highScore = defaults.integer(forKey: highScoreId2)
         }
         if levelId == levelId3 {
-            highScore = defaults.integer(forKey: highScoreId3)
+            graphics.highScore = defaults.integer(forKey: highScoreId3)
         }
         if levelId == levelId4 {
-            highScore = defaults.integer(forKey: highScoreId4)
+            graphics.highScore = defaults.integer(forKey: highScoreId4)
         }
         if levelId == levelId5 {
-            highScore = defaults.integer(forKey: highScoreId5)
+            graphics.highScore = defaults.integer(forKey: highScoreId5)
         }
 
-        isAlreadyUnlocked = highScore >= numberOfPointsRequiredToUnlockLevel
+        isAlreadyUnlocked = graphics.highScore >= numberOfPointsRequiredToUnlockLevel
         muted = defaults.bool(forKey: String(levelId) + gameIsMuted)
         playing = defaults.bool(forKey: String(levelId) + gameIsPlaying)
         
-        muteBubbles(bubbles : player.bubbles, mute : muted)
-        muteBubbles(bubbles : frito.bubbles, mute : muted)
-        muteBubbles(bubbles : brownie.bubbles, mute : muted)
-        muteBubbles(bubbles : misty.bubbles, mute : muted)
+        muteBubbles(bubbles : graphics.player.bubbles, mute : muted)
+        muteBubbles(bubbles : graphics.frito.bubbles, mute : muted)
+        muteBubbles(bubbles : graphics.brownie.bubbles, mute : muted)
+        muteBubbles(bubbles : graphics.misty.bubbles, mute : muted)
         
         if !playing {
             addLives()
@@ -508,16 +329,6 @@ class GameLevel {
     }
     
     func initLives() {
-        for j in 0..<numLives {
-            let lifeImage = SKSpriteNode(imageNamed: heartKey)
-            lifeImage.setScale(1)
-            lifeImage.size = CGSize(width: scene.size.width / 28, height: scene.size.height / 28)
-            let sizeLoc = CGSize(width: scene.size.width / 28, height: scene.size.height / 28)
-            lifeImage.position = CGPoint(x: scene.size.width / 2 + CGFloat(j) * sizeLoc.width + 5, y: CGFloat(scene.size.height * 0.75) - sizeLoc.height)
-            lifeImage.zPosition = zPosLives
-            lifeImage.removeFromParent()
-            scene.addChild(lifeImage)
-        }
     }
     
     func addLives() {
@@ -531,22 +342,22 @@ class GameLevel {
     }
     
     func updatePlayerOcean() {
-        player.update()
+        graphics.player.update()
         
-        player.bubbles.popBubbles(pos : player.getPosition(), scene : scene, sound : [bubblesSound])
+        graphics.player.bubbles.popBubbles(pos : graphics.player.getPosition(), scene : scene, sound : [bubblesSound])
     }
     
     func initBackground(scene : SKScene, numBackgrounds : Int, string1 : String) {
-        blackBackgroundTop.size = CGSize(width: scene.size.width, height: scene.size.height / 4)
-        blackBackgroundTop.position = CGPoint(x: scene.size.width / 2, y: scene.size.height * 0.75 + scene.size.height / 8)
-        blackBackgroundTop.zPosition = zPosBlackCoverImages
-        blackBackgroundBottom.size = CGSize(width: scene.size.width, height: scene.size.height / 4)
-        blackBackgroundBottom.position = CGPoint(x: scene.size.width / 2, y: scene.size.height * 0.25 - scene.size.height / 8)
-        blackBackgroundBottom.zPosition = zPosBlackCoverImages
-        blackBackgroundTop.removeFromParent()
-        blackBackgroundBottom.removeFromParent()
-        scene.addChild(blackBackgroundTop)
-        scene.addChild(blackBackgroundBottom)
+        graphics.blackBackgroundTop.size = CGSize(width: scene.size.width, height: scene.size.height / 4)
+        graphics.blackBackgroundTop.position = CGPoint(x: scene.size.width / 2, y: scene.size.height * 0.75 + scene.size.height / 8)
+        graphics.blackBackgroundTop.zPosition = zPosBlackCoverImages
+        graphics.blackBackgroundBottom.size = CGSize(width: scene.size.width, height: scene.size.height / 4)
+        graphics.blackBackgroundBottom.position = CGPoint(x: scene.size.width / 2, y: scene.size.height * 0.25 - scene.size.height / 8)
+        graphics.blackBackgroundBottom.zPosition = zPosBlackCoverImages
+        graphics.blackBackgroundTop.removeFromParent()
+        graphics.blackBackgroundBottom.removeFromParent()
+        scene.addChild(graphics.blackBackgroundTop)
+        scene.addChild(graphics.blackBackgroundBottom)
         
         self.numBackgrounds = numBackgrounds
         
@@ -557,13 +368,13 @@ class GameLevel {
             
             background.size = CGSize(width: scene.size.width, height: scene.size.height / 2)
                         
-            widthBackground = background.size.width
+            graphics.widthBackground = background.size.width
             
             background.anchorPoint = CGPoint(x: 0, y: 0.5)
-            background.position = CGPoint(x: widthBackground * CGFloat(i) - CGFloat(numberOfPixelsOfOverlapBetweenBackgroundImages * i), y: scene.size.height / 2)
+            background.position = CGPoint(x: graphics.widthBackground * CGFloat(i) - CGFloat(numberOfPixelsOfOverlapBetweenBackgroundImages * i), y: scene.size.height / 2)
             
             background.zPosition = 0
-            backgrounds.append(background)
+            graphics.backgrounds.append(background)
             background.removeFromParent()
             scene.addChild(background)
         }
@@ -584,24 +395,9 @@ class GameLevel {
             let posY = getRandomNumber() * scene.size.height / 2 * factor + scene.size.height / 4 + 1/2 * (1 - factor) * scene.size.height / 2
             
             cheesyBite.setPosition(position: CGPoint(x: posX, y: posY))
-            cheesyBite.setVelocity(velX: -backgroundSpeed, velY: 0)
+            cheesyBite.setVelocity(velX: -graphics.backgroundSpeed, velY: 0)
             cheesyBite.pointsForSnack = points
             snacks.append(cheesyBite)
-        }
-    }
-    
-    func updateBackgrounds(backgrounds : [SKSpriteNode], velX : CGFloat) {
-
-        let n = backgrounds.count
-        
-        for j in 0..<n {
-            backgrounds[j].position.x += velX
-            if(j > 0 && backgrounds[j - 1].position.x < 0) {
-                backgrounds[j].position.x = backgrounds[j - 1].position.x + backgrounds[j - 1].size.width - 10
-            }
-            if(j == n - 1 && backgrounds[j].position.x < 0) {
-                backgrounds[0].position.x = backgrounds[j].position.x + backgrounds[j].size.width - 10
-            }
         }
     }
     
@@ -627,27 +423,8 @@ class GameLevel {
             
             bird.addImagesToScene(scene : scene)
 
-            birds.append(bird)
+            self.graphics.birds.append(bird)
             
-        }
-    }
-    
-    func addJellyfish(images : [String]) {
-        for j in 0..<numJellyFish {
-            
-            var jellyImages = [String]()
-            
-            for x in images {
-                jellyImages.append(x)
-            }
-            
-            let zPosition = CGFloat(j) + minZPosJellyFish
-            let size = CGSize(width: scene.size.width / 10, height: scene.size.height / 10)
-            
-            let jelly = JellyFish(jellyFish: jellyImages, size: size, zPos: zPosition)
-            jelly.addImagesToScene(scene : scene)
-
-            jellyfishes.append(jelly)
         }
     }
     
@@ -659,12 +436,12 @@ class GameLevel {
         if(getPlayerId(player: playerId) == PlayerId.GUAPO) {
             playerImages.append(guapoImage1)
             playerImages.append(guapoImage2)
-            player = createHero(images: playerImages, imageHit: guapoHitImage)
+            graphics.player = createHero(images: playerImages, imageHit: guapoHitImage)
         }
         if(getPlayerId(player: playerId) == PlayerId.TUTTI) {
             playerImages.append(tuttiImage1)
             playerImages.append(tuttiImage2)
-            player = createHero(images: playerImages, imageHit: tuttiHitImage)
+            graphics.player = createHero(images: playerImages, imageHit: tuttiHitImage)
         }
     }
     
@@ -691,7 +468,7 @@ class GameLevel {
         
         if(getPlayerId(player: playerId) == PlayerId.GUAPO) {
             playerImages.append(guapoSnorkelImage)
-            player = Player()
+            graphics.player = Player()
                 .images(images: playerImages)
                 .imageHit(imageHit: guapoSnorkelHitImage)
                 .size(size: size)
@@ -700,28 +477,27 @@ class GameLevel {
         
         if(getPlayerId(player: playerId) == PlayerId.TUTTI) {
             playerImages.append(tuttiSnorkelImage)
-            player = Player()
+            graphics.player = Player()
                 .images(images: playerImages)
                 .imageHit(imageHit: tuttiSnorkelHitImage)
                 .size(size: size)
                 .zPos(zPos: zPosPlayer)
         }
         
-        player.setPosition(position: CGPoint(x : scene.size.width / 5, y : scene.size.height / 2))
-        player.setHeight(height : scene.size.height)
-        player.setWidth(width : scene.size.width)
+        graphics.player.setPosition(position: CGPoint(x : scene.size.width / 5, y : scene.size.height / 2))
+        graphics.player.setHeight(height : scene.size.height)
+        graphics.player.setWidth(width : scene.size.width)
         
-        player.bubbles.addBubble(imageId: bubbleImage)
-        player.bubbles.addBubble(imageId: bubbleImage)
-        player.bubbles.addBubble(imageId: bubbleImage)
+        graphics.player.bubbles.addBubble(imageId: bubbleImage)
+        graphics.player.bubbles.addBubble(imageId: bubbleImage)
+        graphics.player.bubbles.addBubble(imageId: bubbleImage)
         
-        for x in player.bubbles.bubblez {
+        for x in graphics.player.bubbles.bubblez {
             x.removeFromParent()
             scene.addChild(x)
         }
-        player.addImagesToScene(scene : scene)
+        graphics.player.addImagesToScene(scene : scene)
     }
-    
     
     private func getPlayerId(player: Int) -> PlayerId {
         switch player {
@@ -735,428 +511,56 @@ class GameLevel {
     }
     
     func addSnacks(scene : SKScene) {
-        initSnack(bite : cheesyBiteImage, points: pointsForCheesyBite, numCheesyBites : Parameters.numberOfCheesyBites, snacks : &cheesyBites, scene : scene)
+        initSnack(bite : cheesyBiteImage, points: pointsForCheesyBite, numCheesyBites : Parameters.numberOfCheesyBites, snacks : &graphics.cheesyBites, scene : scene)
         
-        initSnack(bite : paprikaImage, points: pointsForPaprika, numCheesyBites : totalNumberOfPaprika, snacks : &paprikas, scene : scene)
+        initSnack(bite : paprikaImage, points: pointsForPaprika, numCheesyBites : totalNumberOfPaprika, snacks : &graphics.paprikas, scene : scene)
         
-        initSnack(bite : broccoliImage, points: pointsForBroccoli, numCheesyBites : totalNumberOfBroccoli, snacks : &broccolis, scene : scene)
+        initSnack(bite : broccoliImage, points: pointsForBroccoli, numCheesyBites : totalNumberOfBroccoli, snacks : &graphics.broccolis, scene : scene)
         
-        initSnack(bite : cucumberImage, points: pointsForCucumber, numCheesyBites : totalNumberOfCucumbers, snacks : &cucumbers, scene : scene)
+        initSnack(bite : cucumberImage, points: pointsForCucumber, numCheesyBites : totalNumberOfCucumbers, snacks : &graphics.cucumbers, scene : scene)
         
-        initSnack(bite : begginStripImage, points: pointsBegginStrip, numCheesyBites : totalNumberOfBegginStrips, snacks : &begginStrips, scene : scene)
+        initSnack(bite : begginStripImage, points: pointsBegginStrip, numCheesyBites : totalNumberOfBegginStrips, snacks : &graphics.begginStrips, scene : scene)
         
         // Move beggin strips out of bounds
-        for strip in begginStrips {
+        for strip in graphics.begginStrips {
             strip.setPosition(position: CGPoint(x : -1000, y : 0))
         }
     }
     
-    func updateSnack(snacks : [Snack], backgroundSpeed : CGFloat) {
-        for snack in snacks {
-            snack.update(scene: scene)
-            snack.setVelocity(velX: -backgroundSpeed, velY: 0)
-            
-            if objectCollidedWithPlayer(bird : snack, player : player, den : 2.5) {
-                snack.setPosition(position: CGPoint(x: -scene.size.width * 10, y: 0))
-                
-                if muted == false {
-                    playSound(scene: scene, sound: [tuttiEatingKnaagstokSound])
-                }
-                
-                gameScore += snack.pointsForSnack
-            }
-        }
-    }
-    
-    func popFrito() {
-        if frito.appeared && muted == false && frito.playSound {
-            playSound(scene: scene, sound: [fritoAppearingSound])
-            frito.playSound = false
-        }
-
-        frito.updatePosition(scene: scene)
-        
-        if objectCollidedWithPlayer(bird : frito, player : player, den : 2.5) {
-            frito.hit = true
-
-            if muted == false && frito.playHitSound {
-                playSound(scene: scene, sound: [fritoSound])
-                frito.playHitSound = false
-            }
-        }
-    }
-    
-    func popBrownie() {
-        if brownie.appeared && muted == false && brownie.playSound {
-            playSound(scene: scene, sound: [brownieAppearingSound])
-            brownie.playSound = false
-        }
-
-        brownie.update(scene: scene)
-        
-        if objectCollidedWithPlayer(bird : brownie, player : player, den : 2.5) {
-            brownie.hit = true
-
-            if muted == false && brownie.playHitSound {
-                playSound(scene: scene, sound: [brownieSound])
-                brownie.playHitSound = false
-            }
-        }
-    }
-    
-    func popMisty() {
-        misty.popMisty(misty.height, backgroundSpeed)
-        
-        if objectCollidedWithPlayer(bird : misty, player : player, den : 2.5) {
-            misty.hit = true
-            
-            if muted == false && misty.playSound {
-                misty.playSound = false
-                playSound(scene: scene, sound: [mistySound])
-            }
-        }
-        
-        if gameScore >= playMisty {
-            playMisty += 200 + Int.random(in: 10..<40)
-            playMistyFcn()
-        }
-    }
-    
-    func playMistyFcn() {
-        misty.play(bool: Bool.random())
-        if misty.top {
-            misty.setPosition(position: CGPoint(x : misty.width / 2, y : misty.height * 0.75 + misty.images[0].size.height / 2))
-            misty.setVelMisty(vx: misty.velX, vy: -backgroundSpeed)
-        }
-        else {
-            misty.setPosition(position: CGPoint(x : misty.width / 2, y : misty.height * 0.25 - misty.images[0].size.height / 2))
-            misty.setVelMisty(vx: misty.velX, vy: backgroundSpeed)
-        }
-        
-        misty.playSound = true
-        misty.hit = false
-        
-        if muted == false {
-            playSound(scene: scene, sound: [mistyAppearingSound])
-        }
-    }
-    
     func popFritoOcean() {
-        if frito.appeared  {
+        if graphics.frito.appeared  {
 
-            if muted == false && frito.playSound {
+            if muted == false && graphics.frito.playSound {
                 playSound(scene: scene, sound: [fritoAppearingSound])
-                frito.playSound = false
+                graphics.frito.playSound = false
             }
             
-            frito.bubbles.popBubbles(pos: frito.getPosition(), scene : scene, sound : [bubblesSound])
+            graphics.frito.bubbles.popBubbles(pos: graphics.frito.getPosition(), scene : scene, sound : [bubblesSound])
         }
         else {
-            frito.bubbles.setPosition(pos: CGPoint(x: -1000, y: 0))
+            graphics.frito.bubbles.setPosition(pos: CGPoint(x: -1000, y: 0))
         }
 
-        frito.updatePosition(scene: scene)
+        graphics.frito.updatePosition(scene: scene)
         
-        if objectCollidedWithPlayer(bird : frito, player : player, den : 2.5) {
-            frito.hit = true
+        if objectCollidedWithPlayer(bird : graphics.frito, player : graphics.player, den : 2.5) {
+            graphics.frito.hit = true
 
-            if muted == false && frito.playHitSound {
+            if muted == false && graphics.frito.playHitSound {
                 playSound(scene: scene, sound: [fritoSound])
-                frito.playHitSound = false
+                graphics.frito.playHitSound = false
             }
         }
     }
-    
-    func popBrownieOcean() {
-        if brownie.appeared  {
 
-            if muted == false && brownie.playSound {
-                playSound(scene: scene, sound: [brownieAppearingSound])
-                brownie.playSound = false
-            }
-            
-            brownie.bubbles.popBubbles(pos: brownie.getPosition(), scene : scene, sound : [bubblesSound])
-
-        }
-        else {
-            brownie.bubbles.setPosition(pos: CGPoint(x: -1000, y: 0))
-        }
-
-        brownie.update(scene: scene)
-        
-        if objectCollidedWithPlayer(bird : brownie, player : player, den : 2.5) {
-            brownie.hit = true
-
-            if muted == false && brownie.playHitSound {
-                playSound(scene: scene, sound: [brownieSound])
-                brownie.playHitSound = false
-            }
-        }
-    }
-    
-    func popMistyOcean() {
-        misty.popMisty(misty.height, backgroundSpeed)
-        
-        if objectCollidedWithPlayer(bird : misty, player : player, den : 2.5) {
-            misty.hit = true
-            
-            if muted == false && misty.playSound {
-                playSound(scene: scene, sound: [mistySound])
-                misty.playSound = false
-            }
-        }
-        
-        if gameScore >= playMisty {
-            playMisty += 20 + Int.random(in: 10..<40)
-            misty.play(bool: Bool.random())
-            playMistyFcn()
-        }
-        else {
-            misty.bubbles.setPosition(pos: CGPoint(x: -1000, y: 0))
-        }
-    }
-    
-    func updateJellyfish() {
-        let defaults = UserDefaults()
-        
-        for jelly in jellyfishes {
-            jelly.update(scene : scene, backgroundSpeed: -backgroundSpeed)
-            
-            if objectCollidedWithPlayer(bird : jelly, player : player, den : 3.5) {
-
-                if muted == false {
-                    playSound(scene: scene, sound: [endSound])
-                }
-                
-                self.currentGameState = GameState.afterGame
-                
-                if !hitBird {
-                    hitBird = true
-                    numLives = numLives - 1
-                }
-                
-                defaults.set(numLives, forKey: String(levelId) + numberOfLivesKey)
-                
-                if(numLives < 0) {
-                    numLives = 0
-                    defaults.set(numLives, forKey: String(levelId) + numberOfLivesKey)
-                    gameOver()
-                }
-                else if(numLives >= 0) {
-                    showRestartContinue()
-                }
-            }
-        }
-    }
-    
-    func updateFish() {
-        fish1.update(scene : scene, backgroundSpeed : -backgroundSpeed)
-        fish2.updatePosition(scene : scene, backgroundSpeed : -backgroundSpeed)
-        fish3.updatePosition(scene : scene, backgroundSpeed : -backgroundSpeed)
-        fish4.updatePosition(scene : scene, backgroundSpeed : -backgroundSpeed)
-        fish5.updatePositionGoingInOppositeDirection(scene : scene, backgroundSpeed : backgroundSpeed)
-        fish6.updatePositionGoingInOppositeDirection(scene : scene, backgroundSpeed : backgroundSpeed)
-    }
-    
-    func updateBlowFish() {
-        blowFish.update(scene: scene, at: 5)
-        
-        if objectCollidedWithPlayer(bird : blowFish, player : player, den : 3.5) {
-
-            if muted == false && blowFish.playHitSound {
-                playSound(scene: scene, sound: [blowFishSound])
-            }
-            blowFish.playSound = false
-            blowFish.playHitSound = false
-            blowFish.hit = true
-        }
-    }
-    
-    func updatePlayer() {
-        player.update()
-        
-        player.cape1.position.x = player.posX - player.cape1.size.width / 2
-        player.cape1.position.y = player.posY
-        player.cape2.position.x = player.posX - player.cape2.size.width / 2
-        player.cape2.position.y = player.posY
-        
-        if counter < 5 {
-            if toSwitch {
-                player.cape1.zPosition = 2
-                player.cape2.zPosition = -1
-            }
-            else {
-                player.cape1.zPosition = -1
-                player.cape2.zPosition = 2
-            }
-            counter += 1
-        }
-        else {
-            toSwitch = !toSwitch
-            counter = 1
-        }
-    }
-    
-    func updateBirds() {
-        let defaults = UserDefaults()
-        
-        for bird in birds {
-            bird.update(scene : scene, backgroundSpeed : -backgroundSpeed)
-
-            if objectCollidedWithPlayer(bird : bird, player : player, den : 3.5) {
-
-                if muted == false {
-                    playSound(scene: scene, sound: [endSound])
-                }
-                
-                self.currentGameState = GameState.afterGame
-                
-                if !hitBird {
-                    hitBird = true
-                    numLives = numLives - 1
-                }
-                
-                defaults.set(numLives, forKey: String(levelId) + numberOfLivesKey)
-                
-                if(numLives < 0) {
-                    numLives = 0
-                    defaults.set(numLives, forKey: String(levelId) + numberOfLivesKey)
-                    gameOver()
-                }
-                else if(numLives >= 0) {
-                    if(levelId == levelId1) {
-                        showRestartContinue()
-                    }
-                    if(levelId == levelId2) {
-                        showRestartContinue()
-                    }
-                    if(levelId == levelId3) {
-                        showRestartContinue()
-                    }
-                    if(levelId == levelId5) {
-                        showRestartContinue()
-                    }
-                }
-            }
-        }
-    }
-    
-    func sunPopup() {
-        if gameScore >=  numberOfPointsRequiredToUnlockLevel && !isAlreadyUnlocked && sunPopupFrameCounter <= numberOfFramesSunPopup {
-            sunPopupFrameCounter += 1
-            if muted == false && playSunPopup {
-                playSound(scene: scene, sound: [sunPopupSound])
-                playSunPopup = false
-            }
-            
-            sunPopupNode.zPosition = zPosSunPopup
-        }
-        else {
-            //Reset sun popup zposition
-            sunPopupNode.zPosition = -1
-        }
-    }
-    
-    func flagPopup() {
-        
-        if gameScore == 0 && startSave {
-            startSave = false
-            
-            // Spawn thread to save state
-            class MyThread: Thread {
-                var base : GameLevel
-                init(base : GameLevel) {
-                    self.base = base
-                }
-                override func main() {
-                    base.saveState()
-                }
-            }
-
-            let thread = MyThread(base : self)
-            thread.start()
-        
-        }
-        
-        if gameScore >= flagNum * flagFrequency && flagPopupFrameCounter <= numberOfFramesFlagPopup && numLives > 0 {
-            
-            flagPopupFrameCounter += 1
-            
-            if muted == false && playFlagPopup {
-                playSound(scene: scene, sound: [sunPopupSound])
-                playFlagPopup = false
-            }
-            
-            flag.setZPosition(zPos: zPosFlagPopup)
-            
-            if startThread {
-                startThread = false
-                
-                // Spawn thread to save state
-                class MyThread: Thread {
-                    var base : GameLevel
-                    init(base : GameLevel) {
-                        self.base = base
-                    }
-                    override func main() {
-                        base.saveState()
-                    }
-                }
-
-                let thread = MyThread(base : self)
-                thread.start()
-            }
-        }
-        else if flagPopupFrameCounter > numberOfFramesFlagPopup {
-            
-            flagNum += 1
-            flagPopupFrameCounter = 0
-            playFlagPopup = true
-            startThread = true
-            
-            //Reset flag popup zposition
-            flag.setZPosition(zPos: -1)
-        }
-    }
-    
-    func updateNumberOfBirds() {
-        if gameScore >= boundTracker * numberOfPointsWhenVillainsAppear && birds.count < Parameters.totalNumberOfVillains {
-            
-            let imageNames = self.birds[0].imageNames
-            let size = self.birds[0].images[0].size
-            
-            let bird = Bird(birds: imageNames, size: size, zPos: CGFloat(birds.count) + minZPosVillains)
-            bird.addImagesToScene(scene : scene)
-            
-            birds.append(bird)
-            
-            boundTracker += 1
-        }
-    }
-    
-    func updateNumJelly() {
-        if gameScore >= boundTracker * numberOfPointsWhenVillainsAppear && jellyfishes.count < Parameters.totalNumberOfVillains {
-            
-            let imageNames = self.jellyfishes[0].imageNames
-            let size = self.jellyfishes[0].images[0].size
-            
-            let jelly = JellyFish(jellyFish: imageNames, size: size, zPos: CGFloat(jellyfishes.count) + minZPosVillains)
-            jelly.addImagesToScene(scene : scene)
-            
-            jellyfishes.append(jelly)
-            
-            boundTracker += 1
-        }
-    }
-    
     func runContinue(highScoreId: String, gameLevel : SKScene) {
         let defaults = UserDefaults()
-        if gameScore > highScore {
+        if gameScore > graphics.highScore {
             defaults.set(gameScore, forKey: highScoreId)
         }
         
-        player.setZPosition(zPos: -1)
-        player.setZPositionHit(zPos: zPosPlayer)
+        graphics.player.setZPosition(zPos: -1)
+        graphics.player.setZPositionHit(zPos: zPosPlayer)
         var start = true
         startScene(scene: scene, start: &start, gameLevel: gameLevel)
     }
@@ -1168,12 +572,12 @@ class GameLevel {
     func runGameOver(highScoreId : String) {
         let defaults = UserDefaults()
         
-        if gameScore > highScore {
+        if gameScore > graphics.highScore {
             defaults.set(gameScore, forKey: highScoreId)
         }
         
-        player.setZPosition(zPos: -1)
-        player.setZPositionHit(zPos: zPosPlayer)
+        graphics.player.setZPosition(zPos: -1)
+        graphics.player.setZPositionHit(zPos: zPosPlayer)
         
         playing = false
         defaults.set(playing, forKey: String(levelId) + gameIsPlaying)
@@ -1185,17 +589,15 @@ class GameLevel {
     }
     
     func showRestartContinue() {
-        
-        player.setZPosition(zPos: -1)
-        player.setZPositionHit(zPos: zPosPlayer)
-        continueButton.images[0].zPosition = zPosContinueButton
-        restartButton.images[0].zPosition = zPosStartButton
+        graphics.player.setZPosition(zPos: -1)
+        graphics.player.setZPositionHit(zPos: zPosPlayer)
+        graphics.continueButton.images[0].zPosition = zPosContinueButton
+        graphics.restartButton.images[0].zPosition = zPosStartButton
         
         endGame()
     }
     
     func changeScene() {
-        
         let sceneToMoveTo = MainMenuScene(size: scene.size)
         sceneToMoveTo.scaleMode = scene.scaleMode
         let myTransition = SKTransition.fade(withDuration: 0.5)
@@ -1222,7 +624,7 @@ class GameLevel {
         
         if currentGameState == GameState.preGame {
             startGame()
-            player.setVelocity(velX: 0, velY: 0)
+            graphics.player.setVelocity(velX: 0, velY: 0)
         }
         else if currentGameState == GameState.inGame {
             
@@ -1238,13 +640,12 @@ class GameLevel {
                     pauseGame()
                 }
                 else if touchInGameArea {
-                    player.setPosition(position: pointOfTouch)
-                    player.setVelocity(velX: 0, velY: 0)
+                    graphics.player.setPosition(position: pointOfTouch)
+                    graphics.player.setVelocity(velX: 0, velY: 0)
                 }
             }
         }
         else if currentGameState == GameState.gamePaused {
-            
             for touch: AnyObject in touches {
                 let pointOfTouch = touch.location(in: scene)
                 
@@ -1259,69 +660,16 @@ class GameLevel {
             for touch: AnyObject in touches {
                 let point = touch.location(in: scene)
                 
-                let p1 = continueButton.images[0].position
-                let w1 = continueButton.images[0].size.width / 2
-                let h1 = continueButton.images[0].size.height / 2
-                let p2 = restartButton.images[0].position
-                let w2 = restartButton.images[0].size.width / 2
-                let h2 = restartButton.images[0].size.height / 2
-                if point.x > p1.x - w1 && point.x < p1.x + w1 && point.y > p1.y - h1 && point.y < p1.y + h1 {
-                    continueButton.imagesHit[0].zPosition = zPosContinueButton
-                    continueButton.images[0].zPosition = -1
-                    let defaults = UserDefaults()
-                    playing = true
-                    defaults.set(playing, forKey: String(levelId) + gameIsPlaying)
-                    
-                    if levelId == levelId1 {
-                        runContinue(highScoreId: highScoreId1, gameLevel: GameLevel1(size: scene.size))
-                    }
-                    if levelId == levelId2 {
-                        runContinue(highScoreId: highScoreId2, gameLevel: GameLevel2(size: scene.size))
-                    }
-                    if levelId == levelId3 {
-                        runContinue(highScoreId: highScoreId3, gameLevel: GameLevel3(size: scene.size))
-                    }
-                    if levelId == levelId4 {
-                        runContinue(highScoreId: highScoreId4, gameLevel: GameLevel4(size: scene.size))
-                    }
-                    if levelId == levelId5 {
-                        runContinue(highScoreId: highScoreId5, gameLevel: GameLevel5(size: scene.size))
-                    }
-                }
-                
-                if point.x > p2.x - w2 && point.x < p2.x + w2 && point.y > p2.y - h2 && point.y < p2.y + h2 {
-                    restartButton.imagesHit[0].zPosition = zPosStartButton
-                    restartButton.images[0].zPosition = -1
-                    let defaults = UserDefaults()
-                    playing = false
-                    defaults.set(playing, forKey: String(levelId) + gameIsPlaying)
-                    if levelId == levelId1 {
-                        runRestart(highScoreId: highScoreId1)
-                    }
-                    if levelId == levelId2 {
-                        runRestart(highScoreId: highScoreId2)
-                    }
-                    if levelId == levelId3 {
-                        runRestart(highScoreId: highScoreId3)
-                    }
-                    if levelId == levelId4 {
-                        runRestart(highScoreId: highScoreId4)
-                    }
-                    if levelId == levelId5 {
-                        runRestart(highScoreId: highScoreId5)
-                    }
-                }
             }
         }
     }
     
     func touchesMoved(_ touches: Set<UITouch>, with _: UIEvent?) {
-        
-        self.ro = player.images[0].position
+        self.ro = graphics.player.images[0].position
         
         if currentGameState == GameState.preGame {
             startGame()
-            player.setVelocity(velX: 0, velY: 0)
+            graphics.player.setVelocity(velX: 0, velY: 0)
         }
         else if currentGameState == GameState.inGame && moveCounter > 10 {
             
@@ -1338,10 +686,10 @@ class GameLevel {
                     // Do nothing
                 }
                 else if touchInGameArea {
-                    player.setPosition(position: pointOfTouch)
+                    graphics.player.setPosition(position: pointOfTouch)
                     
-                    var velX = (self.player.images[0].position.x - self.ro.x) / 2
-                    var velY = (self.player.images[0].position.y - self.ro.y) / 2
+                    var velX = (graphics.player.images[0].position.x - self.ro.x) / 2
+                    var velY = (graphics.player.images[0].position.y - self.ro.y) / 2
                     
                     let minSpeed2 = 3.1
                     let speed2 = velX * velX + velY * velY
@@ -1351,7 +699,7 @@ class GameLevel {
                         velY = 0
                     }
                     
-                    player.setVelocity(velX: velX, velY: velY)
+                    graphics.player.setVelocity(velX: velX, velY: velY)
                 }
             }
         }

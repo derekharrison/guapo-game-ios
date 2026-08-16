@@ -12,7 +12,7 @@ class Player : GameObject {
     var cape1 : SKSpriteNode
     var cape2 : SKSpriteNode
     var capeCounter = 1
-    
+    var toSwitch = false
     var positions: [Position] = []
     
     override init() {
@@ -53,7 +53,30 @@ class Player : GameObject {
     override func update() {
         super.update()
         updatePositionPlayer()
-        updateImage(numFrames: numberOfFramesBird)
+        updateImage(numFrames: numOfFramesForUpdate)
+        
+        if(State.levelId != LevelId.OCEAN) {
+            self.cape1.position.x = self.posX - self.cape1.size.width / 2
+            self.cape1.position.y = self.posY
+            self.cape2.position.x = self.posX - self.cape2.size.width / 2
+            self.cape2.position.y = self.posY
+            
+            if capeCounter < 5 {
+                if toSwitch {
+                    self.cape1.zPosition = 2
+                    self.cape2.zPosition = -1
+                }
+                else {
+                    self.cape1.zPosition = -1
+                    self.cape2.zPosition = 2
+                }
+                capeCounter += 1
+            }
+            else {
+                toSwitch = !toSwitch
+                capeCounter = 1
+            }
+        }
     }
     
     override func addImagesToScene(scene : SKScene) {

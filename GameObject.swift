@@ -225,7 +225,7 @@ class GameObject {
     func advanceFrameCounterHit() {
         frameCounterHit += 1
         
-        if(frameCounterHit < numberOfFramesBird) {
+        if(frameCounterHit < numOfFramesForUpdate) {
             displayImageHit(imageId: imageIdHit)
         }
         else {

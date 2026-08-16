@@ -42,7 +42,7 @@ let pointsForPaprika = 1
 let pointsForBroccoli = 3
 let pointsBegginStrip = 5
 
-let numberOfFramesBird = 8
+let numOfFramesForUpdate = 8
 let numberOfFramesJellyFish = 15
 let numberOfFramesSunPopup = 180
 let numberOfFramesChange = 5

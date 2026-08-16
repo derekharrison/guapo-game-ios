@@ -12,7 +12,7 @@ import SpriteKit
 class Fish : GameObject {
     func update(scene : SKScene, backgroundSpeed : CGFloat) {
         super.update()
-        updateImage(numFrames: numberOfFramesBird)
+        updateImage(numFrames: numOfFramesForUpdate)
         updatePosition(scene: scene, backgroundSpeed: backgroundSpeed)
     }
     
@@ -39,7 +39,7 @@ class Fish : GameObject {
             self.hit = false
         }
         updateImagePositions()
-        updateImage(numFrames: numberOfFramesBird)
+        updateImage(numFrames: numOfFramesForUpdate)
         advanceFrameCounter()
     }
     

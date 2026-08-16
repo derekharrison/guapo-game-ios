@@ -79,7 +79,7 @@ class GameLevel {
         numBirds = 2
         self.scene = scene
         
-        addPlayer()
+        createPlayer()
         
         initCommon(scene: scene, id: id)
     }
@@ -651,32 +651,34 @@ class GameLevel {
         }
     }
     
-    func addPlayer() {
-        let size = CGSize(width: scene.size.width / 5, height: scene.size.height / 7.5)
-        
+    func createPlayer() {
         var playerImages : [String] = [String]()
-        
         let defaults = UserDefaults()
         let playerId = defaults.integer(forKey: "player_id")
         
-        if(playerId == 0) {
+        if(getPlayerId(player: playerId) == PlayerId.GUAPO) {
             playerImages.append(guapoImage1)
             playerImages.append(guapoImage2)
-            player = Player(images: playerImages, size: size, zPos: zPosPlayer)
-            player.addImageHit(image: guapoHitImage)
+            player = createHero(images: playerImages, imageHit: guapoHitImage)
         }
-        if(playerId == 1) {
+        if(getPlayerId(player: playerId) == PlayerId.TUTTI) {
             playerImages.append(tuttiImage1)
             playerImages.append(tuttiImage2)
-            player = Player(images: playerImages, size: size, zPos: zPosPlayer)
-            player.addImageHit(image: tuttiHitImage)
+            player = createHero(images: playerImages, imageHit: tuttiHitImage)
         }
-
-        player.addImagesToScene(scene : scene)
-        player.setVelocity(velX: 0, velY: 0)
-        player.setPosition(position: CGPoint(x : scene.size.width / 5, y : scene.size.height / 2))
-        player.setHeight(height : scene.size.height)
-        player.setWidth(width : scene.size.width)
+    }
+    
+    private func createHero(images : [String], imageHit : String) -> Player {
+        let size = CGSize(width: scene.size.width / 5, height: scene.size.height / 7.5)
+        return PlayerBuilder(scene: scene)
+            .images(images: images)
+            .imageHit(imageHit: imageHit)
+            .size(size: size)
+            .zPos(zPos: zPosPlayer)
+            .position(position: CGPoint(x : scene.size.width / 5, y : scene.size.height / 2))
+            .width(width: scene.size.width)
+            .height(height: scene.size.height)
+            .build()
     }
     
     func addPlayerOcean() {
@@ -687,23 +689,28 @@ class GameLevel {
         let defaults = UserDefaults()
         let playerId = defaults.integer(forKey: "player_id")
         
-        if playerId == 0 {
+        if(getPlayerId(player: playerId) == PlayerId.GUAPO) {
             playerImages.append(guapoSnorkelImage)
-            player = Player(images: playerImages, size: size, zPos: zPosPlayer)
-            player.addImageHit(image: guapoSnorkelHitImage)
+            player = Player()
+                .images(images: playerImages)
+                .imageHit(imageHit: guapoSnorkelHitImage)
+                .size(size: size)
+                .zPos(zPos: zPosPlayer)
         }
         
-        if playerId == 1 {
+        if(getPlayerId(player: playerId) == PlayerId.TUTTI) {
             playerImages.append(tuttiSnorkelImage)
-            player = Player(images: playerImages, size: size, zPos: zPosPlayer)
-            player.addImageHit(image: tuttiSnorkelHitImage)
+            player = Player()
+                .images(images: playerImages)
+                .imageHit(imageHit: tuttiSnorkelHitImage)
+                .size(size: size)
+                .zPos(zPos: zPosPlayer)
         }
         
-
-        player.setVelocity(velX: 0, velY: 0)
         player.setPosition(position: CGPoint(x : scene.size.width / 5, y : scene.size.height / 2))
         player.setHeight(height : scene.size.height)
         player.setWidth(width : scene.size.width)
+        
         player.bubbles.addBubble(imageId: bubbleImage)
         player.bubbles.addBubble(imageId: bubbleImage)
         player.bubbles.addBubble(imageId: bubbleImage)
@@ -713,6 +720,18 @@ class GameLevel {
             scene.addChild(x)
         }
         player.addImagesToScene(scene : scene)
+    }
+    
+    
+    private func getPlayerId(player: Int) -> PlayerId {
+        switch player {
+        case 0:
+            return PlayerId.GUAPO
+        case 1:
+            return PlayerId.TUTTI
+        default:
+            return PlayerId.NONE
+        }
     }
     
     func addSnacks(scene : SKScene) {

@@ -28,9 +28,6 @@ class GameObject {
     var bubbles : Bubbles
     var posX : CGFloat
     var posY : CGFloat
-    var cape1 : SKSpriteNode
-    var cape2 : SKSpriteNode
-    var capeCounter = 1
     
     init() {
         self.zPos = -1
@@ -48,8 +45,6 @@ class GameObject {
         self.bubbles = Bubbles()
         self.posX = -10000
         self.posY = 0
-        self.cape1 = SKSpriteNode(imageNamed: capeImage1)
-        self.cape2 = SKSpriteNode(imageNamed: capeImage2)
     }
     
     func update() {
@@ -144,16 +139,6 @@ class GameObject {
     }
     
     func addImagesToScene(scene : SKScene) {
-        self.cape1.setScale(1)
-        self.cape1.size = CGSize(width: scene.size.width / 12, height: scene.size.height / 10)
-        self.cape2.setScale(1)
-        self.cape2.size = CGSize(width: scene.size.width / 12, height: scene.size.height / 10)
-        
-        self.cape1.removeFromParent()
-        scene.addChild(self.cape1)
-        self.cape2.removeFromParent()
-        scene.addChild(self.cape2)
-        
         for x in self.images {
             x.removeFromParent()
             scene.addChild(x)

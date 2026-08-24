@@ -301,6 +301,10 @@ func objectsOverlap(l1: CGPoint ,r1: CGPoint, l2: CGPoint, r2: CGPoint) -> Bool 
 }
 
 func objectCollidedWithPlayer(bird : GameObject, player : Player, den : CGFloat) -> Bool {
+
+    if(bird.images.isEmpty) {
+        return false
+    }
     
     var l1 = bird.images[0].position
     var r1 = l1

@@ -12,14 +12,14 @@ import GameplayKit
 
 class GameLevel3: SKScene {
     
-    var base = GameLevel()
+    var base = GameScene()
 
     override func update(_ _: TimeInterval) {
         base.update()
     }
     
     override func didMove(to _: SKView) {
-        base.didMove(scene: self, id: levelId3)
+        base.createScene(scene: self, id: levelId3)
         
         State.levelId = LevelId.TRIP
         
@@ -27,21 +27,21 @@ class GameLevel3: SKScene {
         images.append(fritoImage)
         images.append(fritoHitImage)
         
-        base.initImagesFrito(images: images, height: self.size.height, width: self.size.width)
-        base.initBackground(scene: self, numBackgrounds: numberOfBackgroundImagesTripLevel, string1: backgroundTripLevelPrefix)
+        base.createFrito(images: images, height: self.size.height, width: self.size.width)
+        base.createBackgrounds(scene: self, numBackgrounds: numberOfBackgroundImagesTripLevel, string1: backgroundTripLevelPrefix)
         
         var imagesBrownie = [String]()
         imagesBrownie.append(brownieImage)
         imagesBrownie.append(brownieHitImage)
         
-        base.initImagesBrownie(images: imagesBrownie, height: self.size.height, width: self.size.width)
+        base.createBrownie(images: imagesBrownie, height: self.size.height, width: self.size.width)
         
         var imagesMisty = [String]()
         imagesMisty.append(mistyImage)
         imagesMisty.append(mistyHitImage)
         imagesMisty.append(mistyRotatedImage)
         imagesMisty.append(mistyRotatedHitImage)
-        base.initImagesMisty(images: imagesMisty, height: self.size.height, width: self.size.width)
+        base.createMisty(images: imagesMisty, height: self.size.height, width: self.size.width)
         
         var birdImages = [String]()
         
@@ -49,7 +49,7 @@ class GameLevel3: SKScene {
         birdImages.append(waraWaraImage2)
         birdImages.append(waraWaraImage3)
         
-        base.addBirds(images: birdImages)
+        base.createBirds(images: birdImages)
         
 //        if base.playing {
 //            base.getState()

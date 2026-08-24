@@ -27,9 +27,9 @@ class Update {
             updateNumberOfBirds()
         }
         else {
-            updateJellyFish()
-            
             updateNumberOfJellyFish()
+            
+            updateJellyFish()
         }
         
         updateSnacks()

@@ -77,36 +77,7 @@ class GraphicsBuilder {
         let width = scene.size.width
         let height = scene.size.height
         
-        addSnacks(scene : scene)
-        
-        graphics.continueButton.addImage(image: continueButtonNotPressed)
-        graphics.continueButton.addImageHit(image: continueButtonPressed)
-        graphics.continueButton.setPosition(position: CGPoint(x: scene.size.width / 2 - graphics.continueButton.getSize().width / 2, y: scene.size.height / 2))
-        graphics.continueButton.setZPosition(zPos: -1)
-        graphics.continueButton.setSize(size: CGSize(width: scene.size.width / 5, height: scene.size.height / 10))
-        graphics.continueButton.addImagesToScene(scene: scene)
-        
-        graphics.restartButton.addImage(image: restartButtonNotPressed)
-        graphics.restartButton.addImageHit(image: restartButtonPressed)
-        graphics.restartButton.setPosition(position: CGPoint(x: scene.size.width / 2 + graphics.restartButton.getSize().width / 2, y: scene.size.height / 2))
-        graphics.restartButton.setZPosition(zPos: -1)
-        graphics.restartButton.setSize(size: CGSize(width: scene.size.width / 5, height: scene.size.height / 10))
-        graphics.restartButton.addImagesToScene(scene: scene)
-        
-        if levelId != levelId5 {
-            graphics.flag.addImage(image: arubanFlag)
-            graphics.flag.setZPosition(zPos: -1)
-            graphics.flag.setSize(size: CGSize(width: scene.size.width / 5, height: scene.size.height / 5))
-            graphics.flag.setPosition(position: CGPoint(x: scene.size.width - graphics.flag.getSize().width, y: scene.size.height * 0.75 - graphics.flag.getSize().height))
-            graphics.flag.addImagesToScene(scene: scene)
-        }
-        else {
-            graphics.flag.addImage(image: dutchFlag)
-            graphics.flag.setZPosition(zPos: -1)
-            graphics.flag.setSize(size: CGSize(width: scene.size.width / 5, height: scene.size.height / 5))
-            graphics.flag.setPosition(position: CGPoint(x: scene.size.width - graphics.flag.getSize().width, y: scene.size.height * 0.75 - graphics.flag.getSize().height))
-            graphics.flag.addImagesToScene(scene: scene)
-        }
+        createSnacks(scene : scene)
         
         let defaults = UserDefaults()
         if levelId == levelId1 {
@@ -120,20 +91,45 @@ class GraphicsBuilder {
         }
         if levelId == levelId4 {
             graphics.highScore = defaults.integer(forKey: highScoreId4)
-            initFish(width: width, height: height)
+            createFish(width: width, height: height)
         }
         if levelId == levelId5 {
             graphics.highScore = defaults.integer(forKey: highScoreId5)
         }
-
-        muteBubbles(bubbles : graphics.player.bubbles, mute : muted)
-        muteBubbles(bubbles : graphics.frito.bubbles, mute : muted)
-        muteBubbles(bubbles : graphics.brownie.bubbles, mute : muted)
-        muteBubbles(bubbles : graphics.misty.bubbles, mute : muted)
-
+        
+        pauseButtonNode.setScale(1)
+        pauseButtonNode.size = CGSize(width: width / 28, height: height / 28)
+        pauseButtonNode.position = CGPoint(x: width - width / 12, y: height / 2 + height * 1.9 / 10)
+        pauseButtonNode.zPosition = zPosPauseButton
+        pauseButtonNode.removeFromParent()
+        scene.addChild(pauseButtonNode)
+        
+        playButtonNode.setScale(1)
+        playButtonNode.size = CGSize(width: width / 28, height: height / 28)
+        playButtonNode.position = pauseButtonNode.position
+        playButtonNode.zPosition = -1
+        playButtonNode.removeFromParent()
+        scene.addChild(playButtonNode)
+        
+        sunPopupNode.setScale(1)
+        sunPopupNode.size = CGSize(width: width / 7, height: height / 7)
+        sunPopupNode.position = CGPoint(x: width / 2 + sunPopupNode.size.width / 5, y: height / 2 + height / 4 - sunPopupNode.size.height / 2 - width / 11)
+        sunPopupNode.zPosition = -1
+        sunPopupNode.removeFromParent()
+        scene.addChild(sunPopupNode)
+        
+        scoreLabelNode.text = "0"
+        scoreLabelNode.fontSize = 100
+        scoreLabelNode.fontColor = SKColor.gray
+        scoreLabelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
+        scoreLabelNode.position = CGPoint(x: scene.size.width / 12, y: scene.size.height / 2 + scene.size.height * 1.8 / 10)
+        
+        scoreLabelNode.zPosition = zPosPauseButton
+        scoreLabelNode.removeFromParent()
+        scene.addChild(scoreLabelNode)
     }
-    
-    func initFish(width : CGFloat, height : CGFloat) {
+
+    func createFish(width : CGFloat, height : CGFloat) {
         graphics.fish1.addImage(image: fishImage1a)
         graphics.fish1.addImage(image: fishImage1b)
         graphics.fish1.setHeight(height : height)
@@ -202,21 +198,16 @@ class GraphicsBuilder {
         graphics.blowFish.addImagesToScene(scene: scene)
     }
     
-    func muteBubbles(bubbles : Bubbles, mute : Bool) {
-        bubbles.isMuted = mute
-    }
-    
-    
-    func addSnacks(scene : SKScene) {
-        initSnack(bite : cheesyBiteImage, points: pointsForCheesyBite, numCheesyBites : Parameters.numberOfCheesyBites, snacks : &graphics.cheesyBites, scene : scene)
+    func createSnacks(scene : SKScene) {
+        createSnack(bite : cheesyBiteImage, points: pointsForCheesyBite, numCheesyBites : Parameters.numberOfCheesyBites, snacks : &graphics.cheesyBites, scene : scene)
         
-        initSnack(bite : paprikaImage, points: pointsForPaprika, numCheesyBites : totalNumberOfPaprika, snacks : &graphics.paprikas, scene : scene)
+        createSnack(bite : paprikaImage, points: pointsForPaprika, numCheesyBites : totalNumberOfPaprika, snacks : &graphics.paprikas, scene : scene)
         
-        initSnack(bite : broccoliImage, points: pointsForBroccoli, numCheesyBites : totalNumberOfBroccoli, snacks : &graphics.broccolis, scene : scene)
+        createSnack(bite : broccoliImage, points: pointsForBroccoli, numCheesyBites : totalNumberOfBroccoli, snacks : &graphics.broccolis, scene : scene)
         
-        initSnack(bite : cucumberImage, points: pointsForCucumber, numCheesyBites : totalNumberOfCucumbers, snacks : &graphics.cucumbers, scene : scene)
+        createSnack(bite : cucumberImage, points: pointsForCucumber, numCheesyBites : totalNumberOfCucumbers, snacks : &graphics.cucumbers, scene : scene)
         
-        initSnack(bite : begginStripImage, points: pointsBegginStrip, numCheesyBites : totalNumberOfBegginStrips, snacks : &graphics.begginStrips, scene : scene)
+        createSnack(bite : begginStripImage, points: pointsBegginStrip, numCheesyBites : totalNumberOfBegginStrips, snacks : &graphics.begginStrips, scene : scene)
         
         // Move beggin strips out of bounds
         for strip in graphics.begginStrips {
@@ -224,7 +215,7 @@ class GraphicsBuilder {
         }
     }
     
-    func initSnack(bite : String, points : Int, numCheesyBites : Int, snacks : inout [Snack], scene : SKScene) {
+    func createSnack(bite : String, points : Int, numCheesyBites : Int, snacks : inout [Snack], scene : SKScene) {
         for _ in 0..<numCheesyBites {
             
             let size = CGSize(width: scene.size.width / 14, height: scene.size.height / 14)
@@ -242,6 +233,37 @@ class GraphicsBuilder {
             cheesyBite.setVelocity(velX: -graphics.backgroundSpeed, velY: 0)
             cheesyBite.pointsForSnack = points
             snacks.append(cheesyBite)
+        }
+    }
+    
+    func createBackgrounds(numBackgrounds : Int, string1 : String) {
+        graphics.blackBackgroundTop.size = CGSize(width: scene.size.width, height: scene.size.height / 4)
+        graphics.blackBackgroundTop.position = CGPoint(x: scene.size.width / 2, y: scene.size.height * 0.75 + scene.size.height / 8)
+        graphics.blackBackgroundTop.zPosition = zPosBlackCoverImages
+        graphics.blackBackgroundBottom.size = CGSize(width: scene.size.width, height: scene.size.height / 4)
+        graphics.blackBackgroundBottom.position = CGPoint(x: scene.size.width / 2, y: scene.size.height * 0.25 - scene.size.height / 8)
+        graphics.blackBackgroundBottom.zPosition = zPosBlackCoverImages
+        graphics.blackBackgroundTop.removeFromParent()
+        graphics.blackBackgroundBottom.removeFromParent()
+        scene.addChild(graphics.blackBackgroundTop)
+        scene.addChild(graphics.blackBackgroundBottom)
+        
+        for i in 0..<numBackgrounds {
+            let string2 = String(i + 1)
+            let imageName = string1 + string2
+            let background = SKSpriteNode(imageNamed: imageName)
+            
+            background.size = CGSize(width: scene.size.width, height: scene.size.height / 2)
+                        
+            graphics.widthBackground = background.size.width
+            
+            background.anchorPoint = CGPoint(x: 0, y: 0.5)
+            background.position = CGPoint(x: graphics.widthBackground * CGFloat(i) - CGFloat(numberOfPixelsOfOverlapBetweenBackgroundImages * i), y: scene.size.height / 2)
+            
+            background.zPosition = 0
+            graphics.backgrounds.append(background)
+            background.removeFromParent()
+            scene.addChild(background)
         }
     }
 }

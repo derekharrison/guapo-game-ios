@@ -10,53 +10,33 @@ import SpriteKit
 
 class GameLevel1 : SKScene {
     
-    var base = GameLevel()
+    var gameScene = GameScene()
     var numBackgrounds: Int = numberOfBackgroundImagesArubaLevel
     
     override func update(_ _: TimeInterval) {
-        base.update()
+        gameScene.update()
     }
     
     override func didMove(to _: SKView) {
-        base.didMove(scene: self, id: levelId1)
-        
-        State.levelId = LevelId.ARUBA
-        
-        var images = [String]()
-        images.append(fritoImage)
-        images.append(fritoHitImage)
-        
-        base.initImagesFrito(images: images, height: self.size.height, width: self.size.width)
-        base.initBackground(scene: self, numBackgrounds: numBackgrounds, string1: backgroundArubaLevelPrefix)
-        
-        var imagesBrownie = [String]()
-        imagesBrownie.append(brownieImage)
-        imagesBrownie.append(brownieHitImage)
-        
-        base.initImagesBrownie(images: imagesBrownie, height: self.size.height, width: self.size.width)
-        
-        var imagesMisty = [String]()
-        imagesMisty.append(mistyImage)
-        imagesMisty.append(mistyHitImage)
-        imagesMisty.append(mistyRotatedImage)
-        imagesMisty.append(mistyRotatedHitImage)
-        base.initImagesMisty(images: imagesMisty, height: self.size.height, width: self.size.width)
-        
-        var birdImages = [String]()
-        
-        birdImages.append(waraWaraImage1)
-        birdImages.append(waraWaraImage2)
-        birdImages.append(waraWaraImage3)
-        
-        base.addBirds(images: birdImages)
+        var levelId = LevelId.ARUBA
+        gameScene = GameSceneBuilder()
+            .scene(scene: self)
+            .birdImages(VillainImages.getVillainImages(levelId: levelId))
+            .mistyImages(MistyImages.getMistyImages(levelId: levelId))
+            .brownieImages(BrownieImages.getBrownieImages(levelId: levelId))
+            .fritoImages(FritoImages.getImages(levelId: levelId))
+            .backgroundPrefix(backgroundArubaLevelPrefix)
+            .numBackgrounds(numberOfBackgroundImagesArubaLevel)
+            .levelId(levelId)
+            .build()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        base.touchesBegan(touches, with: event)
+        gameScene.touchesBegan(touches, with: event)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        base.touchesMoved(touches, with: event)
+        gameScene.touchesMoved(touches, with: event)
     }
 }
 

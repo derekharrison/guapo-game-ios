@@ -12,14 +12,14 @@ import GameplayKit
 
 class GameLevel2: SKScene {
     
-    var base = GameLevel()
+    var base = GameScene()
 
     override func update(_ _: TimeInterval) {
         base.update()
     }
     
     override func didMove(to _: SKView) {
-        base.didMove(scene: self, id: levelId2)
+        base.createScene(scene: self, id: levelId2)
         
         State.levelId = LevelId.BEACH
         
@@ -27,21 +27,21 @@ class GameLevel2: SKScene {
         images.append(fritoImage)
         images.append(fritoHitImage)
         
-        base.initImagesFrito(images: images, height: self.size.height, width: self.size.width)
-        base.initBackground(scene: self, numBackgrounds: numberOfBackgroundImagesBeachLevel, string1: backgroundBeachLevelPrefix)
+        base.createFrito(images: images, height: self.size.height, width: self.size.width)
+        base.createBackgrounds(scene: self, numBackgrounds: numberOfBackgroundImagesBeachLevel, string1: backgroundBeachLevelPrefix)
         
         var imagesBrownie = [String]()
         imagesBrownie.append(brownieImage)
         imagesBrownie.append(brownieHitImage)
         
-        base.initImagesBrownie(images: imagesBrownie, height: self.size.height, width: self.size.width)
+        base.createBrownie(images: imagesBrownie, height: self.size.height, width: self.size.width)
         
         var imagesMisty = [String]()
         imagesMisty.append(mistyImage)
         imagesMisty.append(mistyHitImage)
         imagesMisty.append(mistyRotatedImage)
         imagesMisty.append(mistyRotatedHitImage)
-        base.initImagesMisty(images: imagesMisty, height: self.size.height, width: self.size.width)
+        base.createMisty(images: imagesMisty, height: self.size.height, width: self.size.width)
         
         var birdImages = [String]()
         
@@ -49,7 +49,7 @@ class GameLevel2: SKScene {
         birdImages.append(seagullImage2)
         birdImages.append(seagullImage3)
         
-        base.addBirds(images: birdImages)
+        base.createBirds(images: birdImages)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

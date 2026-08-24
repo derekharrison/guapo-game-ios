@@ -31,12 +31,15 @@ class Bird : GameObject {
     func updatePosition(scene : SKScene, backgroundSpeed : CGFloat) {
         posX += self.velX
         posY += self.velY
-        if posX < -self.images[0].size.width {
-            updateSpeed(backgroundSpeed: backgroundSpeed)
-            updatePosition(scene: scene)
-            playSoundAllowed()
-            self.hit = false
+        for image in self.images {
+            if posX < -image.size.width {
+                updateSpeed(backgroundSpeed: backgroundSpeed)
+                updatePosition(scene: scene)
+                playSoundAllowed()
+                self.hit = false
+            }
         }
+
     }
     
     func updateSpeed(backgroundSpeed : CGFloat) {

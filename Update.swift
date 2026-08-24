@@ -21,11 +21,18 @@ class Update {
     func update() {
         updatePlayer()
         
-        updateBirds()
+        if(State.levelId != LevelId.OCEAN) {
+            updateBirds()
+            
+            updateNumberOfBirds()
+        }
+        else {
+            updateJellyFish()
+            
+            updateNumberOfJellyFish()
+        }
         
         updateSnacks()
-        
-        updateNumberOfBirds()
         
         popFrito()
         
@@ -55,6 +62,21 @@ class Update {
         }
     }
     
+    func updateNumberOfJellyFish() {
+        if gameScore >= boundTracker * numberOfPointsWhenVillainsAppear && graphics.jellyfishes.count < Parameters.totalNumberOfVillains {
+            
+            let imageNames = self.graphics.jellyfishes[0].imageNames
+            let size = self.graphics.jellyfishes[0].images[0].size
+            
+            let bird = JellyFish(jellyFish: imageNames, size: size, zPos: CGFloat(graphics.jellyfishes.count) + minZPosVillains)
+            bird.addImagesToScene(scene : scene)
+            
+            graphics.jellyfishes.append(bird)
+            
+            boundTracker += 1
+        }
+    }
+    
     func updateBackgrounds(backgrounds : [SKSpriteNode], velX : CGFloat) {
 
         let n = backgrounds.count
@@ -76,6 +98,22 @@ class Update {
             bird.update(scene : scene, backgroundSpeed : -graphics.backgroundSpeed)
             
             if objectCollidedWithPlayer(bird : bird, player : graphics.player, den : 3.5) {
+                
+                if muted == false {
+                    playSound(scene: scene, sound: [endSound])
+                }
+                
+                runGameOver()
+            }
+        }
+    }
+    
+    func updateJellyFish() {
+        for jellyFish in graphics.jellyfishes {
+            
+            jellyFish.update(scene : scene, backgroundSpeed : -graphics.backgroundSpeed)
+            
+            if objectCollidedWithPlayer(bird : jellyFish, player : graphics.player, den : 3.5) {
                 
                 if muted == false {
                     playSound(scene: scene, sound: [endSound])

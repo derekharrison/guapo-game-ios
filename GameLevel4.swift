@@ -43,6 +43,14 @@ class GameLevel4: SKScene {
 
         base.initImagesMisty(images: imagesMisty, height: self.size.height, width: self.size.width)
         
+        var jellyImages = [String]()
+        
+        jellyImages.append(jellyFishImage1)
+        jellyImages.append(jellyFishImage2)
+        jellyImages.append(jellyFishImage3)
+        
+        base.addJellyFish(images: jellyImages)
+        
         base.initBackground(scene: self, numBackgrounds: numberOfBackgroundImagesOceanLevel, string1: backgroundOceanLevelPrefix)
     }
     

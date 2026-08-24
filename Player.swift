@@ -16,37 +16,37 @@ class Player : GameObject {
     var positions: [Position] = []
     
     override init() {
-        self.cape1 = SKSpriteNode(imageNamed: capeImage1)
-        self.cape2 = SKSpriteNode(imageNamed: capeImage2)
+        cape1 = SKSpriteNode(imageNamed: capeImage1)
+        cape2 = SKSpriteNode(imageNamed: capeImage2)
         super.init()
         
-        self.setPosition(position: CGPoint(x: -5000, y: 0))
+        setPosition(position: CGPoint(x: -5000, y: 0))
     }
     
     func images(images: [String]) -> Player {
         for x in images {
-            self.addImage(image: x)
+            addImage(image: x)
         }
         return self;
     }
     
     func imageHit(imageHit: String) -> Player {
-        self.addImageHit(image: imageHit)
+        addImageHit(image: imageHit)
         return self;
     }
     
     func size(size: CGSize) -> Player {
-        self.setSize(size: size)
+        setSize(size: size)
         return self;
     }
     
     func zPos(zPos : CGFloat) -> Player {
-        self.setZPosition(zPos: zPos)
+        setZPosition(zPos: zPos)
         return self;
     }
     
     func position(position: CGPoint) -> Player {
-        self.setPosition(position: position)
+        setPosition(position: position)
         return self;
     }
     
@@ -56,27 +56,36 @@ class Player : GameObject {
         updateImage(numFrames: numOfFramesForUpdate)
         
         if(State.levelId != LevelId.OCEAN) {
-            self.cape1.position.x = self.posX - self.cape1.size.width / 2
-            self.cape1.position.y = self.posY
-            self.cape2.position.x = self.posX - self.cape2.size.width / 2
-            self.cape2.position.y = self.posY
-            
-            if capeCounter < 5 {
-                if toSwitch {
-                    self.cape1.zPosition = 2
-                    self.cape2.zPosition = -1
-                }
-                else {
-                    self.cape1.zPosition = -1
-                    self.cape2.zPosition = 2
-                }
-                capeCounter += 1
-            }
-            else {
-                toSwitch = !toSwitch
-                capeCounter = 1
-            }
+            updateCape()
         }
+    }
+    
+    private func updateCape() {
+        self.cape1.position.x = self.posX - self.cape1.size.width / 2
+        self.cape1.position.y = self.posY
+        self.cape2.position.x = self.posX - self.cape2.size.width / 2
+        self.cape2.position.y = self.posY
+        
+        if capeCounter < 5 {
+            showCape1()
+        }
+        else if capeCounter < 10{
+            showCape2()
+        }
+        else if capeCounter == 15 {
+            capeCounter = 0
+        }
+        capeCounter += 1
+    }
+    
+    private func showCape1() {
+        self.cape1.zPosition = 2
+        self.cape2.zPosition = -1
+    }
+
+    private func showCape2() {
+        self.cape1.zPosition = -1
+        self.cape2.zPosition = 2
     }
     
     override func addImagesToScene(scene : SKScene) {

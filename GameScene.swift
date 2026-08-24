@@ -405,7 +405,7 @@ class GameScene {
         }
         else if currentGameState == GameState.afterGame {
             for touch: AnyObject in touches {
-                let point = touch.location(in: scene)
+                let _ = touch.location(in: scene)
                 // TODO : implement ?
             }
         }

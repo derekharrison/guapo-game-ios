@@ -18,7 +18,7 @@ class GameLevel1 : SKScene {
     }
     
     override func didMove(to _: SKView) {
-        var levelId = LevelId.ARUBA
+        let levelId = LevelId.ARUBA
         gameScene = GameSceneBuilder()
             .scene(scene: self)
             .birdImages(VillainImages.getVillainImages(levelId: levelId))

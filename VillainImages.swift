@@ -8,7 +8,14 @@
 class VillainImages {
     
     static func getVillainImages(levelId : LevelId) -> [String] {
-        if(levelId != LevelId.OCEAN) {
+        if levelId == LevelId.BEACH {
+            var birdImages = [String]()
+            birdImages.append(seagullImage1)
+            birdImages.append(seagullImage2)
+            birdImages.append(seagullImage3)
+            return birdImages
+        }
+        else if(levelId != LevelId.OCEAN) {
             var birdImages = [String]()
             birdImages.append(waraWaraImage1)
             birdImages.append(waraWaraImage2)

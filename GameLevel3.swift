@@ -26,12 +26,6 @@ class GameLevel3: SKScene {
         
         gameScene = GameSceneBuilder()
             .scene(scene: self)
-            .birdImages(VillainImages.getVillainImages(levelId: levelId))
-            .mistyImages(MistyImages.getMistyImages(levelId: levelId))
-            .brownieImages(BrownieImages.getBrownieImages(levelId: levelId))
-            .fritoImages(FritoImages.getImages(levelId: levelId))
-            .backgroundPrefix(backgroundTripLevelPrefix)
-            .numBackgrounds(numberOfBackgroundImagesTripLevel)
             .levelId(levelId)
             .build()
     }

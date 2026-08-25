@@ -47,7 +47,7 @@ class GameScene {
     
     var scene = SKScene()
 
-    func createScene(scene: SKScene, id : Int) {
+    func createScene(scene: SKScene, id : LevelId) {
         numBirds = 2
         self.scene = scene
         
@@ -67,8 +67,12 @@ class GameScene {
         }
     }
     
-    private func createGraphics(scene: SKScene, id : Int) {
-        GraphicsBuilder().graphics(graphics: graphics).scene(scene: scene).id(id: id).build()
+    private func createGraphics(scene: SKScene, id : LevelId) {
+        GraphicsBuilder()
+            .graphics(graphics: graphics)
+            .scene(scene: scene)
+            .id(id: id)
+            .build()
     }
     
     private func createUpdateModel(scene: SKScene) {
@@ -110,36 +114,8 @@ class GameScene {
         graphics.frito.addImagesToScene(scene: scene)
     }
     
-    func createBrownie(images : [String], height : CGFloat, width : CGFloat) {
-        for image in images {
-            graphics.brownie.addImage(image : image)
-        }
-        graphics.brownie.setHeight(height : height)
-        graphics.brownie.setWidth(width : width)
-        graphics.brownie.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
-        graphics.brownie.setVelocity(velX: -2 * graphics.backgroundSpeed, velY: -2 * graphics.backgroundSpeed)
-        graphics.brownie.setZPosition(zPos: zPosCharacters + 1)
-        graphics.brownie.setPosition(position: CGPoint(x : -width, y: height * 0.75 + graphics.brownie.images[0].size.height / 2))
-        
-        graphics.brownie.addImagesToScene(scene: scene)
-    }
-    
-    func createMisty(images : [String], height : CGFloat, width : CGFloat) {
-        for image in images {
-            graphics.misty.addImage(image : image)
-        }
-        graphics.misty.setHeight(height : height)
-        graphics.misty.setWidth(width : width)
-        graphics.misty.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
-        graphics.misty.setVelMisty(vx: 0, vy: -graphics.backgroundSpeed)
-        graphics.misty.setZPosition(zPos: zPosCharacters + 2)
-        graphics.misty.setPosition(position: CGPoint(x : width / 2, y : height * 0.75 + graphics.misty.images[0].size.height / 2))
-        
-        graphics.misty.addImagesToScene(scene: scene)
-    }
-    
-    func initGameVariables(scene: SKScene, id : Int) {
-        levelId = id
+    func initGameVariables(scene: SKScene, id : LevelId) {
+        levelId = getLevelIdKeyPrefix(id: id)
         playSunPopup = true
         sunPopupFrameCounter = 0
         gameScore = 0
@@ -153,117 +129,27 @@ class GameScene {
         startGame()
     }
     
+    private func getLevelIdKeyPrefix(id : LevelId) -> Int {
+        if(id == LevelId.ARUBA) {
+            return 0
+        }
+        if(id == LevelId.BEACH) {
+            return 1
+        }
+        if(id == LevelId.TRIP) {
+            return 2
+        }
+        if(id == LevelId.OCEAN) {
+            return 3
+        }
+        if(id == LevelId.UTREG) {
+            return 4
+        }
+        return 0
+    }
+    
     func updatePlayerOcean() {
         graphics.player.update()
-    }
-    
-    func createBackgrounds(scene : SKScene, numBackgrounds : Int, string1 : String) {
-        
-        
-        graphics.blackBackgroundTop.size = CGSize(width: scene.size.width, height: scene.size.height / 4)
-        graphics.blackBackgroundTop.position = CGPoint(x: scene.size.width / 2, y: scene.size.height * 0.75 + scene.size.height / 8)
-        graphics.blackBackgroundTop.zPosition = zPosBlackCoverImages
-        graphics.blackBackgroundBottom.size = CGSize(width: scene.size.width, height: scene.size.height / 4)
-        graphics.blackBackgroundBottom.position = CGPoint(x: scene.size.width / 2, y: scene.size.height * 0.25 - scene.size.height / 8)
-        graphics.blackBackgroundBottom.zPosition = zPosBlackCoverImages
-        graphics.blackBackgroundTop.removeFromParent()
-        graphics.blackBackgroundBottom.removeFromParent()
-        scene.addChild(graphics.blackBackgroundTop)
-        scene.addChild(graphics.blackBackgroundBottom)
-        
-        self.numBackgrounds = numBackgrounds
-        
-        for i in 0..<numBackgrounds {
-            let string2 = String(i + 1)
-            let imageName = string1 + string2
-            let background = SKSpriteNode(imageNamed: imageName)
-            
-            background.size = CGSize(width: scene.size.width, height: scene.size.height / 2)
-                        
-            graphics.widthBackground = background.size.width
-            
-            background.anchorPoint = CGPoint(x: 0, y: 0.5)
-            background.position = CGPoint(x: graphics.widthBackground * CGFloat(i) - CGFloat(numberOfPixelsOfOverlapBetweenBackgroundImages * i), y: scene.size.height / 2)
-            
-            background.zPosition = 0
-            graphics.backgrounds.append(background)
-            background.removeFromParent()
-            scene.addChild(background)
-        }
-    }
-    
-    func createBirds(images : [String]) {
-        for j in 0..<numBirds {
-            
-            var birdImages = [String]()
-            
-            for x in images {
-                birdImages.append(x)
-            }
-            
-            let zPosition = CGFloat(j) + minZPosVillains
-            let size = CGSize(width: scene.size.width / 10, height: scene.size.height / 10)
-            
-            let bird = Bird(birds: birdImages, size: size, zPos: zPosition)
-            
-            bird.addImagesToScene(scene : scene)
-
-            self.graphics.birds.append(bird)
-            
-        }
-    }
-    
-    func createJellyFishes(images : [String]) {
-        for j in 0..<numJellyFish {
-            
-            var birdImages = [String]()
-            
-            for x in images {
-                birdImages.append(x)
-            }
-            
-            let zPosition = CGFloat(j) + minZPosVillains
-            let size = CGSize(width: scene.size.width / 10, height: scene.size.height / 10)
-            
-            let jellyFish = JellyFish(jellyFish: birdImages, size: size, zPos: zPosition)
-            
-            jellyFish.addImagesToScene(scene : scene)
-
-            self.graphics.jellyfishes.append(jellyFish)
-            
-        }
-    }
-    
-    func createPlayerOcean() {
-        let size = CGSize(width: scene.size.width / 5, height: scene.size.height / 7.5)
-        
-        var playerImages : [String] = [String]()
-        
-        let defaults = UserDefaults()
-        let playerId = defaults.integer(forKey: "player_id")
-        
-        if(getPlayerId(player: playerId) == PlayerId.GUAPO) {
-            playerImages.append(guapoSnorkelImage)
-            graphics.player = Player()
-                .images(images: playerImages)
-                .imageHit(imageHit: guapoSnorkelHitImage)
-                .size(size: size)
-                .zPos(zPos: zPosPlayer)
-        }
-        
-        if(getPlayerId(player: playerId) == PlayerId.TUTTI) {
-            playerImages.append(tuttiSnorkelImage)
-            graphics.player = Player()
-                .images(images: playerImages)
-                .imageHit(imageHit: tuttiSnorkelHitImage)
-                .size(size: size)
-                .zPos(zPos: zPosPlayer)
-        }
-        
-        graphics.player.setPosition(position: CGPoint(x : scene.size.width / 5, y : scene.size.height / 2))
-        graphics.player.setHeight(height : scene.size.height)
-        graphics.player.setWidth(width : scene.size.width)
-        graphics.player.addImagesToScene(scene : scene)
     }
     
     private func getPlayerId(player: Int) -> PlayerId {

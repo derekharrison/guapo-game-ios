@@ -2,9 +2,9 @@ import SpriteKit
 
 class GraphicsBuilder {
     
-    var graphics : Graphics = Graphics()
-    var scene : SKScene = SKScene()
-    var id: Int = 0
+    private var graphics : Graphics = Graphics()
+    private var scene : SKScene = SKScene()
+    private var levelId: LevelId = LevelId.ARUBA
     
     init() {}
     
@@ -18,14 +18,26 @@ class GraphicsBuilder {
         return self
     }
     
-    func id(id: Int) -> Self {
-        self.id = id
+    func id(id: LevelId) -> Self {
+        self.levelId = id
         return self
     }
     
     func build() {
-        initCommon()
+        createCommon()
         createPlayer()
+        createFrito()
+        createBrownie()
+        createMisty()
+        
+        createBackgrounds()
+        
+        if levelId != LevelId.OCEAN {
+            createBirds()
+        }
+        else {
+            createJellyFishes()
+        }
     }
     
     private func getPlayerId(player: Int) -> PlayerId {
@@ -69,8 +81,164 @@ class GraphicsBuilder {
             .build()
     }
     
-    func initCommon() {
-        let levelId = self.id
+    func createBackgrounds() {
+        graphics.blackBackgroundTop.size = CGSize(width: scene.size.width, height: scene.size.height / 4)
+        graphics.blackBackgroundTop.position = CGPoint(x: scene.size.width / 2, y: scene.size.height * 0.75 + scene.size.height / 8)
+        graphics.blackBackgroundTop.zPosition = zPosBlackCoverImages
+        graphics.blackBackgroundBottom.size = CGSize(width: scene.size.width, height: scene.size.height / 4)
+        graphics.blackBackgroundBottom.position = CGPoint(x: scene.size.width / 2, y: scene.size.height * 0.25 - scene.size.height / 8)
+        graphics.blackBackgroundBottom.zPosition = zPosBlackCoverImages
+        graphics.blackBackgroundTop.removeFromParent()
+        graphics.blackBackgroundBottom.removeFromParent()
+        scene.addChild(graphics.blackBackgroundTop)
+        scene.addChild(graphics.blackBackgroundBottom)
+        
+        for i in 0..<getNumBackgrounds() {
+            let string2 = String(i + 1)
+            let imageName = getBackgroundPrefix() + string2
+            let background = SKSpriteNode(imageNamed: imageName)
+            
+            background.size = CGSize(width: scene.size.width, height: scene.size.height / 2)
+                        
+            graphics.widthBackground = background.size.width
+            
+            background.anchorPoint = CGPoint(x: 0, y: 0.5)
+            background.position = CGPoint(x: graphics.widthBackground * CGFloat(i) - CGFloat(numberOfPixelsOfOverlapBetweenBackgroundImages * i), y: scene.size.height / 2)
+            
+            background.zPosition = 0
+            graphics.backgrounds.append(background)
+            background.removeFromParent()
+            scene.addChild(background)
+        }
+    }
+    
+    private func getNumBackgrounds() -> Int {
+        if(levelId == LevelId.ARUBA) {
+            return numberOfBackgroundImagesArubaLevel
+        }
+        if(levelId == LevelId.BEACH) {
+            return numberOfBackgroundImagesBeachLevel
+        }
+        if(levelId == LevelId.TRIP) {
+            return numberOfBackgroundImagesTripLevel
+        }
+        if(levelId == LevelId.OCEAN) {
+            return numberOfBackgroundImagesOceanLevel
+        }
+        if(levelId == LevelId.UTREG) {
+            return numberOfBackgroundImagesUtrechtLevel
+        }
+        return numberOfBackgroundImagesArubaLevel
+    }
+    
+    private func getBackgroundPrefix() -> String {
+        if(levelId == LevelId.ARUBA) {
+            return backgroundArubaLevelPrefix
+        }
+        if(levelId == LevelId.BEACH) {
+            return backgroundBeachLevelPrefix
+        }
+        if(levelId == LevelId.TRIP) {
+            return backgroundTripLevelPrefix
+        }
+        if(levelId == LevelId.OCEAN) {
+            return backgroundOceanLevelPrefix
+        }
+        if(levelId == LevelId.UTREG) {
+            return backgroundUtrechtLevelPrefix
+        }
+        return backgroundArubaLevelPrefix
+    }
+    
+    func createFrito() {
+        for image in FritoImages.getImages(levelId: levelId) {
+            graphics.frito.addImage(image : image)
+        }
+        graphics.frito.setHeight(height : scene.size.height)
+        graphics.frito.setWidth(width : scene.size.width)
+        graphics.frito.setSize(size: CGSize(width : scene.size.width / 7.5, height : scene.size.height / 7.5))
+        graphics.frito.setVelocity(velX: 2 * graphics.backgroundSpeed, velY: -2 * graphics.backgroundSpeed)
+        graphics.frito.setZPosition(zPos: zPosCharacters)
+        graphics.frito.setPosition(position: CGPoint(x : 10 * scene.size.width, y : scene.size.height * 0.75 + graphics.frito.images[0].size.height / 2))
+        graphics.frito.addImagesToScene(scene: scene)
+    }
+    
+    func createBrownie() {
+        for image in BrownieImages.getBrownieImages(levelId: levelId) {
+            graphics.brownie.addImage(image : image)
+        }
+        let height = scene.size.height
+        let width = scene.size.width
+        graphics.brownie.setHeight(height : height)
+        graphics.brownie.setWidth(width : width)
+        graphics.brownie.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
+        graphics.brownie.setVelocity(velX: -2 * graphics.backgroundSpeed, velY: -2 * graphics.backgroundSpeed)
+        graphics.brownie.setZPosition(zPos: zPosCharacters + 1)
+        graphics.brownie.setPosition(position: CGPoint(x : -width, y: height * 0.75 + graphics.brownie.images[0].size.height / 2))
+        
+        graphics.brownie.addImagesToScene(scene: scene)
+    }
+    
+    func createMisty() {
+        for image in MistyImages.getMistyImages(levelId: levelId) {
+            graphics.misty.addImage(image : image)
+        }
+        let height = scene.size.height
+        let width = scene.size.width
+        graphics.misty.setHeight(height : height)
+        graphics.misty.setWidth(width : width)
+        graphics.misty.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
+        graphics.misty.setVelMisty(vx: 0, vy: -graphics.backgroundSpeed)
+        graphics.misty.setZPosition(zPos: zPosCharacters + 2)
+        graphics.misty.setPosition(position: CGPoint(x : width / 2, y : height * 0.75 + graphics.misty.images[0].size.height / 2))
+        
+        graphics.misty.addImagesToScene(scene: scene)
+    }
+    
+    func createBirds() {
+        for j in 0..<numBirds {
+            
+            var birdImages = [String]()
+            
+            for x in VillainImages.getVillainImages(levelId: levelId) {
+                birdImages.append(x)
+            }
+            
+            let zPosition = CGFloat(j) + minZPosVillains
+            let size = CGSize(width: scene.size.width / 10, height: scene.size.height / 10)
+            
+            let bird = Bird(birds: birdImages, size: size, zPos: zPosition)
+            
+            bird.addImagesToScene(scene : scene)
+
+            self.graphics.birds.append(bird)
+            
+        }
+    }
+    
+    func createJellyFishes() {
+        for j in 0..<numJellyFish {
+            
+            var birdImages = [String]()
+            
+            for x in VillainImages.getVillainImages(levelId: levelId) {
+                birdImages.append(x)
+            }
+            
+            let zPosition = CGFloat(j) + minZPosVillains
+            let size = CGSize(width: scene.size.width / 10, height: scene.size.height / 10)
+            
+            let jellyFish = JellyFish(jellyFish: birdImages, size: size, zPos: zPosition)
+            
+            jellyFish.addImagesToScene(scene : scene)
+
+            self.graphics.jellyfishes.append(jellyFish)
+            
+        }
+    }
+    
+    func createCommon() {
+        let levelId = self.levelId
         
         graphics.backgroundSpeed = scene.size.width / 400
         
@@ -80,20 +248,20 @@ class GraphicsBuilder {
         createSnacks(scene : scene)
         
         let defaults = UserDefaults()
-        if levelId == levelId1 {
+        if levelId == LevelId.ARUBA {
             graphics.highScore = defaults.integer(forKey: highScoreId1)
         }
-        if levelId == levelId2 {
+        if levelId == LevelId.BEACH {
             graphics.highScore = defaults.integer(forKey: highScoreId2)
         }
-        if levelId == levelId3 {
+        if levelId == LevelId.TRIP {
             graphics.highScore = defaults.integer(forKey: highScoreId3)
         }
-        if levelId == levelId4 {
+        if levelId == LevelId.OCEAN {
             graphics.highScore = defaults.integer(forKey: highScoreId4)
             createFish(width: width, height: height)
         }
-        if levelId == levelId5 {
+        if levelId == LevelId.UTREG {
             graphics.highScore = defaults.integer(forKey: highScoreId5)
         }
         

@@ -22,12 +22,6 @@ class GameLevel4: SKScene {
         State.levelId = LevelId.OCEAN
         gameScene = GameSceneBuilder()
             .scene(scene: self)
-            .jellyImages(VillainImages.getVillainImages(levelId: levelId))
-            .mistyImages(MistyImages.getMistyImages(levelId: levelId))
-            .brownieImages(BrownieImages.getBrownieImages(levelId: levelId))
-            .fritoImages(FritoImages.getImages(levelId: levelId))
-            .backgroundPrefix(backgroundOceanLevelPrefix)
-            .numBackgrounds(numberOfBackgroundImagesOceanLevel)
             .levelId(levelId)
             .build()
     }

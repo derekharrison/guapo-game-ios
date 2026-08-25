@@ -21,12 +21,6 @@ class GameLevel1 : SKScene {
         let levelId = LevelId.ARUBA
         gameScene = GameSceneBuilder()
             .scene(scene: self)
-            .birdImages(VillainImages.getVillainImages(levelId: levelId))
-            .mistyImages(MistyImages.getMistyImages(levelId: levelId))
-            .brownieImages(BrownieImages.getBrownieImages(levelId: levelId))
-            .fritoImages(FritoImages.getImages(levelId: levelId))
-            .backgroundPrefix(backgroundArubaLevelPrefix)
-            .numBackgrounds(numberOfBackgroundImagesArubaLevel)
             .levelId(levelId)
             .build()
     }

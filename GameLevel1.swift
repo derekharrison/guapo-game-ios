@@ -10,27 +10,25 @@ import SpriteKit
 
 class GameLevel1 : SKScene {
     
-    var gameScene = GameScene()
+    var model : GameModel = GameModel()
     var numBackgrounds: Int = numberOfBackgroundImagesArubaLevel
     
     override func update(_ _: TimeInterval) {
-        gameScene.update()
+        model.update()
     }
     
     override func didMove(to _: SKView) {
         let levelId = LevelId.ARUBA
-        gameScene = GameSceneBuilder()
-            .scene(scene: self)
-            .levelId(levelId)
-            .build()
+        State.levelId = LevelId.ARUBA
+        model = GameModel(scene: self, id: levelId)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        gameScene.touchesBegan(touches, with: event)
+        model.modelUpdate.touchesBegan(touches, with: event)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        gameScene.touchesMoved(touches, with: event)
+        model.modelUpdate.touchesMoved(touches, with: event)
     }
 }
 

@@ -12,26 +12,23 @@ import GameplayKit
 
 class GameLevel4: SKScene {
     var levelId = LevelId.OCEAN
-    var gameScene = GameScene()
+    var model = GameModel()
  
     override func update(_ _: TimeInterval) {
-        gameScene.update()
+        model.update()
     }
     
     override func didMove(to _: SKView) {
         State.levelId = LevelId.OCEAN
-        gameScene = GameSceneBuilder()
-            .scene(scene: self)
-            .levelId(levelId)
-            .build()
+        model = GameModel(scene: self, id: levelId)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        gameScene.touchesBegan(touches, with: event)
+        model.modelUpdate.touchesBegan(touches, with: event)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        gameScene.touchesMoved(touches, with: event)
+        model.modelUpdate.touchesMoved(touches, with: event)
     }
 }
 

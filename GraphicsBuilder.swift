@@ -403,35 +403,4 @@ class GraphicsBuilder {
             snacks.append(cheesyBite)
         }
     }
-    
-    func createBackgrounds(numBackgrounds : Int, string1 : String) {
-        graphics.blackBackgroundTop.size = CGSize(width: scene.size.width, height: scene.size.height / 4)
-        graphics.blackBackgroundTop.position = CGPoint(x: scene.size.width / 2, y: scene.size.height * 0.75 + scene.size.height / 8)
-        graphics.blackBackgroundTop.zPosition = zPosBlackCoverImages
-        graphics.blackBackgroundBottom.size = CGSize(width: scene.size.width, height: scene.size.height / 4)
-        graphics.blackBackgroundBottom.position = CGPoint(x: scene.size.width / 2, y: scene.size.height * 0.25 - scene.size.height / 8)
-        graphics.blackBackgroundBottom.zPosition = zPosBlackCoverImages
-        graphics.blackBackgroundTop.removeFromParent()
-        graphics.blackBackgroundBottom.removeFromParent()
-        scene.addChild(graphics.blackBackgroundTop)
-        scene.addChild(graphics.blackBackgroundBottom)
-        
-        for i in 0..<numBackgrounds {
-            let string2 = String(i + 1)
-            let imageName = string1 + string2
-            let background = SKSpriteNode(imageNamed: imageName)
-            
-            background.size = CGSize(width: scene.size.width, height: scene.size.height / 2)
-                        
-            graphics.widthBackground = background.size.width
-            
-            background.anchorPoint = CGPoint(x: 0, y: 0.5)
-            background.position = CGPoint(x: graphics.widthBackground * CGFloat(i) - CGFloat(numberOfPixelsOfOverlapBetweenBackgroundImages * i), y: scene.size.height / 2)
-            
-            background.zPosition = 0
-            graphics.backgrounds.append(background)
-            background.removeFromParent()
-            scene.addChild(background)
-        }
-    }
 }

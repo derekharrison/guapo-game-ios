@@ -100,20 +100,7 @@ class GameScene {
             runGameOver(highScoreId: highScoreId5)
         }
     }
-    
-    func createFrito(images : [String], height : CGFloat, width : CGFloat) {
-        for image in images {
-            graphics.frito.addImage(image : image)
-        }
-        graphics.frito.setHeight(height : height)
-        graphics.frito.setWidth(width : width)
-        graphics.frito.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
-        graphics.frito.setVelocity(velX: 2 * graphics.backgroundSpeed, velY: -2 * graphics.backgroundSpeed)
-        graphics.frito.setZPosition(zPos: zPosCharacters)
-        graphics.frito.setPosition(position: CGPoint(x : 10 * width, y : height * 0.75 + graphics.frito.images[0].size.height / 2))
-        graphics.frito.addImagesToScene(scene: scene)
-    }
-    
+
     func initGameVariables(scene: SKScene, id : LevelId) {
         levelId = getLevelIdKeyPrefix(id: id)
         playSunPopup = true
@@ -148,10 +135,6 @@ class GameScene {
         return 0
     }
     
-    func updatePlayerOcean() {
-        graphics.player.update()
-    }
-    
     private func getPlayerId(player: Int) -> PlayerId {
         switch player {
         case 0:
@@ -160,32 +143,6 @@ class GameScene {
             return PlayerId.TUTTI
         default:
             return PlayerId.NONE
-        }
-    }
-    
-    func popFritoOcean() {
-        if graphics.frito.appeared  {
-
-            if muted == false && graphics.frito.playSound {
-                playSound(scene: scene, sound: [fritoAppearingSound])
-                graphics.frito.playSound = false
-            }
-            
-            graphics.frito.bubbles.popBubbles(pos: graphics.frito.getPosition(), scene : scene, sound : [bubblesSound])
-        }
-        else {
-            graphics.frito.bubbles.setPosition(pos: CGPoint(x: -1000, y: 0))
-        }
-
-        graphics.frito.updatePosition(scene: scene)
-        
-        if objectCollidedWithPlayer(bird : graphics.frito, player : graphics.player, den : 2.5) {
-            graphics.frito.hit = true
-
-            if muted == false && graphics.frito.playHitSound {
-                playSound(scene: scene, sound: [fritoSound])
-                graphics.frito.playHitSound = false
-            }
         }
     }
 

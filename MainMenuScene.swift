@@ -175,11 +175,11 @@ class MainMenuScene: SKScene {
             volumeOn.zPosition = 2
         }
         
-        startScene(scene: self, start : &startLevel1Scene, gameLevel : GameLevel1(size: self.size))
-        startScene(scene: self, start : &startLevel2Scene, gameLevel : GameLevel2(size: self.size))
-        startScene(scene: self, start : &startLevel3Scene, gameLevel : GameLevel3(size: self.size))
-        startScene(scene: self, start : &startLevel4Scene, gameLevel : GameLevel4(size: self.size))
-        startScene(scene: self, start : &startLevel5Scene, gameLevel : GameLevel5(size: self.size))
+        startLevel(levelId: LevelId.ARUBA, scene: self, start : &startLevel1Scene, gameLevel : GameLevel(size: self.size))
+        startLevel(levelId: LevelId.BEACH, scene: self, start : &startLevel2Scene, gameLevel : GameLevel(size: self.size))
+        startLevel(levelId: LevelId.TRIP, scene: self, start : &startLevel3Scene, gameLevel : GameLevel(size: self.size))
+        startLevel(levelId: LevelId.OCEAN, scene: self, start : &startLevel4Scene, gameLevel : GameLevel(size: self.size))
+        startLevel(levelId: LevelId.UTREG, scene: self, start : &startLevel5Scene, gameLevel : GameLevel(size: self.size))
         startScene(scene: self, start : &startMenu, gameLevel : StartMenu(size: self.size))
         startScene(scene: self, start : &playerMenu, gameLevel : PlayerScene(size: self.size))
     }

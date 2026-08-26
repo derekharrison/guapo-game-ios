@@ -266,6 +266,38 @@ func startScene(scene : SKScene, start : inout Bool, gameLevel : SKScene) {
     }
 }
 
+func startLevel(levelId : LevelId, scene : SKScene, start : inout Bool, gameLevel : SKScene) {
+    if start {
+        setLevelId(levelId: levelId)
+        let sceneToMoveTo = gameLevel
+        sceneToMoveTo.scaleMode = scene.scaleMode
+        let myTransition = SKTransition.fade(withDuration: 3.0)
+        scene.view!.presentScene(sceneToMoveTo, transition: myTransition)
+        
+        start = false
+    }
+}
+
+private func setLevelId(levelId: LevelId) {
+    State.levelId = .ARUBA
+    
+    if(levelId == LevelId.ARUBA) {
+        State.levelId = .ARUBA
+    }
+    if(levelId == LevelId.BEACH) {
+        State.levelId = .BEACH
+    }
+    if(levelId == LevelId.TRIP) {
+        State.levelId = .TRIP
+    }
+    if(levelId == LevelId.OCEAN) {
+        State.levelId = .OCEAN
+    }
+    if(levelId == LevelId.UTREG) {
+        State.levelId = .UTREG
+    }
+}
+
 func playSound(scene : SKScene, sound : [SKAction]) {
     let bubbleSound = SKSpriteNode()
     bubbleSound.removeFromParent()

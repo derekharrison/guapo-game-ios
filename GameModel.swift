@@ -12,28 +12,27 @@ class GameModel {
 
     var graphics : Graphics = Graphics()
     var modelUpdate : ModelUpdate = ModelUpdate(graphics: Graphics(), scene: SKScene())
-    var levelId : Int = 0
     var scene = SKScene()
     
     init() {}
 
-    init(scene: SKScene, id : LevelId) {
+    init(scene: SKScene) {
         self.scene = scene
         
         initGameVariables(scene: scene)
         
-        createGraphics(scene: scene, id: id)
+        createGraphics(scene: scene)
         
         createModelUpdate(scene: scene)
         
         startGame()
     }
     
-    private func createGraphics(scene: SKScene, id : LevelId) {
+    private func createGraphics(scene: SKScene) {
         GraphicsBuilder()
             .graphics(graphics: graphics)
             .scene(scene: scene)
-            .id(id: id)
+            .id(id: getLevelId())
             .build()
     }
     
@@ -48,6 +47,10 @@ class GameModel {
     
     private func startGame() {
         ModelUtils.startGame()
+    }
+    
+    private func getLevelId() -> LevelId {
+        return State.levelId
     }
 }
 

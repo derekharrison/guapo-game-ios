@@ -30,4 +30,42 @@ class ModelUtils {
         pauseButtonNode.zPosition = zPosPauseButton
         playButtonNode.zPosition = -1
     }
+    
+    static func getNumBackgrounds(levelId : LevelId) -> Int {
+        if(levelId == LevelId.ARUBA) {
+            return numberOfBackgroundImagesArubaLevel
+        }
+        if(levelId == LevelId.BEACH) {
+            return numberOfBackgroundImagesBeachLevel
+        }
+        if(levelId == LevelId.TRIP) {
+            return numberOfBackgroundImagesTripLevel
+        }
+        if(levelId == LevelId.OCEAN) {
+            return numberOfBackgroundImagesOceanLevel
+        }
+        if(levelId == LevelId.UTREG) {
+            return numberOfBackgroundImagesUtrechtLevel
+        }
+        return numberOfBackgroundImagesArubaLevel
+    }
+    
+    static func getBackgroundPrefix(levelId : LevelId) -> String {
+        if(levelId == LevelId.ARUBA) {
+            return backgroundArubaLevelPrefix
+        }
+        if(levelId == LevelId.BEACH) {
+            return backgroundBeachLevelPrefix
+        }
+        if(levelId == LevelId.TRIP) {
+            return backgroundTripLevelPrefix
+        }
+        if(levelId == LevelId.OCEAN) {
+            return backgroundOceanLevelPrefix
+        }
+        if(levelId == LevelId.UTREG) {
+            return backgroundUtrechtLevelPrefix
+        }
+        return backgroundArubaLevelPrefix
+    }
 }

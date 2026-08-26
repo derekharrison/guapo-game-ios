@@ -22,6 +22,14 @@ class ModelUpdate {
     }
     
     func update() {
+        updateScore()
+        
+        if State.gameState == GameState.inGame {
+            updateModel()
+        }
+    }
+    
+    private func updateModel() {
         updatePlayer()
         
         if(State.levelId != LevelId.OCEAN) {
@@ -33,6 +41,8 @@ class ModelUpdate {
             updateNumberOfJellyFish()
             
             updateJellyFish()
+            
+            updateFish()
         }
         
         updateSnacks()
@@ -135,6 +145,28 @@ class ModelUpdate {
         }
     }
     
+    private func updateFish() {
+        graphics.fish1.update(scene : scene, backgroundSpeed : -graphics.backgroundSpeed)
+        graphics.fish2.update(scene : scene, backgroundSpeed : -graphics.backgroundSpeed)
+        graphics.fish3.update(scene : scene, backgroundSpeed : -graphics.backgroundSpeed)
+        graphics.fish4.update(scene : scene, backgroundSpeed : -graphics.backgroundSpeed)
+        graphics.fish5.updatePositionGoingInOppositeDirection(scene : scene, backgroundSpeed : graphics.backgroundSpeed)
+        graphics.fish6.updatePositionGoingInOppositeDirection(scene : scene, backgroundSpeed : graphics.backgroundSpeed)
+        
+        updateBlowFish()
+    }
+    
+    private func updateBlowFish() {
+        graphics.blowFish.update(scene: scene)
+        if objectCollidedWithPlayer(bird : graphics.blowFish, player : graphics.player, den : 3.5) {
+            graphics.blowFish.hit = true
+            if muted == false && graphics.blowFish.playSound {
+                playSound(scene: scene, sound: [blowFishSound])
+                graphics.blowFish.playSound = false
+            }
+        }
+    }
+    
     func updateSnacks() {
         //Update positions of snacks and detect eating snacks
         updateSnack(snacks : graphics.cheesyBites, backgroundSpeed : graphics.backgroundSpeed)
@@ -209,7 +241,7 @@ class ModelUpdate {
     }
     
     func popMisty() {
-        graphics.misty.popMisty(graphics.misty.height, graphics.backgroundSpeed)
+        graphics.misty.popMisty()
         
         if objectCollidedWithPlayer(bird : graphics.misty, player : graphics.player, den : 2.5) {
             graphics.misty.hit = true

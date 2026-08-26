@@ -9,17 +9,17 @@ import Foundation
 import SpriteKit
 
 class GameLevel1 : SKScene {
+    let levelId = LevelId.ARUBA
     
     var model : GameModel = GameModel()
-    var numBackgrounds: Int = numberOfBackgroundImagesArubaLevel
-    
+
     override func update(_ _: TimeInterval) {
-        model.update()
+        model.modelUpdate.update()
     }
     
     override func didMove(to _: SKView) {
-        let levelId = LevelId.ARUBA
-        State.levelId = LevelId.ARUBA
+        State.levelId = levelId
+
         model = GameModel(scene: self, id: levelId)
     }
     

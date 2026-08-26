@@ -12,14 +12,16 @@ import GameplayKit
 
 class GameLevel4: SKScene {
     var levelId = LevelId.OCEAN
+    
     var model = GameModel()
  
     override func update(_ _: TimeInterval) {
-        model.update()
+        model.modelUpdate.update()
     }
     
     override func didMove(to _: SKView) {
-        State.levelId = LevelId.OCEAN
+        State.levelId = levelId
+        
         model = GameModel(scene: self, id: levelId)
     }
     

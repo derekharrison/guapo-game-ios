@@ -9,18 +9,16 @@ import Foundation
 import SpriteKit
 
 class GameLevel5 : SKScene {
+    let levelId = LevelId.UTREG
     
     var model = GameModel()
 
     override func update(_ _: TimeInterval) {
-        model.update()
+        model.modelUpdate.update()
     }
     
     override func didMove(to _: SKView) {
-        
-        let levelId = LevelId.UTREG
-        
-        State.levelId = LevelId.UTREG
+        State.levelId = levelId
         
         model = GameModel(scene: self, id: levelId)
     }

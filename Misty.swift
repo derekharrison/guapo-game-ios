@@ -61,7 +61,7 @@ class Misty : GameObject {
         }
     }
     
-    func popMisty(_ : CGFloat, _ : CGFloat) {
+    func popMisty() {
         
         if !self.hit && top {
             self.displayImageNotHit(imageId: 2)

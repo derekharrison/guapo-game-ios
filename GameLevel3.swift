@@ -11,18 +11,16 @@ import SpriteKit
 import GameplayKit
 
 class GameLevel3: SKScene {
+    let levelId = LevelId.TRIP
     
     var model = GameModel()
 
     override func update(_ _: TimeInterval) {
-        model.update()
+        model.modelUpdate.update()
     }
     
-    override func didMove(to _: SKView) {
-        
-        let levelId = LevelId.TRIP
-        
-        State.levelId = LevelId.TRIP
+    override func didMove(to _: SKView) {        
+        State.levelId = levelId
         
         model = GameModel(scene: self, id: levelId)
     }

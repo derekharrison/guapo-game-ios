@@ -29,7 +29,6 @@ class GraphicsBuilder {
         createFrito()
         createBrownie()
         createMisty()
-        
         createBackgrounds()
         
         if levelId != LevelId.OCEAN {
@@ -37,17 +36,7 @@ class GraphicsBuilder {
         }
         else {
             createJellyFishes()
-        }
-    }
-    
-    private func getPlayerId(player: Int) -> PlayerId {
-        switch player {
-        case 0:
-            return PlayerId.GUAPO
-        case 1:
-            return PlayerId.TUTTI
-        default:
-            return PlayerId.NONE
+            createFish()
         }
     }
     
@@ -93,9 +82,9 @@ class GraphicsBuilder {
         scene.addChild(graphics.blackBackgroundTop)
         scene.addChild(graphics.blackBackgroundBottom)
         
-        for i in 0..<getNumBackgrounds() {
+        for i in 0..<ModelUtils.getNumBackgrounds(levelId: levelId) {
             let string2 = String(i + 1)
-            let imageName = getBackgroundPrefix() + string2
+            let imageName = ModelUtils.getBackgroundPrefix(levelId: levelId) + string2
             let background = SKSpriteNode(imageNamed: imageName)
             
             background.size = CGSize(width: scene.size.width, height: scene.size.height / 2)
@@ -110,44 +99,6 @@ class GraphicsBuilder {
             background.removeFromParent()
             scene.addChild(background)
         }
-    }
-    
-    private func getNumBackgrounds() -> Int {
-        if(levelId == LevelId.ARUBA) {
-            return numberOfBackgroundImagesArubaLevel
-        }
-        if(levelId == LevelId.BEACH) {
-            return numberOfBackgroundImagesBeachLevel
-        }
-        if(levelId == LevelId.TRIP) {
-            return numberOfBackgroundImagesTripLevel
-        }
-        if(levelId == LevelId.OCEAN) {
-            return numberOfBackgroundImagesOceanLevel
-        }
-        if(levelId == LevelId.UTREG) {
-            return numberOfBackgroundImagesUtrechtLevel
-        }
-        return numberOfBackgroundImagesArubaLevel
-    }
-    
-    private func getBackgroundPrefix() -> String {
-        if(levelId == LevelId.ARUBA) {
-            return backgroundArubaLevelPrefix
-        }
-        if(levelId == LevelId.BEACH) {
-            return backgroundBeachLevelPrefix
-        }
-        if(levelId == LevelId.TRIP) {
-            return backgroundTripLevelPrefix
-        }
-        if(levelId == LevelId.OCEAN) {
-            return backgroundOceanLevelPrefix
-        }
-        if(levelId == LevelId.UTREG) {
-            return backgroundUtrechtLevelPrefix
-        }
-        return backgroundArubaLevelPrefix
     }
     
     func createFrito() {
@@ -238,120 +189,62 @@ class GraphicsBuilder {
     }
     
     func createCommon() {
-        let levelId = self.levelId
+        let width = getSceneWidth()
+        let height = getSceneHeight()
         
-        graphics.backgroundSpeed = scene.size.width / 400
-        
-        let width = scene.size.width
-        let height = scene.size.height
+        initBackgroundSpeed()
         
         createSnacks(scene : scene)
         
-        let defaults = UserDefaults()
-        if levelId == LevelId.ARUBA {
-            graphics.highScore = defaults.integer(forKey: highScoreId1)
-        }
-        if levelId == LevelId.BEACH {
-            graphics.highScore = defaults.integer(forKey: highScoreId2)
-        }
-        if levelId == LevelId.TRIP {
-            graphics.highScore = defaults.integer(forKey: highScoreId3)
-        }
-        if levelId == LevelId.OCEAN {
-            graphics.highScore = defaults.integer(forKey: highScoreId4)
-            createFish(width: width, height: height)
-        }
-        if levelId == LevelId.UTREG {
-            graphics.highScore = defaults.integer(forKey: highScoreId5)
-        }
+        getHighScore()
         
-        pauseButtonNode.setScale(1)
-        pauseButtonNode.size = CGSize(width: width / 28, height: height / 28)
-        pauseButtonNode.position = CGPoint(x: width - width / 12, y: height / 2 + height * 1.9 / 10)
-        pauseButtonNode.zPosition = zPosPauseButton
-        pauseButtonNode.removeFromParent()
-        scene.addChild(pauseButtonNode)
+        addPauseButtonToScene(width: width, height: height)
         
-        playButtonNode.setScale(1)
-        playButtonNode.size = CGSize(width: width / 28, height: height / 28)
-        playButtonNode.position = pauseButtonNode.position
-        playButtonNode.zPosition = -1
-        playButtonNode.removeFromParent()
-        scene.addChild(playButtonNode)
+        addPlayButtonToScene(width: width, height: height)
         
-        sunPopupNode.setScale(1)
-        sunPopupNode.size = CGSize(width: width / 7, height: height / 7)
-        sunPopupNode.position = CGPoint(x: width / 2 + sunPopupNode.size.width / 5, y: height / 2 + height / 4 - sunPopupNode.size.height / 2 - width / 11)
-        sunPopupNode.zPosition = -1
-        sunPopupNode.removeFromParent()
-        scene.addChild(sunPopupNode)
+        addSunPopUpToScene(width: width, height: height)
         
-        scoreLabelNode.text = "0"
-        scoreLabelNode.fontSize = 100
-        scoreLabelNode.fontColor = SKColor.gray
-        scoreLabelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
-        scoreLabelNode.position = CGPoint(x: scene.size.width / 12, y: scene.size.height / 2 + scene.size.height * 1.8 / 10)
+        addScoreLabelToScene(width: width, height: height)
         
-        scoreLabelNode.zPosition = zPosPauseButton
-        scoreLabelNode.removeFromParent()
-        scene.addChild(scoreLabelNode)
     }
 
-    func createFish(width : CGFloat, height : CGFloat) {
-        graphics.fish1.addImage(image: fishImage1a)
-        graphics.fish1.addImage(image: fishImage1b)
-        graphics.fish1.setHeight(height : height)
-        graphics.fish1.setWidth(width : width)
-        graphics.fish1.setSize(size: CGSize(width : width / 7.5, height : height / 15))
-        graphics.fish1.setPosition(position: CGPoint(x: -1000, y: 0))
-        graphics.fish1.setZPosition(zPos: minZPosFishes)
-        graphics.fish1.addImagesToScene(scene: scene)
+    func createFish() {
+        let width = scene.size.width
+        let height = scene.size.height
         
-        graphics.fish2.addImage(image: fishImage2a)
-        graphics.fish2.addImage(image: fishImage2b)
-        graphics.fish2.setHeight(height : height)
-        graphics.fish2.setWidth(width : width)
-        graphics.fish2.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
-        graphics.fish2.setPosition(position: CGPoint(x: -1000, y: 0))
-        graphics.fish2.setZPosition(zPos: minZPosFishes + 1)
-        graphics.fish2.addImagesToScene(scene: scene)
-        
-        graphics.fish3.addImage(image: fishImage3a)
-        graphics.fish3.addImage(image: fishImage3b)
-        graphics.fish3.setHeight(height : height)
-        graphics.fish3.setWidth(width : width)
-        graphics.fish3.setSize(size: CGSize(width : width / 7.5, height : height / 15))
-        graphics.fish3.setPosition(position: CGPoint(x: -1000, y: 0))
-        graphics.fish3.setZPosition(zPos: minZPosFishes + 2)
-        graphics.fish3.addImagesToScene(scene: scene)
-        
-        graphics.fish4.addImage(image: fishImage4a)
-        graphics.fish4.addImage(image: fishImage4b)
-        graphics.fish4.setHeight(height : height)
-        graphics.fish4.setWidth(width : width)
-        graphics.fish4.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
-        graphics.fish4.setPosition(position: CGPoint(x: -1000, y: 0))
-        graphics.fish4.setZPosition(zPos: minZPosFishes + 3)
-        graphics.fish4.addImagesToScene(scene: scene)
-        
-        graphics.fish5.addImage(image: fishImage5a)
-        graphics.fish5.addImage(image: fishImage5b)
-        graphics.fish5.setHeight(height : height)
-        graphics.fish5.setWidth(width : width)
-        graphics.fish5.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
-        graphics.fish5.setPosition(position: CGPoint(x: 10 * width, y: 0))
-        graphics.fish5.setZPosition(zPos: minZPosFishes + 4)
-        graphics.fish5.addImagesToScene(scene: scene)
-        
-        graphics.fish6.addImage(image: fishImage6a)
-        graphics.fish6.addImage(image: fishImage6b)
-        graphics.fish6.setHeight(height : height)
-        graphics.fish6.setWidth(width : width)
-        graphics.fish6.setSize(size: CGSize(width : width / 7.5, height : height / 15))
-        graphics.fish6.setPosition(position: CGPoint(x: 10 * width, y: 0))
-        graphics.fish6.setZPosition(zPos: minZPosFishes + 5)
-        graphics.fish6.addImagesToScene(scene: scene)
-        
+        createFish(images: getFish1Images(), fish: graphics.fish1, width: width, height: height, zPos: Int(minZPosFishes))
+        createFish(images: getFish2Images(), fish: graphics.fish2, width: width, height: height, zPos: Int(minZPosFishes) + 1)
+        createFish(images: getFish3Images(), fish: graphics.fish3, width: width, height: height, zPos: Int(minZPosFishes) + 2)
+        createFish(images: getFish4Images(), fish: graphics.fish4, width: width, height: height, zPos: Int(minZPosFishes) + 3)
+        createFishMovingInOppositeDirection(images: getFish5Images(), fish: graphics.fish5, width: width, height: height, zPos: Int(minZPosFishes) + 4)
+        createFishMovingInOppositeDirection(images: getFish6Images(), fish: graphics.fish6, width: width, height: height, zPos: Int(minZPosFishes) + 5)
+        createBlowFish(width: width, height: height)
+    }
+    
+    private func createFish(images : [String], fish : Fish, width: CGFloat, height : CGFloat, zPos: Int) {
+        for image in images {
+            fish.addImage(image: image)
+        }
+        fish.setHeight(height : height)
+        fish.setWidth(width : width)
+        fish.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
+        fish.setPosition(position: CGPoint(x: -1000, y: 0))
+        fish.setZPosition(zPos: minZPosFishes + 3)
+        fish.addImagesToScene(scene: scene)
+    }
+    private func createFishMovingInOppositeDirection(images : [String], fish : Fish, width: CGFloat, height : CGFloat, zPos: Int) {
+        for image in images {
+            fish.addImage(image: image)
+        }
+        fish.setHeight(height : height)
+        fish.setWidth(width : width)
+        fish.setSize(size: CGSize(width : width / 7.5, height : height / 15))
+        fish.setPosition(position: CGPoint(x: 10 * width, y: 0))
+        fish.setZPosition(zPos: minZPosFishes + 5)
+        fish.addImagesToScene(scene: scene)
+    }
+    
+    private func createBlowFish(width : CGFloat, height : CGFloat) {
         graphics.blowFish.addImage(image: blowFishImage1)
         graphics.blowFish.addImage(image: blowFishImage2)
         graphics.blowFish.addImageHit(image: blowFishImage3)
@@ -402,5 +295,128 @@ class GraphicsBuilder {
             cheesyBite.pointsForSnack = points
             snacks.append(cheesyBite)
         }
+    }
+    
+    private func addPauseButtonToScene(width: CGFloat, height: CGFloat) {
+        pauseButtonNode.setScale(1)
+        pauseButtonNode.size = CGSize(width: width / 28, height: height / 28)
+        pauseButtonNode.position = CGPoint(x: width - width / 12, y: height / 2 + height * 1.9 / 10)
+        pauseButtonNode.zPosition = zPosPauseButton
+        pauseButtonNode.removeFromParent()
+        scene.addChild(pauseButtonNode)
+    }
+    
+    private func addPlayButtonToScene(width: CGFloat, height: CGFloat) {
+        playButtonNode.setScale(1)
+        playButtonNode.size = CGSize(width: width / 28, height: height / 28)
+        playButtonNode.position = pauseButtonNode.position
+        playButtonNode.zPosition = -1
+        playButtonNode.removeFromParent()
+        scene.addChild(playButtonNode)
+    }
+    
+    private func addSunPopUpToScene(width: CGFloat, height: CGFloat) {
+        sunPopupNode.setScale(1)
+        sunPopupNode.size = CGSize(width: width / 7, height: height / 7)
+        sunPopupNode.position = CGPoint(x: width / 2 + sunPopupNode.size.width / 5, y: height / 2 + height / 4 - sunPopupNode.size.height / 2 - width / 11)
+        sunPopupNode.zPosition = -1
+        sunPopupNode.removeFromParent()
+        scene.addChild(sunPopupNode)
+    }
+    
+    private func addScoreLabelToScene(width: CGFloat, height: CGFloat) {
+        scoreLabelNode.text = "0"
+        scoreLabelNode.fontSize = 100
+        scoreLabelNode.fontColor = SKColor.gray
+        scoreLabelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
+        scoreLabelNode.position = CGPoint(x: scene.size.width / 12, y: scene.size.height / 2 + scene.size.height * 1.8 / 10)
+        scoreLabelNode.zPosition = zPosPauseButton
+        scoreLabelNode.removeFromParent()
+        scene.addChild(scoreLabelNode)
+    }
+    
+    private func getFish4Images() -> [String] {
+        var images: [String] = []
+        images.append(fishImage4a)
+        images.append(fishImage4b)
+        return images
+    }
+    
+    private func getFish1Images() -> [String] {
+        var images: [String] = []
+        images.append(fishImage1a)
+        images.append(fishImage1b)
+        return images
+    }
+    
+    private func getFish2Images() -> [String] {
+        var images: [String] = []
+        images.append(fishImage2a)
+        images.append(fishImage2b)
+        return images
+    }
+    
+    private func getFish3Images() -> [String] {
+        var images: [String] = []
+        images.append(fishImage3a)
+        images.append(fishImage3b)
+        return images
+    }
+    
+    private func getFish5Images() -> [String] {
+        var images: [String] = []
+        images.append(fishImage5a)
+        images.append(fishImage5b)
+        return images
+    }
+    
+    
+    private func getFish6Images() -> [String] {
+        var images: [String] = []
+        images.append(fishImage6a)
+        images.append(fishImage6b)
+        return images
+    }
+    
+    private func getHighScore() {
+        let defaults = UserDefaults()
+        if levelId == LevelId.ARUBA {
+            graphics.highScore = defaults.integer(forKey: highScoreId1)
+        }
+        if levelId == LevelId.BEACH {
+            graphics.highScore = defaults.integer(forKey: highScoreId2)
+        }
+        if levelId == LevelId.TRIP {
+            graphics.highScore = defaults.integer(forKey: highScoreId3)
+        }
+        if levelId == LevelId.OCEAN {
+            graphics.highScore = defaults.integer(forKey: highScoreId4)
+        }
+        if levelId == LevelId.UTREG {
+            graphics.highScore = defaults.integer(forKey: highScoreId5)
+        }
+    }
+    
+    private func getPlayerId(player: Int) -> PlayerId {
+        switch player {
+        case 0:
+            return PlayerId.GUAPO
+        case 1:
+            return PlayerId.TUTTI
+        default:
+            return PlayerId.NONE
+        }
+    }
+    
+    private func initBackgroundSpeed() {
+        graphics.backgroundSpeed = scene.size.width / 400
+    }
+    
+    private func getSceneWidth() -> CGFloat {
+        return scene.size.width
+    }
+    
+    private func getSceneHeight() -> CGFloat {
+        return scene.size.height
     }
 }

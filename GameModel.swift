@@ -25,14 +25,8 @@ class GameModel {
         createGraphics(scene: scene, id: id)
         
         createModelUpdate(scene: scene)
-    }
-    
-    func update() {
-        modelUpdate.updateScore()
         
-        if State.gameState == GameState.inGame {
-            modelUpdate.update()
-        }
+        startGame()
     }
     
     private func createGraphics(scene: SKScene, id : LevelId) {
@@ -47,10 +41,12 @@ class GameModel {
         modelUpdate = ModelUpdate(graphics : graphics, scene: scene)
     }
 
-    func initGameVariables(scene: SKScene) {
+    private func initGameVariables(scene: SKScene) {
         gameScore = 0
         boundTracker = 1
-        
+    }
+    
+    private func startGame() {
         ModelUtils.startGame()
     }
 }

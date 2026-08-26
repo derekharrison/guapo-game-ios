@@ -68,4 +68,15 @@ class ModelUtils {
         }
         return backgroundArubaLevelPrefix
     }
+    
+    static func getPlayerId(player: Int) -> PlayerId {
+        switch player {
+        case 0:
+            return PlayerId.GUAPO
+        case 1:
+            return PlayerId.TUTTI
+        default:
+            return PlayerId.NONE
+        }
+    }
 }

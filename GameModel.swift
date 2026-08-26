@@ -14,12 +14,13 @@ class GameModel {
     var modelUpdate : ModelUpdate = ModelUpdate(graphics: Graphics(), scene: SKScene())
     var scene = SKScene()
     
-    init() {}
-
+    init() {
+        // Allow construction of base model
+    }
     init(scene: SKScene) {
         self.scene = scene
         
-        initGameVariables(scene: scene)
+        initGameVariables()
         
         createGraphics(scene: scene)
         
@@ -32,7 +33,7 @@ class GameModel {
         GraphicsBuilder()
             .graphics(graphics: graphics)
             .scene(scene: scene)
-            .id(id: getLevelId())
+            .levelId(id: getLevelId())
             .build()
     }
     
@@ -40,7 +41,7 @@ class GameModel {
         modelUpdate = ModelUpdate(graphics : graphics, scene: scene)
     }
 
-    private func initGameVariables(scene: SKScene) {
+    private func initGameVariables() {
         gameScore = 0
         boundTracker = 1
     }

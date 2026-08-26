@@ -388,7 +388,9 @@ class ModelUpdate {
             frameCounter = 11
             for touch: AnyObject in touches {
                 let pointOfTouch = touch.location(in: scene)
-                if touchInPauseArea(pointOfTouch: pointOfTouch) {}
+                if touchInPauseArea(pointOfTouch: pointOfTouch) {
+                    // Do nothing when hero moves over pause button region
+                }
                 else if touchInGameArea(pointOfTouch: pointOfTouch) {
                     updatePlayerVelocity(pointOfTouch: pointOfTouch)
                 }

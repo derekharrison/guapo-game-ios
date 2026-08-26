@@ -6,8 +6,6 @@ class GraphicsBuilder {
     private var scene : SKScene = SKScene()
     private var levelId: LevelId = LevelId.ARUBA
     
-    init() {}
-    
     func graphics(graphics: Graphics) -> Self {
         self.graphics = graphics
         return self
@@ -18,7 +16,7 @@ class GraphicsBuilder {
         return self
     }
     
-    func id(id: LevelId) -> Self {
+    func levelId(id: LevelId) -> Self {
         self.levelId = id
         return self
     }
@@ -40,17 +38,17 @@ class GraphicsBuilder {
         }
     }
     
-    func createPlayer() {
+    private func createPlayer() {
         var playerImages : [String] = [String]()
         let defaults = UserDefaults()
         let playerId = defaults.integer(forKey: "player_id")
         
-        if(getPlayerId(player: playerId) == PlayerId.GUAPO) {
+        if(ModelUtils.getPlayerId(player: playerId) == PlayerId.GUAPO) {
             playerImages.append(guapoImage1)
             playerImages.append(guapoImage2)
             graphics.player = createHero(images: playerImages, imageHit: guapoHitImage)
         }
-        if(getPlayerId(player: playerId) == PlayerId.TUTTI) {
+        if(ModelUtils.getPlayerId(player: playerId) == PlayerId.TUTTI) {
             playerImages.append(tuttiImage1)
             playerImages.append(tuttiImage2)
             graphics.player = createHero(images: playerImages, imageHit: tuttiHitImage)
@@ -70,7 +68,7 @@ class GraphicsBuilder {
             .build()
     }
     
-    func createBackgrounds() {
+    private func createBackgrounds() {
         graphics.blackBackgroundTop.size = CGSize(width: scene.size.width, height: scene.size.height / 4)
         graphics.blackBackgroundTop.position = CGPoint(x: scene.size.width / 2, y: scene.size.height * 0.75 + scene.size.height / 8)
         graphics.blackBackgroundTop.zPosition = zPosBlackCoverImages
@@ -101,7 +99,7 @@ class GraphicsBuilder {
         }
     }
     
-    func createFrito() {
+    private func createFrito() {
         for image in FritoImages.getImages(levelId: levelId) {
             graphics.frito.addImage(image : image)
         }
@@ -114,7 +112,7 @@ class GraphicsBuilder {
         graphics.frito.addImagesToScene(scene: scene)
     }
     
-    func createBrownie() {
+    private func createBrownie() {
         for image in BrownieImages.getBrownieImages(levelId: levelId) {
             graphics.brownie.addImage(image : image)
         }
@@ -130,7 +128,7 @@ class GraphicsBuilder {
         graphics.brownie.addImagesToScene(scene: scene)
     }
     
-    func createMisty() {
+    private func createMisty() {
         for image in MistyImages.getMistyImages(levelId: levelId) {
             graphics.misty.addImage(image : image)
         }
@@ -146,7 +144,7 @@ class GraphicsBuilder {
         graphics.misty.addImagesToScene(scene: scene)
     }
     
-    func createBirds() {
+    private func createBirds() {
         for j in 0..<numBirds {
             
             var birdImages = [String]()
@@ -167,7 +165,7 @@ class GraphicsBuilder {
         }
     }
     
-    func createJellyFishes() {
+    private func createJellyFishes() {
         for j in 0..<numJellyFish {
             
             var birdImages = [String]()
@@ -188,7 +186,7 @@ class GraphicsBuilder {
         }
     }
     
-    func createCommon() {
+    private func createCommon() {
         let width = getSceneWidth()
         let height = getSceneHeight()
         
@@ -208,16 +206,16 @@ class GraphicsBuilder {
         
     }
 
-    func createFish() {
+    private func createFish() {
         let width = scene.size.width
         let height = scene.size.height
         
-        createFish(images: getFish1Images(), fish: graphics.fish1, width: width, height: height, zPos: Int(minZPosFishes))
-        createFish(images: getFish2Images(), fish: graphics.fish2, width: width, height: height, zPos: Int(minZPosFishes) + 1)
-        createFish(images: getFish3Images(), fish: graphics.fish3, width: width, height: height, zPos: Int(minZPosFishes) + 2)
-        createFish(images: getFish4Images(), fish: graphics.fish4, width: width, height: height, zPos: Int(minZPosFishes) + 3)
-        createFishMovingInOppositeDirection(images: getFish5Images(), fish: graphics.fish5, width: width, height: height, zPos: Int(minZPosFishes) + 4)
-        createFishMovingInOppositeDirection(images: getFish6Images(), fish: graphics.fish6, width: width, height: height, zPos: Int(minZPosFishes) + 5)
+        createFish(images: FishImages.getFish1Images(), fish: graphics.fish1, width: width, height: height, zPos: Int(minZPosFishes))
+        createFish(images: FishImages.getFish2Images(), fish: graphics.fish2, width: width, height: height, zPos: Int(minZPosFishes) + 1)
+        createFish(images: FishImages.getFish3Images(), fish: graphics.fish3, width: width, height: height, zPos: Int(minZPosFishes) + 2)
+        createFish(images: FishImages.getFish4Images(), fish: graphics.fish4, width: width, height: height, zPos: Int(minZPosFishes) + 3)
+        createFishMovingInOppositeDirection(images: FishImages.getFish5Images(), fish: graphics.fish5, width: width, height: height, zPos: Int(minZPosFishes) + 4)
+        createFishMovingInOppositeDirection(images: FishImages.getFish6Images(), fish: graphics.fish6, width: width, height: height, zPos: Int(minZPosFishes) + 5)
         createBlowFish(width: width, height: height)
     }
     
@@ -229,9 +227,10 @@ class GraphicsBuilder {
         fish.setWidth(width : width)
         fish.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
         fish.setPosition(position: CGPoint(x: -1000, y: 0))
-        fish.setZPosition(zPos: minZPosFishes + 3)
+        fish.setZPosition(zPos: CGFloat(zPos))
         fish.addImagesToScene(scene: scene)
     }
+    
     private func createFishMovingInOppositeDirection(images : [String], fish : Fish, width: CGFloat, height : CGFloat, zPos: Int) {
         for image in images {
             fish.addImage(image: image)
@@ -240,7 +239,7 @@ class GraphicsBuilder {
         fish.setWidth(width : width)
         fish.setSize(size: CGSize(width : width / 7.5, height : height / 15))
         fish.setPosition(position: CGPoint(x: 10 * width, y: 0))
-        fish.setZPosition(zPos: minZPosFishes + 5)
+        fish.setZPosition(zPos: CGFloat(zPos))
         fish.addImagesToScene(scene: scene)
     }
     
@@ -259,7 +258,7 @@ class GraphicsBuilder {
         graphics.blowFish.addImagesToScene(scene: scene)
     }
     
-    func createSnacks(scene : SKScene) {
+    private func createSnacks(scene : SKScene) {
         createSnack(bite : cheesyBiteImage, points: pointsForCheesyBite, numCheesyBites : Parameters.numberOfCheesyBites, snacks : &graphics.cheesyBites, scene : scene)
         
         createSnack(bite : paprikaImage, points: pointsForPaprika, numCheesyBites : totalNumberOfPaprika, snacks : &graphics.paprikas, scene : scene)
@@ -276,7 +275,7 @@ class GraphicsBuilder {
         }
     }
     
-    func createSnack(bite : String, points : Int, numCheesyBites : Int, snacks : inout [Snack], scene : SKScene) {
+    private func createSnack(bite : String, points : Int, numCheesyBites : Int, snacks : inout [Snack], scene : SKScene) {
         for _ in 0..<numCheesyBites {
             
             let size = CGSize(width: scene.size.width / 14, height: scene.size.height / 14)
@@ -329,53 +328,10 @@ class GraphicsBuilder {
         scoreLabelNode.fontSize = 100
         scoreLabelNode.fontColor = SKColor.gray
         scoreLabelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
-        scoreLabelNode.position = CGPoint(x: scene.size.width / 12, y: scene.size.height / 2 + scene.size.height * 1.8 / 10)
+        scoreLabelNode.position = CGPoint(x: width / 12, y: height / 2 + height * 1.8 / 10)
         scoreLabelNode.zPosition = zPosPauseButton
         scoreLabelNode.removeFromParent()
         scene.addChild(scoreLabelNode)
-    }
-    
-    private func getFish4Images() -> [String] {
-        var images: [String] = []
-        images.append(fishImage4a)
-        images.append(fishImage4b)
-        return images
-    }
-    
-    private func getFish1Images() -> [String] {
-        var images: [String] = []
-        images.append(fishImage1a)
-        images.append(fishImage1b)
-        return images
-    }
-    
-    private func getFish2Images() -> [String] {
-        var images: [String] = []
-        images.append(fishImage2a)
-        images.append(fishImage2b)
-        return images
-    }
-    
-    private func getFish3Images() -> [String] {
-        var images: [String] = []
-        images.append(fishImage3a)
-        images.append(fishImage3b)
-        return images
-    }
-    
-    private func getFish5Images() -> [String] {
-        var images: [String] = []
-        images.append(fishImage5a)
-        images.append(fishImage5b)
-        return images
-    }
-    
-    
-    private func getFish6Images() -> [String] {
-        var images: [String] = []
-        images.append(fishImage6a)
-        images.append(fishImage6b)
-        return images
     }
     
     private func getHighScore() {
@@ -394,17 +350,6 @@ class GraphicsBuilder {
         }
         if levelId == LevelId.UTREG {
             graphics.highScore = defaults.integer(forKey: highScoreId5)
-        }
-    }
-    
-    private func getPlayerId(player: Int) -> PlayerId {
-        switch player {
-        case 0:
-            return PlayerId.GUAPO
-        case 1:
-            return PlayerId.TUTTI
-        default:
-            return PlayerId.NONE
         }
     }
     

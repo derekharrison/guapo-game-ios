@@ -13,7 +13,8 @@ class ModelUpdate {
     var graphics: Graphics
     var playMisty = Int.random(in: 10..<40) + 20
     var oldPosition = CGPoint(x: 0, y: 0)
-    var moveCounter = 0
+    var frameCounter = 0
+    var playFinalSoundHero = true
     
     init(graphics: Graphics, scene: SKScene) {
         self.graphics = graphics
@@ -44,7 +45,7 @@ class ModelUpdate {
         
         updateBackgrounds(backgrounds : graphics.backgrounds, velX : -graphics.backgroundSpeed)
         
-        moveCounter += 1
+        frameCounter += 1
     }
     
     func updateScore() {
@@ -107,8 +108,9 @@ class ModelUpdate {
             
             if objectCollidedWithPlayer(bird : bird, player : graphics.player, den : 3.5) {
                 
-                if muted == false {
+                if muted == false && playFinalSoundHero {
                     playSound(scene: scene, sound: [endSound])
+                    playFinalSoundHero = false
                 }
                 
                 runGameOver()
@@ -123,8 +125,9 @@ class ModelUpdate {
             
             if objectCollidedWithPlayer(bird : jellyFish, player : graphics.player, den : 3.5) {
                 
-                if muted == false {
+                if muted == false && playFinalSoundHero {
                     playSound(scene: scene, sound: [endSound])
+                    playFinalSoundHero = false
                 }
                 
                 runGameOver()
@@ -243,6 +246,7 @@ class ModelUpdate {
     }
     
     func runGameOver() {
+        State.gameState = GameState.afterGame
         graphics.player.setZPosition(zPos: -1)
         graphics.player.setZPositionHit(zPos: zPosPlayer)
       
@@ -348,8 +352,8 @@ class ModelUpdate {
             startGame()
             graphics.player.setVelocity(velX: 0, velY: 0)
         }
-        else if State.gameState == GameState.inGame && moveCounter > 10 {
-            moveCounter = 11
+        else if State.gameState == GameState.inGame && frameCounter > 10 {
+            frameCounter = 11
             for touch: AnyObject in touches {
                 let pointOfTouch = touch.location(in: scene)
                 if touchInPauseArea(pointOfTouch: pointOfTouch) {}

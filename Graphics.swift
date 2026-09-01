@@ -29,6 +29,7 @@ class Graphics {
     
     var frito = Frito()
     var brownie = Brownie()
+    var rocco = Rocco()
     var misty = Misty()
     var fish1 = Fish()
     var fish2 = Fish()

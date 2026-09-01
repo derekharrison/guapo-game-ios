@@ -54,9 +54,18 @@ class Player : GameObject {
         super.update()
         updatePositionPlayer()
         updateImage(numFrames: numOfFramesForUpdate)
+        updateTrajectory()
         
         if(State.levelId != LevelId.OCEAN) {
             updateCape()
+        }
+    }
+    
+    private func updateTrajectory() {
+        State.trajectory.append(CGPoint(x: self.posX, y: self.posY))
+        
+        if(State.trajectory.count > 60) {
+            State.trajectory.remove(at: 0)
         }
     }
     

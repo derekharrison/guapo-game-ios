@@ -22,4 +22,5 @@ enum PlayingState {
 class State {
     static var levelId : LevelId = LevelId.NONE
     static var gameState : GameState = .preGame
+    static var trajectory : [CGPoint] = []
 }

@@ -164,7 +164,6 @@ class MainMenuScene: SKScene {
         placeButton(fac: 0.76, buttonNotPressed: playerMenuButtonNotPressed, buttonPressed: playerMenuButtonPressed)
     }
     
-    //Force the mute button to change by running update()
     override func update(_ _: TimeInterval) {
         if muted {
             volumeOff.zPosition = 2

@@ -17,6 +17,7 @@ class GameModel {
     init() {
         // Allow construction of base model
     }
+    
     init(scene: SKScene) {
         self.scene = scene
         

@@ -26,6 +26,7 @@ class GraphicsBuilder {
         createPlayer()
         createFrito()
         createBrownie()
+        createRocco()
         createMisty()
         createBackgrounds()
         
@@ -126,6 +127,22 @@ class GraphicsBuilder {
         graphics.brownie.setPosition(position: CGPoint(x : -width, y: height * 0.75 + graphics.brownie.images[0].size.height / 2))
         
         graphics.brownie.addImagesToScene(scene: scene)
+    }
+    
+    private func createRocco() {
+        for image in BrownieImages.getBrownieImages(levelId: levelId) {
+            graphics.rocco.addImage(image : image)
+        }
+        let height = scene.size.height
+        let width = scene.size.width
+        graphics.rocco.setHeight(height : height)
+        graphics.rocco.setWidth(width : width)
+        graphics.rocco.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
+        graphics.rocco.setVelocity(velX: -2 * graphics.backgroundSpeed, velY: -2 * graphics.backgroundSpeed)
+        graphics.rocco.setZPosition(zPos: zPosCharacters + 1)
+        graphics.rocco.setPosition(position: CGPoint(x : -width, y: height * 0.75 + graphics.brownie.images[0].size.height / 2))
+        
+        graphics.rocco.addImagesToScene(scene: scene)
     }
     
     private func createMisty() {

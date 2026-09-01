@@ -271,8 +271,8 @@ func startLevel(levelId : LevelId, scene : SKScene, start : inout Bool, gameLeve
         setLevelId(levelId: levelId)
         let sceneToMoveTo = gameLevel
         sceneToMoveTo.scaleMode = scene.scaleMode
-        let myTransition = SKTransition.fade(withDuration: 3.0)
-        scene.view!.presentScene(sceneToMoveTo, transition: myTransition)
+        let transition = SKTransition.fade(withDuration: 3.0)
+        scene.view!.presentScene(sceneToMoveTo, transition: transition)
         
         start = false
     }

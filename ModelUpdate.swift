@@ -51,6 +51,8 @@ class ModelUpdate {
         
         popBrownie()
         
+        popRocco()
+        
         popMisty()
         
         updateBackgrounds(backgrounds : graphics.backgrounds, velX : -graphics.backgroundSpeed)
@@ -238,6 +240,10 @@ class ModelUpdate {
                 graphics.brownie.playHitSound = false
             }
         }
+    }
+    
+    private func popRocco() {
+        graphics.rocco.update(scene: scene)
     }
     
     func popMisty() {

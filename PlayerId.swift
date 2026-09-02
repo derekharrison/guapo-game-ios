@@ -8,5 +8,7 @@
 enum PlayerId {
     case GUAPO
     case TUTTI
+    case MIKA
+    case ROCCO
     case NONE
 }

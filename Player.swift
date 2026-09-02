@@ -64,7 +64,7 @@ class Player : GameObject {
     private func updateTrajectory() {
         State.trajectory.append(CGPoint(x: self.posX, y: self.posY))
         
-        if(State.trajectory.count > 60) {
+        if(State.trajectory.count > 20) {
             State.trajectory.remove(at: 0)
         }
     }

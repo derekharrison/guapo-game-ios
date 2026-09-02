@@ -17,11 +17,17 @@ class PlayerScene: SKScene {
     
     let guapoImage = SKSpriteNode(imageNamed: guapoPlayerImage)
     let tuttiImage = SKSpriteNode(imageNamed: tuttiPlayerImage)
-
+    let mikaImage = SKSpriteNode(imageNamed: mikaPlayerImage)
+    let roccoImage = SKSpriteNode(imageNamed: roccoPlayerImage)
+    
     let guapoButtonNotPressed = SKSpriteNode(imageNamed: Parameters.guapoButtonNotPressed)
     let guapoButtonPressed = SKSpriteNode(imageNamed: Parameters.guapoButtonPressed)
     let tuttiButtonNotPressed = SKSpriteNode(imageNamed: Parameters.tuttiButtonNotPressed)
     let tuttiButtonPressed = SKSpriteNode(imageNamed: Parameters.tuttiButtonPressed)
+    let mikaButtonNotPressed = SKSpriteNode(imageNamed: Parameters.mikaButtonNotPressed)
+    let mikaButtonPressed = SKSpriteNode(imageNamed: Parameters.mikaButtonPressed)
+    let roccoButtonNotPressed = SKSpriteNode(imageNamed: Parameters.roccoButtonNotPressed)
+    let roccoButtonPressed = SKSpriteNode(imageNamed: Parameters.roccoButtonPressed)
     
     var startMenuChosen = false
     var startMenu = false
@@ -44,11 +50,15 @@ class PlayerScene: SKScene {
         background.removeFromParent()
         self.addChild(background)
         
-        placeImage(fac: 0.8, button: guapoImage)
-        placeImage(fac: 0.66, button: tuttiImage)
+        placeImage(fac: 0.9, button: guapoImage)
+        placeImage(fac: 0.76, button: tuttiImage)
+        placeImage(fac: 0.62, button: mikaImage)
+        placeImage(fac: 0.48, button: roccoImage)
         
-        placeButton(fac: 0.8, buttonNotPressed: guapoButtonNotPressed, buttonPressed: guapoButtonPressed, width: self.size.width / 5, height: self.size.height / 16)
-        placeButton(fac: 0.66, buttonNotPressed: tuttiButtonNotPressed, buttonPressed: tuttiButtonPressed, width: self.size.width / 5, height: self.size.height / 16)
+        placeButton(fac: 0.9, buttonNotPressed: guapoButtonNotPressed, buttonPressed: guapoButtonPressed, width: self.size.width / 5, height: self.size.height / 16)
+        placeButton(fac: 0.76, buttonNotPressed: tuttiButtonNotPressed, buttonPressed: tuttiButtonPressed, width: self.size.width / 5, height: self.size.height / 16)
+        placeButton(fac: 0.62, buttonNotPressed: mikaButtonNotPressed, buttonPressed: mikaButtonPressed, width: self.size.width / 5, height: self.size.height / 16)
+        placeButton(fac: 0.48, buttonNotPressed: roccoButtonNotPressed, buttonPressed: roccoButtonPressed, width: self.size.width / 5, height: self.size.height / 16)
         placeButton(fac: 0.3, buttonNotPressed: continueNotPressed, buttonPressed: continuePressed, width: self.size.width / 4, height: self.size.height / 16)
         placeButton(fac: 0.16, buttonNotPressed: startMenuNotPressed, buttonPressed: startMenuPressed, width: self.size.width / 4, height: self.size.height / 16)
     }
@@ -64,21 +74,33 @@ class PlayerScene: SKScene {
         for touch: AnyObject in touches {
             let pointOfTouch = touch.location(in: self)
             
-            var dummy1 = false
-            var dummy2 = false
+            var guapoIsChosen = false
+            var tuttiIsChosen = false
+            var mikaIsChosen = false
+            var roccoIsChosen = false
             
             pressButton(pointOfTouch: pointOfTouch, buttonNotPressed : startMenuNotPressed, buttonPressed : startMenuPressed, touched : &startMenu)
             pressButton(pointOfTouch: pointOfTouch, buttonNotPressed : continueNotPressed, buttonPressed : continuePressed, touched : &levelMenu)
-            pressCharacterMenu(pointOfTouch: pointOfTouch, buttonNotPressed : guapoButtonNotPressed, buttonPressed : guapoButtonPressed, touched : &dummy1)
-            pressCharacterMenu(pointOfTouch: pointOfTouch, buttonNotPressed : tuttiButtonNotPressed, buttonPressed : tuttiButtonPressed, touched : &dummy2)
+            pressCharacterMenu(pointOfTouch: pointOfTouch, buttonNotPressed : guapoButtonNotPressed, buttonPressed : guapoButtonPressed, touched : &guapoIsChosen)
+            pressCharacterMenu(pointOfTouch: pointOfTouch, buttonNotPressed : tuttiButtonNotPressed, buttonPressed : tuttiButtonPressed, touched : &tuttiIsChosen)
+            pressCharacterMenu(pointOfTouch: pointOfTouch, buttonNotPressed : mikaButtonNotPressed, buttonPressed : mikaButtonPressed, touched : &mikaIsChosen)
+            pressCharacterMenu(pointOfTouch: pointOfTouch, buttonNotPressed : roccoButtonNotPressed, buttonPressed : roccoButtonPressed, touched : &roccoIsChosen)
             
-            if dummy1 {
+            if guapoIsChosen {
                 let defaults = UserDefaults()
                 defaults.set(0, forKey: "player_id")
             }
-            if dummy2 {
+            if tuttiIsChosen {
                 let defaults = UserDefaults()
                 defaults.set(1, forKey: "player_id")
+            }
+            if mikaIsChosen {
+                let defaults = UserDefaults()
+                defaults.set(2, forKey: "player_id")
+            }
+            if roccoIsChosen {
+                let defaults = UserDefaults()
+                defaults.set(3, forKey: "player_id")
             }
         }
     }
@@ -169,6 +191,10 @@ class PlayerScene: SKScene {
             self.guapoButtonPressed.zPosition = -1
             self.tuttiButtonNotPressed.zPosition = 2
             self.tuttiButtonPressed.zPosition = -1
+            self.mikaButtonNotPressed.zPosition = 2
+            self.mikaButtonPressed.zPosition = -1
+            self.roccoButtonNotPressed.zPosition = 2
+            self.roccoButtonPressed.zPosition = -1
             
             buttonNotPressed.zPosition = -1
             buttonPressed.zPosition = 2

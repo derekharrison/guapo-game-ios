@@ -75,6 +75,10 @@ class ModelUtils {
             return PlayerId.GUAPO
         case 1:
             return PlayerId.TUTTI
+        case 2:
+            return PlayerId.MIKA
+        case 3:
+            return PlayerId.ROCCO
         default:
             return PlayerId.NONE
         }

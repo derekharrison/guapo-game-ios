@@ -54,6 +54,16 @@ class GraphicsBuilder {
             playerImages.append(tuttiImage2)
             graphics.player = createHero(images: playerImages, imageHit: tuttiHitImage)
         }
+        if(ModelUtils.getPlayerId(player: playerId) == PlayerId.MIKA) {
+            playerImages.append(mikaImage1)
+            playerImages.append(mikaImage2)
+            graphics.player = createHero(images: playerImages, imageHit: mikaHitImage)
+        }
+        if(ModelUtils.getPlayerId(player: playerId) == PlayerId.ROCCO) {
+            playerImages.append(roccoImage1)
+            playerImages.append(roccoImage2)
+            graphics.player = createHero(images: playerImages, imageHit: roccoHitImage)
+        }
     }
     
     private func createHero(images : [String], imageHit : String) -> Player {
@@ -130,7 +140,7 @@ class GraphicsBuilder {
     }
     
     private func createRocco() {
-        for image in BrownieImages.getBrownieImages(levelId: levelId) {
+        for image in RoccoImages.getImages(levelId: levelId) {
             graphics.rocco.addImage(image : image)
         }
         let height = scene.size.height

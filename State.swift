@@ -11,6 +11,7 @@ enum GameState {
     case preGame
     case inGame
     case afterGame
+    case continueGame
     case gamePaused
 }
 

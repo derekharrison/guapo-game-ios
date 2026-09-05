@@ -27,6 +27,7 @@ class GraphicsBuilder {
         createFrito()
         createBrownie()
         createRocco()
+        createFlag()
         createMisty()
         createBackgrounds()
         
@@ -68,7 +69,7 @@ class GraphicsBuilder {
     
     private func createHero(images : [String], imageHit : String) -> Player {
         let size = CGSize(width: scene.size.width / 5, height: scene.size.height / 7.5)
-        return PlayerBuilder(scene: scene)
+        var builder = PlayerBuilder(scene: scene)
             .images(images: images)
             .imageHit(imageHit: imageHit)
             .size(size: size)
@@ -76,7 +77,12 @@ class GraphicsBuilder {
             .position(position: CGPoint(x : scene.size.width / 5, y : scene.size.height / 2))
             .width(width: scene.size.width)
             .height(height: scene.size.height)
-            .build()
+        
+        if(State.gameState == .continueGame) {
+            let point = getPlayerPosition(key: String(State.levelId.hashValue) + "position")
+            builder = builder.position(position: CGPoint(x: point.posX, y: point.posY))
+        }
+        return builder.build()
     }
     
     private func createBackgrounds() {
@@ -108,6 +114,10 @@ class GraphicsBuilder {
             background.removeFromParent()
             scene.addChild(background)
         }
+        
+        if(State.gameState == GameState.continueGame) {
+            getBackgrounds(backgrounds: graphics.backgrounds)
+        }
     }
     
     private func createFrito() {
@@ -121,6 +131,10 @@ class GraphicsBuilder {
         graphics.frito.setZPosition(zPos: zPosCharacters)
         graphics.frito.setPosition(position: CGPoint(x : 10 * scene.size.width, y : scene.size.height * 0.75 + graphics.frito.images[0].size.height / 2))
         graphics.frito.addImagesToScene(scene: scene)
+        
+        if(State.gameState == .continueGame) {
+            getFrito(object: &graphics.frito, level: State.levelId)
+        }
     }
     
     private func createBrownie() {
@@ -137,6 +151,10 @@ class GraphicsBuilder {
         graphics.brownie.setPosition(position: CGPoint(x : -width, y: height * 0.75 + graphics.brownie.images[0].size.height / 2))
         
         graphics.brownie.addImagesToScene(scene: scene)
+        
+        if(State.gameState == .continueGame) {
+            getBrownie(object: &graphics.brownie, level: State.levelId)
+        }
     }
     
     private func createRocco() {
@@ -155,6 +173,24 @@ class GraphicsBuilder {
         graphics.rocco.addImagesToScene(scene: scene)
     }
     
+    private func createFlag() {
+        if levelId != LevelId.UTREG {
+            graphics.flag.addImage(image : arubanFlag)
+        }
+        else {
+            graphics.flag.addImage(image: dutchFlag)
+        }
+        let height = scene.size.height
+        let width = scene.size.width
+        graphics.flag.setHeight(height : height)
+        graphics.flag.setWidth(width : width)
+        graphics.flag.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
+        graphics.flag.setZPosition(zPos: -1)
+        graphics.flag.setPosition(position: CGPoint(x : width * 0.5, y: height * 0.6))
+        
+        graphics.flag.addImagesToScene(scene: scene)
+    }
+    
     private func createMisty() {
         for image in MistyImages.getMistyImages(levelId: levelId) {
             graphics.misty.addImage(image : image)
@@ -169,9 +205,18 @@ class GraphicsBuilder {
         graphics.misty.setPosition(position: CGPoint(x : width / 2, y : height * 0.75 + graphics.misty.images[0].size.height / 2))
         
         graphics.misty.addImagesToScene(scene: scene)
+        
+        if(State.gameState == .continueGame) {
+            getMisty(object: &graphics.misty, level: State.levelId)
+        }
     }
     
     private func createBirds() {
+        
+        if(State.gameState == .continueGame) {
+            numBirds = getNumBirds()
+        }
+        
         for j in 0..<numBirds {
             
             var birdImages = [String]()
@@ -183,9 +228,13 @@ class GraphicsBuilder {
             let zPosition = CGFloat(j) + minZPosVillains
             let size = CGSize(width: scene.size.width / 10, height: scene.size.height / 10)
             
-            let bird = Bird(birds: birdImages, size: size, zPos: zPosition)
+            var bird = Bird(birds: birdImages, size: size, zPos: zPosition)
             
             bird.addImagesToScene(scene : scene)
+            
+            if(State.gameState == .continueGame) {
+                getBird(bird: &bird, birdId: j)
+            }
 
             self.graphics.birds.append(bird)
             
@@ -204,10 +253,14 @@ class GraphicsBuilder {
             let zPosition = CGFloat(j) + minZPosVillains
             let size = CGSize(width: scene.size.width / 10, height: scene.size.height / 10)
             
-            let jellyFish = JellyFish(jellyFish: birdImages, size: size, zPos: zPosition)
+            var jellyFish = JellyFish(jellyFish: birdImages, size: size, zPos: zPosition)
             
             jellyFish.addImagesToScene(scene : scene)
 
+            if(State.gameState == .continueGame) {
+                getJellyFish(jelly: &jellyFish, jellyId: j)
+            }
+            
             self.graphics.jellyfishes.append(jellyFish)
             
         }
@@ -244,6 +297,10 @@ class GraphicsBuilder {
         createFishMovingInOppositeDirection(images: FishImages.getFish5Images(), fish: graphics.fish5, width: width, height: height, zPos: Int(minZPosFishes) + 4)
         createFishMovingInOppositeDirection(images: FishImages.getFish6Images(), fish: graphics.fish6, width: width, height: height, zPos: Int(minZPosFishes) + 5)
         createBlowFish(width: width, height: height)
+        
+        if(State.gameState == .continueGame) {
+            getFish(graphics: graphics)
+        }
     }
     
     private func createFish(images : [String], fish : Fish, width: CGFloat, height : CGFloat, zPos: Int) {
@@ -286,15 +343,15 @@ class GraphicsBuilder {
     }
     
     private func createSnacks(scene : SKScene) {
-        createSnack(bite : cheesyBiteImage, points: pointsForCheesyBite, numCheesyBites : Parameters.numberOfCheesyBites, snacks : &graphics.cheesyBites, scene : scene)
+        createSnack(bite : cheesyBiteImage, points: pointsForCheesyBite, numCheesyBites : Parameters.numberOfCheesyBites, snacks : &graphics.cheesyBites, scene : scene, snackType: "cheesyBite")
         
-        createSnack(bite : paprikaImage, points: pointsForPaprika, numCheesyBites : totalNumberOfPaprika, snacks : &graphics.paprikas, scene : scene)
+        createSnack(bite : paprikaImage, points: pointsForPaprika, numCheesyBites : totalNumberOfPaprika, snacks : &graphics.paprikas, scene : scene, snackType: "paprika")
         
-        createSnack(bite : broccoliImage, points: pointsForBroccoli, numCheesyBites : totalNumberOfBroccoli, snacks : &graphics.broccolis, scene : scene)
+        createSnack(bite : broccoliImage, points: pointsForBroccoli, numCheesyBites : totalNumberOfBroccoli, snacks : &graphics.broccolis, scene : scene, snackType: "broccoli")
         
-        createSnack(bite : cucumberImage, points: pointsForCucumber, numCheesyBites : totalNumberOfCucumbers, snacks : &graphics.cucumbers, scene : scene)
+        createSnack(bite : cucumberImage, points: pointsForCucumber, numCheesyBites : totalNumberOfCucumbers, snacks : &graphics.cucumbers, scene : scene, snackType: "cucumber")
         
-        createSnack(bite : begginStripImage, points: pointsBegginStrip, numCheesyBites : totalNumberOfBegginStrips, snacks : &graphics.begginStrips, scene : scene)
+        createSnack(bite : begginStripImage, points: pointsBegginStrip, numCheesyBites : totalNumberOfBegginStrips, snacks : &graphics.begginStrips, scene : scene, snackType: "begginStrip")
         
         // Move beggin strips out of bounds
         for strip in graphics.begginStrips {
@@ -302,8 +359,8 @@ class GraphicsBuilder {
         }
     }
     
-    private func createSnack(bite : String, points : Int, numCheesyBites : Int, snacks : inout [Snack], scene : SKScene) {
-        for _ in 0..<numCheesyBites {
+    private func createSnack(bite : String, points : Int, numCheesyBites : Int, snacks : inout [Snack], scene : SKScene, snackType: String) {
+        for id in 0..<numCheesyBites {
             
             let size = CGSize(width: scene.size.width / 14, height: scene.size.height / 14)
             let biteImage = bite
@@ -315,8 +372,13 @@ class GraphicsBuilder {
             let factor = 1.0 - (cheesyBite.getSize().height) / (scene.size.height / 2)
             let posX = getRandomNumber() * scene.size.width * 2
             let posY = getRandomNumber() * scene.size.height / 2 * factor + scene.size.height / 4 + 1/2 * (1 - factor) * scene.size.height / 2
-            
             cheesyBite.setPosition(position: CGPoint(x: posX, y: posY))
+            
+            if State.gameState == .continueGame {
+                let point = getSnackPosition(snack: cheesyBite, snackId: id, snackType: snackType)
+                cheesyBite.setPosition(position: CGPoint(x: point.x, y: point.y))
+            }
+            
             cheesyBite.setVelocity(velX: -graphics.backgroundSpeed, velY: 0)
             cheesyBite.pointsForSnack = points
             snacks.append(cheesyBite)

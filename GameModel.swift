@@ -44,7 +44,14 @@ class GameModel {
 
     private func initGameVariables() {
         gameScore = 0
-        boundTracker = 1
+        if(State.gameState == GameState.continueGame) {
+            boundTracker = getBoundTracker()
+            scoreAtWhichToSaveGameState = getScoreAtWhichToSaveGameState()
+            getOther()
+        }
+        else {
+            boundTracker = 1
+        }
     }
     
     private func startGame() {

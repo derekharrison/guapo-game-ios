@@ -11,8 +11,10 @@ import SpriteKit
 var numBirds = 1
 var numJellyFish = 1
 var gameScore = 0
+var numLives = 3
 var muted = false
 var boundTracker = 1
+var scoreAtWhichToSaveGameState: Int = 25
 
 class Parameters {
     static let totalNumberOfVillains = 12
@@ -245,7 +247,7 @@ let oceanLevelButtonGrayed = "ocean_level_button_grey_1"
 let utrechtLevelButtonGrayed = "utreg_level_button_grey_1"
 
 let numberOfPointsRequiredToUnlockLevel = 100
-let numberOfPointsBetweenCheckpoints = 100
+let numberOfPointsBetweenCheckpoints = 25
 
 let backgroundsKey = "backgrounds"
 let playerKey = "LEVEL_1_player"
@@ -257,6 +259,8 @@ let paprikaKey = "LEVEL_1_PAPRIKA"
 let cucumberKey = "LEVEL_1_CUCUMBERS"
 let begginStripKey = "LEVEL_1_BEGGIN"
 let broccoliKey = "LEVEL_1_BROCCOLIS"
+let birdKey = "birdsKey"
+let jellyFishKey = "jellyFishKey"
 
 let fishKey1 = "FISH_1"
 let fishKey2 = "FISH_2"

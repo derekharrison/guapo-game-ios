@@ -19,6 +19,11 @@ class ModelUpdate {
     init(graphics: Graphics, scene: SKScene) {
         self.graphics = graphics
         self.scene = scene
+        
+        if(State.gameState == GameState.continueGame) {
+            boundTracker = getBoundTracker()
+            scoreAtWhichToSaveGameState = getScoreAtWhichToSaveGameState()
+        }
     }
     
     func update() {
@@ -53,11 +58,53 @@ class ModelUpdate {
         
         popRocco()
         
+        popFlag()
+        
         popMisty()
         
         updateBackgrounds(backgrounds : graphics.backgrounds, velX : -graphics.backgroundSpeed)
         
         frameCounter += 1
+        
+        saveGameState()
+    }
+    
+    private func saveGameState() {
+        if gameScore >= scoreAtWhichToSaveGameState {
+            scoreAtWhichToSaveGameState += numberOfPointsBetweenCheckpoints
+            // Run heavy work off the main thread
+            DispatchQueue.global(qos: .userInitiated).async {
+                self.saveState()
+                
+                // Always return to main queue for SpriteKit scene or node updates
+                DispatchQueue.main.async {
+                    // e.g., update labels, nodes, or game state that touches SpriteKit APIs
+                }
+            }
+        }
+    }
+    
+    private func saveState() {
+        savePlayer(player: self.graphics.player)
+        saveBoundTracker()
+        saveSnacks(snacks : self.graphics.cheesyBites, snackType: "cheesyBite")
+        saveSnacks(snacks : self.graphics.paprikas, snackType: "paprika")
+        saveSnacks(snacks : self.graphics.broccolis, snackType: "broccoli")
+        saveSnacks(snacks : self.graphics.broccolis, snackType: "cucumber")
+        saveSnacks(snacks : self.graphics.broccolis, snackType: "begginStrip")
+        saveFrito(object: self.graphics.frito)
+        saveBrownie(object: self.graphics.brownie)
+        saveMisty(object: self.graphics.misty, level: State.levelId)
+        saveBackgrounds(backgrounds: self.graphics.backgrounds)
+        saveScoreAtWhichToSaveGameState(score: scoreAtWhichToSaveGameState)
+        saveOther()
+        if(State.levelId == LevelId.OCEAN) {
+            saveFishes(graphics: self.graphics)
+            saveJellyFish(graphics: self.graphics)
+        }
+        else {
+            saveBirds(graphics: self.graphics)
+        }
     }
     
     func updateScore() {
@@ -79,6 +126,8 @@ class ModelUpdate {
             
             graphics.birds.append(bird)
             
+            numBirds = graphics.birds.count
+            
             boundTracker += 1
         }
     }
@@ -93,6 +142,8 @@ class ModelUpdate {
             bird.addImagesToScene(scene : scene)
             
             graphics.jellyfishes.append(bird)
+            
+            numJellyFish = graphics.jellyfishes.count
             
             boundTracker += 1
         }
@@ -205,6 +256,10 @@ class ModelUpdate {
         }
     }
     
+    private func popFlag() {
+        graphics.flag.update(scene: scene)
+    }
+    
     
     func popFrito() {
         if graphics.frito.appeared && muted == false && graphics.frito.playSound {
@@ -284,7 +339,7 @@ class ModelUpdate {
     }
     
     func runGameOver() {
-        State.gameState = GameState.afterGame
+        State.gameState = GameState.continueGame
         graphics.player.setZPosition(zPos: -1)
         graphics.player.setZPositionHit(zPos: zPosPlayer)
       
@@ -295,11 +350,18 @@ class ModelUpdate {
     }
     
     func changeScene() {
-        let sceneToMoveTo = MainMenuScene(size: scene.size)
+        let sceneToMoveTo = ContinueScene(size: scene.size)
         sceneToMoveTo.scaleMode = scene.scaleMode
         let myTransition = SKTransition.fade(withDuration: 0.5)
         scene.view!.presentScene(sceneToMoveTo, transition: myTransition)
     }
+    
+//    func changeScene() {
+//        let sceneToMoveTo = MainMenuScene(size: scene.size)
+//        sceneToMoveTo.scaleMode = scene.scaleMode
+//        let myTransition = SKTransition.fade(withDuration: 0.5)
+//        scene.view!.presentScene(sceneToMoveTo, transition: myTransition)
+//    }
     
     func touchInPauseArea(pointOfTouch : CGPoint) -> Bool {
         let position = CGPoint(x: scene.size.width - 2 * scene.size.width / 12, y: scene.size.height / 2 + scene.size.height * 1.5 / 10)

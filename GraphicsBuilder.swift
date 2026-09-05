@@ -247,16 +247,16 @@ class GraphicsBuilder {
         
         for j in 0..<Parameters.totalNumberOfVillains + 1 {
             
-            var birdImages = [String]()
+            var images = [String]()
             
             for x in VillainImages.getVillainImages(levelId: levelId) {
-                birdImages.append(x)
+                images.append(x)
             }
             
             let zPosition = CGFloat(j) + minZPosVillains
             let size = CGSize(width: scene.size.width / 10, height: scene.size.height / 10)
             
-            var jellyFish = JellyFish(jellyFish: birdImages, size: size, zPos: zPosition)
+            var jellyFish = JellyFish(jellyFish: images, size: size, zPos: zPosition)
             
             jellyFish.addImagesToScene(scene : scene)
 

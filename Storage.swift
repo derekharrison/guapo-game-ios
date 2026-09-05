@@ -275,7 +275,7 @@ func saveNumBirds() {
 func saveNumJellyFish() {
     let defaults = UserDefaults()
     let levelId = String(State.levelId.hashValue)
-    defaults.set(numBirds, forKey: levelId + "numJellyFish")
+    defaults.set(numJellyFish, forKey: levelId + "numJellyFish")
 }
 
 func getNumJellyFish() -> Int {

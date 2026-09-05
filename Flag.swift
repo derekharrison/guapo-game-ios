@@ -14,7 +14,7 @@ class Flag : GameObject {
     var popCounter : Int = 0
     var popFlag = false
     var boundTrack : Int = boundTracker
-    var scoreForFlagPopup : Int = scoreAtWhichToSaveGameState
+    var scoreForFlagPopup : Int = numberOfPointsBetweenCheckpoints
     
     func update(scene : SKScene) {
         super.update()

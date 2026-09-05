@@ -116,34 +116,18 @@ class ModelUpdate {
     }
     
     func updateNumberOfBirds() {
-        if gameScore >= boundTracker * numberOfPointsWhenVillainsAppear && graphics.birds.count < Parameters.totalNumberOfVillains {
-            
-            let imageNames = self.graphics.birds[0].imageNames
-            let size = self.graphics.birds[0].images[0].size
-            
-            let bird = Bird(birds: imageNames, size: size, zPos: CGFloat(graphics.birds.count) + minZPosVillains)
-            bird.addImagesToScene(scene : scene)
-            
-            graphics.birds.append(bird)
-            
-            numBirds = graphics.birds.count
+        if gameScore >= boundTracker * numberOfPointsWhenVillainsAppear && numBirds < Parameters.totalNumberOfVillains - 1 {
+        
+            numBirds += 1
             
             boundTracker += 1
         }
     }
     
     func updateNumberOfJellyFish() {
-        if gameScore >= boundTracker * numberOfPointsWhenVillainsAppear && graphics.jellyfishes.count < Parameters.totalNumberOfVillains {
+        if gameScore >= boundTracker * numberOfPointsWhenVillainsAppear && numJellyFish < Parameters.totalNumberOfVillains - 1 {
             
-            let imageNames = self.graphics.jellyfishes[0].imageNames
-            let size = self.graphics.jellyfishes[0].images[0].size
-            
-            let bird = JellyFish(jellyFish: imageNames, size: size, zPos: CGFloat(graphics.jellyfishes.count) + minZPosVillains)
-            bird.addImagesToScene(scene : scene)
-            
-            graphics.jellyfishes.append(bird)
-            
-            numJellyFish = graphics.jellyfishes.count
+            numJellyFish += 1
             
             boundTracker += 1
         }
@@ -165,7 +149,15 @@ class ModelUpdate {
     }
     
     func updateBirds() {
+        
+        var birdId: Int = 0
+        
         for bird in graphics.birds {
+            if birdId == numBirds {
+                break
+            }
+            
+            birdId += 1
             
             bird.update(scene : scene, backgroundSpeed : -graphics.backgroundSpeed)
             
@@ -182,7 +174,15 @@ class ModelUpdate {
     }
     
     func updateJellyFish() {
+        
+        var jellyId: Int = 0
+        
         for jellyFish in graphics.jellyfishes {
+            if jellyId == numJellyFish {
+                break
+            }
+            
+            jellyId += 1
             
             jellyFish.update(scene : scene, backgroundSpeed : -graphics.backgroundSpeed)
             

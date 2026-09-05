@@ -22,7 +22,9 @@ func startScene(scene : SKScene, start : inout Bool, gameLevel : SKScene) {
 func startScene(scene : SKScene, start : inout Bool) {
     if start {
         State.gameState = .afterGame
-        scoreAtWhichToSaveGameState = numberOfPointsBetweenCheckpoints
+        scoreAtWhichToSaveGameState = 0
+        numBirds = 1
+        numJellyFish = 1
         let sceneToMoveTo = MainMenuScene(size: scene.size)
         sceneToMoveTo.scaleMode = scene.scaleMode
         let myTransition = SKTransition.fade(withDuration: 3.0)

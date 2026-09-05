@@ -11,14 +11,14 @@ import SpriteKit
 
 class ContinueScene: SKScene {
     
-    let playerMenuNotPressed = SKSpriteNode(imageNamed: Parameters.playerMenuButtonNotPressed)
-    let playerMenuPressed = SKSpriteNode(imageNamed: Parameters.playerMenuButtonPressed)
+    let continueNotPressed = SKSpriteNode(imageNamed: Parameters.continueButtonNotPressed)
+    let continuePressed = SKSpriteNode(imageNamed: Parameters.continueButtonPressed)
     let levelMenuNotPressed = SKSpriteNode(imageNamed: Parameters.levelMenuButtonNotPressed)
     let levelMenuPressed = SKSpriteNode(imageNamed: Parameters.levelMenuButtonPressed)
     
-    var playerMenuChosen = false
-    var playerMenu = false
-    var playerMenuScene = false
+    var playerChoseToContinueGame = false
+    var continueGame = false
+    var gameLevelScene = false
     
     var levelMenuChosen = false
     var levelMenu = false
@@ -37,29 +37,29 @@ class ContinueScene: SKScene {
         background.removeFromParent()
         self.addChild(background)
         
-        placeButton(fac: 0.6, buttonNotPressed: playerMenuNotPressed, buttonPressed: playerMenuPressed)
+        placeButton(fac: 0.6, buttonNotPressed: continueNotPressed, buttonPressed: continuePressed)
         placeButton(fac: 0.46, buttonNotPressed: levelMenuNotPressed, buttonPressed: levelMenuPressed)
     }
     
     //Force the mute button to change by running update()
     override func update(_ _: TimeInterval) {
    
-        startScene(scene: self, start : &playerMenu, gameLevel : GameLevel(size: self.size))
+        startScene(scene: self, start : &continueGame, gameLevel : GameLevel(size: self.size))
         startScene(scene: self, start : &levelMenu)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with _: UIEvent?) {
         for touch: AnyObject in touches {
             let pointOfTouch = touch.location(in: self)
-            pressedButton(pointOfTouch: pointOfTouch, levelNotPressed : playerMenuNotPressed, levelPressed : playerMenuPressed, pressed : &playerMenu)
+            pressedButton(pointOfTouch: pointOfTouch, levelNotPressed : continueNotPressed, levelPressed : continuePressed, pressed : &continueGame)
             pressedButton(pointOfTouch: pointOfTouch, levelNotPressed : levelMenuNotPressed, levelPressed : levelMenuPressed, pressed : &levelMenu)
         }
     }
     
     override func touchesEnded(_ _: Set<UITouch>, with _: UIEvent?) {
-        if playerMenuChosen {
-            playerMenu = true
-            playerMenuScene = true
+        if playerChoseToContinueGame {
+            continueGame = true
+            gameLevelScene = true
         }
         if levelMenuChosen {
             levelMenu = true

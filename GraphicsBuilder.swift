@@ -216,8 +216,7 @@ class GraphicsBuilder {
         if(State.gameState == .continueGame) {
             numBirds = getNumBirds()
         }
-        
-        for j in 0..<numBirds {
+        for j in 0..<Parameters.totalNumberOfVillains + 1 {
             
             var birdImages = [String]()
             
@@ -242,7 +241,11 @@ class GraphicsBuilder {
     }
     
     private func createJellyFishes() {
-        for j in 0..<numJellyFish {
+        if(State.gameState == .continueGame) {
+            numJellyFish = getNumJellyFish()
+        }
+        
+        for j in 0..<Parameters.totalNumberOfVillains + 1 {
             
             var birdImages = [String]()
             

@@ -14,7 +14,7 @@ var gameScore = 0
 var numLives = 3
 var muted = false
 var boundTracker = 1
-var scoreAtWhichToSaveGameState: Int = 25
+var scoreAtWhichToSaveGameState: Int = 0
 
 class Parameters {
     static let totalNumberOfVillains = 12

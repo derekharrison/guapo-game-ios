@@ -65,6 +65,9 @@ let pauseButtonNode = SKSpriteNode(imageNamed: "pause_button_bitmap_cropped")
 let playButtonNode = SKSpriteNode(imageNamed: "play_button_bitmap_cropped")
 let sunPopupNode = SKSpriteNode(imageNamed: "sun_popup_bitmap_cropped")
 let scoreLabelNode = SKLabelNode(fontNamed: "Courier-Bold")
+let lifeNode1 = SKSpriteNode(imageNamed: "heart1_bitmap_cropped")
+let lifeNode2 = SKSpriteNode(imageNamed: "heart1_bitmap_cropped")
+let lifeNode3 = SKSpriteNode(imageNamed: "heart1_bitmap_cropped")
 
 let numberOfPixelsOfOverlapBetweenBackgroundImages = 10
 

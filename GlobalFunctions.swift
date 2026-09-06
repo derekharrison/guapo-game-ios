@@ -11,6 +11,7 @@ import SpriteKit
 func startScene(scene : SKScene, start : inout Bool, gameLevel : SKScene) {
     if start {
         let sceneToMoveTo = gameLevel
+        State.gameState = .continueGame
         sceneToMoveTo.scaleMode = scene.scaleMode
         let myTransition = SKTransition.fade(withDuration: 3.0)
         scene.view!.presentScene(sceneToMoveTo, transition: myTransition)
@@ -22,9 +23,6 @@ func startScene(scene : SKScene, start : inout Bool, gameLevel : SKScene) {
 func startScene(scene : SKScene, start : inout Bool) {
     if start {
         State.gameState = .afterGame
-        scoreAtWhichToSaveGameState = 0
-        numBirds = 1
-        numJellyFish = 1
         let sceneToMoveTo = MainMenuScene(size: scene.size)
         sceneToMoveTo.scaleMode = scene.scaleMode
         let myTransition = SKTransition.fade(withDuration: 3.0)
@@ -36,7 +34,7 @@ func startScene(scene : SKScene, start : inout Bool) {
 
 func startLevel(levelId : LevelId, scene : SKScene, start : inout Bool, gameLevel : SKScene) {
     if start {
-        setLevelId(levelId: levelId)
+        resetGameVariables(levelId: levelId)
         let sceneToMoveTo = gameLevel
         sceneToMoveTo.scaleMode = scene.scaleMode
         let transition = SKTransition.fade(withDuration: 3.0)
@@ -44,6 +42,18 @@ func startLevel(levelId : LevelId, scene : SKScene, start : inout Bool, gameLeve
         
         start = false
     }
+}
+
+private func resetGameVariables(levelId: LevelId) {
+    setLevelId(levelId: levelId)
+    numLives = 3
+    State.lives = 3
+    State.gameState = .preGame
+    scoreAtWhichToSaveGameState = 0
+    boundTracker = 1
+    gameScore = 0
+    numBirds = 1
+    numJellyFish = 1
 }
 
 private func setLevelId(levelId: LevelId) {

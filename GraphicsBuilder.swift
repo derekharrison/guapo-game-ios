@@ -82,6 +82,7 @@ class GraphicsBuilder {
             let point = getPlayerPosition(key: String(State.levelId.hashValue) + "position")
             builder = builder.position(position: CGPoint(x: point.posX, y: point.posY))
         }
+        
         return builder.build()
     }
     
@@ -231,12 +232,11 @@ class GraphicsBuilder {
             
             bird.addImagesToScene(scene : scene)
             
-            if(State.gameState == .continueGame) {
-                getBird(bird: &bird, birdId: j)
-            }
+//            if(State.gameState == .continueGame) {
+//                getBird(bird: &bird, birdId: j)
+//            }
 
             self.graphics.birds.append(bird)
-            
         }
     }
     
@@ -260,9 +260,9 @@ class GraphicsBuilder {
             
             jellyFish.addImagesToScene(scene : scene)
 
-            if(State.gameState == .continueGame) {
-                getJellyFish(jelly: &jellyFish, jellyId: j)
-            }
+//            if(State.gameState == .continueGame) {
+//                getJellyFish(jelly: &jellyFish, jellyId: j)
+//            }
             
             self.graphics.jellyfishes.append(jellyFish)
             
@@ -279,6 +279,8 @@ class GraphicsBuilder {
         
         getHighScore()
         
+        addLivesToScene(width: width, height: height)
+        
         addPauseButtonToScene(width: width, height: height)
         
         addPlayButtonToScene(width: width, height: height)
@@ -286,9 +288,8 @@ class GraphicsBuilder {
         addSunPopUpToScene(width: width, height: height)
         
         addScoreLabelToScene(width: width, height: height)
-        
     }
-
+    
     private func createFish() {
         let width = scene.size.width
         let height = scene.size.height
@@ -386,6 +387,27 @@ class GraphicsBuilder {
             cheesyBite.pointsForSnack = points
             snacks.append(cheesyBite)
         }
+    }
+    
+    private func addLivesToScene(width: CGFloat, height: CGFloat) {
+        if State.lives >= 1 {
+            addLife(node: lifeNode1, width: width, height: height, position: CGPoint(x: width - width / 2, y: height / 2 + height * 1.9 / 10))
+        }
+        if( State.lives >= 2) {
+            addLife(node: lifeNode2, width: width, height: height, position: CGPoint(x: width - width / 2 + width / 26, y: height / 2 + height * 1.9 / 10))
+        }
+        if State.lives >= 3 {
+            addLife(node: lifeNode3, width: width, height: height, position: CGPoint(x: width - width / 2 + width / 13, y: height / 2 + height * 1.9 / 10))
+        }
+    }
+    
+    private func addLife(node: SKSpriteNode, width: CGFloat, height: CGFloat, position: CGPoint) {
+        node.setScale(1)
+        node.size = CGSize(width: width / 28, height: height / 28)
+        node.position = position
+        node.zPosition = zPosPauseButton
+        node.removeFromParent()
+        scene.addChild(node)
     }
     
     private func addPauseButtonToScene(width: CGFloat, height: CGFloat) {

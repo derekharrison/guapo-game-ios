@@ -18,7 +18,7 @@ class Flag : GameObject {
     
     func update(scene : SKScene) {
         super.update()
-        if(gameScore >= scoreForFlagPopup) {
+        if(gameScore >= scoreForFlagPopup && State.lives > 0) {
             popCounter = 0
             for image in self.images {
                 image.zPosition = zPosFlagPopup

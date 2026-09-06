@@ -24,4 +24,5 @@ class State {
     static var levelId : LevelId = LevelId.NONE
     static var gameState : GameState = .preGame
     static var trajectory : [CGPoint] = []
+    static var lives : Int = 3
 }

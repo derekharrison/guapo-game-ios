@@ -19,11 +19,6 @@ class ModelUpdate {
     init(graphics: Graphics, scene: SKScene) {
         self.graphics = graphics
         self.scene = scene
-        
-        if(State.gameState == GameState.continueGame) {
-            boundTracker = getBoundTracker()
-            scoreAtWhichToSaveGameState = getScoreAtWhichToSaveGameState()
-        }
     }
     
     func update() {
@@ -117,7 +112,7 @@ class ModelUpdate {
     
     func updateNumberOfBirds() {
         if gameScore >= boundTracker * numberOfPointsWhenVillainsAppear && numBirds < Parameters.totalNumberOfVillains - 1 {
-        
+            
             numBirds += 1
             
             boundTracker += 1
@@ -126,7 +121,6 @@ class ModelUpdate {
     
     func updateNumberOfJellyFish() {
         if gameScore >= boundTracker * numberOfPointsWhenVillainsAppear && numJellyFish < Parameters.totalNumberOfVillains - 1 {
-            
             numJellyFish += 1
             
             boundTracker += 1
@@ -153,7 +147,7 @@ class ModelUpdate {
         var birdId: Int = 0
         
         for bird in graphics.birds {
-            if birdId == numBirds {
+            if birdId >= numBirds {
                 break
             }
             
@@ -339,6 +333,9 @@ class ModelUpdate {
     }
     
     func runGameOver() {
+        numLives -= 1
+        State.lives -= 1
+        hideLifeWhenLost()
         State.gameState = GameState.continueGame
         graphics.player.setZPosition(zPos: -1)
         graphics.player.setZPositionHit(zPos: zPosPlayer)
@@ -349,19 +346,34 @@ class ModelUpdate {
         scene.run(changeSceneSequence)
     }
     
-    func changeScene() {
-        let sceneToMoveTo = ContinueScene(size: scene.size)
-        sceneToMoveTo.scaleMode = scene.scaleMode
-        let myTransition = SKTransition.fade(withDuration: 0.5)
-        scene.view!.presentScene(sceneToMoveTo, transition: myTransition)
+    private func hideLifeWhenLost() {
+        if(State.lives == 2) {
+            lifeNode3.zPosition = -1
+        }
+        if(State.lives == 1) {
+            lifeNode2.zPosition = -1
+        }
+        if (State.lives == 0) {
+            lifeNode1.zPosition = -1
+        }
     }
     
-//    func changeScene() {
-//        let sceneToMoveTo = MainMenuScene(size: scene.size)
-//        sceneToMoveTo.scaleMode = scene.scaleMode
-//        let myTransition = SKTransition.fade(withDuration: 0.5)
-//        scene.view!.presentScene(sceneToMoveTo, transition: myTransition)
-//    }
+    func changeScene() {
+        if State.lives >= 0 {
+            let sceneToMoveTo = ContinueScene(size: scene.size)
+            sceneToMoveTo.scaleMode = scene.scaleMode
+            let myTransition = SKTransition.fade(withDuration: 0.5)
+            scene.view!.presentScene(sceneToMoveTo, transition: myTransition)
+        }
+        else {
+            State.gameState = .afterGame
+            numBirds = 1
+            let sceneToMoveTo = MainMenuScene(size: scene.size)
+            sceneToMoveTo.scaleMode = scene.scaleMode
+            let myTransition = SKTransition.fade(withDuration: 0.5)
+            scene.view!.presentScene(sceneToMoveTo, transition: myTransition)
+        }
+    }
     
     func touchInPauseArea(pointOfTouch : CGPoint) -> Bool {
         let position = CGPoint(x: scene.size.width - 2 * scene.size.width / 12, y: scene.size.height / 2 + scene.size.height * 1.5 / 10)

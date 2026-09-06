@@ -129,7 +129,9 @@ func saveOther() {
     let defaults = UserDefaults()
     let levelId = State.levelId
     
-    defaults.set(gameScore, forKey: String(levelId.hashValue) + scoreKey)
+    print("SAVE SCORE : ", getLevelIdInt(levelId: levelId), scoreAtWhichToSaveGameState)
+    print(gameScore)
+    defaults.set(gameScore, forKey: String(getLevelIdInt(levelId: levelId)) + scoreKey)
     defaults.set(numLives, forKey: String(levelId.hashValue) + numberOfLivesKey)
 }
 
@@ -137,10 +139,33 @@ func getOther() {
     let defaults = UserDefaults()
     let levelId = State.levelId
     
-    gameScore = defaults.integer(forKey: String(levelId.hashValue) + scoreKey)
+    gameScore = defaults.integer(forKey: String(getLevelIdInt(levelId: levelId)) + scoreKey)
     numLives = defaults.integer(forKey: String(levelId.hashValue) + numberOfLivesKey)
     
     numBirds = getNumBirds()
+    
+    print("GET SCORE : %s", getLevelIdInt(levelId: levelId), scoreAtWhichToSaveGameState)
+    print(gameScore)
+    print(numBirds)
+}
+
+private func getLevelIdInt(levelId: LevelId) -> Int {
+    if(levelId == LevelId.ARUBA) {
+        return 0
+    }
+    if(levelId == LevelId.BEACH) {
+        return 1
+    }
+    if(levelId == LevelId.TRIP) {
+        return 2
+    }
+    if(levelId == LevelId.OCEAN) {
+        return 3
+    }
+    if(levelId == LevelId.UTREG) {
+        return 4
+    }
+    return 0
 }
 
 func saveScoreAtWhichToSaveGameState(score: Int) {

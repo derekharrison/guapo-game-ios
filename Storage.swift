@@ -128,9 +128,7 @@ func saveFishes(graphics: Graphics) {
 func saveOther() {
     let defaults = UserDefaults()
     let levelId = State.levelId
-    
-    print("SAVE SCORE : ", getLevelIdInt(levelId: levelId), scoreAtWhichToSaveGameState)
-    print(gameScore)
+
     defaults.set(gameScore, forKey: String(getLevelIdInt(levelId: levelId)) + scoreKey)
     defaults.set(numLives, forKey: String(levelId.hashValue) + numberOfLivesKey)
 }
@@ -143,10 +141,6 @@ func getOther() {
     numLives = defaults.integer(forKey: String(levelId.hashValue) + numberOfLivesKey)
     
     numBirds = getNumBirds()
-    
-    print("GET SCORE : %s", getLevelIdInt(levelId: levelId), scoreAtWhichToSaveGameState)
-    print(gameScore)
-    print(numBirds)
 }
 
 private func getLevelIdInt(levelId: LevelId) -> Int {

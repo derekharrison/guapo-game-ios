@@ -51,6 +51,7 @@ class GameModel {
         }
         else {
             boundTracker = 1
+            scoreAtWhichToSaveGameState = 0
         }
     }
     

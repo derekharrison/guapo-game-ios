@@ -228,13 +228,9 @@ class GraphicsBuilder {
             let zPosition = CGFloat(j) + minZPosVillains
             let size = CGSize(width: scene.size.width / 10, height: scene.size.height / 10)
             
-            var bird = Bird(birds: birdImages, size: size, zPos: zPosition)
+            let bird = Bird(birds: birdImages, size: size, zPos: zPosition)
             
             bird.addImagesToScene(scene : scene)
-            
-//            if(State.gameState == .continueGame) {
-//                getBird(bird: &bird, birdId: j)
-//            }
 
             self.graphics.birds.append(bird)
         }
@@ -256,14 +252,10 @@ class GraphicsBuilder {
             let zPosition = CGFloat(j) + minZPosVillains
             let size = CGSize(width: scene.size.width / 10, height: scene.size.height / 10)
             
-            var jellyFish = JellyFish(jellyFish: images, size: size, zPos: zPosition)
+            let jellyFish = JellyFish(jellyFish: images, size: size, zPos: zPosition)
             
             jellyFish.addImagesToScene(scene : scene)
 
-//            if(State.gameState == .continueGame) {
-//                getJellyFish(jelly: &jellyFish, jellyId: j)
-//            }
-            
             self.graphics.jellyfishes.append(jellyFish)
             
         }

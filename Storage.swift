@@ -128,8 +128,8 @@ func saveFishes(graphics: Graphics) {
 func saveOther() {
     let defaults = UserDefaults()
     let levelId = State.levelId
-
-    defaults.set(gameScore, forKey: String(getLevelIdInt(levelId: levelId)) + scoreKey)
+    
+    defaults.set(gameScore, forKey: String(levelId.hashValue) + scoreKey)
     defaults.set(numLives, forKey: String(levelId.hashValue) + numberOfLivesKey)
 }
 
@@ -137,29 +137,9 @@ func getOther() {
     let defaults = UserDefaults()
     let levelId = State.levelId
     
-    gameScore = defaults.integer(forKey: String(getLevelIdInt(levelId: levelId)) + scoreKey)
+    gameScore = defaults.integer(forKey: String(levelId.hashValue) + scoreKey)
     numLives = defaults.integer(forKey: String(levelId.hashValue) + numberOfLivesKey)
-    
-    numBirds = getNumBirds()
-}
-
-private func getLevelIdInt(levelId: LevelId) -> Int {
-    if(levelId == LevelId.ARUBA) {
-        return 0
-    }
-    if(levelId == LevelId.BEACH) {
-        return 1
-    }
-    if(levelId == LevelId.TRIP) {
-        return 2
-    }
-    if(levelId == LevelId.OCEAN) {
-        return 3
-    }
-    if(levelId == LevelId.UTREG) {
-        return 4
-    }
-    return 0
+    numBirds = min(getNumBirds(), getBoundTracker())
 }
 
 func saveScoreAtWhichToSaveGameState(score: Int) {

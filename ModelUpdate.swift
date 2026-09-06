@@ -333,17 +333,21 @@ class ModelUpdate {
     }
     
     func runGameOver() {
+        loseLife()
+        displayPlayerIsHit()
+        State.gameState = GameState.continueGame
+        updateScene()
+    }
+    
+    private func loseLife() {
         numLives -= 1
         State.lives -= 1
         hideLifeWhenLost()
-        State.gameState = GameState.continueGame
+    }
+    
+    private func displayPlayerIsHit() {
         graphics.player.setZPosition(zPos: -1)
         graphics.player.setZPositionHit(zPos: zPosPlayer)
-      
-        let changeSceneAction = SKAction.run(changeScene)
-        let waitToChangeScene = SKAction.wait(forDuration: 1)
-        let changeSceneSequence = SKAction.sequence([waitToChangeScene, changeSceneAction])
-        scene.run(changeSceneSequence)
     }
     
     private func hideLifeWhenLost() {
@@ -358,6 +362,13 @@ class ModelUpdate {
         }
     }
     
+    private func updateScene() {
+        let changeSceneAction = SKAction.run(changeScene)
+        let waitToChangeScene = SKAction.wait(forDuration: 1)
+        let changeSceneSequence = SKAction.sequence([waitToChangeScene, changeSceneAction])
+        scene.run(changeSceneSequence)
+    }
+    
     func changeScene() {
         if State.lives >= 0 {
             let sceneToMoveTo = ContinueScene(size: scene.size)
@@ -367,7 +378,6 @@ class ModelUpdate {
         }
         else {
             State.gameState = .afterGame
-            numBirds = 1
             let sceneToMoveTo = MainMenuScene(size: scene.size)
             sceneToMoveTo.scaleMode = scene.scaleMode
             let myTransition = SKTransition.fade(withDuration: 0.5)

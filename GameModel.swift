@@ -50,9 +50,35 @@ class GameModel {
             getOther()
         }
         else {
-            boundTracker = 1
-            scoreAtWhichToSaveGameState = 0
+            initLives()
+            initScore()
+            initNumVillains()
+            
+            initScoreAtWhichToSaveGameState()
+            initBoundTracker()
         }
+    }
+    
+    private func initLives() {
+        numLives = 3
+        State.lives = 3
+    }
+    
+    private func initScore() {
+        gameScore = 0
+    }
+    
+    private func initNumVillains() {
+        numBirds = 1
+        numJellyFish = 1
+    }
+    
+    private func initScoreAtWhichToSaveGameState() {
+        scoreAtWhichToSaveGameState = 0
+    }
+    
+    private func initBoundTracker() {
+        boundTracker = 1
     }
     
     private func startGame() {

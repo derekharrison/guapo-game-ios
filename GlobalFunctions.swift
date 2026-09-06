@@ -34,26 +34,18 @@ func startScene(scene : SKScene, start : inout Bool) {
 
 func startLevel(levelId : LevelId, scene : SKScene, start : inout Bool, gameLevel : SKScene) {
     if start {
-        resetGameVariables(levelId: levelId)
+        resetState(levelId: levelId)
         let sceneToMoveTo = gameLevel
         sceneToMoveTo.scaleMode = scene.scaleMode
         let transition = SKTransition.fade(withDuration: 3.0)
         scene.view!.presentScene(sceneToMoveTo, transition: transition)
-        
         start = false
     }
 }
 
-private func resetGameVariables(levelId: LevelId) {
+private func resetState(levelId: LevelId) {
     setLevelId(levelId: levelId)
-    numLives = 3
-    State.lives = 3
     State.gameState = .preGame
-    scoreAtWhichToSaveGameState = 0
-    boundTracker = 1
-    gameScore = 0
-    numBirds = 1
-    numJellyFish = 1
 }
 
 private func setLevelId(levelId: LevelId) {

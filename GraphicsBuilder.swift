@@ -213,10 +213,6 @@ class GraphicsBuilder {
     }
     
     private func createBirds() {
-        
-        if(State.gameState == .continueGame) {
-            numBirds = getNumBirds()
-        }
         for j in 0..<Parameters.totalNumberOfVillains + 1 {
             
             var birdImages = [String]()

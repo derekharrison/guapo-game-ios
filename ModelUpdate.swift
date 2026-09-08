@@ -257,7 +257,7 @@ class ModelUpdate {
     }
     
     private func popSun() {
-        if(State.levelId != LevelId.OCEAN || State.levelId != LevelId.UTREG) {
+        if(State.levelId != LevelId.OCEAN && State.levelId != LevelId.UTREG) {
             graphics.sunPopup.update(scene: scene)
         }
     }

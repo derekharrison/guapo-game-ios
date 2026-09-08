@@ -250,15 +250,6 @@ func saveJellyFish(graphics : Graphics) {
     saveNumJellyFish()
 }
 
-func getJellyFish(jelly: inout JellyFish, jellyId : Int) {
-    getJellyFish(object: &jelly, prefix: jellyFishKey + String(jellyId))
-}
-
-func getBird(bird : inout Bird, birdId : Int) {
-    let levelId = String(State.levelId.hashValue)
-    getBird(object: &bird, prefix: levelId + birdKey + String(birdId))
-}
-
 func getNumBirds() -> Int {
     let defaults = UserDefaults()
     let levelId = String(State.levelId.hashValue)
@@ -303,52 +294,6 @@ func saveObject(object : GameObject, prefix : String) {
     
     defaults.set(object.bubbles.bubcounter, forKey: prefix + "bubbles.bubcounter")
     defaults.set(object.bubbles.isMuted, forKey: prefix + "bubbles.is_muted")
-}
-
-func getBird(object : inout Bird, prefix : String) {
-    let defaults = UserDefaults()
-    object.zPos = CGFloat(defaults.float(forKey: prefix + "z_pos"))
-    object.velX = CGFloat(defaults.float(forKey: prefix + "vel_x"))
-    object.velY = CGFloat(defaults.float(forKey: prefix + "vel_y"))
-    object.playSound = defaults.bool(forKey: prefix + "play_sound")
-    object.frameCounter = defaults.integer(forKey: prefix + "bird_counter")
-    object.frameCounterHit = defaults.integer(forKey: prefix + "bird_counter_hit")
-    object.imageId = defaults.integer(forKey: prefix + "bird_id")
-    object.imageIdHit = defaults.integer(forKey: prefix + "bird_id_hit")
-    object.width = CGFloat(defaults.float(forKey: prefix + "width"))
-    object.height = CGFloat(defaults.float(forKey: prefix + "height"))
-    object.hit = defaults.bool(forKey: prefix + "hit")
-    object.appeared = defaults.bool(forKey: prefix + "appeared")
-    object.posX = CGFloat(defaults.float(forKey: prefix + "pos_x"))
-    object.posY = CGFloat(defaults.float(forKey: prefix + "pos_y"))
-    
-    object.setPosition(position: CGPoint(x: object.posX, y: object.posY))
-    
-    object.bubbles.bubcounter = defaults.integer(forKey: prefix + "bubbles.bubcounter")
-    object.bubbles.isMuted = defaults.bool(forKey: prefix + "bubbles.is_muted")
-}
-
-func getJellyFish(object : inout JellyFish, prefix : String) {
-    let defaults = UserDefaults()
-    object.zPos = CGFloat(defaults.float(forKey: prefix + "z_pos"))
-    object.velX = CGFloat(defaults.float(forKey: prefix + "vel_x"))
-    object.velY = CGFloat(defaults.float(forKey: prefix + "vel_y"))
-    object.playSound = defaults.bool(forKey: prefix + "play_sound")
-    object.frameCounter = defaults.integer(forKey: prefix + "bird_counter")
-    object.frameCounterHit = defaults.integer(forKey: prefix + "bird_counter_hit")
-    object.imageId = defaults.integer(forKey: prefix + "bird_id")
-    object.imageIdHit = defaults.integer(forKey: prefix + "bird_id_hit")
-    object.width = CGFloat(defaults.float(forKey: prefix + "width"))
-    object.height = CGFloat(defaults.float(forKey: prefix + "height"))
-    object.hit = defaults.bool(forKey: prefix + "hit")
-    object.appeared = defaults.bool(forKey: prefix + "appeared")
-    object.posX = CGFloat(defaults.float(forKey: prefix + "pos_x"))
-    object.posY = CGFloat(defaults.float(forKey: prefix + "pos_y"))
-    
-    object.setPosition(position: CGPoint(x: object.posX, y: object.posY))
-    
-    object.bubbles.bubcounter = defaults.integer(forKey: prefix + "bubbles.bubcounter")
-    object.bubbles.isMuted = defaults.bool(forKey: prefix + "bubbles.is_muted")
 }
 
 func getFish(object : inout Fish, prefix : String) {

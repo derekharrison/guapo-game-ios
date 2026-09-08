@@ -33,7 +33,7 @@ func startScene(scene : SKScene, start : inout Bool) {
 }
 
 func startLevel(levelId : LevelId, scene : SKScene, start : inout Bool, gameLevel : SKScene) {
-    if start {
+    if start && getHighScorePreviousLevel(levelId: levelId) >= numberOfPointsRequiredToUnlockLevel {
         resetState(levelId: levelId)
         let sceneToMoveTo = gameLevel
         sceneToMoveTo.scaleMode = scene.scaleMode
@@ -48,7 +48,7 @@ private func resetState(levelId: LevelId) {
     State.gameState = .preGame
 }
 
-private func setLevelId(levelId: LevelId) {
+func setLevelId(levelId: LevelId) {
     State.levelId = .ARUBA
     
     if(levelId == LevelId.ARUBA) {
@@ -66,6 +66,42 @@ private func setLevelId(levelId: LevelId) {
     if(levelId == LevelId.UTREG) {
         State.levelId = .UTREG
     }
+}
+
+func getHighScorePreviousLevel(levelId: LevelId) -> Int {
+    if(levelId == .BEACH) {
+        return highScoreNumberLevel1
+    }
+    if(levelId == .TRIP) {
+        return highScoreNumberLevel2
+    }
+    if(levelId == .OCEAN) {
+        return highScoreNumberLevel3
+    }
+    if(levelId == .UTREG) {
+        return highScoreNumberLevel3
+    }
+    return 999
+}
+
+func getHighScore() -> Int {
+    if(State.levelId == .ARUBA) {
+        return highScoreNumberLevel1
+    }
+    if(State.levelId == .BEACH) {
+        return highScoreNumberLevel2
+    }
+    if(State.levelId == .TRIP) {
+        return highScoreNumberLevel3
+    }
+    if(State.levelId == .OCEAN) {
+        return highScoreNumberLevel4
+    }
+    if(State.levelId == .UTREG) {
+        return highScoreNumberLevel5
+    }
+    
+    return 999
 }
 
 func playSound(scene : SKScene, sound : [SKAction]) {

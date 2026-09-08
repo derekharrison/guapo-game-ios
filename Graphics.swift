@@ -22,6 +22,7 @@ class Graphics {
     var continueButton = GameObject()
     var restartButton = GameObject()
     var flag = Flag()
+    var sunPopup = SunPopup()
     var widthBackground : CGFloat = 0
     var blackBackgroundBottom = SKSpriteNode(imageNamed: coverBackgroundPrefix)
     var blackBackgroundTop = SKSpriteNode(imageNamed: coverBackgroundPrefix)

@@ -75,12 +75,6 @@ class MainMenuScene: SKScene {
     var playerMenu = false
     var playerMenuScene = false
     
-    var highScoreNumberLevel1 = 0
-    var highScoreNumberLevel2 = 0
-    var highScoreNumberLevel3 = 0
-    var highScoreNumberLevel4 = 0
-    var highScoreNumberLevel5 = 0
-    
     override func didMove(to _: SKView) {
         
         startNewScene = false
@@ -100,6 +94,7 @@ class MainMenuScene: SKScene {
         volumeOn.zPosition = -1
         
         let defaults = UserDefaults()
+        muted = defaults.bool(forKey: gameIsMuted)
         
         if muted {
             volumeOff.zPosition = 2
@@ -205,11 +200,11 @@ class MainMenuScene: SKScene {
             }
             else {
                 
-                buttonPressed(pointOfTouch: pointOfTouch, levelNotPressed : level1ButtonNotPressed, levelPressed : level1ButtonPressed, pressed : &startLevel1Pressed)
-                buttonPressed(pointOfTouch: pointOfTouch, levelNotPressed : level2ButtonNotPressed, levelPressed : level2ButtonPressed, pressed : &startLevel2Pressed)
-                buttonPressed(pointOfTouch: pointOfTouch, levelNotPressed : level3ButtonNotPressed, levelPressed : level3ButtonPressed, pressed : &startLevel3Pressed)
-                buttonPressed(pointOfTouch: pointOfTouch, levelNotPressed : level4ButtonNotPressed, levelPressed : level4ButtonPressed, pressed : &startLevel4Pressed)
-                buttonPressed(pointOfTouch: pointOfTouch, levelNotPressed : level5ButtonNotPressed, levelPressed : level5ButtonPressed, pressed : &startLevel5Touched)
+                buttonPressed(levelId: .ARUBA, pointOfTouch: pointOfTouch, levelNotPressed : level1ButtonNotPressed, levelPressed : level1ButtonPressed, pressed : &startLevel1Pressed)
+                buttonPressed(levelId: .BEACH, pointOfTouch: pointOfTouch, levelNotPressed : level2ButtonNotPressed, levelPressed : level2ButtonPressed, pressed : &startLevel2Pressed)
+                buttonPressed(levelId: .TRIP, pointOfTouch: pointOfTouch, levelNotPressed : level3ButtonNotPressed, levelPressed : level3ButtonPressed, pressed : &startLevel3Pressed)
+                buttonPressed(levelId: .OCEAN, pointOfTouch: pointOfTouch, levelNotPressed : level4ButtonNotPressed, levelPressed : level4ButtonPressed, pressed : &startLevel4Pressed)
+                buttonPressed(levelId: .UTREG, pointOfTouch: pointOfTouch, levelNotPressed : level5ButtonNotPressed, levelPressed : level5ButtonPressed, pressed : &startLevel5Touched)
                 buttonPressed(pointOfTouch: pointOfTouch, levelNotPressed : startMenuButtonNotPressed, levelPressed : startMenuButtonPressed, pressed : &startMenu)
                 buttonPressed(pointOfTouch: pointOfTouch, levelNotPressed : playerMenuButtonNotPressed, levelPressed : playerMenuButtonPressed, pressed : &playerMenu)
             }
@@ -257,6 +252,18 @@ class MainMenuScene: SKScene {
         let inRangeY = pointOfTouch.y > levelNotPressed.position.y - levelNotPressed.size.height / 2 && pointOfTouch.y < levelNotPressed.position.y + levelNotPressed.size.height / 2
         
         if inRangeX && inRangeY {
+            levelNotPressed.zPosition = -1
+            levelPressed.zPosition = 2
+            pressed = true
+        }
+    }
+    
+    func buttonPressed(levelId: LevelId, pointOfTouch : CGPoint, levelNotPressed : SKSpriteNode, levelPressed : SKSpriteNode, pressed : inout Bool) {
+        let inRangeX = pointOfTouch.x > levelNotPressed.position.x - levelNotPressed.size.width / 2 && pointOfTouch.x < levelNotPressed.position.x + levelNotPressed.size.width / 2
+        
+        let inRangeY = pointOfTouch.y > levelNotPressed.position.y - levelNotPressed.size.height / 2 && pointOfTouch.y < levelNotPressed.position.y + levelNotPressed.size.height / 2
+        
+        if inRangeX && inRangeY && getHighScorePreviousLevel(levelId: levelId) >= numberOfPointsRequiredToUnlockLevel {
             levelNotPressed.zPosition = -1
             levelPressed.zPosition = 2
             pressed = true

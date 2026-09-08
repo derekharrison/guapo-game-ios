@@ -55,6 +55,9 @@ class PlayerBuilder {
     }
     
     func build() -> Player {
+        self.player.bubbles.addBubble(imageId: bubbleImage)
+        self.player.bubbles.addBubble(imageId: bubbleImage)
+        self.player.bubbles.addBubble(imageId: bubbleImage)
         self.player.addImagesToScene(scene: scene)
         return self.player;
     }

@@ -17,6 +17,10 @@ class Brownie : GameObject {
         updateImagePositions()
         displayImage(imageId: 0)
         checkIfBrownieAppeared(scene: scene)
+        
+        if(State.levelId == LevelId.OCEAN) {
+            bubbles.popBubbles(pos: getPosition(), scene: scene, sound: [bubblesSound])
+        }
     }
     
     override func displayImage(imageId _: Int) {

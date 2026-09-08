@@ -50,7 +50,7 @@ class Player : GameObject {
         return self;
     }
     
-    override func update() {
+    func update(scene: SKScene) {
         super.update()
         updatePositionPlayer()
         updateImage(numFrames: numOfFramesForUpdate)
@@ -58,6 +58,9 @@ class Player : GameObject {
         
         if(State.levelId != LevelId.OCEAN) {
             updateCape()
+        }
+        else {
+            bubbles.popBubbles(pos: getPosition(), scene: scene, sound: [bubblesSound])
         }
     }
     
@@ -75,13 +78,13 @@ class Player : GameObject {
         self.cape2.position.x = self.posX - self.cape2.size.width / 2
         self.cape2.position.y = self.posY
         
-        if capeCounter < 5 {
+        if capeCounter <= 5 {
             showCape1()
         }
         else if capeCounter < 10{
             showCape2()
         }
-        else if capeCounter == 15 {
+        else if capeCounter == 10 {
             capeCounter = 0
         }
         capeCounter += 1
@@ -109,6 +112,11 @@ class Player : GameObject {
         scene.addChild(self.cape1)
         self.cape2.removeFromParent()
         scene.addChild(self.cape2)
+        
+        for bubble in bubbles.bubblez {
+            bubble.removeFromParent()
+            scene.addChild(bubble)
+        }
     }
     
     private func updatePositionPlayer() {

@@ -57,6 +57,7 @@ class GameModel {
             initScoreAtWhichToSaveGameState()
             initBoundTracker()
         }
+        getMuted()
     }
     
     private func initLives() {
@@ -87,6 +88,11 @@ class GameModel {
     
     private func getLevelId() -> LevelId {
         return State.levelId
+    }
+    
+    private func getMuted() {
+        let defaults = UserDefaults()
+        muted = defaults.bool(forKey: gameIsMuted)
     }
 }
 

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SpriteKit
 
 
 class Misty : GameObject {
@@ -21,12 +22,16 @@ class Misty : GameObject {
         self.setPosition(position: CGPoint(x: -5000, y: 0))
     }
     
-    override func update() {
+    func update(scene : SKScene) {
         super.update()
-        updatePositionMisty()
+        updatePositionMisty(scene: scene)
+        
+        if(State.levelId == LevelId.OCEAN) {
+            bubbles.popBubbles(pos: getPosition(), scene: scene, sound: [bubblesSound])
+        }
     }
     
-    func updatePositionMisty() {
+    func updatePositionMisty(scene : SKScene) {
         for image in images {
             image.position.x += self.velX
             image.position.y += self.velY
@@ -37,6 +42,10 @@ class Misty : GameObject {
         
         self.posX = images[0].position.x
         self.posY = images[0].position.y
+        
+        if(State.levelId == LevelId.OCEAN) {
+            bubbles.popBubbles(pos: getPosition(), scene: scene, sound: [bubblesSound])
+        }
     }
     
     func play(bool : Bool) {
@@ -61,7 +70,7 @@ class Misty : GameObject {
         }
     }
     
-    func popMisty() {
+    func popMisty(scene : SKScene) {
         
         if !self.hit && top {
             self.displayImageNotHit(imageId: 2)
@@ -80,7 +89,7 @@ class Misty : GameObject {
         }
         
         if counter1 != numFramesMisty && counter1 < numFramesMisty + 60 {
-            self.updatePositionMisty()
+            self.updatePositionMisty(scene: scene)
             counter1 += 1
         }
         else if counter1 == numFramesMisty {

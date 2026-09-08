@@ -55,6 +55,8 @@ class ModelUpdate {
         
         popFlag()
         
+        popSun()
+        
         popMisty()
         
         updateBackgrounds(backgrounds : graphics.backgrounds, velX : -graphics.backgroundSpeed)
@@ -102,15 +104,15 @@ class ModelUpdate {
         }
     }
     
-    func updateScore() {
+    private func updateScore() {
         scoreLabelNode.text = String(gameScore)
     }
     
-    func updatePlayer() {
-        graphics.player.update()
+    private func updatePlayer() {
+        graphics.player.update(scene: scene)
     }
     
-    func updateNumberOfBirds() {
+    private func updateNumberOfBirds() {
         if gameScore >= boundTracker * numberOfPointsWhenVillainsAppear && numBirds < Parameters.totalNumberOfVillains - 1 {
             
             numBirds += 1
@@ -119,7 +121,7 @@ class ModelUpdate {
         }
     }
     
-    func updateNumberOfJellyFish() {
+    private func updateNumberOfJellyFish() {
         if gameScore >= boundTracker * numberOfPointsWhenVillainsAppear && numJellyFish < Parameters.totalNumberOfVillains - 1 {
             numJellyFish += 1
             
@@ -127,7 +129,7 @@ class ModelUpdate {
         }
     }
     
-    func updateBackgrounds(backgrounds : [SKSpriteNode], velX : CGFloat) {
+    private func updateBackgrounds(backgrounds : [SKSpriteNode], velX : CGFloat) {
 
         let n = backgrounds.count
         
@@ -142,7 +144,7 @@ class ModelUpdate {
         }
     }
     
-    func updateBirds() {
+    private func updateBirds() {
         
         var birdId: Int = 0
         
@@ -167,7 +169,7 @@ class ModelUpdate {
         }
     }
     
-    func updateJellyFish() {
+    private func updateJellyFish() {
         
         var jellyId: Int = 0
         
@@ -214,7 +216,7 @@ class ModelUpdate {
         }
     }
     
-    func updateSnacks() {
+    private func updateSnacks() {
         //Update positions of snacks and detect eating snacks
         updateSnack(snacks : graphics.cheesyBites, backgroundSpeed : graphics.backgroundSpeed)
 
@@ -233,7 +235,7 @@ class ModelUpdate {
         }
     }
     
-    func updateSnack(snacks : [Snack], backgroundSpeed : CGFloat) {
+    private func updateSnack(snacks : [Snack], backgroundSpeed : CGFloat) {
         for snack in snacks {
             snack.update(scene: scene)
             snack.setVelocity(velX: -backgroundSpeed, velY: 0)
@@ -254,8 +256,13 @@ class ModelUpdate {
         graphics.flag.update(scene: scene)
     }
     
+    private func popSun() {
+        if(State.levelId != LevelId.OCEAN || State.levelId != LevelId.UTREG) {
+            graphics.sunPopup.update(scene: scene)
+        }
+    }
     
-    func popFrito() {
+    private func popFrito() {
         if graphics.frito.appeared && muted == false && graphics.frito.playSound {
             playSound(scene: scene, sound: [fritoAppearingSound])
             graphics.frito.playSound = false
@@ -273,7 +280,7 @@ class ModelUpdate {
         }
     }
     
-    func popBrownie() {
+    private func popBrownie() {
         if graphics.brownie.appeared && muted == false && graphics.brownie.playSound {
             playSound(scene: scene, sound: [brownieAppearingSound])
             graphics.brownie.playSound = false
@@ -295,8 +302,8 @@ class ModelUpdate {
         graphics.rocco.update(scene: scene)
     }
     
-    func popMisty() {
-        graphics.misty.popMisty()
+    private func popMisty() {
+        graphics.misty.popMisty(scene: scene)
         
         if objectCollidedWithPlayer(bird : graphics.misty, player : graphics.player, den : 2.5) {
             graphics.misty.hit = true
@@ -313,7 +320,7 @@ class ModelUpdate {
         }
     }
     
-    func playMistyFcn() {
+    private func playMistyFcn() {
         graphics.misty.play(bool: Bool.random())
         if graphics.misty.top {
             graphics.misty.setPosition(position: CGPoint(x : graphics.misty.width / 2, y : graphics.misty.height * 0.75 + graphics.misty.images[0].size.height / 2))
@@ -332,10 +339,11 @@ class ModelUpdate {
         }
     }
     
-    func runGameOver() {
+    private func runGameOver() {
         loseLife()
         displayPlayerIsHit()
         State.gameState = GameState.continueGame
+        saveHighScore()
         updateScene()
     }
     
@@ -385,16 +393,43 @@ class ModelUpdate {
         }
     }
     
-    func touchInPauseArea(pointOfTouch : CGPoint) -> Bool {
+    private func saveHighScore() {
+        if gameScore > getHighScore() {
+            let defaults = UserDefaults()
+            defaults.set(gameScore, forKey: getHighScoreKey())
+        }
+    }
+    
+    private func getHighScoreKey() -> String {
+        if(State.levelId == .ARUBA) {
+            return highScoreId1
+        }
+        if(State.levelId == .BEACH) {
+            return highScoreId2
+        }
+        if(State.levelId == .TRIP) {
+            return highScoreId3
+        }
+        if(State.levelId == .OCEAN) {
+            return highScoreId4
+        }
+        if(State.levelId == .UTREG) {
+            return highScoreId5
+        }
+        
+        return highScoreId1
+    }
+    
+    private func touchInPauseArea(pointOfTouch : CGPoint) -> Bool {
         let position = CGPoint(x: scene.size.width - 2 * scene.size.width / 12, y: scene.size.height / 2 + scene.size.height * 1.5 / 10)
         return pointOfTouch.x > position.x && pointOfTouch.y > position.y
     }
     
-    func touchInGameArea(pointOfTouch : CGPoint) -> Bool {
+    private func touchInGameArea(pointOfTouch : CGPoint) -> Bool {
         return pointOfTouch.x > 0 && pointOfTouch.x < scene.size.width && pointOfTouch.y > scene.size.height / 4 && pointOfTouch.y < 0.75 * scene.size.height
     }
     
-    func startGame() {
+    private func startGame() {
         State.gameState = GameState.inGame
         pauseButtonNode.zPosition = zPosPauseButton
         playButtonNode.zPosition = -1
@@ -430,7 +465,7 @@ class ModelUpdate {
         graphics.player.setVelocity(velX: velX, velY: velY)
     }
     
-    func pauseGame() {
+    private func pauseGame() {
         State.gameState = GameState.gamePaused
         pauseButtonNode.zPosition = -1
         playButtonNode.zPosition = zPosPauseButton

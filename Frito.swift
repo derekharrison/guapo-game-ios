@@ -15,6 +15,10 @@ class Frito : GameObject {
         super.update()
         updatePosition(scene: scene)
         updateImage(numFrames: numOfFramesForUpdate)
+        
+        if(State.levelId == LevelId.OCEAN) {
+            bubbles.popBubbles(pos: getPosition(), scene: scene, sound: [bubblesSound])
+        }
     }
     
     func updatePosition(scene : SKScene, atScreen : Int) {

@@ -16,17 +16,23 @@ var muted = false
 var boundTracker = 1
 var scoreAtWhichToSaveGameState: Int = 0
 
+var highScoreNumberLevel1 = 0
+var highScoreNumberLevel2 = 0
+var highScoreNumberLevel3 = 0
+var highScoreNumberLevel4 = 0
+var highScoreNumberLevel5 = 0
+
 class Parameters {
     static let totalNumberOfVillains = 12
     static let numberOfCheesyBites = 5
-    static let tuttiButtonNotPressed = "tutti_button_not_pressed_cropped"
-    static let tuttiButtonPressed = "tutti_button_pressed_cropped"
-    static let mikaButtonNotPressed = "tutti_button_not_pressed_cropped"
-    static let mikaButtonPressed = "tutti_button_pressed_cropped"
-    static let roccoButtonNotPressed = "tutti_button_not_pressed_cropped"
-    static let roccoButtonPressed = "tutti_button_pressed_cropped"
-    static let guapoButtonNotPressed = "guapo_button_not_pressed_cropped"
-    static let guapoButtonPressed = "guapo_button_pressed_cropped"
+    static let tuttiButtonNotPressed = "tutti_button_not_pressed_cropped 1"
+    static let tuttiButtonPressed = "tutti_button_pressed_cropped 1"
+    static let mikaButtonNotPressed = "mika_button_not_pressed_cropped"
+    static let mikaButtonPressed = "mika_button_pressed_cropped"
+    static let roccoButtonNotPressed = "rocco_button_not_pressed_cropped"
+    static let roccoButtonPressed = "rocco_button_pressed_cropped"
+    static let guapoButtonNotPressed = "guapo_button_not_pressed_cropped 1"
+    static let guapoButtonPressed = "guapo_button_pressed_cropped 1"
     static let playerMenuButtonNotPressed = "player_menu_button_not_pressed_bitmap_cropped"
     static let playerMenuButtonPressed = "player_menu_button_pressed_bitmap_cropped"
     static let startMenuButtonNotPressed = "main_menu_button_not_pressed_bitmap_cropped"
@@ -142,8 +148,8 @@ let tuttiSnorkelHitImage = "tutti_snorkel1_hit_cropped"
 let mikaImage1 = "mica_cropped_main2"
 let mikaImage2 = "mica_cropped_main2"
 let mikaHitImage = "mica"
-let mikaSnorkelImage = "tutti_snorkel1_cropped"
-let mikaSnorkelHitImage = "tutti_snorkel1_hit_cropped"
+let mikaSnorkelImage = "mica_scuba"
+let mikaSnorkelHitImage = "mica_hit_scuba"
 
 let capeImage1 = "cape1_bitmap_cropped1"
 let capeImage2 = "cape2_bitmap_cropped1"
@@ -249,7 +255,7 @@ let tripLevelButtonGrayed = "trip_level_button_grey_1"
 let oceanLevelButtonGrayed = "ocean_level_button_grey_1"
 let utrechtLevelButtonGrayed = "utreg_level_button_grey_1"
 
-let numberOfPointsRequiredToUnlockLevel = 100
+let numberOfPointsRequiredToUnlockLevel = 25
 let numberOfPointsBetweenCheckpoints = 25
 
 let backgroundsKey = "backgrounds"
@@ -281,6 +287,7 @@ let numberOfLives = 3
 
 let arubanFlag = "flag_aruba_bitmap_cropped"
 let dutchFlag = "flag_netherlands_bitmap_cropped"
+let sunPopup = "sun_popup_bitmap_cropped"
 
 let continueButtonNotPressed = "continue_button_not_pressed_bitmap_cropped"
 let continueButtonPressed = "continue_button_pressed_bitmap_cropped"

@@ -37,6 +37,14 @@ class ContinueScene: SKScene {
         background.removeFromParent()
         self.addChild(background)
         
+        let defaults = UserDefaults()
+        
+        highScoreNumberLevel1 = defaults.integer(forKey: highScoreId1)
+        highScoreNumberLevel2 = defaults.integer(forKey: highScoreId2)
+        highScoreNumberLevel3 = defaults.integer(forKey: highScoreId3)
+        highScoreNumberLevel4 = defaults.integer(forKey: highScoreId4)
+        highScoreNumberLevel5 = defaults.integer(forKey: highScoreId5)
+        
         placeButton(fac: 0.6, buttonNotPressed: continueNotPressed, buttonPressed: continuePressed)
         placeButton(fac: 0.46, buttonNotPressed: levelMenuNotPressed, buttonPressed: levelMenuPressed)
     }

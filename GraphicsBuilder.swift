@@ -28,6 +28,7 @@ class GraphicsBuilder {
         createBrownie()
         createRocco()
         createFlag()
+        createSunPopup()
         createMisty()
         createBackgrounds()
         
@@ -46,24 +47,53 @@ class GraphicsBuilder {
         let playerId = defaults.integer(forKey: "player_id")
         
         if(ModelUtils.getPlayerId(player: playerId) == PlayerId.GUAPO) {
-            playerImages.append(guapoImage1)
-            playerImages.append(guapoImage2)
-            graphics.player = createHero(images: playerImages, imageHit: guapoHitImage)
+            if State.levelId != .OCEAN {
+                playerImages.append(guapoImage1)
+                playerImages.append(guapoImage2)
+                graphics.player = createHero(images: playerImages, imageHit: guapoHitImage)
+            }
+            else {
+                playerImages.append(guapoSnorkelImage)
+                playerImages.append(guapoSnorkelImage)
+                graphics.player = createHero(images: playerImages, imageHit: guapoSnorkelHitImage)
+            }
+
         }
         if(ModelUtils.getPlayerId(player: playerId) == PlayerId.TUTTI) {
-            playerImages.append(tuttiImage1)
-            playerImages.append(tuttiImage2)
-            graphics.player = createHero(images: playerImages, imageHit: tuttiHitImage)
+            if State.levelId != .OCEAN {
+                playerImages.append(tuttiImage1)
+                playerImages.append(tuttiImage2)
+                graphics.player = createHero(images: playerImages, imageHit: tuttiHitImage)
+            }
+            else {
+                playerImages.append(tuttiSnorkelImage)
+                playerImages.append(tuttiSnorkelImage)
+                graphics.player = createHero(images: playerImages, imageHit: tuttiSnorkelHitImage)
+            }
         }
         if(ModelUtils.getPlayerId(player: playerId) == PlayerId.MIKA) {
-            playerImages.append(mikaImage1)
-            playerImages.append(mikaImage2)
-            graphics.player = createHero(images: playerImages, imageHit: mikaHitImage)
+            if State.levelId != .OCEAN {
+                playerImages.append(mikaImage1)
+                playerImages.append(mikaImage2)
+                graphics.player = createHero(images: playerImages, imageHit: mikaHitImage)
+            }
+            else {
+                playerImages.append(mikaSnorkelImage)
+                playerImages.append(mikaSnorkelImage)
+                graphics.player = createHero(images: playerImages, imageHit: mikaSnorkelHitImage)
+            }
         }
         if(ModelUtils.getPlayerId(player: playerId) == PlayerId.ROCCO) {
-            playerImages.append(roccoImage1)
-            playerImages.append(roccoImage2)
-            graphics.player = createHero(images: playerImages, imageHit: roccoHitImage)
+            if State.levelId != .OCEAN {
+                playerImages.append(roccoImage1)
+                playerImages.append(roccoImage2)
+                graphics.player = createHero(images: playerImages, imageHit: roccoHitImage)
+            }
+            else {
+                playerImages.append(roccoSnorkelImage)
+                playerImages.append(roccoSnorkelImage)
+                graphics.player = createHero(images: playerImages, imageHit: roccoSnorkelHitImage)
+            }
         }
     }
     
@@ -131,6 +161,9 @@ class GraphicsBuilder {
         graphics.frito.setVelocity(velX: 2 * graphics.backgroundSpeed, velY: -2 * graphics.backgroundSpeed)
         graphics.frito.setZPosition(zPos: zPosCharacters)
         graphics.frito.setPosition(position: CGPoint(x : 10 * scene.size.width, y : scene.size.height * 0.75 + graphics.frito.images[0].size.height / 2))
+        graphics.frito.bubbles.addBubble(imageId: bubbleImage)
+        graphics.frito.bubbles.addBubble(imageId: bubbleImage)
+        graphics.frito.bubbles.addBubble(imageId: bubbleImage)
         graphics.frito.addImagesToScene(scene: scene)
         
         if(State.gameState == .continueGame) {
@@ -150,7 +183,9 @@ class GraphicsBuilder {
         graphics.brownie.setVelocity(velX: -2 * graphics.backgroundSpeed, velY: -2 * graphics.backgroundSpeed)
         graphics.brownie.setZPosition(zPos: zPosCharacters + 1)
         graphics.brownie.setPosition(position: CGPoint(x : -width, y: height * 0.75 + graphics.brownie.images[0].size.height / 2))
-        
+        graphics.brownie.bubbles.addBubble(imageId: bubbleImage)
+        graphics.brownie.bubbles.addBubble(imageId: bubbleImage)
+        graphics.brownie.bubbles.addBubble(imageId: bubbleImage)
         graphics.brownie.addImagesToScene(scene: scene)
         
         if(State.gameState == .continueGame) {
@@ -159,8 +194,18 @@ class GraphicsBuilder {
     }
     
     private func createRocco() {
-        for image in RoccoImages.getImages(levelId: levelId) {
-            graphics.rocco.addImage(image : image)
+        let defaults = UserDefaults()
+        let playerId = defaults.integer(forKey: "player_id")
+        
+        if ModelUtils.getPlayerId(player: playerId) != .ROCCO {
+            for image in RoccoImages.getImages(levelId: levelId) {
+                graphics.rocco.addImage(image : image)
+            }
+        }
+        else {
+            for image in GuapoImages.getImages(levelId: levelId) {
+                graphics.rocco.addImage(image : image)
+            }
         }
         let height = scene.size.height
         let width = scene.size.width
@@ -170,7 +215,9 @@ class GraphicsBuilder {
         graphics.rocco.setVelocity(velX: -2 * graphics.backgroundSpeed, velY: -2 * graphics.backgroundSpeed)
         graphics.rocco.setZPosition(zPos: zPosCharacters + 1)
         graphics.rocco.setPosition(position: CGPoint(x : -width, y: height * 0.75 + graphics.brownie.images[0].size.height / 2))
-        
+        graphics.rocco.bubbles.addBubble(imageId: bubbleImage)
+        graphics.rocco.bubbles.addBubble(imageId: bubbleImage)
+        graphics.rocco.bubbles.addBubble(imageId: bubbleImage)
         graphics.rocco.addImagesToScene(scene: scene)
     }
     
@@ -192,6 +239,19 @@ class GraphicsBuilder {
         graphics.flag.addImagesToScene(scene: scene)
     }
     
+    private func createSunPopup() {
+        graphics.sunPopup.addImage(image : sunPopup)
+        let height = scene.size.height
+        let width = scene.size.width
+        graphics.sunPopup.setHeight(height : height)
+        graphics.sunPopup.setWidth(width : width)
+        graphics.sunPopup.setSize(size: CGSize(width : width / 7.5, height : height / 7.5))
+        graphics.sunPopup.setZPosition(zPos: -1)
+        graphics.sunPopup.setPosition(position: CGPoint(x : width * 0.7, y: height * 0.6))
+        
+        graphics.sunPopup.addImagesToScene(scene: scene)
+    }
+    
     private func createMisty() {
         for image in MistyImages.getMistyImages(levelId: levelId) {
             graphics.misty.addImage(image : image)
@@ -204,7 +264,9 @@ class GraphicsBuilder {
         graphics.misty.setVelMisty(vx: 0, vy: -graphics.backgroundSpeed)
         graphics.misty.setZPosition(zPos: zPosCharacters + 2)
         graphics.misty.setPosition(position: CGPoint(x : width / 2, y : height * 0.75 + graphics.misty.images[0].size.height / 2))
-        
+        graphics.misty.bubbles.addBubble(imageId: bubbleImage)
+        graphics.misty.bubbles.addBubble(imageId: bubbleImage)
+        graphics.misty.bubbles.addBubble(imageId: bubbleImage)
         graphics.misty.addImagesToScene(scene: scene)
         
         if(State.gameState == .continueGame) {

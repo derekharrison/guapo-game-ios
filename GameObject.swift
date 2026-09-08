@@ -147,6 +147,11 @@ class GameObject {
             x.removeFromParent()
             scene.addChild(x)
         }
+        
+        for bubble in bubbles.bubblez {
+            bubble.removeFromParent()
+            scene.addChild(bubble)
+        }
     }
     
     func displayImage(imageId : Int) {

@@ -19,6 +19,9 @@ class ModelUpdate {
     init(graphics: Graphics, scene: SKScene) {
         self.graphics = graphics
         self.scene = scene
+        if State.gameState == .continueGame {
+            playMisty = getScoreAtWhichMistyPopsUp()
+        }
     }
     
     func update() {
@@ -102,6 +105,7 @@ class ModelUpdate {
         else {
             saveBirds(graphics: self.graphics)
         }
+        saveScoreAtWhichMistyPopsUp(score: playMisty)
     }
     
     private func updateScore() {

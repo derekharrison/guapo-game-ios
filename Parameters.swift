@@ -255,8 +255,8 @@ let tripLevelButtonGrayed = "trip_level_button_grey_1"
 let oceanLevelButtonGrayed = "ocean_level_button_grey_1"
 let utrechtLevelButtonGrayed = "utreg_level_button_grey_1"
 
-let numberOfPointsRequiredToUnlockLevel = 25
-let numberOfPointsBetweenCheckpoints = 25
+let numberOfPointsRequiredToUnlockLevel = 100
+let numberOfPointsBetweenCheckpoints = 66
 
 let backgroundsKey = "backgrounds"
 let playerKey = "LEVEL_1_player"

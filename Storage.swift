@@ -148,6 +148,18 @@ func saveScoreAtWhichToSaveGameState(score: Int) {
     defaults.set(score, forKey: String(levelId.hashValue) + "scoreAtWhichToSaveGameStateKey")
 }
 
+func saveScoreAtWhichMistyPopsUp(score: Int) {
+    let defaults = UserDefaults()
+    let levelId = State.levelId
+    defaults.set(score, forKey: String(levelId.hashValue) + "mistyPopup")
+}
+
+func getScoreAtWhichMistyPopsUp() -> Int {
+    let defaults = UserDefaults()
+    let levelId = State.levelId
+    return defaults.integer(forKey: String(levelId.hashValue) + "mistyPopup")
+}
+
 func getScoreAtWhichToSaveGameState() -> Int {
     let defaults = UserDefaults()
     let levelId = State.levelId

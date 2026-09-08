@@ -11,6 +11,7 @@ import Foundation
 class Rocco : GameObject {
     var capeCounter : Int = 1
     var popCounter : Int = 0
+    var mainCounter : Int = 0
     private var randomAngle = 0.0
     var cape1 : SKSpriteNode
     var cape2 : SKSpriteNode
@@ -22,21 +23,28 @@ class Rocco : GameObject {
     
     func update(scene : SKScene) {
         super.update()
-        updatePosition(scene : scene)
-        updateImage(numFrames: numOfFramesForUpdate)
-        updateImagePositions()
-        displayImage(imageId: 0)
-        updateCape()
-        
-        popCounter += 1
 
-        if(popCounter >= 300) {
+        
+        mainCounter += 1
+        
+        if(mainCounter >= 600 && mainCounter < 1800) {
+            updatePosition(scene : scene)
+            updateImage(numFrames: numOfFramesForUpdate)
+            updateImagePositions()
+            displayImage(imageId: 0)
+            updateCape()
+            
+            popCounter += 1
+            
+            if(State.levelId == LevelId.OCEAN) {
+                bubbles.popBubbles(pos: getPosition(), scene: scene, sound: [bubblesSound])
+            }
+        }
+        else if mainCounter >= 1800 {
+            mainCounter = 0
             popCounter = 0
         }
-        
-        if(State.levelId == LevelId.OCEAN) {
-            bubbles.popBubbles(pos: getPosition(), scene: scene, sound: [bubblesSound])
-        }
+
     }
     
     override func displayImage(imageId _: Int) {

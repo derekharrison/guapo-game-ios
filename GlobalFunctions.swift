@@ -84,6 +84,37 @@ func getHighScorePreviousLevel(levelId: LevelId) -> Int {
     return 999
 }
 
+
+func placeButton(scene: SKScene, fac : CGFloat, buttonNotPressed : SKSpriteNode, buttonPressed : SKSpriteNode) {
+    
+    let widthButton = scene.size.width / 4
+    let heightButton = scene.size.height / 16
+    
+    buttonNotPressed.size = CGSize(width: widthButton, height: heightButton)
+    buttonNotPressed.position = CGPoint(x: scene.size.width / 2, y: scene.size.height / 2 * fac + scene.size.height / 4)
+    buttonNotPressed.zPosition = 2
+    buttonNotPressed.removeFromParent()
+    scene.addChild(buttonNotPressed)
+    
+    buttonPressed.size = CGSize(width: widthButton, height: heightButton)
+    buttonPressed.position = CGPoint(x: scene.size.width / 2, y: scene.size.height / 2 * fac + scene.size.height / 4)
+    buttonPressed.zPosition = -1
+    buttonPressed.removeFromParent()
+    scene.addChild(buttonPressed)
+}
+
+func pressedButton(pointOfTouch : CGPoint, buttonNotPressed : SKSpriteNode, buttonPressed : SKSpriteNode, pressed : inout Bool) {
+    let inRangeX = pointOfTouch.x > buttonNotPressed.position.x - buttonNotPressed.size.width / 2 && pointOfTouch.x < buttonNotPressed.position.x + buttonNotPressed.size.width / 2
+    
+    let inRangeY = pointOfTouch.y > buttonNotPressed.position.y - buttonNotPressed.size.height / 2 && pointOfTouch.y < buttonNotPressed.position.y + buttonNotPressed.size.height / 2
+    
+    if inRangeX && inRangeY {
+        buttonNotPressed.zPosition = -1
+        buttonPressed.zPosition = 2
+        pressed = true
+    }
+}
+
 func getHighScore() -> Int {
     if(State.levelId == .ARUBA) {
         return highScoreNumberLevel1
